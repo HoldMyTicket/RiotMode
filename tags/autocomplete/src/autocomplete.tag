@@ -1,6 +1,6 @@
 <rm-autocomplete>
 	<div class="wrap">
-		<input id="baseInput" type="{opts.type || 'text'}" name="autocomplete" placeholder="{opts.placeholder}" onkeyup="{handle}">
+		<input id="baseInput" type="{opts.type || 'text'}" name="autocomplete" placeholder="{opts.placeholder}">
 		<div id="list">
 			<ul show={ list.length }>
 				<li each={item, i in list }>{item}</li>
@@ -13,39 +13,48 @@
 		this.mixin(ajaxMixin);
 		this.ajax = opts.ajax || false;
 		this.min = opts.min || 2;
-		this.choices = opts.choices;
+		this.choices = opts.choices || ['Apple','Orange','Banana'];
 		this.list = [];
 		this.readonly = (opts.readonly ? true : false);
 		
 		this.on('mount', function() {
-			this.initType();
-			if(this.ajax) {
-				this.choices = ['Apple','Orange','Banana'];
+			initType();
+			if(self.ajax) {
+				//DO ajax here?
 			}
+			
+			self.choices = ['Apple','Orange','Banana'];
 		});
 		
-		this.initType = function() {
+		function initType() {
+			var input = document.getElementById('baseInput');
+			var list = document.getElementById('list');
+			
 			if(opts.readonly) {
-				document.getElementById('baseInput').readOnly = true;
-				document.getElementById('list');
+				input.readOnly = true;
+				input.onclick = function(e) {
+					console.log(e);
+				}
+				
+			} else {
+				input.onkeyup = function(e) {
+					handleText(e);
+				}
 			}
 		}
-		
-		this.expression = function(e) {
-            return RegExp(e.target.value,'i');
-        }
-		
-		this.handle = function(e) {
-
-			if(e.target.value.length < this.min) {
-                this.list = [];
-                this.active = -1;
+				
+		function handleText(e) {
+			
+			if(e.target.value.length < self.min) {
+                self.list = [];
+                self.active = -1;
                 return;
             }
 			
-			this.list = this.choices.filter(function(c) {
-                return c.match(self.expression(e));
+			self.list = self.choices.filter(function(c) {
+                return c.match(RegExp(e.target.value,'i'));
             });
+			self.update();
 			
 			if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
 				e.preventDefault();
