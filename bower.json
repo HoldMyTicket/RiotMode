@@ -1,0 +1,20 @@
+{
+  "name": "RiotMode",
+  "version": "0.1.0",
+  "homepage": "https://github.com/HoldMyTicket/RiotMode",
+  "authors": [
+    "Evan Fajardo <e.faj33@gmail.com>"
+  ],
+  "description": "Riot.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "riot": "~2.2.1"
+  }
+}
