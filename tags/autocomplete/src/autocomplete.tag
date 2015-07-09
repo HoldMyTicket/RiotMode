@@ -44,15 +44,16 @@
 		}
 				
 		function handleText(e) {
+			var target = e.srcElement || e.originalTarget;
 			
-			if(e.target.value.length < self.min) {
+			if(target.value.length < self.min) {
                 self.list = [];
                 self.active = -1;
                 return;
             }
 			
 			self.list = self.choices.filter(function(c) {
-                return c.match(RegExp(e.target.value,'i'));
+                return c.match(RegExp(target.value,'i'));
             });
 			self.update();
 			
