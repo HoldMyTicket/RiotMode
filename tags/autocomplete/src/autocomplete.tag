@@ -1,14 +1,24 @@
 <rm-autocomplete>
+
 	<div class="wrap">
-		<input onclick="{ updateSelect }" id="baseInput" type="text" name="autocomplete" placeholder="{ opts.placeholder }" data-value="{ baseInputValue }" value="{ baseInputText }">
-		<div id="list" show={open}>
-			<input show={selectBox} onkeyup="{ handleText }" id="selectInput" type="text" name="autocomplete" placeholder="{ opts['filter-placeholder'] || 'Filter' }"
-			value="{ selectInputText }">
-			<ul show={ list.length }>
-				<li onclick="{ parent.choose }" each={ item, i in list } data-value="{ item.value || ''}">{item.text}</li>
-			</ul>
+		<input class="mdl-textfield__input { border : selectBox } base" onclick="{ selectBox ? updateSelect : null }" id="baseInput" type="text" name="autocomplete" placeholder="{ opts.placeholder }" data-value="{ baseInputValue }" value="{ baseInputText }">
+		<div class="list" show={open}>	
+			<table class="mdl-data-table mdl-js-data-table">
+				<tr show={selectBox} class="search-row">
+					<td>
+						<input class="filter" onkeyup="{ handleText }" id="selectInput" type="text" name="autocomplete"
+						placeholder="{ opts['filter-placeholder'] || 'Filter' }" value="{ selectInputText }">
+					</td>
+				</tr>	
+				<tr onclick="{ parent.choose }" each={ item, i in list } data-value="{ item.value || ''}">
+					<td class="mdl-data-table__cell--non-numeric">{item.text}</td>
+				</tr>
+			</table>
+			
 		</div>
 	</div>
+	
+	
 	<script>
 		var self = this;
 		
@@ -96,4 +106,43 @@
 			self.updateSelect();
 		}
 	</script>
+	
+	<style scoped>
+		.base { height:40px; }
+		
+		.border {
+			border:1px solid rgba(0,0,0,.12);
+			box-sizing:border-box;
+			padding-left:5px; }
+			.border:-moz-placeholder { color: rgb(96, 108, 113); /* Firefox 18- */ }
+			.border:-ms-input-placeholder { color: rgb(96, 108, 113); }
+			.border::-webkit-input-placeholder { color: rgb(96, 108, 113); }
+			.border::-moz-placeholder { color: rgb(96, 108, 113); /* Firefox 19+ */ }
+		
+		.filter {
+			background:none;
+			border:none;
+			color: rgb(85, 85, 85);
+			font-size:16px;
+			height:100%;
+			width:100%; }
+		
+		.search-row { height:auto !important; }
+		
+			.search-row td {
+				border-top:none;
+				height:25px;
+				padding:5px !important; }
+		
+		table {
+			border:none !important;
+			height:100%;
+			width:100%; }
+		
+			table td { border:1px solid rgba(0,0,0,.12); }
+		 
+		textarea:focus, input:focus { outline: 0; }
+		
+		.wrap { width:200px; }
+	</style>
 </rm-autocomplete>
