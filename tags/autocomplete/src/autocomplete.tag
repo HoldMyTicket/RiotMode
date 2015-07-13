@@ -18,22 +18,31 @@
 		</div>
 	</div>
 	
-	
 	<script>
+		/**
+		 * Autocomplete component for RiotJS v1.0
+		 * 
+		 * @author evan-f
+		 */
 		var self = this;
 		
 		this.mixin(ajaxMixin);
-		this.ajax = opts.ajax || false;
-		this.min = opts.min || 2;
+		this.ajax = opts.ajax || false; //Grab choice with ajax or not
 		this.choices = opts.choices || [];
+		//this.length = ops.length || 5; //Length of dropdown
 		this.list = [];
+		this.min = opts.min || 2;
 		this.selectBox = (opts.type === "select" ? true : false);
 		this.open = false;
 		
 		this.on('mount', function() {
 			self.initType();
-			if(self.ajax) {
+			if(self.ajax === 'initial') {
 				//DO ajax here?
+				this.ajaxGet('http://localhost:12/tags/autocomplete/demo/demo.json',function(res) {
+					var json = JSON.parse(res);
+					self.choices = json.choices;
+				});
 			}
 		});
 		
@@ -126,6 +135,9 @@
 			font-size:16px;
 			height:100%;
 			width:100%; }
+		
+		.list {
+			box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; }
 		
 		.search-row { height:auto !important; }
 		

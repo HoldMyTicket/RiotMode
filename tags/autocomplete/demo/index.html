@@ -6,6 +6,7 @@
 		<title>RiotMode Autocomplete</title>
 		<style>
 			body {
+				box-sizing:border-box;
 				padding:20px;
 			}
 		</style>
@@ -15,8 +16,8 @@
 	</head>
 	<body>
 		<h1>RiotMode Autocomplete Demo</h1>
-		<p>Search common fruits!</p>
-		<rm-autocomplete type="select" placeholder="Pick Fruit" filter-placeholder="Filter Fruit"></rm-autocomplete>
+		<p>Search for a country</p>
+		<rm-autocomplete type="select" ajax="initial" placeholder="Country Selection" filter-placeholder="Filter"></rm-autocomplete>
 		<script src="/bower_components/material-design-lite/material.min.js"></script>
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
 		<script src="/mixins/ajaxMixin.js"></script>
