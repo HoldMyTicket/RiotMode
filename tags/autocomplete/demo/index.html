@@ -13,12 +13,12 @@
 	<body>
 		<h2>RiotMode Autocomplete Demo</h2>
 		<p>Search common fruits!</p>
-		<rm-autocomplete placeholder="Enter..."></rm-autocomplete>
-		<script src="../../../bower_components/riot/riot+compiler.min.js"></script>
-		<script src="../../../mixins/ajaxMixin.js"></script>
+		<rm-autocomplete type="select" placeholder="Pick Fruit" filter-placeholder="Filter Fruit"></rm-autocomplete>
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script src="/mixins/ajaxMixin.js"></script>
 		<script src="../src/autocomplete.tag" type="riot/tag"></script>
 		<script>
-			riot.mount('rm-autocomplete');
+			riot.mount('rm-autocomplete',{choices:[{value:'hi', text:'Apple'},{text:'Orange'},{text:'Banana'}]});
 		</script>
 	</body>
 </html>

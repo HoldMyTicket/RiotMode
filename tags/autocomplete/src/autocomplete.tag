@@ -1,9 +1,11 @@
 <rm-autocomplete>
 	<div class="wrap">
-		<input id="baseInput" type="{opts.type || 'text'}" name="autocomplete" placeholder="{opts.placeholder}">
-		<div id="list">
+		<input onclick="{ updateSelect }" id="baseInput" type="text" name="autocomplete" placeholder="{ opts.placeholder }" data-value="{ baseInputValue }" value="{ baseInputText }">
+		<div id="list" show={open}>
+			<input show={selectBox} onkeyup="{ handleText }" id="selectInput" type="text" name="autocomplete" placeholder="{ opts['filter-placeholder'] || 'Filter' }"
+			value="{ selectInputText }">
 			<ul show={ list.length }>
-				<li each={item, i in list }>{item}</li>
+				<li onclick="{ parent.choose }" each={ item, i in list } data-value="{ item.value || ''}">{item.text}</li>
 			</ul>
 		</div>
 	</div>
@@ -13,48 +15,60 @@
 		this.mixin(ajaxMixin);
 		this.ajax = opts.ajax || false;
 		this.min = opts.min || 2;
-		this.choices = opts.choices || ['Apple','Orange','Banana'];
+		this.choices = opts.choices || [];
 		this.list = [];
-		this.readonly = (opts.readonly ? true : false);
+		this.selectBox = (opts.type === "select" ? true : false);
+		this.open = false;
 		
 		this.on('mount', function() {
-			initType();
+			self.initType();
 			if(self.ajax) {
 				//DO ajax here?
 			}
-			
-			self.choices = ['Apple','Orange','Banana'];
 		});
 		
-		function initType() {
+		this.initType = function() {
 			var input = document.getElementById('baseInput');
-			var list = document.getElementById('list');
-			
-			if(opts.readonly) {
+			if(self.selectBox) {
 				input.readOnly = true;
-				input.onclick = function(e) {
-					console.log(e);
-				}
-				
 			} else {
 				input.onkeyup = function(e) {
-					handleText(e);
+					var clean = self.handleText(e);
+					if(!clean) 
+						self.open = false;
 				}
 			}
 		}
 				
-		function handleText(e) {
+		this.updateSelect = function(e) {
+			self.list = self.choices;
+			self.open = !self.open;
+			
+			//Reset input
+			if(self.open == false)
+				self.selectInputText = '';
+			
+			self.update();
+		}
+				
+		this.handleText = function(e) {
 			var target = e.srcElement || e.originalTarget;
 			
 			if(target.value.length < self.min) {
-                self.list = [];
-                self.active = -1;
-                return;
+				if(!self.selectBox)
+					self.list = [];
+				else
+					self.list = self.choices;
+				self.update();
+                return false;
             }
 			
 			self.list = self.choices.filter(function(c) {
-                return c.match(RegExp(target.value,'i'));
+                return c.text.match(RegExp(target.value,'i'));
             });
+			
+			//Safety open
+			self.open = true;
 			self.update();
 			
 			if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
@@ -71,6 +85,15 @@
 				}
 			}
 			return true;
+		}
+		
+		this.choose = function(e) {
+			var target = e.srcElement || e.originalTarget;
+			var value = target.getAttribute('data-value') || target.innerHTML;
+			
+			self.baseInputText = target.innerHTML;
+			self.baseInputValue = value;
+			self.updateSelect();
 		}
 	</script>
 </rm-autocomplete>
