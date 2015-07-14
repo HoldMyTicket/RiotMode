@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>RiotMode Autocomplete</title>
+		<style>
+			body {
+				box-sizing:border-box;
+				padding:20px;
+			}
+		</style>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+	</head>
+	<body>
+		<h1>RiotMode Autocomplete Demo</h1>
+		<p>Search for a country</p>
+		<rm-autocomplete ajax="flow" type="select" url="http://localhost:12/tags/autocomplete/demo/demo.json" height="200px" placeholder="Country Selection" filter-placeholder="Filter"></rm-autocomplete>
+		<script src="/bower_components/material-design-lite/material.min.js"></script>
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script src="/mixins/ajaxMixin.js"></script>
+		<script src="../src/autocomplete.tag" type="riot/tag"></script>
+		<script>
+			riot.mount('rm-autocomplete',{choices:[{value:'hi', text:'Apple'},{text:'Orange'},{text:'Banana'}]});
+		</script>
+	</body>
+</html>
