@@ -112,9 +112,13 @@
 					self.closeChoices();
 				} else if (e.keyCode == 13) {
 					if(self.list.length == 1) {
-						// TODO update this action
-						document.querySelectorAll('td')[1].click();
+						self.assign(self.list[0].text,self.list[0].value);
 						return;			
+					} else {
+						self.list.forEach(function(item) {
+							if(item.active)
+								self.assign(item.text,item.value);
+						});
 					}
 				} else if (e.keyCode == 38) {
 					if(self.atIndex <= 0)
@@ -178,8 +182,12 @@
 			var target = e.srcElement || e.originalTarget;
 			var value = target.getAttribute('data-value') || target.innerHTML;
 			
-			self.baseInputText = target.innerHTML;
-			self.baseInputValue = value;
+			self.assign(target.innerHTML,value);
+		}
+		
+		this.assign = function(text, val) {
+			self.baseInputText = text;
+			self.baseInputValue = val;
 			self.open = false;
 			self.atIndex = -1;
 			self.deactivate();
