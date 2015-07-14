@@ -42,7 +42,7 @@
 			self.initType();
 			
 			//Setup height on the table
-			document.getElementById('table').style.maxHeight = self.height;
+			this.table.style.maxHeight = self.height;
 			
 			if(self.ajax) {
 				self.ajaxGet(self.url, function(res) {
@@ -53,7 +53,7 @@
 		});
 		
 		this.initType = function() {
-			var input = document.getElementById('baseInput');
+			var input = this.baseInput;
 			if(self.selectBox) {
 				input.readOnly = true;
 			} else {
