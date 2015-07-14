@@ -7,19 +7,18 @@
 			   name="{ opts.name || autocomplete }" 
 			   placeholder="{ opts.placeholder }" 
 			   data-value="{ baseInputValue }"
-			   onfocus="{ baseFocus }" 
 			   value="{ baseInputText }"
+			   onfocus="{ baseFocus }" 
 			   onkeyup="{ handleText }">
 		<div class="list" show={open}>
 			<input show={selectBox} 
-			       class="filter" 
+			       id="filter"
+				   class="filter" 
 				   onkeyup="{ handleText }" 
 				   id="selectInput" 
 				   type="text" 
 				   name="autocomplete"
-				   placeholder="{ opts['filter-placeholder'] || 'Filter' }" 
-				   onfocus="{  }"
-				   value="{ selectInputText }">			
+				   placeholder="{ opts['filter-placeholder'] || 'Filter' }">			
 			<div id="table" class="table-wrap">
 				<table class="mdl-data-table mdl-js-data-table">
 					<tbody>
@@ -133,7 +132,6 @@
 					self.atIndex++;
 					self.activate();
 				}
-				console.log(self.atIndex);
 			}
 			self.update();
 			return true;
@@ -145,6 +143,7 @@
 				self.ajaxGet(self.url, function(res) {
 					var json = JSON.parse(res);
 					self.choices = json.choices;
+					self.list = json.choices;
 					self.update();
 				});
 			} else {
@@ -186,6 +185,9 @@
 		}
 		
 		this.assign = function(text, val) {
+			if(self.selectBox)  {
+				this.filter.value = '';		
+			}
 			self.baseInputText = text;
 			self.baseInputValue = val;
 			self.open = false;
