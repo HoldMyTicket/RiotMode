@@ -3,12 +3,13 @@
 	<div class="wrap">
 		<input class="mdl-textfield__input { border : selectBox } base" onclick="{ selectBox ? updateSelect : null }" id="baseInput" type="text" name="autocomplete" placeholder="{ opts.placeholder }" data-value="{ baseInputValue }" value="{ baseInputText }">
 		<div class="list" show={open}>
-			<input class="filter" onkeyup="{ handleText }" id="selectInput" type="text" name="autocomplete"
+			<input show={selectBox} class="filter" onkeyup="{ capture }" id="selectInput" type="text" name="autocomplete"
 							placeholder="{ opts['filter-placeholder'] || 'Filter' }" value="{ selectInputText }">	
 							
-			<div class="table-wrap">
+			<div id="table" class="table-wrap">
 				<table class="mdl-data-table mdl-js-data-table">
 					<tbody>
+						<tr show={noResults}><td class="mdl-data-table__cell--non-numeric mute">Nothing Found...</td></tr>
 						<tr onclick="{ parent.choose }" each={ item, i in list } data-value="{ item.value || ''}">
 							<td class="mdl-data-table__cell--non-numeric">{item.text}</td>
 						</tr>
@@ -28,18 +29,23 @@
 		
 		this.mixin(ajaxMixin);
 		this.ajax = opts.ajax || false; //Grab choice with ajax or not
+		this.ajaxTimeout = parseInt(opts.timeout) || 1000;
 		this.choices = opts.choices || [];
-		this.height = parseInt(opts.height) || 5; //Length of dropdown
+		this.height = opts.height || '500px'; //Length of dropdown
 		this.list = [];
-		this.min = opts.min || 2;
 		this.selectBox = (opts.type === "select" ? true : false);
+		this.url = opts.url || false;
 		this.open = false;
+		this.noResults = false;
 		
 		this.on('mount', function() {
 			self.initType();
-			if(self.ajax === 'initial') {
-				//DO ajax here?
-				this.ajaxGet('http://localhost:12/tags/autocomplete/demo/demo.json',function(res) {
+			
+			//Setup height on the table
+			document.getElementById('table').style.maxHeight = self.height;
+			
+			if(self.ajax) {
+				self.ajaxGet(self.url, function(res) {
 					var json = JSON.parse(res);
 					self.choices = json.choices;
 				});
@@ -52,7 +58,7 @@
 				input.readOnly = true;
 			} else {
 				input.onkeyup = function(e) {
-					var clean = self.handleText(e);
+					var clean = self.capture(e);
 					if(!clean) 
 						self.open = false;
 				}
@@ -69,22 +75,45 @@
 			
 			self.update();
 		}
+			
+		this.ajaxReady = true;
+			
+		this.capture = function(e) {
+			if(self.ajax === 'flow') {
+				if(self.ajaxReady) {
+					self.ajaxReady = false;
+					self.ajaxGet(self.url, function(res) {
+						var json = JSON.parse(res);
+						self.choices = json.choices;
+						self.handleText(e);
+						setTimeout(function() {
+							self.ajaxReady = true;
+						},self.ajaxTimeout);
+					});
+				} else {
+					self.handleText(e);
+				}
+			} else {
+				self.handleText(e);
+			}
+		}
 				
 		this.handleText = function(e) {
 			var target = e.srcElement || e.originalTarget;
 			
-			if(target.value.length < self.min) {
-				if(!self.selectBox)
-					self.list = [];
-				else
-					self.list = self.choices;
+			if(target.value.length == 0) {
+				self.open = false;
 				self.update();
-                return false;
-            }
+				return true;
+			}
 			
 			self.list = self.choices.filter(function(c) {
                 return c.text.match(RegExp(target.value,'i'));
             });
+			
+			self.noResults = false;
+			if(self.list.length < 1) 
+				self.noResults = true;
 			
 			//Safety open
 			self.open = true;
@@ -93,14 +122,12 @@
 			if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
 				e.preventDefault();
 
-				if (e.keyCode == 38) {
-					
+				if (e.keyCode == 27) {
+					self.open = false;
 				} else if (e.keyCode == 13) {
-					
-				} else if (e.keyCode == 40) {
-					
-				} else if (e.keyCode == 13) {
-					
+					if(self.list.length == 1) {
+						document.querySelectorAll('td')[1].click();				
+					}
 				}
 			}
 			return true;
@@ -132,6 +159,7 @@
 			background:none;
 			border:1px solid rgba(0,0,0,.12);
 			border-top:none;
+
 			box-sizing:border-box;
 			color: rgb(85, 85, 85);
 			padding:5px;
@@ -150,23 +178,16 @@
 				padding:5px !important; }
 		
 		.table-wrap {
-			height:500px;
+			height:auto;
 			overflow-x:hidden;
 			overflow-y:auto;}
 		
 		table {
-			border:none !important;
 			width:100%; }
-		
-			table tbody {
-				height:400px;
-				overflow: scroll; }
-		
-			table td { border:1px solid rgba(0,0,0,.12); }
-			table td::first-child {}
 			
-			table tr {border: none;}
-		 
+			table tr {
+				width:100%;}
+			
 		textarea:focus, input:focus { outline: 0; }
 		
 		.wrap { 
