@@ -8,7 +8,8 @@
 			   placeholder="{ opts.placeholder }" 
 			   data-value="{ baseInputValue }"
 			   onfocus="{ baseFocus }" 
-			   value="{ baseInputText }">
+			   value="{ baseInputText }"
+			   onkeyup="{ handleText }">
 		<div class="list" show={open}>
 			<input show={selectBox} 
 			       class="filter" 
@@ -69,12 +70,6 @@
 			
 			if(self.selectBox) {
 				input.readOnly = true;
-			} else {
-				input.onkeyup = function(e) {
-					var clean = self.handleText(e);
-					if(!clean) 
-						self.open = false;
-				}
 			}
 			
 			if(self.ajax) {
@@ -103,7 +98,6 @@
 			var target = e.srcElement || e.originalTarget;
 			
 			self.list = self.choices.filter(function(c) {
-				//TODO can also deactive before regex
                 return c.text.match(RegExp(target.value,'i'));
             });
 			
@@ -154,13 +148,14 @@
 			}
 		}
 		
-		this.closeChoices = function(e) {
-			if (!self.root.contains(e.target)) {
-				self.open = false;
-				self.atIndex = -1;
-				self.deactivate();
-				self.update();
+		this.closeChoices = function(e) {	
+			if (self.root.contains(e.target)) {
+				return;
 			}
+			self.open = false;
+			self.atIndex = -1;
+			self.deactivate();
+			self.update();
 		}
 		
 		this.activate = function() {
