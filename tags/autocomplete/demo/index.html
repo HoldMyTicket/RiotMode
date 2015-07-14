@@ -17,7 +17,13 @@
 	<body>
 		<h1>RiotMode Autocomplete Demo</h1>
 		<p>Search for a country</p>
-		<rm-autocomplete ajax="flow" type="select" url="/tags/autocomplete/demo/demo.json" height="200px" placeholder="Country Selection" filter-placeholder="Filter"></rm-autocomplete>
+		<rm-autocomplete ajax="initial" 
+						 type="select"
+						 url="/tags/autocomplete/demo/demo.json" 
+						 height="190px" 
+						 placeholder="Country Selection" 
+						 filter-placeholder="Filter">
+		</rm-autocomplete>
 		<script src="/bower_components/material-design-lite/material.min.js"></script>
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
 		<script src="/mixins/ajaxMixin.js"></script>
