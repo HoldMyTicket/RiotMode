@@ -166,9 +166,20 @@
 			if(typeof self.list[index] === 'undefined') {
 				return;
 			}
+						
 			self.deactivate();
 			self.list[index].active = true;
 			self.update();
+			
+			var active = document.querySelector('.active');
+			var table = this.table;
+			
+			var diff = active.getBoundingClientRect().top - table.getBoundingClientRect().top;
+			var max = parseInt(table.style.maxHeight);
+			
+			if(diff >= max || diff < 0) {
+				active.scrollIntoView();
+			}
 		}
 		
 		this.deactivate = function () {
