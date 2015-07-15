@@ -1,10 +1,26 @@
 <rm-toggle>
     <div class="wrap">
         <label class="mdl-{ toggleClass } mdl-js-{ toggleClass } mdl-js-ripple-effect" for="{ makeId }">
-            <input type="{ toggleType }" id="{ makeId }" name="{ toggleName }" class="mdl-{ toggleClass }__{ toggleType === 'radio' ? 'button' : 'input' }" value="{ toggleValue }" onclick="{ toggle }" checked="{ opts.toggle.checked }" />
-            <i if="{ toggleClass === 'icon-toggle' }" class="mdl-icon-toggle__label material-icons">format_bold</i>
-            <span if="{ toggleLabelText && toggleClass !== 'icon-toggle' }" class="mdl-{ toggleClass }__label">{ toggleLabelText }</span>
+                
+            <input 
+                type="{ toggleType }"
+                id="{ makeId }" 
+                name="{ toggleName }" 
+                class="mdl-{ toggleClass }__{ toggleType === 'radio' ? 'button' : 'input' }" 
+                value="{ toggleValue }" 
+                onclick="{ toggle }" 
+                checked="{ opts.toggle.checked }" />
+                
+            <span 
+                if="{ toggleLabelText && toggleClass !== 'icon-toggle' }" 
+                class="mdl-{ toggleClass }__label">{ toggleLabelText }</span>
+                
+            <i 
+                if="{ toggleClass === 'icon-toggle' }" 
+                class="mdl-icon-toggle__label material-icons">{ toggleIcon }</i>
+                
         </label>
+
     </div>
     
     <script>
@@ -18,8 +34,9 @@
         this.toggleType = '';
         this.toggleClass = '';
         this.toggleValue = opts.value || '';
-        this.toggleLabelText = opts['label-text'] || '';
         this.toggleName = opts.name || '';
+        this.toggleIcon = opts.icon || '';
+        this.toggleLabelText = opts['label-text'] || '';
         
         this.initType = function(toggleType) {
             switch(toggleType) {
