@@ -9,9 +9,11 @@
 				box-sizing:border-box;
 				padding:20px;
 			}
-			.item {
-				display:inline-block;
-				margin:10px;
+			section {
+				display: inline-block;
+				padding: 10px 35px 20px 0;
+				margin-right: 35px;
+				border-right: 1px solid #AAA;
 			}
 		</style>
 		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
@@ -20,34 +22,35 @@
 	</head>
 	<body>
 		<h1>RiotMode Autocomplete Demo</h1>
-		<div class="item">
-			<p>Text Input</p>
+		<p>There are different types of selections. One is autocomplete type, the other select type.</p>
+		<section>
+			<p>Search for a country (Autocomplete type)</p>
 			<rm-autocomplete  
-						 url="/tags/autocomplete/demo/demo.json" 
-						 height="190px" 
-						 placeholder="Country Selection" 
-						 filter-placeholder="Filter">
-				</rm-autocomplete>
-		</div>
-
-		<div class="item">
-			<p>Select Box</p>
+							 url="/tags/autocomplete/demo/demo.json" 
+							 height="190px" 
+							 placeholder="Country Selection" 
+							 filter-placeholder="Filter">
+			</rm-autocomplete>
+		</section>
+			
+		<section>
+			<p>Search for a city (select type)</p>
 			<rm-autocomplete  
-						 ajax="flow"
-						 type="select"
-						 url="/tags/autocomplete/demo/demo.json" 
-						 height="190px" 
-						 placeholder="Country Selection" 
-						 filter-placeholder="Filter">
-				</rm-autocomplete>
-		</div>
-
+							 url="/tags/autocomplete/demo/demo.json" 
+							 height="190px" 
+							 placeholder="Country Selection" 
+							 filter-placeholder="Filter"
+							 type="select">
+			</rm-autocomplete>
+		</section>
+		<p>This text is just down here to see how the page reflows as the user interacts with the &lt;rm-autocomplete&gt; tag</p>
+		
 		<script src="/bower_components/material-design-lite/material.min.js"></script>
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
 		<script src="/mixins/ajaxMixin.js"></script>
 		<script src="../src/autocomplete.tag" type="riot/tag"></script>
 		<script>
-			riot.mount('rm-autocomplete',{choices:[{value:'hi', text:'Apple'},{text:'Orange'},{text:'Banana'}]});
+			riot.mount('*');
 		</script>
 	</body>
 </html>
