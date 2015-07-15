@@ -1,7 +1,7 @@
 <rm-toggle>
     <div class="wrap">
-        <label class="mdl-{ toggleClass } mdl-js-{ toggleClass } mdl-js-ripple-effect" for="toggleInput{ opts.id }">
-            <input type="{ toggleType }" id="toggleInput{ opts.id }" name="toggleInput{ opts.id }" class="mdl-{ toggleClass }__{ toggleType === 'radio' ? 'button' : 'input' }" value="{ toggleValue }" onclick="{ toggle }" checked="{ opts.toggle.checked }" />
+        <label class="mdl-{ toggleClass } mdl-js-{ toggleClass } mdl-js-ripple-effect" for="{ makeId }">
+            <input type="{ toggleType }" id="{ makeId }" name="{ toggleName }" class="mdl-{ toggleClass }__{ toggleType === 'radio' ? 'button' : 'input' }" value="{ toggleValue }" onclick="{ toggle }" checked="{ opts.toggle.checked }" />
             <i if="{ toggleClass === 'icon-toggle' }" class="mdl-icon-toggle__label material-icons">format_bold</i>
             <span if="{ toggleLabelText && toggleClass !== 'icon-toggle' }" class="mdl-{ toggleClass }__label">{ toggleLabelText }</span>
         </label>
@@ -19,6 +19,7 @@
         this.toggleClass = '';
         this.toggleValue = opts.value || '';
         this.toggleLabelText = opts['label-text'] || '';
+        this.toggleName = opts.name || '';
         
         this.initType = function(toggleType) {
             switch(toggleType) {
@@ -50,6 +51,17 @@
             if(opts.toggle.onToggle) {
                 opts.toggle.onToggle(e);
             }
+        }
+        
+        this.makeId = function() {
+            var id = '';
+            var possibleChoices = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        
+            for(var i = 0; i < 5; i++) {
+                id += possibleChoices.charAt(Math.floor(Math.random() * possibleChoices.length));
+            }
+            
+            return id;
         }
         
         this.initType(opts.type);
