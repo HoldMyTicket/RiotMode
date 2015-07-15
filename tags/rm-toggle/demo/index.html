@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>RiotMode Toggle</title>
+		<style>
+			body {
+				box-sizing:border-box;
+				padding:20px;
+			}
+		</style>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+	</head>
+	<body>
+		<h1>RiotMode Toggle Demo</h1>
+        
+        <rm-toggle id="checkbox1" type="checkbox" label-text="Checkbox" toggle="toggle"></rm-toggle>
+        <rm-toggle id="radio1" type="radio" label-text="Radio Button"></rm-toggle>
+        <rm-toggle id="iconToggle1" type="icon-toggle"></rm-toggle>
+        <rm-toggle id="switch1" type="switch" label-text="Switch Toggle"></rm-toggle>
+        
+		<script src="/bower_components/material-design-lite/material.min.js"></script>
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<!--<script src="/mixins/ajaxMixin.js"></script>-->
+		<script src="../src/rm-toggle.tag" type="riot/tag"></script>
+        <script>riot.mount('rm-toggle')</script>
+        <script type="text/javascript">
+            this.toggle = {
+                checked: false,
+                onToggle: function(e) {
+                    console.log(e);
+                }
+            };
+        </script>
+	</body>
+</html>
