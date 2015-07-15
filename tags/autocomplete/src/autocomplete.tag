@@ -8,7 +8,7 @@
 			   placeholder="{ opts.placeholder }" 
 			   data-value="{ baseInputValue }"
 			   value="{ baseInputText }"
-			   onclick="{ baseFocus }"
+			   onclick="{ openChoices }"
 			   onfocus="{ baseFocus }" 
 			   onkeyup="{ handleText }">
 		<div class="list" show={open}>
@@ -64,8 +64,8 @@
 		});
 		
 		this.on('unmount', function () {
-			document.removeEventListener('click', self.closeDropdown);
-			document.removeEventListener('focus', self.closeDropdown, true);
+			document.removeEventListener('click', self.closeChoices);
+			document.removeEventListener('focus', self.closeChoices, true);
 		});
 		
 		this.init = function() {
@@ -103,7 +103,7 @@
 			
 			self.list = self.choices.filter(function(c) {
                 return c.text.match(RegExp(target.value,'i'));
-            });
+            });				
 			
 			self.noResults = false;
 			if(self.list.length < 1) 
