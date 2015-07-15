@@ -198,7 +198,7 @@
 	</script>
 	
 	<style scoped>
-		.active { background:rgb(176,176,176); }
+		.active { background:rgb(215,215,215); }
 		
 		.base { height:40px; }
 		
