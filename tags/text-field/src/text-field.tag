@@ -1,7 +1,7 @@
 <rm-text-field>
 	<div id="wrap" class="mdl-textfield mdl-js-textfield textfield-demo">
 		<textarea if="{ opts.type == 'multiple' && opts.type !='expanding'}" class="mdl-textfield__input" type="text" rows= "3" id="{id}" ></textarea>
-		<input if="{ opts.type != 'multiple' && opts.type !='expanding'}" class="mdl-textfield__input" type="text" pattern="{ regex }" class="mdl-textfield__input" type="text" id="{id}" />
+		<input if="{ opts.type != 'multiple' && opts.type !='expanding'}" class="mdl-textfield__input" type="text" class="mdl-textfield__input" type="text" id="{id}" />
     	<label id="label" class="mdl-textfield__label" for="{id}">{ opts.placeholder || 'Type...' }</label>
 		<span if="{ opts.type == 'numeric' }"" class="mdl-textfield__error">{ error }</span>
 		<div if="{ opts.type == 'expanding' }" class="mdl-textfield__expandable-holder">
@@ -24,7 +24,9 @@
 		 this.id = this.type + '-rm-text-field';
 		 
 		 this.on('mount',function() {
-			 
+			//Fix for ID not binding to this object riot 2.2.1 -e
+			this[self.id] = this.root.querySelector('#'+self.id);
+			
 			this.wrap.style.width = this.width;
 			if(this.floating) {
 				this.wrap.classList.add('mdl-textfield--floating-label');
@@ -41,16 +43,17 @@
 		 
 		 this.handleRegex = function() {
 			 if(this.type === 'numeric') {
-				 this.regex = '-?[0-9]*(\.[0-9]+)?';
+				 this[self.id].setAttribute('pattern','-?[0-9]*(\.[0-9]+)?');
 				 this.error = 'Input is not a numberee!';
 				 this.update();
 				 return;
 			 }
 			 
-			 this.regex = opts.regex || '';
-			 this.error = opts.error || 'Input error!';
-			 
-			 this.update();
+			 if(opts.regex) {
+				 this.error = opts.error || 'Input error!';
+				 this[self.id].setAttribute('pattern',opts.regex);
+				 this.update();
+			 }
 		 }
 		 
 		 
