@@ -8,6 +8,7 @@
 			   placeholder="{ opts.placeholder }" 
 			   data-value="{ baseInputValue }"
 			   value="{ baseInputText }"
+			   onclick="{ baseFocus }"
 			   onfocus="{ baseFocus }" 
 			   onkeyup="{ handleText }">
 		<div class="list" show={open}>
@@ -152,7 +153,7 @@
 		}
 		
 		this.closeChoices = function(e) {	
-			if (self.root.contains(e.target)) {
+			if (e != undefined && self.root.contains(e.target)) {
 				return;
 			}
 			self.open = false;
