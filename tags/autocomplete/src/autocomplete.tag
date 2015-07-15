@@ -1,17 +1,31 @@
 <rm-autocomplete>
 
 	<div class="wrap">
-		<input class="mdl-textfield__input { border : selectBox } base" onclick="{ selectBox ? updateSelect : null }" id="baseInput" type="text" name="autocomplete" placeholder="{ opts.placeholder }" data-value="{ baseInputValue }" value="{ baseInputText }">
+		<input class="mdl-textfield__input { border : selectBox } base" 
+		       id="baseInput" 
+			   type="text" 
+			   name="{ opts.name || autocomplete }" 
+			   placeholder="{ opts.placeholder }" 
+			   data-value="{ baseInputValue }"
+			   value="{ baseInputText }"
+			   onclick="{ baseFocus }"
+			   onfocus="{ baseFocus }" 
+			   onkeyup="{ handleText }">
 		<div class="list" show={open}>
-			<input show={selectBox} class="filter" onkeyup="{ capture }" id="selectInput" type="text" name="autocomplete"
-							placeholder="{ opts['filter-placeholder'] || 'Filter' }" value="{ selectInputText }">	
-							
+			<input show={selectBox} 
+			       id="filter"
+				   class="filter" 
+				   onkeyup="{ handleText }" 
+				   id="selectInput" 
+				   type="text" 
+				   name="autocomplete"
+				   placeholder="{ opts['filter-placeholder'] || 'Filter' }">			
 			<div id="table" class="table-wrap">
 				<table class="mdl-data-table mdl-js-data-table">
 					<tbody>
 						<tr show={noResults}><td class="mdl-data-table__cell--non-numeric mute">Nothing Found...</td></tr>
 						<tr onclick="{ parent.choose }" each={ item, i in list } data-value="{ item.value || ''}">
-							<td class="mdl-data-table__cell--non-numeric">{item.text}</td>
+							<td class="mdl-data-table__cell--non-numeric {active:item.active}">{item.text}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -21,91 +35,67 @@
 	
 	<script>
 		/**
-		 * Autocomplete component for RiotJS v1.0
+		 * Autocomplete component for RiotJS v2.2
 		 * 
 		 * @author evan-f
 		 */
 		var self = this;
 		
 		this.mixin(ajaxMixin);
-		this.ajax = opts.ajax || false; //Grab choice with ajax or not
-		this.ajaxTimeout = parseInt(opts.timeout) || 1000;
+		this.ajax = opts.ajax || false;
 		this.choices = opts.choices || [];
-		this.height = opts.height || '500px'; //Length of dropdown
+		this.dropdown = opts.dropdown || false;
+		this.height = opts.height || '500px'; 
 		this.list = [];
 		this.selectBox = (opts.type === "select" ? true : false);
 		this.url = opts.url || false;
 		this.open = false;
 		this.noResults = false;
+		this.atIndex = -1;
 		
 		this.on('mount', function() {
-			self.initType();
+			self.init();
+			document.addEventListener('click', self.closeChoices);
+			document.addEventListener('focus', self.closeChoices, true);
+		});
+		
+		this.on('unmount', function () {
+			document.removeEventListener('click', self.closeDropdown);
+			document.removeEventListener('focus', self.closeDropdown, true);
+		});
+		
+		this.init = function() {
+			var input = self.baseInput;
+			self.table.style.maxHeight = self.height;
 			
-			//Setup height on the table
-			document.getElementById('table').style.maxHeight = self.height;
+			if(self.selectBox) {
+				input.readOnly = true;
+			}
 			
 			if(self.ajax) {
 				self.ajaxGet(self.url, function(res) {
 					var json = JSON.parse(res);
 					self.choices = json.choices;
+					self.list = json.choices;
+					self.update();
 				});
-			}
-		});
-		
-		this.initType = function() {
-			var input = document.getElementById('baseInput');
-			if(self.selectBox) {
-				input.readOnly = true;
 			} else {
-				input.onkeyup = function(e) {
-					var clean = self.capture(e);
-					if(!clean) 
-						self.open = false;
-				}
+				self.list = self.choices;
+			}
+			
+			input.onfocus = function() {
+				self.baseFocus();
 			}
 		}
 				
-		this.updateSelect = function(e) {
-			self.list = self.choices;
-			self.open = !self.open;
-			
-			//Reset input
-			if(self.open == false)
-				self.selectInputText = '';
-			
-			self.update();
-		}
-			
-		this.ajaxReady = true;
-			
-		this.capture = function(e) {
-			if(self.ajax === 'flow') {
-				if(self.ajaxReady) {
-					self.ajaxReady = false;
-					self.ajaxGet(self.url, function(res) {
-						var json = JSON.parse(res);
-						self.choices = json.choices;
-						self.handleText(e);
-						setTimeout(function() {
-							self.ajaxReady = true;
-						},self.ajaxTimeout);
-					});
-				} else {
-					self.handleText(e);
-				}
-			} else {
-				self.handleText(e);
+		this.baseFocus = function() {
+			if(self.list.length > 0) {
+				self.openChoices();
 			}
 		}
 				
 		this.handleText = function(e) {
 			var target = e.srcElement || e.originalTarget;
-			
-			if(target.value.length == 0) {
-				self.open = false;
-				self.update();
-				return true;
-			}
 			
 			self.list = self.choices.filter(function(c) {
                 return c.text.match(RegExp(target.value,'i'));
@@ -115,35 +105,113 @@
 			if(self.list.length < 1) 
 				self.noResults = true;
 			
-			//Safety open
-			self.open = true;
-			self.update();
-			
 			if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
 				e.preventDefault();
-
+				
 				if (e.keyCode == 27) {
-					self.open = false;
+					self.closeChoices();
 				} else if (e.keyCode == 13) {
 					if(self.list.length == 1) {
-						document.querySelectorAll('td')[1].click();				
+						self.assign(self.list[0].text,self.list[0].value);
+						return;			
+					} else {
+						self.list.forEach(function(item) {
+							if(item.active)
+								self.assign(item.text,item.value);
+						});
 					}
+				} else if (e.keyCode == 38) {
+					if(self.atIndex <= 0)
+						return;
+
+					self.atIndex--;
+					self.activate();
+				} else if (e.keyCode == 40) {
+					if(self.atIndex + 1 >= self.list.length)
+						return;
+					
+					self.atIndex++;
+					self.activate();
 				}
 			}
+			self.update();
 			return true;
+		}
+		
+		this.openChoices = function() {
+			self.open = true;
+			if(self.ajax === 'flow') {
+				self.ajaxGet(self.url, function(res) {
+					var json = JSON.parse(res);
+					self.choices = json.choices;
+					self.list = json.choices;
+					self.update();
+				});
+			} else {
+				self.update();
+			}
+		}
+		
+		this.closeChoices = function(e) {	
+			if (e != undefined && self.root.contains(e.target)) {
+				return;
+			}
+			self.open = false;
+			self.atIndex = -1;
+			self.deactivate();
+			self.update();
+		}
+		
+		this.activate = function() {
+			var index = self.atIndex;
+			if(typeof self.list[index] === 'undefined') {
+				return;
+			}
+						
+			self.deactivate();
+			self.list[index].active = true;
+			self.update();
+			
+			var active = document.querySelector('.active');
+			var table = this.table;
+			
+			var diff = active.getBoundingClientRect().top - table.getBoundingClientRect().top;
+			var max = parseInt(table.style.maxHeight);
+			
+			if(diff >= max || diff < 0) {
+				active.scrollIntoView();
+			}
+		}
+		
+		this.deactivate = function () {
+			self.list.forEach(function(item) {
+				item.active = false;
+			});
 		}
 		
 		this.choose = function(e) {
 			var target = e.srcElement || e.originalTarget;
 			var value = target.getAttribute('data-value') || target.innerHTML;
 			
-			self.baseInputText = target.innerHTML;
-			self.baseInputValue = value;
-			self.updateSelect();
+			self.assign(target.innerHTML,value);
+		}
+		
+		this.assign = function(text, val) {
+			if(self.selectBox)  {
+				this.filter.value = '';		
+			}
+			self.baseInputText = text;
+			self.baseInputValue = val;
+			self.open = false;
+			self.atIndex = -1;
+			self.deactivate();
+			self.update();
 		}
 	</script>
 	
 	<style scoped>
+		.active { background:rgb(215,215,215); }
+		
 		.base { height:40px; }
 		
 		.border {
