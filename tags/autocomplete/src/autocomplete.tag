@@ -236,6 +236,8 @@
 			width:100%; }
 		
 		.list {
+			position:absolute;
+			width: inherit;
 			box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px;}
 		
 		.search-row { height:auto !important; }

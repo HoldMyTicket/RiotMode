@@ -9,6 +9,10 @@
 				box-sizing:border-box;
 				padding:20px;
 			}
+			.item {
+				display:inline-block;
+				margin:10px;
+			}
 		</style>
 		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
@@ -17,12 +21,27 @@
 	<body>
 		<h1>RiotMode Autocomplete Demo</h1>
 		<p>Search for a country</p>
-		<rm-autocomplete  
+		
+		<div class="item">
+			<rm-autocomplete  
 						 url="/tags/autocomplete/demo/demo.json" 
 						 height="190px" 
 						 placeholder="Country Selection" 
 						 filter-placeholder="Filter">
-		</rm-autocomplete>
+				</rm-autocomplete>
+		</div>
+
+		<div class="item">
+			<rm-autocomplete  
+						 ajax="flow"
+						 type="select"
+						 url="/tags/autocomplete/demo/demo.json" 
+						 height="190px" 
+						 placeholder="Country Selection" 
+						 filter-placeholder="Filter">
+				</rm-autocomplete>
+		</div>
+
 		<script src="/bower_components/material-design-lite/material.min.js"></script>
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
 		<script src="/mixins/ajaxMixin.js"></script>
