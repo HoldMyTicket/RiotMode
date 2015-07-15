@@ -43,12 +43,16 @@
 		
 		this.mixin(ajaxMixin);
 		this.ajax = opts.ajax || false;
+		
 		this.choices = opts.choices || [];
 		this.dropdown = opts.dropdown || false;
 		this.height = opts.height || '500px'; 
 		this.list = [];
 		this.selectBox = (opts.type === "select" ? true : false);
 		this.url = opts.url || false;
+		if(this.url !== false)
+			this.ajax = true;
+			
 		this.open = false;
 		this.noResults = false;
 		this.atIndex = -1;
