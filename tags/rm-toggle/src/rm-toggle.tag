@@ -17,7 +17,7 @@
                 
             <i 
                 if="{ toggleClass === 'icon-toggle' }" 
-                class="mdl-icon-toggle__label material-icons">{ toggleIcon }</i>
+                class="mdl-icon-toggle__label material-icons">{ opts.icon }</i>
                 
         </label>
 
@@ -32,12 +32,11 @@
         var self = this;
         
         this.mixin(eventMixin);
-        toggleType = '';
-        toggleClass = '';
-        toggleValue = opts.value || '';
-        toggleName = opts.name || '';
-        toggleIcon = opts.icon || '';
-        toggleLabelText = opts['label-text'] || '';
+        this.toggleType = '';
+        this.toggleClass = '';
+        this.toggleValue = opts.value || '';
+        this.toggleName = opts.name || '';
+        this.toggleLabelText = opts['label-text'] || '';
         
         initType(toggleType) {
             switch(toggleType) {
