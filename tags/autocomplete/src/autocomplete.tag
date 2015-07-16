@@ -145,6 +145,7 @@
 		}
 		
 		this.openChoices = function() {
+			this.fire('open')
 			self.open = true;
 			if(self.ajax === 'flow') {
 				self.ajaxGet(self.url, function(res) {

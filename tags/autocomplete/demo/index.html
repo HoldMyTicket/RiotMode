@@ -25,12 +25,24 @@
 		<p>There are different types of selections. One is autocomplete type, the other select type.</p>
 		<section>
 			<p>Search for a country (Autocomplete type)</p>
+			<script>
+				function customFunc(){
+					console.log('abc')
+				}
+				
+				var myObj = {
+					customFunc: function(){
+						console.log('obj function called');
+					}
+				}
+			</script>
 			<rm-autocomplete  
 							 ready="test"
 							 url="/tags/autocomplete/demo/demo.json" 
 							 height="190px" 
 							 placeholder="Country Selection" 
-							 filter-placeholder="Filter">
+							 filter-placeholder="Filter"
+							>
 			</rm-autocomplete>
 		</section>
 			
@@ -41,7 +53,8 @@
 							 height="190px" 
 							 placeholder="Country Selection" 
 							 filter-placeholder="Filter"
-							 type="select">
+							 type="select"
+							 onopen="myObj.customFunc">
 			</rm-autocomplete>
 		</section>
 		<p>This text is just down here to see how the page reflows as the user interacts with the &lt;rm-autocomplete&gt; tag</p>
@@ -55,7 +68,7 @@
 			var test = function() {
 				console.log('hello');
 			}
-			riot.mount('*');
+			riot.mount('*', {useWindow:true});
 		</script>
 	</body>
 </html>
