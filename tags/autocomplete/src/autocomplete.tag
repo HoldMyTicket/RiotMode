@@ -42,6 +42,7 @@
 		var self = this;
 		
 		this.mixin(ajaxMixin);
+		this.mixin(eventMixin);
 		this.ajax = opts.ajax || false;
 		
 		this.choices = opts.choices || [];
