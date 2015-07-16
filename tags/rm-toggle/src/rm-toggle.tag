@@ -9,7 +9,7 @@
                 class="mdl-{ toggleClass }__{ toggleType === 'radio' ? 'button' : 'input' }" 
                 value="{ toggleValue }" 
                 onclick="{ toggle }" 
-                checked="{ opts.toggle.checked }" />
+                checked="{ opts.checked }" />
                 
             <span 
                 if="{ toggleLabelText && toggleClass !== 'icon-toggle' }" 
@@ -31,14 +31,15 @@
          */
         var self = this;
         
-        this.toggleType = '';
-        this.toggleClass = '';
-        this.toggleValue = opts.value || '';
-        this.toggleName = opts.name || '';
-        this.toggleIcon = opts.icon || '';
-        this.toggleLabelText = opts['label-text'] || '';
+        this.mixin(eventMixin);
+        toggleType = '';
+        toggleClass = '';
+        toggleValue = opts.value || '';
+        toggleName = opts.name || '';
+        toggleIcon = opts.icon || '';
+        toggleLabelText = opts['label-text'] || '';
         
-        this.initType = function(toggleType) {
+        initType(toggleType) {
             switch(toggleType) {
                 case 'checkbox':
                     self.toggleType = 'checkbox';
@@ -62,15 +63,13 @@
             }
         }
         
-        this.toggle = function(e) {
-            opts.toggle.checked = !opts.toggle.checked;
-            
-            if(opts.toggle.onToggle) {
-                opts.toggle.onToggle(e);
-            }
+        toggle(e) {
+            opts.checked = !opts.checked;
+            opts.ontoggle(e);
+            this.fire('toggle', e, self);
         }
         
-        this.makeId = function() {
+        makeId(e) {
             var id = '';
             var possibleChoices = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         
