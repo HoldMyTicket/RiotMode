@@ -30,24 +30,14 @@
 				<rm-toggle type="radio" label-text="Radio Button" ontoggle="{ myToggle }"></rm-toggle>
 				<rm-toggle type="icon-toggle" icon="feedback" ontoggle="{ myToggle }"></rm-toggle>
 				<rm-toggle type="switch" label-text="Switch Toggle" ontoggle="{ myToggle }"></rm-toggle>
-				
-				<label>
-					<input type="radio">
-					<span>Test</span>
-				</label>
-				
-				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
-  					<input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" />
-					<span class="mdl-checkbox__label">Checkbox</span>
-				</label>
 			
 				<div class="hidden-message" show="{ show }">This is a hidden message! :D</div>
 				
+				var parent = this;
 				show = false;
-				myToggle = function(e, self) {
+				myToggle = function(e) {
 					show = !show;
-					console.log(this);
-					self.update();
+					parent.update();
 				}
 			</toggle-demo>
 		</script>

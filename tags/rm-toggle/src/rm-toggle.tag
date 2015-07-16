@@ -65,8 +65,7 @@
         
         toggle(e) {
             opts.checked = !opts.checked;
-            opts.ontoggle(e);
-            this.fire('toggle', e, self);
+            this.fire('toggle', e);
         }
         
         makeId(e) {
