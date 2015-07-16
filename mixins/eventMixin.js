@@ -1,10 +1,10 @@
 var eventMixin = {
-    fire: function (action, obj) {
-    	if(typeof obj.opts[action] == 'string') {
-			window[obj.opts[action]]();	
+    fire: function (action) {
+    	if(typeof this.opts[action] == 'string') {
+			window[this.opts[action]]();	
 		}
-		else if(typeof obj.opts[action] == 'function') {
-			obj.opts[action]();
+		else if(typeof this.opts[action] == 'function') {
+			this.opts[action]();
 		}
     }
 }    

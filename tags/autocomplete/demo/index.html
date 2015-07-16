@@ -26,6 +26,7 @@
 		<section>
 			<p>Search for a country (Autocomplete type)</p>
 			<rm-autocomplete  
+							 ready="test"
 							 url="/tags/autocomplete/demo/demo.json" 
 							 height="190px" 
 							 placeholder="Country Selection" 
@@ -51,6 +52,9 @@
 		<script src="/mixins/eventMixin.js"></script>
 		<script src="../src/autocomplete.tag" type="riot/tag"></script>
 		<script>
+			var test = function() {
+				console.log('hello');
+			}
 			riot.mount('*');
 		</script>
 	</body>

@@ -60,6 +60,7 @@
 		
 		this.on('mount', function() {
 			self.init();
+			self.fire('ready');
 			document.addEventListener('click', self.closeChoices);
 			document.addEventListener('focus', self.closeChoices, true);
 		});
