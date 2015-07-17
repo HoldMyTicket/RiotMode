@@ -169,7 +169,7 @@
         var target = e.srcElement || e.originalTarget;
 		var value = target.getAttribute('data-value') || target.innerHTML;
 
-        tag.value = target.innerHTML;
+        tag.value = target.innerHTML.trim();
         tag.closeWindow();
     }
 
