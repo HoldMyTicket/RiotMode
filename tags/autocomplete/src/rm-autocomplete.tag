@@ -196,16 +196,20 @@
                 return c.text.match(RegExp(target.value,'i'));
             });
         }
-        tag.update();
 
-        if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
+        if ([8, 13, 27, 38, 40].indexOf(e.keyCode) > -1) {
 			e.preventDefault();
             tag.keys(e.keyCode)
+        } else {
+            tag.atIndex = -1;
         }
+        tag.update();
     }
 
     keys(val) {
-        if (val == 27) {
+        if(val == 8) {
+            tag.deactivate();
+        } else if (val == 27) {
             tag.closeWindow();
         } else if (val == 13) {
             if(tag.list.length == 1) {
