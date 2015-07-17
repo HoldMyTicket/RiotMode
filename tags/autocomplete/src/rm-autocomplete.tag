@@ -30,7 +30,7 @@
             left:0; right:0;
             height:auto;
             overflow-x:hidden;
-            overflow-y:scroll;
+            overflow-y:auto;
 			border: 1px solid rgba(0, 0, 0, 0.117647);
             border-top:none;
 			box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px;}
@@ -65,6 +65,9 @@
                     <input class="filter-input"
                        placeholder="Filter"
                        onkeyup="{ handleText }">
+                </li>
+                <li show={ noResults }>
+                    No results...
                 </li>
     			<li onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" class="item { active: item.active }">
                     { item.text }
@@ -140,17 +143,16 @@
     openWindow(e) {
         if(tag.open)
             return;
-        if(tag.select) {
-            var fi = tag.root.querySelector('.filter-input');
-            fi.focus();
-            //TODO
-        }
+
         tag.open = true;
         tag.update();
+
+        //If selectbox want to focus filter
+        if(tag.select)
+            tag.root.querySelector('.filter-input').select();
     }
 
     closeWindow(e) {
-        //console.log(e);
         tag.atIndex = -1;
         tag.open = false;
         tag.update();
@@ -196,6 +198,10 @@
                 return c.text.match(RegExp(target.value,'i'));
             });
         }
+
+        tag.noResults = false;
+		if(tag.filteredList.length < 1)
+			tag.noResults = true;
 
         if ([8, 13, 27, 38, 40].indexOf(e.keyCode) > -1) {
 			e.preventDefault();
