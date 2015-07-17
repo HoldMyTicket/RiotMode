@@ -218,9 +218,10 @@
         } else if (val == 27) {
             tag.closeWindow();
         } else if (val == 13) {
-            if(tag.list.length == 1) {
-                tag.value = tag.list[0].text;
+            if(tag.filteredList.length == 1) {
+                tag.value = tag.filteredList[0].text;
                 tag.closeWindow();
+                tag.root.querySelector('.base').blur();
                 return;
             } else {
                 tag.filteredList.forEach(function(item) {
