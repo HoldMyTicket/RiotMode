@@ -83,7 +83,7 @@ function handleRoute(route) {
     var page = 'page-'+route;
     if(mountedTag)
       mountedTag.unmount(true);
-    riot.compile('/pages/' + page + '.html', function() {
+    riot.compile('pages/' + page + '.html', function() {
       mountedTag = riot.mount('#pagewrap', page)[0];
       $('#pagewrap').attr('riot-tag',page);
     });
