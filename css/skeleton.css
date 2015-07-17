@@ -409,12 +409,13 @@ hr {
   line-height: .5;
   
 }
-.header small { font-size: 13px; color: #def1eb;  }
+.header small { font-size: 13px; color: #000;  }
 
 ul.nav, ul.nav li { list-style: none; list-style-image: none; text-align: right; font-size: 13px;  }
 ul.nav li { padding-right: 10px; }
 ul.nav { border-right: 1px solid #ccc; margin: 40px 10px 0 0; }
-
+ul.nav li a {color: #000;text-decoration: none;}
+ul.nav li a:hover { text-decoration: underline; }
 .container { margin: 50px auto 50px auto; }
 
 /* Media Queries

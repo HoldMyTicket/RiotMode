@@ -29,12 +29,10 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
-  
-
 </head>
 <body>
 
-  <div class="header">
+  <div class="header" onclick="window.location='/'">
     <i class="entypo entypo-switch"></i> RiotMode<br /><small>by HoldMyTicket</small>
   </div>
 
@@ -45,32 +43,52 @@
   <div class="row">
     <div class="three columns">
       <ul class="nav">
-        <li>Autocomplete</li>
-        <li>Modal</li>
-        <li>Text</li>
-        <li>Toggle</li>
-        <li>Tooltip</li>
+        <li><a href="#autocomplete">Autocomplete</a></li>
+        <li><a href="#modal">Modal</a></li>
+        <li><a href="#text">Text</a></li>
+        <li><a href="#toggle">Toggle</a></li>
+        <li><a href="#tooltip">Tooltip</a></li>
       </ul>
     </div>
     <div class="one columns">
     </div>
-    <div class="seven columns" id="page">
-
-      <page-home></page-home>
+    <div class="seven columns" id="pagewrap">
 
     </div>
   </div>
 
 </div>
 
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <script src="pages/page-home.html" type="riot/tag"></script>
 <script src="pages/page-autocomplete.html" type="riot/tag"></script>
+<script src="pages/page-modal.html" type="riot/tag"></script>
+<script src="pages/page-text.html" type="riot/tag"></script>
+<script src="pages/page-toggle.html" type="riot/tag"></script>
+<script src="pages/page-tooltip.html" type="riot/tag"></script>
 
 <script src="js/riot.js"></script>
 
-<script>riot.mount('page-home')</script>
+<script>
+var mountedTag = false;
+riot.route.exec(function(route) {
+  handleRoute(route || 'home');
+})
+riot.route(function(route) {
+  handleRoute(route);
+})
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+function handleRoute(route) {
+    var page = 'page-'+route;
+    if(mountedTag)
+      mountedTag.unmount(true);
+    riot.compile('/pages/' + page + '.html', function() {
+      mountedTag = riot.mount('#pagewrap', page)[0];
+      $('#pagewrap').attr('riot-tag',page);
+    });
+}
+</script>
+
 </body>
 </html>
