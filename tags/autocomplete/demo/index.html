@@ -19,13 +19,19 @@
 		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script src="/bower_components/material-design-lite/material.min.js"></script>
+		<script src="/mixins/ajaxMixin.js"></script>
+		<script src="/mixins/eventMixin.js"></script>
+		<script src="../src/rm-autocomplete.tag" type="riot/tag"></script>
 	</head>
 	<body>
 		<h1>RiotMode Autocomplete Demo</h1>
 		<p>There are different types of selections. One is autocomplete type, the other select type.</p>
 		<section>
 			<p>Search for a country (Autocomplete type)</p>
-			<rm-autocomplete
+			<rm-autocomplete parameter="q"
 							 name="text-input"
 							 url="/tags/autocomplete/demo/demo.json"
 							 height="190px"
@@ -37,7 +43,7 @@
 			<p>Search for a country (select type)</p>
 			<rm-autocomplete
 							 name="select-input"
-							 url="/tags/autocomplete/demo/demo.json"
+
 							 height="190px"
 							 placeholder="Country Selection"
 							 filter-placeholder="Filter"
@@ -55,12 +61,6 @@
 			</rm-autocomplete>
 		</section>
 		<!-- <p>This text is just down here to see how the page reflows as the user interacts with the &lt;rm-autocomplete&gt; tag</p> -->
-
-		<script src="/bower_components/material-design-lite/material.min.js"></script>
-		<script src="/bower_components/riot/riot+compiler.min.js"></script>
-		<script src="/mixins/ajaxMixin.js"></script>
-		<script src="/mixins/eventMixin.js"></script>
-		<script src="../src/rm-autocomplete.tag" type="riot/tag"></script>
 		<script>
 			riot.mount('rm-autocomplete',{list:[{text:'Apple'},{text:'Orange'},{text:'Banana'}]});
 		</script>

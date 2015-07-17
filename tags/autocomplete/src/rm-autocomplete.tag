@@ -1,5 +1,6 @@
 <rm-autocomplete>
     <style scoped>
+        * {box-sizing:border-box;}
         .active { background:rgb(215,215,215); }
         .base {height:40px;padding-left:5px;}
 		.border {
@@ -24,15 +25,26 @@
 			font-size:16px;
 			height:30px;
 			width:100%; }
-		.list {
+        .list {
 			position:absolute;
             left:0; right:0;
+            height:auto;
+            overflow-x:hidden;
+            overflow-y:scroll;
 			border: 1px solid rgba(0, 0, 0, 0.117647);
             border-top:none;
 			box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px;}
+        .noselect {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
         ul { list-style-type: none; padding:0; maring:0; -webkit-margin-before: 0; -webkit-margin-after: 0;}
         ul li {
-            padding:15px;
+            padding:5px 15px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
         }
         ul li:hover { background: rgb(240, 240, 240); }
@@ -40,17 +52,21 @@
         .wrap { position: relative; }
 	</style>
 
-    <div class="wrap">
+    <div class="wrap noselect">
         <input class="mdl-textfield__input base { border : select }"
-               placeholder="{ opts.placeholder || 'Type...' }">
+               placeholder="{ opts.placeholder || 'Type...' }"
+               onkeyup="{ handleText }"
+               value="{ value }">
+
 
         <div show={ open } class="list">
             <ul>
                 <li show={ select } class="filter">
                     <input class="filter-input"
-                       placeholder="Filter">
+                       placeholder="Filter"
+                       onkeyup="{ handleText }">
                 </li>
-    			<li each="{ item, i in filteredList }" onclick="{ parent.select }" class="item { active: item.active }">
+    			<li onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" class="item { active: item.active }">
                     { item.text }
                 </li>
     		</ul>
@@ -59,12 +75,20 @@
 
     var tag = this;
 
+    this.mixin(ajaxMixin);
+    this.mixin(eventMixin);
+
     this.open = false;
     this.select = opts.type === "select" ? true : false;
-
-    //Fill both lists for now
+    this.maxHeight = opts.height || '520px';
+    this.url = opts.url || false;
+	if(this.url !== false)
+		this.ajax = true;
+    this.parameter = opts.parameter || false;
     this.list = opts.list || [];
     this.filteredList = opts.list || [];
+    this.noResults = false;
+	this.atIndex = -1;
 
     this.on('mount',function(){
         var base = this.root.querySelector('.base');
@@ -74,23 +98,35 @@
         else
             tag.error(base,'No name attribute');
 
+        //Handle any focus or click outside of this element to close it
+        document.addEventListener('click', tag.globalClose);
+    	document.addEventListener('focus', tag.globalClose, true);
     });
+
+    this.on('unmount', function () {
+		document.removeEventListener('click', tag.globalClose);
+		document.removeEventListener('focus', tag.globalClose, true);
+	});
 
     //Normal setup logic
     setup(input) {
         if(tag.select)
             input.readOnly = true;
 
-        input.onkeyup = function(e) {
-            tag.handleText(e);
-        };
-        input.onblur  = function(e) {
-            tag.closeWindow();
-        };
+        if(tag.ajax) {
+			tag.ajaxGet(tag.url, function(res) {
+				var json = JSON.parse(res);
+				tag.list = json.choices;
+                tag.filteredList = json.choices;
+				tag.update();
+			});
+		}
+        tag.root.querySelector('.list').style.maxHeight = tag.maxHeight;
         input.onfocus = function(e) {
-            tag.openWindow();
-        };
-        input.onclick = function(e) {};
+            if(!tag.open) {
+                tag.openWindow(e);
+            }
+        }
     }
 
     error(input, message) {
@@ -102,21 +138,128 @@
 
 
     openWindow(e) {
+        if(tag.open)
+            return;
+        if(tag.select) {
+            var fi = tag.root.querySelector('.filter-input');
+            fi.focus();
+            //TODO
+        }
         tag.open = true;
         tag.update();
     }
 
     closeWindow(e) {
+        //console.log(e);
+        tag.atIndex = -1;
         tag.open = false;
         tag.update();
     }
 
+    globalClose(e) {
+        if (e != undefined && tag.root.contains(e.target)) {
+			return;
+		}
+        tag.closeWindow();
+    }
+
+    pick(e) {
+        var target = e.srcElement || e.originalTarget;
+		var value = target.getAttribute('data-value') || target.innerHTML;
+
+        tag.value = target.innerHTML;
+        tag.closeWindow();
+    }
+
     handleText(e) {
 		var target = e.srcElement || e.originalTarget;
-        tag.filteredList = tag.list.filter(function(c) {
-            return c.text.match(RegExp(target.value,'i'));
-        });
+
+        //Ajax on the fly
+        if(tag.parameter) {
+            var path = '';
+
+            //Construct url string with parameter
+            var re = new RegExp("([?&])" + tag.parameter + "=.*?(&|$)", "i");
+            var separator = tag.url.indexOf('?') !== -1 ? "&" : "?";
+            if (tag.url.match(re)) {
+                path = tag.url.replace(re, '$1' + tag.parameter + "=" + target.value + '$2');
+            } else {
+                path = tag.url + separator + tag.parameter + "=" + target.value;
+            }
+
+            tag.ajaxGet(path, function(res) {
+				var json = JSON.parse(res);
+                tag.filteredList = json.choices;
+			});
+        } else {
+            tag.filteredList = tag.list.filter(function(c) {
+                return c.text.match(RegExp(target.value,'i'));
+            });
+        }
         tag.update();
+
+        if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
+			e.preventDefault();
+            tag.keys(e.keyCode)
+        }
     }
+
+    keys(val) {
+        if (val == 27) {
+            tag.closeWindow();
+        } else if (val == 13) {
+            if(tag.list.length == 1) {
+                tag.value = tag.list[0].text;
+                tag.closeWindow();
+                return;
+            } else {
+                tag.filteredList.forEach(function(item) {
+                    if(item.active) {
+                        tag.value = item.text;
+                        tag.closeWindow();
+                    }
+                });
+            }
+        } else if (val == 38) {
+            if(tag.atIndex <= 0)
+                return;
+
+            tag.atIndex--;
+            tag.activate();
+        } else if (val == 40) {
+            if(tag.atIndex + 1 >= tag.list.length)
+                return;
+
+            tag.atIndex++;
+            tag.activate();
+        }
+    }
+
+    activate() {
+
+        if(typeof tag.filteredList[tag.atIndex] === 'undefined') {
+            return;
+        }
+
+        tag.deactivate();
+        tag.filteredList[tag.atIndex].active = true;
+        tag.update();
+
+        var active = tag.root.querySelector('.active');
+        var table = tag.root.querySelector('.list');
+
+        var diff = active.getBoundingClientRect().top - table.getBoundingClientRect().top;
+        var max = parseInt(table.style.maxHeight);
+
+        if(diff >= max || diff < 0) {
+            active.scrollIntoView();
+        }
+    }
+
+    deactivate() {
+		tag.filteredList.forEach(function(item) {
+			item.active = false;
+		});
+	}
 
 </rm-autocomplete>
