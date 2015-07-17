@@ -33,11 +33,11 @@
 			
 				<div class="hidden-message" show="{ show }">This is a hidden message! :D</div>
 				
-				var parent = this;
+				var self = this;
 				show = false;
 				myToggle = function(e) {
 					show = !show;
-					parent.update();
+					self.update();
 				}
 			</toggle-demo>
 		</script>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>RiotMode Toggle</title>
+		<style>
+			body {
+				box-sizing:border-box;
+				padding:20px;
+			}
+		</style>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+	</head>
+	<body>
+		<h1>RiotMode Modal Demo</h1>
+		
+		<modal-demo></modal-demo>
+		
+		<script type="riot/tag">
+			<modal-demo>
+                <button onclick="{ openModal }">Open Modal</button>
+            
+				<rm-modal visible="{ visible }">
+                    <h4>Are you sure you want to?</h4>
+                    <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Decline</button>
+                </rm-modal>
+			</modal-demo>
+            
+            var self = this;
+            visible = false;
+            openModal = function(e) {
+                visible = true;
+            }
+		</script>
+        
+		<script src="/bower_components/material-design-lite/material.min.js"></script>
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script src="/mixins/eventMixin.js"></script>
+		<script src="../src/rm-modal.tag" type="riot/tag"></script>
+        <script>riot.mount('modal-demo')</script>
+	</body>
+</html>
