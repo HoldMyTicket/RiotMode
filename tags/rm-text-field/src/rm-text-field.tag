@@ -28,6 +28,7 @@
 	this.name = opts.name || false;
 
     this.on('mount',function() {
+
 		tag.wrap.style.width = tag.width;
 
 		if(!tag.name) {
