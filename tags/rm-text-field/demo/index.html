@@ -20,42 +20,25 @@
 	</head>
 	<body>
 		<h1>RiotMode Text-Field Demo</h1>
-		
+
 		<div class="item">
 			<p>Text</p>
 			<rm-text-field width="150px"></rm-text-field>
 		</div>
-		
+
 		<div class="item">
 			<p>Numeric</p>
 			<rm-text-field placeholder="Number..." type="numeric"></rm-text-field>
 		</div>
-		
+
 		<div class="item">
-			<p>Floating Label</p>			
+			<p>Floating Label</p>
 			<rm-text-field floating="true"></rm-text-field>
 		</div>
-		
-		<div class="item">
-			<p>Regex Email</p>			
-			<rm-text-field type="email"></rm-text-field>
-		</div>
-		
-		<div class="item">
-			<p>Expanding</p>
-			<rm-text-field placeholder="Number..." type="expanding"></rm-text-field>
-		</div>
-		
-		<br>
-		
-		<div class="item">
-			<p>Multiple Line</p>
-			<rm-text-field type="multiple" width="700px" placeholder="Text lines..."></rm-text-field>
-		</div>
-		
+
 		<script src="/bower_components/material-design-lite/material.min.js"></script>
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
-		<script src="../src/text-field.tag" type="riot/tag"></script>
+		<script src="../src/rm-text-field.tag" type="riot/tag"></script>
 		<script>
 			riot.mount('rm-text-field');
 		</script>

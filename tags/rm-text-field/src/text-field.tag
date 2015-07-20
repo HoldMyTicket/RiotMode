@@ -2,8 +2,7 @@
 
 	<div id="wrap" class="mdl-textfield mdl-js-textfield textfield-demo">
 		<textarea if="{ opts.type == 'multiple' && opts.type !='expanding'}" class="mdl-textfield__input" type="text" rows= "3" id="{id}" ></textarea>
-		<input if="{ opts.type != 'multiple' && opts.type !='expanding'}" value="{value}" class="mdl-textfield__input" type="text" class="mdl-textfield__input" type="text" 
-			id="inp{_id}" />
+		<input if="{ opts.type != 'multiple' && opts.type !='expanding'}" value="{value}" class="mdl-textfield__input" type="text" class="mdl-textfield__input" id>
 	  	<label id="label" class="mdl-textfield__label" for="inp{_id}">{ opts.placeholder || 'Type...' }</label>
 		<span if="{ opts.type == 'numeric' || opts.type == 'email' || opts.regex }" class="mdl-textfield__error">{ error }</span>
 		<div if="{ opts.type == 'expanding' }" class="mdl-textfield__expandable-holder">
@@ -14,11 +13,11 @@
 
 	/**
 	* Text-field component for RiotJS v2.2
-	* 
+	*
 	* @author evan-f
 	*/
 	var self = this;
-	
+
 	this.value = '';
 
 	this.type = opts.type || 'text'; //default to text
@@ -51,19 +50,19 @@
 		 this.update();
 		 return;
 	 }
-	 
+
 	 if(this.type === 'email') {
 	//	 this[self.id].setAttribute('pattern','^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$');
 		 this.error = opts.error || 'Invalid email!';
 		 this.update();
 		 return;
 	 }
-	 
+
 	 if(opts.regex) {
 		 this.error = opts.error || 'Input error!';
 	//	 this[self.id].setAttribute('pattern',opts.regex);
 		 this.update();
 	 }
 	}
-		 
+
 </rm-text-field>
