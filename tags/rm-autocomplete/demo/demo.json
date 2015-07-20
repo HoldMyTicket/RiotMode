@@ -1,0 +1,84 @@
+{  
+    "choices":[  
+        {  
+            "text":"Dobříš",
+            "value":1
+        },
+        {  
+            "text":"Belanting",
+            "value":2
+        },
+        {  
+            "text":"Verin Dvin",
+            "value":3
+        },
+        {  
+            "text":"Oliveiras",
+            "value":4
+        },
+        {  
+            "text":"Pasirhaur",
+            "value":5
+        },
+        {  
+            "text":"Dongjian",
+            "value":6
+        },
+        {  
+            "text":"Mahikeng",
+            "value":7
+        },
+        {  
+            "text":"Saint Louis",
+            "value":8
+        },
+        {  
+            "text":"Jiacun",
+            "value":9
+        },
+        {  
+            "text":"Czerwonak",
+            "value":10
+        },
+        {  
+            "text":"Punat",
+            "value":11
+        },
+        {  
+            "text":"La Dorada",
+            "value":12
+        },
+        {  
+            "text":"Qinglian",
+            "value":13
+        },
+        {  
+            "text":"Betulia",
+            "value":14
+        },
+        {  
+            "text":"Santo Amaro",
+            "value":15
+        },
+        {  
+            "text":"Cergy-Pontoise",
+            "value":16
+        },
+        {  
+            "text":"Paungde",
+            "value":17
+        },
+        {  
+            "text":"Georgetown",
+            "value":18
+        },
+        {  
+            "text":"Ziyang Chengguanzhen",
+            "value":19
+        },
+        {  
+            "text":"Zehak",
+            "value":20
+        }
+    ]
+}

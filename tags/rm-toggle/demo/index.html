@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>RiotMode Toggle</title>
+		<style>
+			body {
+				box-sizing:border-box;
+				padding:20px;
+			}
+			.hidden-message {
+				margin: 50px 0 0 0;
+				font-weight: bold;
+				color: tomato;
+			}
+		</style>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+	</head>
+	<body>
+		<h1>RiotMode Toggle Demo</h1>
+		
+		<toggle-demo></toggle-demo>
+		
+		<script type="riot/tag">
+			<toggle-demo>
+				<rm-toggle type="checkbox" label-text="Checkbox" ontoggle="{ myToggle }"></rm-toggle>
+				<rm-toggle type="radio" label-text="Radio Button" ontoggle="{ myToggle }"></rm-toggle>
+				<rm-toggle type="icon-toggle" icon="feedback" ontoggle="{ myToggle }"></rm-toggle>
+				<rm-toggle type="switch" label-text="Switch Toggle" ontoggle="{ myToggle }"></rm-toggle>
+			
+				<div class="hidden-message" show="{ show }">This is a hidden message! :D</div>
+				
+				var self = this;
+				show = false;
+				myToggle = function(e) {
+					show = !show;
+					self.update();
+				}
+			</toggle-demo>
+		</script>
+        
+		<script src="/bower_components/material-design-lite/material.min.js"></script>
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script src="/mixins/eventMixin.js"></script>
+		<script src="../src/rm-toggle.tag" type="riot/tag"></script>
+        <script>riot.mount('toggle-demo')</script>
+	</body>
+</html>
