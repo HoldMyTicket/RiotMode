@@ -1,32 +1,4 @@
-<rm-modal>
-    <div class="wrap">
-        <div class="overlay { show: opts.visible }">
-            <div class="modal">
-                <div class="modal-content">
-                    <yield/>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        /**
-         * Modal component for RiotJS v2.2
-         * 
-         * @author joseph-p
-         */
-        var self = this;
-        
-        this.mixin(eventMixin);
-        
-        openModal(e) {
-            this.fire('openModal', e);
-        }
-        
-        closeModal(e) {
-            this.fire('closeModal', e);
-        }
-    </script>
+<rm-modal>    
     
     <style scoped>
         .overlay {
@@ -66,5 +38,40 @@
             position: absolute;
             right: 0;
         }
+        
+        .close-btn {
+            float: right;
+            cursor: pointer;
+        }
     </style>
+    
+    <div class="wrap">
+        <div class="overlay { show: opts.visible }">
+            <div class="modal">
+                <i class="material-icons close-btn" onclick="{ closeModal }">close</i>
+                <div class="modal-content">
+                    <yield/>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        /**
+         * Modal component for RiotJS v2.2
+         * 
+         * @author joseph-p
+         */
+        var self = this;
+        
+        this.mixin(eventMixin);
+        
+        openModal(e) {
+            this.fire('openModal', e);
+        }
+        
+        closeModal(e) {
+            this.fire('closeModal', e);
+        }
+    </script>
 </rm-modal>
