@@ -1,25 +1,18 @@
 <rm-google-map>
 
 	<style scoped>
-		.rg-google-map {
+		.rm-google-map {
 			margin: 0;
 			padding: 0;
 			width: 100%;
 			height: 100%;
 		}
-		.rg-google-map img {
+		.rm-google-map img {
 			max-width: inherit;
 		}
 	</style>
 
 	<div class="rm-google-map"></div>
-
-	<script>
-		var RMGM = riot.observable();
-		RMGM.initialize = function() {
-			_RMGM.trigger('buildMap')
-		}
-	</script>
 
 	var me = this;
 
@@ -28,22 +21,18 @@
 		zoom: 5
 	};;
 	this.on('mount',function() {
+		window.RiotModeMap = function() {
+			var map = new google.maps.Map(me.root.querySelector('.rm-google-map'), me.mapOptions);
+		}
 		me.loadScript();
-		console.log(window);
 	});
 
-	// _RMGM.on('buildMap', function () {
-	// 	console.log("build");
-	// 	var map = new google.maps.Map(me.root.querySelector('.rm-google-map'), me.mapOptions);
-	// });
-
 	loadScript() {
-		console.log('load');
 		if (!document.getElementById('gmap_script')) {
 			var script = document.createElement('script');
 			script.setAttribute('id', 'gmap_script');
 			script.type = 'text/javascript';
-			script.src = 'https://maps.googleapis.com/maps/api/js?sensor=false&callback=RMGM.initialize';
+			script.src = 'https://maps.googleapis.com/maps/api/js?sensor=false&callback=window.RiotModeMap';
 			document.body.appendChild(script);
 		}
 	}
