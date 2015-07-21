@@ -29,7 +29,7 @@
          * 
          * @author joseph-p
          */
-        var self = this;
+        var me = this;
         
         this.mixin(eventMixin);
         this.toggleType = '';
@@ -41,24 +41,24 @@
         initType(toggleType) {
             switch(toggleType) {
                 case 'checkbox':
-                    self.toggleType = 'checkbox';
-                    self.toggleClass = 'checkbox';
+                    me.toggleType = 'checkbox';
+                    me.toggleClass = 'checkbox';
                     break;
                 case 'radio':
-                    self.toggleType = 'radio';
-                    self.toggleClass = 'radio';
+                    me.toggleType = 'radio';
+                    me.toggleClass = 'radio';
                     break;
                 case 'icon-toggle':
-                    self.toggleType = 'checkbox';
-                    self.toggleClass = 'icon-toggle';
+                    me.toggleType = 'checkbox';
+                    me.toggleClass = 'icon-toggle';
                     break;
                 case 'switch':
-                    self.toggleType = 'checkbox';
-                    self.toggleClass = 'switch';
+                    me.toggleType = 'checkbox';
+                    me.toggleClass = 'switch';
                     break;
                 default:
-                    self.toggleType = 'checkbox';
-                    self.toggleClass = 'checkbox';
+                    me.toggleType = 'checkbox';
+                    me.toggleClass = 'checkbox';
             }
         }
         

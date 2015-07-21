@@ -23,19 +23,38 @@
 			<modal-demo>
                 <button onclick="{ openModal }">Open Modal</button>
             
-				<rm-modal visible="{ visible }">
+				<rm-modal onopen="{ openModal }" onclose="{ closeModal }">
                     <h4>Are you sure you want to?</h4>
                     <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Decline</button>
+					<p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+                    <button onclick="{ confirm }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
+                    <button onclick="{ decline }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Decline</button>
                 </rm-modal>
+				
+				var me = this;
+	            opened = false;
+	            openModal(e) {
+	                opened = true;
+					me.update();
+	            }
+				
+				closeModal(e) {
+					opened = false;
+					me.update();
+				}
+				
+				confirm(e) {
+					opened = false;
+					me.update();
+					console.log('confirm!');
+				}
+				
+				decline(e) {
+					opened = false;
+					me.update();
+					console.log('decline!');
+				}
 			</modal-demo>
-            
-            var self = this;
-            var visible = false;
-            openModal = function(e) {
-                visible = true;
-            }
 		</script>
         
 		<script src="/bower_components/material-design-lite/material.min.js"></script>

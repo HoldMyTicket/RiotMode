@@ -18,7 +18,8 @@
         }
         
         .modal {
-            width: 300px;
+            width: 25%;
+            height: 18%;
             margin: 100px auto;
             background-color: #fff;
             border: 1px solid #000;
@@ -45,8 +46,8 @@
         }
     </style>
     
-    <div class="wrap">
-        <div class="overlay { show: opts.visible }">
+    <div class="wrap" show="{ opts.opened }">
+        <div class="overlay">
             <div class="modal">
                 <i class="material-icons close-btn" onclick="{ closeModal }">close</i>
                 <div class="modal-content">
@@ -62,16 +63,16 @@
          * 
          * @author joseph-p
          */
-        var self = this;
+        var me = this;
         
         this.mixin(eventMixin);
         
-        openModal(e) {
-            this.fire('openModal', e);
+        openedModal(e) {
+            this.fire('opened', e);
         }
         
         closeModal(e) {
-            this.fire('closeModal', e);
+            this.fire('closed', e);
         }
     </script>
 </rm-modal>
