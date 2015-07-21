@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>RiotMode Google Map</title>
+		<style>
+			body {
+				box-sizing:border-box;
+				padding:20px;
+			}
+			.item {
+				display:inline-block;
+				margin:10px;
+			}
+		</style>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+	</head>
+	<body>
+		<h1>RiotMode Google Map</h1>
+		<rm-google-map></rm-google-map>
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script src="../src/rm-google-map.tag" type="riot/tag"></script>
+		<script>
+			riot.mount('rm-google-map');
+		</script>
+	</body>
+</html>
