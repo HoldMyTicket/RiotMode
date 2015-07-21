@@ -18,7 +18,7 @@
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-  
+
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -52,42 +52,23 @@
     </div>
     <div class="one columns">
     </div>
-    <div class="seven columns" id="pagewrap">
 
-    </div>
+    <rm-router>
+        <section route="toggle" />
+        <section route="autocomplete" src="tags/rm-autocomplete/src" />
+    </rm-router>
+
   </div>
 
 </div>
 
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<script src="pages/page-home.html" type="riot/tag"></script>
-<script src="pages/page-autocomplete.html" type="riot/tag"></script>
-<script src="pages/page-modal.html" type="riot/tag"></script>
-<script src="pages/page-text.html" type="riot/tag"></script>
-<script src="pages/page-toggle.html" type="riot/tag"></script>
-<script src="pages/page-tooltip.html" type="riot/tag"></script>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="/tags/rm-router/src/rm-router.tag" type="riot/tag"></script>
 
 <script src="js/riot.js"></script>
 
 <script>
-var mountedTag = false;
-riot.route.exec(function(route) {
-  handleRoute(route || 'home');
-})
-riot.route(function(route) {
-  handleRoute(route);
-})
-
-function handleRoute(route) {
-    var page = 'page-'+route;
-    if(mountedTag)
-      mountedTag.unmount(true);
-    riot.compile('pages/' + page + '.html', function() {
-      mountedTag = riot.mount('#pagewrap', page)[0];
-      $('#pagewrap').attr('riot-tag',page);
-    });
-}
+    riot.mount('*');
 </script>
 
 </body>
