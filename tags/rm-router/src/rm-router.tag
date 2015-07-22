@@ -120,7 +120,7 @@
 	}
 
 	load(url) {
-		console.log("load",url);
+
 		var found = false;
 		for (i = 0; i < me.routes.length; ++i) {
 			found = me.compare(url.path, me.routes[i].route);
@@ -128,11 +128,13 @@
 			    if(me.mountedTag)
 			    	me.mountedTag.unmount(true);
 
-				console.log("ready to compile");
-			    riot.compile(me.routes[i].src, function() {
-					console.log("compilin");
-			    	me.mountedTag = riot.mount(me.base, me.routes[i].tag)[0];
-			    	me.base.setAtrribute('riot-tag', me.routes[i].tag);
+				
+			    riot.compile(me.routes[i].path, function() {
+					var fileName = me.routes[i].path.split('/').pop().replace(/\.[^/.]+$/, "");
+			    	me.mountedTag = riot.mount(me.base, 'page-'+fileName)[0];
+					console.log(me.mountedTag);
+					//TODO is this needed?
+			    	//me.base.setAtrribute('riot-tag', fileName);
 			    });
 				return;
 			}
