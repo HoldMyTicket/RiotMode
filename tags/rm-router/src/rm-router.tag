@@ -21,6 +21,9 @@
 			return me.parseUrl(path);
 		})
 		riot.route.start();
+		riot.route.exec(function(url) {
+			me.load(url || me.parseUrl('/'));
+		});
 		riot.route(function(url) {
 			me.load(url);
 		});
@@ -45,11 +48,12 @@
 			}
 			me.routes = routes;
 		} else {
-			console.log("Options are not setup");
+			console.log("RiotMode: rm-router has no options!");
 		}
 	}
 
 	parseUrl(path, mode) {
+		//TODO look through this
 
 		//Just hash by default, may update for pushstate
 		mode = 'hash';
@@ -116,11 +120,10 @@
 		}
 
 		return url;
-
 	}
 
 	load(url) {
-
+		
 		var found = false;
 		for (i = 0; i < me.routes.length; ++i) {
 			found = me.compare(url.path, me.routes[i].route);
@@ -132,7 +135,7 @@
 			    riot.compile(me.routes[i].path, function() {
 					var fileName = me.routes[i].path.split('/').pop().replace(/\.[^/.]+$/, "");
 			    	me.mountedTag = riot.mount(me.base, 'page-'+fileName)[0];
-					console.log(me.mountedTag);
+					//console.log(me.mountedTag);
 					//TODO is this needed?
 			    	//me.base.setAtrribute('riot-tag', fileName);
 			    });
@@ -145,7 +148,6 @@
 		if(base === match) {
 			return true;
 		}
-
 		return false;
 	}
 
