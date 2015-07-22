@@ -15,17 +15,63 @@
 	<div class="rm-google-map"></div>
 
 	var me = this;
-
-	this.mapOptions = opts.map ||  {
-		center: { lat: 53.806, lng: -1.535 },
-		zoom: 5
-	};;
+	
 	this.on('mount',function() {
 		window.RiotModeMap = function() {
-			var map = new google.maps.Map(me.root.querySelector('.rm-google-map'), me.mapOptions);
+			me.buildMap();
 		}
 		me.loadScript();
 	});
+
+	buildMap() {
+		me.buildOpts();
+		var map = new google.maps.Map(me.root.querySelector('.rm-google-map'), me.mapOptions);
+		
+		if(opts.address) {
+			var geocoder = new google.maps.Geocoder();
+			geocoder.geocode({ 'address': opts.address }, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+			    	map.setCenter(results[0].geometry.location);
+			    	var marker = new google.maps.Marker({
+			    		map: map,
+			    		position: results[0].geometry.location,
+						icon: opts.icon || '',
+						animation: google.maps.Animation.DROP
+					});
+				}
+			});
+			
+			//TODO address window
+			// var infoWindow = new google.maps.InfoWindow({
+	        // 	content: opts.address,
+	        // });
+			// 
+			// infoWindow.open(map);
+		}
+		
+		if(opts.markers.length > 0) {
+			for (var i = 0; i < opts.markers.length; i++) {
+				var location = opts.markers[i];
+			    var myLatLng = new google.maps.LatLng(location[1], location[2]);
+			    var marker = new google.maps.Marker({
+			        position: myLatLng,
+			        map: map,
+			        icon: opts.icon || '',
+			        title: location[0] || '',
+			        zIndex: location[3] || 1
+			    });
+			}
+		}
+	}
+	
+	buildOpts() {
+		me.mapOptions = {
+			center: opts.center || { lat: 35.1107, lng: -106.6100 },
+			zoom: opts.zoom || 5,
+			zoomControl: opts.zoomControl || true,
+			mapTypeId: google.maps.MapTypeId[opts.mapType.toUpperCase()] || google.maps.MapTypeId.ROADMAP,
+		};
+	}
 
 	loadScript() {
 		if (!document.getElementById('gmap_script')) {

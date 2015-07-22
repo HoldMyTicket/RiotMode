@@ -25,11 +25,27 @@
 	</head>
 	<body>
 		<h1>RiotMode Google Map</h1>
+		<hr>
+		<p>Demo with a 5 custom markers</p>
 		<rm-google-map></rm-google-map>
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
 		<script src="../src/rm-google-map.tag" type="riot/tag"></script>
 		<script>
-			riot.mount('rm-google-map');
+			riot.mount('rm-google-map', {
+				zoom: 5,
+			    center: { lat: 35.1107, lng: -106.6100},    
+			    zoomControl: false,
+				mapType: 'terrain', //roadmap satellite hybrid terrain
+				icon: 'star.png',
+				markers: [
+					['Place 1', 29.1107, -108.6100, 4],
+					['Place 2', 32.1107, -106.6100, 5],
+					['Place 3', 35.11079, -116.6100, 3],
+					['Place 4', 35.1107, -101.6100, 2],
+					['Place 5', 35.1107, -106.6100, 1]
+			  	],
+				address: '120 Central Ave SW, Albuquerque, NM 87102',
+			});
 		</script>
 	</body>
 </html>
