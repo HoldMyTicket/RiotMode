@@ -23,12 +23,12 @@
 			<modal-demo>
                 <button onclick="{ openModal }">Open Modal</button>
             
-				<rm-modal onopen="{ openModal }" onclose="{ closeModal }">
+				<rm-modal id="modal" onopen="{ openModal }" onclose="{ closeModal }" opened="{ opened }">
                     <h4>Are you sure you want to?</h4>
                     <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
 					<p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
-                    <button onclick="{ confirm }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
-                    <button onclick="{ decline }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Decline</button>
+                    <button onclick="{ confirmBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
+                    <button onclick="{ declineBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Decline</button>
                 </rm-modal>
 				
 				var me = this;
@@ -43,13 +43,13 @@
 					me.update();
 				}
 				
-				confirm(e) {
+				confirmBtn(e) {
 					opened = false;
 					me.update();
 					console.log('confirm!');
 				}
 				
-				decline(e) {
+				declineBtn(e) {
 					opened = false;
 					me.update();
 					console.log('decline!');

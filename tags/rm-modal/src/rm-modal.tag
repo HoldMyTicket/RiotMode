@@ -2,7 +2,6 @@
     
     <style scoped>
         .overlay {
-            visibility: hidden;
             position: absolute;
             left: 0px;
             top: 0px;
@@ -13,8 +12,32 @@
             background-color: rgba(0, 0, 0, 0.8);
         }
         
-        .overlay.show {
-            visibility: visible;
+        .overlay.fade-in {
+            -webkit-animation: fadeIn .25s linear;
+            -moz-animation: fadeIn .25s linear;
+            -o-animation: fadeIn .25s linear;
+            animation: fadeIn .25s linear;
+        }
+        
+        .modal.scale-up {
+            -webkit-animation: scaleUp .30s linear;
+            -moz-animation: scaleUp .30s linear;
+            -o-animation: scaleUp .30s linear;
+            animation: scaleUp .30s linear;
+        }
+        
+        .overlay.fade-out {
+            -webkit-animation: fadeIn .25s reverse;
+            -moz-animation: fadeIn .25s reverse;
+            -o-animation: fadeIn .25s reverse;
+            animation: fadeIn .25s reverse;
+        }
+        
+        .modal.scale-down {
+            -webkit-animation: scaleUp .30s reverse;
+            -moz-animation: scaleUp .30s reverse;
+            -o-animation: scaleUp .30s reverse;
+            animation: scaleUp .30s reverse;
         }
         
         .modal {
@@ -40,16 +63,37 @@
             right: 0;
         }
         
-        .close-btn {
-            float: right;
-            cursor: pointer;
+        /* animation for modal */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes scaleUp {
+            0% {
+                -webkit-transform: scale(0);
+                -moz-transform: scale(0);
+                -o-transform: scale(0);
+                transform: scale(0);
+            }
+            50% {
+                -webkit-transform: scale(0.5);
+                -moz-transform: scale(0.5);
+                -o-transform: scale(0.5);
+                transform: scale(0.5);
+            }
+            100% {
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+            }
         }
     </style>
     
     <div class="wrap" show="{ opts.opened }">
-        <div class="overlay">
-            <div class="modal">
-                <i class="material-icons close-btn" onclick="{ closeModal }">close</i>
+        <div class="overlay fade-in" onclick="{ closeModal }">
+            <div class="modal scale-up">
                 <div class="modal-content">
                     <yield/>
                 </div>
