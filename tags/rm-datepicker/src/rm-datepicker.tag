@@ -2,10 +2,17 @@
 
 	<style scoped>
 		a {
+			color: rgb(117,117,117);
 			text-decoration:none;
 		}
 		.rm-datepicker {
 			position: relative;
+		    -webkit-touch-callout: none;
+		    -webkit-user-select: none;
+		    -khtml-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;
 		}
 		.base_input {
 			height:40px;
@@ -14,12 +21,14 @@
 			box-sizing:border-box;
 			padding-left:5px;
 			cursor: pointer;
+			color: rgb(85, 85, 85);
+			font-size:1em;
 		}
 		.view {
 			position: absolute;
 			border: 1px solid #D3D3D3;
 			width:280px;
-			height:280px;
+			height:auto;
 			margin-top:5px;
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
@@ -30,8 +39,8 @@
 		.view_title {
 			display:block;
 			text-align:center;
-			background: rgb(233,229,227);
-			color: rgb(176, 174, 173);
+			background: rgb(216,27,96);
+			color: #FFF;
 			line-height: 50px;
 		}
 		.view_title a {
@@ -41,28 +50,40 @@
 			float:left;
 			line-height:50px;
 			margin-left:10px;
+			color:#FFF
 		}
 		.right_arrow {
 			float:right;
 			line-height:50px;
 			margin-right:10px;
+			color:#FFF
 		}
 		table {
-			height:230px;
+			padding:5px;
 			width: 100%;
 			text-align:center;
 			table-layout: fixed;
+			border-collapse:collapse;
+			border-spacing:0px;
 		}	
 		table td {
+			height:40px;
 			border-radius: 20px;
 		}
-		table td .active {
+		table td .today, .today:hover{
 			background:rgb(176, 174, 173);
 		}
 		table td:hover {
 			background:rgb(233,229,227);
+			cursor:pointer;
 		}
-		
+		table thead tr {
+			color: rgb(0,188,214);
+		}
+		.today {
+			background:rgb(190, 190, 190);
+		}
+		.nohover:hover {background:none;cursor:default;}
 	</style>
 
 	<div class="rm-datepicker">
@@ -70,40 +91,109 @@
 		<div show={ open } class="view">
 			<div class="view_title">
 				<a onclick="{ previous }"><i class="material-icons left_arrow">&#xE5C4;</i></a>
-				<span class="month">July</span>&nbsp;<span class="year">2015</span>
+				<span class="month">{ header }</span>&nbsp;<span class="year">{ currentYear }</span>
 				<a onclick="{ next }"><i class="material-icons right_arrow">&#xE5C8;</i></a>
 			</div>
 			
 			<table>
 				<thead>
-					<th>Mo</th>
-					<th>Tu</th>
-					<th>We</th>
-					<th>Th</th>
-					<th>Fr</th>
-					<th>Sa</th>
-					<th>Su</th>
+					<tr>
+						<th>Mo</th>
+						<th>Tu</th>
+						<th>We</th>
+						<th>Th</th>
+						<th>Fr</th>
+						<th>Sa</th>
+						<th>Su</th>
+					</tr>
 				</thead>
-				<tbody><tr><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">1</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">2</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">3</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">4</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">5</a></td></tr><tr><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">6</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">7</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">8</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">9</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">10</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">11</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">12</a></td></tr><tr><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">13</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">14</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">15</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">16</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">17</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">18</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">19</a></td></tr><tr><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">20</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">21</a></td><td class=" ui-datepicker-days-cell-over  ui-datepicker-current-day ui-datepicker-today" data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default ui-state-highlight ui-state-active" href="#">22</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">23</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">24</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">25</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">26</a></td></tr><tr><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">27</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">28</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">29</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">30</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="6" data-year="2015"><a class="ui-state-default" href="#">31</a></td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody>
+				<tbody>
+					<tr each="{ rows in data }">
+						<td onclick="{ parent.pick }" class="{ nohover: day.asNumber < 0, today: day.active }" each="{ day in rows }">
+							<a>{ day.asNumber > 0 ? day.asNumber : '' }</a>	
+						</td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 	</div>
 
 	var me = this;
+	var longMonthNames = ["January", "Febuary", "March", "April", "May", "June",
+  		"July", "August", "September", "October", "November", "December"
+	];
+	var shortMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
+  		"July", "Aug", "Sep", "Oct", "Nov", "Dec"
+	];
 
-	this.date = (opts.date ? new Date(opts.date) : new Date() );
+	this.today = new Date();
+	this.currentDay = this.today.getDate();
+	this.currentMonth = this.today.getMonth();
+	this.currentYear = this.today.getFullYear();
+	this.header = longMonthNames[this.currentMonth];
 	this.open = false;
+
+	this.on('mount', function() {
+		Date.prototype.monthDays= function(){
+		    var d= new Date(this.getFullYear(), this.getMonth()+1, 0);
+		    return d.getDate();
+		}
+		me.date = shortMonthNames[me.currentMonth]+" "+me.currentDay+", "+me.currentYear;
+		me.build(me.currentYear, me.currentMonth);
+	});
 
 	show(e) {
 		me.open = !me.open;
 	}
 
+	pick(e) {
+		console.log(e);
+	}
+
 	previous(e) {
-		
+		me.currentYear = (me.currentMonth == 0 ? --me.currentYear : me.currentYear); 
+		me.currentMonth = (me.currentMonth == 0 ? 11 : --me.currentMonth);
+		me.header = longMonthNames[me.currentMonth];
+		me.build(me.currentYear,me.currentMonth);
 	}
 
 	next(e) {
+		me.currentYear = (me.currentMonth == 11 ? ++me.currentYear : me.currentYear); 
+		me.currentMonth = (me.currentMonth < 11 ? ++me.currentMonth : 0); 
+		me.header = longMonthNames[me.currentMonth];
+		me.build(me.currentYear,me.currentMonth);
+	}
+	
+	build(year, month) {
+		var month = new Date(year, month, 1);
+		var firstDay = month.getDay();
+		var totalDays = month.monthDays();
+		var outDay = 1;
 		
+		me.data = [];
+		var working = true;
+		while(working) {
+			var week = [];
+			for(var day = 0; day < 7; day++) {
+				if((outDay - 1) == totalDays) {
+					working = false;
+					break;
+				}
+				//Fill empty up until first day
+				firstDay--;
+				if(firstDay > 0) {
+			 		week.push({asNumber:-1,active:false});
+				} else {
+					var active = false;
+					if(me.currentDay == outDay) 
+						active = true;
+					week.push({asNumber:outDay,active:active});
+					outDay++;
+				}
+			}
+			me.data.push(week);
+		}
+		me.update();
 	}
 
 </rm-datepicker>
