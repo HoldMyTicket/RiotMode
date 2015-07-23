@@ -3,21 +3,11 @@
 	<head lang="en">
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>RiotMode Datepicker</title>
+		<title>RiotMode Toast</title>
 		<style>
 			body {
 				box-sizing:border-box;
-				padding10px;
-			}
-			.item {
-				display:inline-block;
-				margin:10px;
-			}
-			rm-datepicker {
-				display: block;
-				margin-left:40px;
-				height: 400px;
-				width: 400px;
+				padding:10px;
 			}
 		</style>
 		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
@@ -25,14 +15,23 @@
 		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
 	</head>
 	<body>
-		<h1>RiotMode Datepicker</h1>
-		<hr>
-		<p></p>
-		<rm-datepicker></rm-datepicker>
+		<h1>RiotMode Toast</h1>
+		<div class="wrapper">
+			
+			<p>I like toast</p>
+			
+		    <div class="leftcolumn">
+		        <pre class="raw"></pre>
+		    </div>
+		    <div class="rightcolumn">
+		        <rm-toast></rm-toast>
+		    </div>
+		</div>
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
-		<script src="../src/rm-datepicker.tag" type="riot/tag"></script>
+		<script src="/bower_components/marked/marked.min.js"></script>
+		<script src="../src/rm-toast.tag" type="riot/tag"></script>
 		<script>
-			riot.mount('rm-datepicker');
+			riot.mount('rm-toast');
 		</script>
 	</body>
 </html>
