@@ -109,7 +109,7 @@
 				</thead>
 				<tbody>
 					<tr each="{ rows in data }">
-						<td onclick="{ parent.pick }" class="{ nohover: day.asNumber < 0, today: day.active }" each="{ day in rows }">
+						<td onclick="run(window.event)" class="{ nohover: day.asNumber < 0, today: day.active }" each="{ day in rows }">
 							<a>{ day.asNumber > 0 ? day.asNumber : '' }</a>	
 						</td>
 					</tr>
@@ -134,8 +134,12 @@
 	this.open = false;
 
 	this.on('mount', function() {
+		window.run = function(event) {
+			event = event || window.event;
+			me.pick(event);
+		}
 		Date.prototype.monthDays= function(){
-		    var d= new Date(this.getFullYear(), this.getMonth()+1, 0);
+		    var d = new Date(this.getFullYear(), this.getMonth()+1, 0);
 		    return d.getDate();
 		}
 		me.date = shortMonthNames[me.currentMonth]+" "+me.currentDay+", "+me.currentYear;
@@ -147,7 +151,10 @@
 	}
 
 	pick(e) {
-		console.log(e);
+		var target = e.target || e.srcElement;
+		me.date = shortMonthNames[me.currentMonth]+" "+target.childNodes[1].innerHTML+", "+me.currentYear;
+		me.open = false;
+		me.update();
 	}
 
 	previous(e) {
@@ -155,6 +162,7 @@
 		me.currentMonth = (me.currentMonth == 0 ? 11 : --me.currentMonth);
 		me.header = longMonthNames[me.currentMonth];
 		me.build(me.currentYear,me.currentMonth);
+		me.update();
 	}
 
 	next(e) {
@@ -162,6 +170,7 @@
 		me.currentMonth = (me.currentMonth < 11 ? ++me.currentMonth : 0); 
 		me.header = longMonthNames[me.currentMonth];
 		me.build(me.currentYear,me.currentMonth);
+		me.update();
 	}
 	
 	build(year, month) {
@@ -179,14 +188,11 @@
 					working = false;
 					break;
 				}
-				//Fill empty up until first day
 				firstDay--;
 				if(firstDay > 0) {
 			 		week.push({asNumber:-1,active:false});
 				} else {
-					var active = false;
-					if(me.currentDay == outDay) 
-						active = true;
+					var active = me.currentDay == outDay && me.currentMonth == me.today.getMonth() ? true : false;
 					week.push({asNumber:outDay,active:active});
 					outDay++;
 				}
