@@ -65,15 +65,17 @@
 			table-layout: fixed;
 			border-collapse:collapse;
 			border-spacing:0px;
-		}	
-		table td {
+		}
+		table td a{
 			height:40px;
 			border-radius: 20px;
+			display: block;
+			line-height: 40px;
 		}
-		table td .today, .today:hover{
+		table td a.today, a.today:hover{
 			background:rgb(176, 174, 173);
 		}
-		table td:hover {
+		table td a:hover {
 			background:rgb(233,229,227);
 			cursor:pointer;
 		}
@@ -108,9 +110,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr each="{ rows in mydata }">
-						<td class="{ nohover: day.asNumber < 0, today: day.active }" each="{ day in rows }">
-							<a onclick="{ parent.parent.pick }">{ day.asNumber > 0 ? day.asNumber : '' }</a>	
+					<tr each="{ rows in mydata }">			
+						<td each="{ day in rows }">
+							<a class="{ nohover: day.asNumber < 0, today: day.active }" onclick="{ pick }">{ day.asNumber > 0 ? day.asNumber : '' }</a>	
 						</td>
 					</tr>
 				</tbody>
@@ -197,7 +199,7 @@
 			}
 			me.mydata.push(week);
 		}
-	//	me.update();
+		me.update();
 	}
 
 </rm-datepicker>
