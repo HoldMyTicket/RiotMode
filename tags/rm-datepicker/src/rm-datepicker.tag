@@ -108,9 +108,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr each="{ rows in data }">
-						<td onclick="run(window.event)" class="{ nohover: day.asNumber < 0, today: day.active }" each="{ day in rows }">
-							<a>{ day.asNumber > 0 ? day.asNumber : '' }</a>	
+					<tr each="{ rows in mydata }">
+						<td class="{ nohover: day.asNumber < 0, today: day.active }" each="{ day in rows }">
+							<a onclick="{ parent.parent.pick }">{ day.asNumber > 0 ? day.asNumber : '' }</a>	
 						</td>
 					</tr>
 				</tbody>
@@ -134,10 +134,6 @@
 	this.open = false;
 
 	this.on('mount', function() {
-		window.run = function(event) {
-			event = event || window.event;
-			me.pick(event);
-		}
 		Date.prototype.monthDays= function(){
 		    var d = new Date(this.getFullYear(), this.getMonth()+1, 0);
 		    return d.getDate();
@@ -150,10 +146,12 @@
 		me.open = !me.open;
 	}
 
-	pick(e) {
-		var target = e.target || e.srcElement;
-		me.date = shortMonthNames[me.currentMonth]+" "+target.childNodes[1].innerHTML+", "+me.currentYear;
+	this.pick = function(e) {
+		console.log(this);
+		var target = e.target;
+		me.date = shortMonthNames[me.currentMonth]+" "+target.innerHTML+", "+me.currentYear;
 		me.open = false;
+		//e.stopPropagation();		
 		me.update();
 	}
 
@@ -179,7 +177,7 @@
 		var totalDays = month.monthDays();
 		var outDay = 1;
 		
-		me.data = [];
+		me.mydata = [];
 		var working = true;
 		while(working) {
 			var week = [];
@@ -197,9 +195,9 @@
 					outDay++;
 				}
 			}
-			me.data.push(week);
+			me.mydata.push(week);
 		}
-		me.update();
+	//	me.update();
 	}
 
 </rm-datepicker>
