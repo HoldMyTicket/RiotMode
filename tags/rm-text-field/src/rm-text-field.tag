@@ -1,6 +1,6 @@
 <rm-text-field>
 
-	<div id="wrap" class="mdl-textfield mdl-js-textfield">
+	<div class="mdl-textfield mdl-js-textfield">
         <textarea if="{ opts.type == 'multiple' && opts.type !='expanding'}" name="{name}" class="mdl-textfield__input" type="text" rows="{rows}" id="text_{id}" ></textarea>
         <input if="{ opts.type != 'multiple' && opts.type !='expanding'}" name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}" />
         <label class="mdl-textfield__label" for="text_{_id}">{ opts.placeholder || 'Type...' }</label>
@@ -16,7 +16,7 @@
 	*
 	* @author evan-f
 	*/
-	var tag = this;
+	var me = this;
 
     this.value = '';
     this.type = opts.type || 'text';
@@ -25,51 +25,54 @@
     this.rows = parseInt(opts.rows) || 2;
     this.regex = opts.regex || false;
     this.error = opts.error || "Input error!";
-	this.name = opts.name || false;
+		this.name = opts.name || false;
+		
 
     this.on('mount',function() {
+			var wrap = this.root.children[0];
+			
+			wrap.style.width = me.width;
 
-		tag.wrap.style.width = tag.width;
+			if(!me.name) {
+				wrap.innerHTML = "<span style='color:red;'>Set name attribute!</span>";
+				return;
+			}
 
-		if(!tag.name) {
-			tag.wrap.innerHTML = "<span style='color:red;'>Set name attribute!</span>";
-			return;
-		}
+	    if(me.floating) {
+	  		wrap.classList.add('mdl-textfield--floating-label');
+	  	}
 
-        if(tag.floating) {
-    		tag.wrap.classList.add('mdl-textfield--floating-label');
-    	}
+			if(me.type === 'expanding') {
+				var label = me.root.querySelector('label');
+				wrap.classList.add('mdl-textfield--expandable');
+				label.setAttribute('class','mdl-button mdl-js-button mdl-button--icon');
+				label.innerHTML = '<i class="material-icons">search</i>';
+			}
 
-		if(tag.type === 'expanding') {
-			var label = tag.root.querySelector('label');
-			tag.wrap.classList.add('mdl-textfield--expandable');
-			label.setAttribute('class','mdl-button mdl-js-button mdl-button--icon');
-			label.innerHTML = '<i class="material-icons">search</i>';
-		}
-
-        tag.assignRegex();
+      me.assignRegex();
+			componentHandler.upgradeElement(wrap); //call to load materialdesign on el
     });
 
     assignRegex() {
-        var input = tag.root.querySelector('input');
+        var input = me.root.querySelector('input');
 
-        if(tag.type === 'numeric') {
+        if(me.type === 'numeric') {
             input.setAttribute('pattern','-?[0-9]*(\.[0-9]+)?');
-            tag.error = 'Input is not a number!';
-            tag.update();
+            me.error = 'Input is not a number!';
+            me.update();
             return;
         }
 
-        if(tag.type === 'email') {
+        if(me.type === 'email') {
        	    input.setAttribute('pattern','^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$');
-            tag.error = opts.error || 'Invalid email!';
-            tag.update();
+            me.error = opts.error || 'Invalid email!';
+            me.update();
             return;
         }
 
-        if(tag.regex) {
+        if(me.regex) {
             input.setAttribute('pattern',opts.regex);
-		    tag.update();
+		    		me.update();
         }
     }
 
