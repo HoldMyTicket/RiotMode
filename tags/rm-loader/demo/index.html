@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>RiotMode Loader</title>
+		<style>
+			body {
+				box-sizing:border-box;
+				padding:10px;
+			}
+		</style>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+	</head>
+	<body>
+		
+		<h1>RiotMode Loader</h1>
+		<p>I like loader</p>
+		<rm-loader></rm-loader>
+		
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script src="/bower_components/marked/marked.min.js"></script>
+		<script src="../src/rm-loader.tag" type="riot/tag"></script>
+		<script>
+			riot.mount('rm-loader');
+		</script>
+	</body>
+</html>

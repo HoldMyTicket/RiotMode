@@ -148,12 +148,10 @@
 		me.open = !me.open;
 	}
 
-	this.pick = function(e) {
-		console.log(this);
+	pick = function(e) {
 		var target = e.target;
 		me.date = shortMonthNames[me.currentMonth]+" "+target.innerHTML+", "+me.currentYear;
 		me.open = false;
-		//e.stopPropagation();		
 		me.update();
 	}
 
@@ -192,7 +190,9 @@
 				if(firstDay > 0) {
 			 		week.push({asNumber:-1,active:false});
 				} else {
-					var active = me.currentDay == outDay && me.currentMonth == me.today.getMonth() ? true : false;
+					var active = me.currentDay == outDay 
+									&& me.currentMonth == me.today.getMonth() 
+									&& me.currentYear == me.today.getFullYear() ? true : false;
 					week.push({asNumber:outDay,active:active});
 					outDay++;
 				}
