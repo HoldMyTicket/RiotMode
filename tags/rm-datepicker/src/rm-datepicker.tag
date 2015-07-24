@@ -26,6 +26,7 @@
 		}
 		.view {
 			position: absolute;
+			background: #FFF;
 			border: 1px solid #D3D3D3;
 			width:280px;
 			height:auto;
@@ -35,6 +36,7 @@
 			-webkit-box-shadow: 0 2px 10px -4px #444;
 			-moz-box-shadow: 0 2px 10px -4px #444;
 			box-shadow: 0 2px 10px -4px #444;
+			z-index:10;
 		}
 		.view_title {
 			display:block;
@@ -188,7 +190,7 @@
 				}
 				firstDay--;
 				if(firstDay > 0) {
-			 		week.push({asNumber:-1,active:false});
+			 		week.push({asNumber:-1});
 				} else {
 					var active = me.currentDay == outDay 
 									&& me.currentMonth == me.today.getMonth() 

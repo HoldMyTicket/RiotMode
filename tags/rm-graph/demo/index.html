@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>RiotMode Graph</title>
+		<style>
+			body {
+				box-sizing:border-box;
+				padding:10px;
+			}
+		</style>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+	</head>
+	<body>
+		
+		<h1>RiotMode Graph</h1>
+		<hr>
+		<rm-graph></rm-graph>
+		
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script src="/bower_components/Chart.js/Chart.min.js"></script>
+		<script src="../src/rm-graph.tag" type="riot/tag"></script>
+		<script>
+			riot.mount('rm-graph', {
+			   data:{
+					    labels: ["January", "February", "March", "April", "May", "June", "July"],
+					    datasets: [
+					        {
+					            label: "My First dataset",
+					            fillColor: "rgba(220,220,220,0.2)",
+					            strokeColor: "rgba(220,220,220,1)",
+					            pointColor: "rgba(220,220,220,1)",
+					            pointStrokeColor: "#fff",
+					            pointHighlightFill: "#fff",
+					            pointHighlightStroke: "rgba(220,220,220,1)",
+					            data: [65, 59, 80, 81, 56, 55, 40]
+					        },
+					        {
+					            label: "My Second dataset",
+					            fillColor: "rgba(151,187,205,0.2)",
+					            strokeColor: "rgba(151,187,205,1)",
+					            pointColor: "rgba(151,187,205,1)",
+					            pointStrokeColor: "#fff",
+					            pointHighlightFill: "#fff",
+					            pointHighlightStroke: "rgba(151,187,205,1)",
+					            data: [28, 48, 40, 19, 86, 27, 90]
+					        }
+					    ]
+					}
+			});
+		</script>
+	</body>
+</html>

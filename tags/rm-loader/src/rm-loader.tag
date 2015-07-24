@@ -1,13 +1,19 @@
 <rm-loader>
-
-	<h2>Yum loader</h2>
-	<div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate progress-demo"></div>
-
+	
+	<input class="mdl-slider mdl-js-slider" type="range" id="s1" min="0" max="10" value="4" step="2" disabled />
 
 	var me = this;
+	
+	this.config = {
+		'spinner' : function() {
+			
+		},
+		'spinner-single-color' : function() {
+			
+		},
+	}
+	
 	this.on('mount', function() {
-		this.p.addEventListener('mdl-componentupgraded', function() {
-	      this.MaterialProgress.setProgress(44);
-	    });
+		
 	});
 </rm-loader>
