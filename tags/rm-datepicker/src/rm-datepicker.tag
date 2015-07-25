@@ -75,7 +75,7 @@
 			line-height: 40px;
 		}
 		table td a.today, a.today:hover{
-			background:rgb(176, 174, 173);
+			box-shadow: 0 0 0 2px rgb(0,188,214);
 		}
 		table td a:hover {
 			background:rgb(233,229,227);
@@ -83,9 +83,6 @@
 		}
 		table thead tr {
 			color: rgb(0,188,214);
-		}
-		.today {
-			background:rgb(190, 190, 190);
 		}
 		.nohover:hover {background:none;cursor:default;}
 	</style>
@@ -95,7 +92,7 @@
 		<div show={ open } class="view">
 			<div class="view_title">
 				<a onclick="{ previous }"><i class="material-icons left_arrow">&#xE5C4;</i></a>
-				<span class="month">{ header }</span>&nbsp;<span class="year">{ currentYear }</span>
+				<span class="month">{ header }</span>
 				<a onclick="{ next }"><i class="material-icons right_arrow">&#xE5C8;</i></a>
 			</div>
 			
@@ -114,7 +111,8 @@
 				<tbody>
 					<tr each="{ rows in mydata }">			
 						<td each="{ day in rows }">
-							<a class="{ nohover: day.asNumber < 0, today: day.active }" onclick="{ pick }">{ day.asNumber > 0 ? day.asNumber : '' }</a>	
+							<a class="{ nohover: day.asNumber < 0, today: day.active }" 
+									onclick="{ pick }">{ day.asNumber > 0 ? day.asNumber : '' }</a>	
 						</td>
 					</tr>
 				</tbody>
@@ -123,62 +121,43 @@
 	</div>
 
 	var me = this;
-	var longMonthNames = ["January", "Febuary", "March", "April", "May", "June",
-  		"July", "August", "September", "October", "November", "December"
-	];
-	var shortMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
-  		"July", "Aug", "Sep", "Oct", "Nov", "Dec"
-	];
-
-	this.today = new Date();
-	this.currentDay = this.today.getDate();
-	this.currentMonth = this.today.getMonth();
-	this.currentYear = this.today.getFullYear();
-	this.header = longMonthNames[this.currentMonth];
+	
+	this.today = moment();
+	this.month = opts.initial ? moment(opts.initial) : moment();		
 	this.open = false;
-
+	this.format = opts.format || "MMM Do YYYY";
+	
 	this.on('mount', function() {
-		Date.prototype.monthDays= function(){
-		    var d = new Date(this.getFullYear(), this.getMonth()+1, 0);
-		    return d.getDate();
-		}
-		me.date = shortMonthNames[me.currentMonth]+" "+me.currentDay+", "+me.currentYear;
-		me.build(me.currentYear, me.currentMonth);
+		me.date = me.month.format(me.format);
+		me.build(me.month);
+		me.update();
 	});
 
 	show(e) {
 		me.open = !me.open;
 	}
 
-	pick = function(e) {
-		var target = e.target;
-		me.date = shortMonthNames[me.currentMonth]+" "+target.innerHTML+", "+me.currentYear;
+	pick(e) {
 		me.open = false;
 		me.update();
 	}
 
 	previous(e) {
-		me.currentYear = (me.currentMonth == 0 ? --me.currentYear : me.currentYear); 
-		me.currentMonth = (me.currentMonth == 0 ? 11 : --me.currentMonth);
-		me.header = longMonthNames[me.currentMonth];
-		me.build(me.currentYear,me.currentMonth);
-		me.update();
+		me.month = me.month.subtract(1, 'months');
+		me.build(me.month);
 	}
 
 	next(e) {
-		me.currentYear = (me.currentMonth == 11 ? ++me.currentYear : me.currentYear); 
-		me.currentMonth = (me.currentMonth < 11 ? ++me.currentMonth : 0); 
-		me.header = longMonthNames[me.currentMonth];
-		me.build(me.currentYear,me.currentMonth);
-		me.update();
+		me.month = me.month.add(1, 'months');
+		me.build(me.month);
 	}
 	
-	build(year, month) {
-		var month = new Date(year, month, 1);
-		var firstDay = month.getDay();
-		var totalDays = month.monthDays();
+	build(date) {
+		var firstDay = date.startOf('month').day();
+		var totalDays = date.daysInMonth();
 		var outDay = 1;
-		
+
+		me.header = date.format("MMMM YYYY");
 		me.mydata = [];
 		var working = true;
 		while(working) {
@@ -190,12 +169,12 @@
 				}
 				firstDay--;
 				if(firstDay > 0) {
-			 		week.push({asNumber:-1});
+			 		week.push({asNumber:-1,active:false});
 				} else {
-					var active = me.currentDay == outDay 
-									&& me.currentMonth == me.today.getMonth() 
-									&& me.currentYear == me.today.getFullYear() ? true : false;
-					week.push({asNumber:outDay,active:active});
+					week.push({
+						asNumber: outDay,
+						active: me.today.date() == outDay,
+					});
 					outDay++;
 				}
 			}
