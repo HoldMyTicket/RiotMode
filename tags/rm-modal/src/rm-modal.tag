@@ -101,22 +101,20 @@
         </div>
     </div>
     
-    <script>
-        /**
-         * Modal component for RiotJS v2.2
-         * 
-         * @author joseph-p
-         */
-        var me = this;
-        
-        this.mixin(eventMixin);
-        
-        openedModal(e) {
-            this.fire('opened', e);
-        }
-        
-        closeModal(e) {
-            this.fire('closed', e);
-        }
-    </script>
+    /**
+     * Modal component for RiotJS v2.2
+     * 
+     * @author joseph-p
+     */
+    var me = this;
+    
+    this.mixin(eventMixin);
+    
+    openedModal(e) {
+        this.fire('opened', e);
+    }
+    
+    closeModal(e) {
+        this.fire('closed', e);
+    }
 </rm-modal>
