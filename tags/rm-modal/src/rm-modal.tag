@@ -3,8 +3,10 @@
     <style scoped>
         .overlay {
             position: absolute;
-            left: 0px;
-            top: 0px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             text-align: center;
@@ -42,25 +44,22 @@
         
         .modal {
             width: 25%;
-            height: 18%;
             margin: 100px auto;
             background-color: #fff;
             border: 1px solid #000;
             padding: 15px;
         }
         
-        .modal-content {
-            position: relative;
-        }
-        
         .affirmative-btn {
-            position: absolute;
-            left: 0;
+            float: left;
         }
         
         .dismissive-btn {
-            position: absolute;
-            right: 0;
+            float: right;
+        }
+        
+        .clear {
+            clear: both;
         }
         
         /* animation for modal */
@@ -97,6 +96,7 @@
                 <div class="modal-content">
                     <yield/>
                 </div>
+                <div class="clear"></div>
             </div>
         </div>
     </div>
