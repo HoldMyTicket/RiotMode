@@ -3,30 +3,38 @@
 	<head lang="en">
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>RiotMode Graph</title>
+		<title>RiotMode Google Map</title>
 		<style>
 			body {
 				box-sizing:border-box;
-				padding:10px;
+				padding:20px;
+			}
+			.item {
+				display:inline-block;
+				margin:10px;
+			}
+			rm-card {
+				display: block;
+				height: 400px;
+				width: 800px;
 			}
 		</style>
 		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
-		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.css">
 	</head>
 	<body>
-		
-		<h1>RiotMode Graph</h1>
+		<h1>RiotMode Card</h1>
 		<hr>
-		<rm-graph></rm-graph>
-		
+		<p>Card</p>
+		<rm-card></rm-card>
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.js"></script>
-		<script src="../src/rm-graph.tag" type="riot/tag"></script>
+		<script src="../src/rm-card.tag" type="riot/tag"></script>
 		<script>
-			riot.mount('rm-graph');
+			riot.mount('rm-card', {
+				title:"Hello Mate",
+				text:"Body text is going in here"
+			});
 		</script>
 	</body>
 </html>
