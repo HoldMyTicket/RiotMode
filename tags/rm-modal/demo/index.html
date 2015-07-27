@@ -23,7 +23,7 @@
 			<modal-demo>
                 <button onclick="{ openModal }">Open Modal</button>
             
-				<rm-modal id="modal" opened="{ opened }">
+				<rm-modal id="modal" onclose="{ closeModal }" opened="{ opened }">
                     <h4>Are you sure you want to?</h4>
                     <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
 					<p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
@@ -35,24 +35,18 @@
 	            opened = false;
 	            openModal(e) {
 	                opened = true;
-					me.update();
 	            }
 				
 				closeModal(e) {
 					opened = false;
-					me.update();
 				}
 				
 				confirmBtn(e) {
 					console.log('confirm');
-					// opened = false;
-					// me.update();
 				}
 				
 				declineBtn(e) {
 					console.log('decline');
-					// opened = false;
-					// me.update();
 				}
 			</modal-demo>
 		</script>

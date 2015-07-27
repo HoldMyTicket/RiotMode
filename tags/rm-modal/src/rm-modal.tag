@@ -10,7 +10,7 @@
             width: 100%;
             height: 100%;
             text-align: center;
-            z-index: 1000;
+            z-index: 9999;
             background-color: rgba(0, 0, 0, 0.8);
         }
         
@@ -115,6 +115,7 @@
     }
     
     closeModal(e) {
+        opts.onclose();
         this.fire('closed', e);
     }
 </rm-modal>
