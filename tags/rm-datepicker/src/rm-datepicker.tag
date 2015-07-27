@@ -88,7 +88,7 @@
 	</style>
 
 	<div class="rm-datepicker">
-		<input class="base_input" type="text" onclick="{ show }" value="{ date }" readonly>
+		<input class="base_input" type="text" onclick="{ show }" value="{ value }" readonly>
 		<div show={ open } class="view">
 			<div class="view_title">
 				<a onclick="{ previous }"><i class="material-icons left_arrow">&#xE5C4;</i></a>
@@ -111,7 +111,7 @@
 				<tbody>
 					<tr each="{ rows in mydata }">			
 						<td each="{ day in rows }">
-							<a class="{ nohover: day.asNumber < 0, today: day.active }" 
+							<a class="{ nohover: day.asNumber < 0, today: day.active, selected:day.selected }" 
 									onclick="{ pick }">{ day.asNumber > 0 ? day.asNumber : '' }</a>	
 						</td>
 					</tr>
@@ -126,9 +126,10 @@
 	this.month = opts.initial ? moment(opts.initial) : moment();		
 	this.open = false;
 	this.format = opts.format || "MMM Do YYYY";
+	this.date = moment(this.month);
+	this.value = this.date.format(this.format);
 	
 	this.on('mount', function() {
-		me.date = me.month.format(me.format);
 		me.build(me.month);
 		me.update();
 	});
@@ -138,6 +139,12 @@
 	}
 
 	pick(e) {
+		var target = e.target || e.srcElement;
+		me.date = moment({
+				year: me.month.year(),
+				month: me.month.month(),
+				day: target.innerHTML
+		}).format(me.format);		
 		me.open = false;
 		me.update();
 	}
@@ -174,6 +181,9 @@
 					week.push({
 						asNumber: outDay,
 						active: me.today.date() == outDay,
+						selected: me.date.month() == me.month.month()
+									&& me.date.year() == me.month.year()
+									&& me.date.day() == outDay
 					});
 					outDay++;
 				}
