@@ -14,28 +14,28 @@
             background-color: rgba(0, 0, 0, 0.8);
         }
         
-        .overlay.fade-in {
+        .overlay.fade-in-overlay {
             -webkit-animation: fadeIn .25s linear;
             -moz-animation: fadeIn .25s linear;
             -o-animation: fadeIn .25s linear;
             animation: fadeIn .25s linear;
         }
         
-        .modal.scale-up {
+        .modal.scale-up-modal {
             -webkit-animation: scaleUp .30s linear;
             -moz-animation: scaleUp .30s linear;
             -o-animation: scaleUp .30s linear;
             animation: scaleUp .30s linear;
         }
         
-        .overlay.fade-out {
+        .overlay.fade-out-overlay {
             -webkit-animation: fadeIn .25s reverse;
             -moz-animation: fadeIn .25s reverse;
             -o-animation: fadeIn .25s reverse;
             animation: fadeIn .25s reverse;
         }
         
-        .modal.scale-down {
+        .modal.scale-down-modal {
             -webkit-animation: scaleUp .30s reverse;
             -moz-animation: scaleUp .30s reverse;
             -o-animation: scaleUp .30s reverse;
@@ -90,9 +90,9 @@
         }
     </style>
     
-    <div class="wrap" show="{ opts.opened }">
-        <div class="overlay fade-in" onclick="{ closeModal }">
-            <div class="modal scale-up">
+    <div class="wrap">
+        <div class="overlay" show="{ opts.opened }" onclick="{ closeModal }">
+            <div class="modal">
                 <div class="modal-content">
                     <yield/>
                 </div>
@@ -110,7 +110,7 @@
     
     this.mixin(eventMixin);
     
-    openedModal(e) {
+    openModal(e) {
         this.fire('opened', e);
     }
     
