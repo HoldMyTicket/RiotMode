@@ -123,7 +123,9 @@
 	var me = this;
 	
 	this.today = moment();
-	this.month = opts.initial ? moment(opts.initial) : moment();		
+	this.month = opts.initial ? moment(opts.initial) : moment();
+	this.min = opts.min ? moment(opts.min) : false;
+	this.max = opts.max ? moment(opts.max) : false;		
 	this.open = false;
 	this.format = opts.format || "MMM Do YYYY";
 	this.date = moment(this.month);

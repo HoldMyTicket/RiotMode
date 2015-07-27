@@ -28,18 +28,16 @@
 		var map = new google.maps.Map(me.root.querySelector('.rm-google-map'), me.mapOptions);
 		
 		if(opts.address) {
+			
 			var geocoder = new google.maps.Geocoder();
-			geocoder.geocode({ 'address': opts.address }, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-			    	map.setCenter(results[0].geometry.location);
-			    	var marker = new google.maps.Marker({
-			    		map: map,
-			    		position: results[0].geometry.location,
-						icon: opts.icon || '',
-						animation: google.maps.Animation.DROP
-					});
-				}
-			});
+			
+			if(Array.isArray(opts.address)) {
+				opts.address.forEach(function(item) {
+					me.address(map,geocoder,item);
+				});
+			} else {
+				me.address(map,geocoder,opts,address);
+			}
 			
 			//TODO address window
 			// var infoWindow = new google.maps.InfoWindow({
@@ -62,6 +60,20 @@
 			    });
 			}
 		}
+	}
+	
+	address(map, geo, location) {
+		geo.geocode({ 'address': location }, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				map.setCenter(results[0].geometry.location);
+				var marker = new google.maps.Marker({
+					map: map,
+					position: results[0].geometry.location,
+					icon: opts.icon || '',
+					animation: google.maps.Animation.DROP
+				});
+			}
+		});
 	}
 	
 	buildOpts() {
