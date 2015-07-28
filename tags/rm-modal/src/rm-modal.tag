@@ -10,7 +10,7 @@
             width: 100%;
             height: 100%;
             text-align: center;
-            z-index: 9999;
+            z-index: 10;
             background-color: rgba(0, 0, 0, 0.8);
         }
         
@@ -44,10 +44,12 @@
         
         .modal {
             width: 25%;
-            margin: 100px auto;
             background-color: #fff;
             border: 1px solid #000;
             padding: 15px;
+            position: fixed;
+            left: 35%;
+            z-index: 11;
         }
         
         .affirmative-btn {
@@ -91,13 +93,12 @@
     </style>
     
     <div class="wrap">
-        <div class="overlay" show="{ opts.opened }" onclick="{ closeModal }">
-            <div class="modal">
-                <div class="modal-content">
-                    <yield/>
-                </div>
-                <div class="clear"></div>
+        <div class="overlay" show="{ opts.opened }" onclick="{ closeModal }"></div>
+        <div class="modal" show="{ opts.opened }">
+            <div class="modal-content">
+                <yield/>
             </div>
+            <div class="clear"></div>
         </div>
     </div>
     
