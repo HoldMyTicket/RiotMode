@@ -35,10 +35,12 @@
 	            opened = false;
 	            openModal(e) {
 	                opened = true;
+					me.update();
 	            }
 				
 				closeModal(e) {
 					opened = false;
+					me.update();
 				}
 				
 				confirmBtn(e) {
