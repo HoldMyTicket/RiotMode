@@ -1,4 +1,4 @@
-riot.tag('rm-graph', '<div id="chart_{_id}"> <svg></svg> </div>', 'rm-graph div, [riot-tag="rm-graph"] div{ height:500px; width:500px; }', function(opts) {
+riot.tag('rm-graph', '<div id="chart_{_id}"> <svg></svg> </div>', 'rm-graph div { height:500px; width:500px; }', function(opts) {
 	
 	var me = this;
 	
