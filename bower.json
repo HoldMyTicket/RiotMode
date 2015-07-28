@@ -1,6 +1,6 @@
 {
   "name": "riotmode",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "homepage": "https://github.com/HoldMyTicket/RiotMode",
   "authors": [
     "HoldMyTicket"
@@ -14,7 +14,9 @@
     "bower_components",
     "pages",
     "test",
-    "tests"
+    "tests",
+    "load",
+    "check_bower.js"
   ],
   "dependencies": {
     "riot": "~2.2.1",
