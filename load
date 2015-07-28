@@ -10,7 +10,7 @@ do
     cp $dir/src/*.tag $temp
 done
     
-echo "======================="
+echo "======================"
 echo "Compiling main dist..."    
 riot $temp dist/RiotMode.js
 rm -rf $temp
