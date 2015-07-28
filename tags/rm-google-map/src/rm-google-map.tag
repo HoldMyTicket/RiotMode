@@ -1,6 +1,44 @@
 <rm-google-map>
 
 	<style scoped>
+		.wrapper{
+			position:relative;
+			height:100%;
+			width:100%;
+		}
+		.infoWindow {
+			position:absolute;
+			top:0px;
+			left:0px;
+			width:auto;
+			height:auto;
+			margin: 10px; 
+			padding: 1px; 
+			-webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; 
+			box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; 
+			border-radius: 2px; 
+			background-color: white;
+			z-index:10;
+		}
+		.card {padding: 9px 4px 9px 11px;}
+		.description {
+			width: 200px;
+  			display: inline-block;
+			color: #5B5B5B;
+		}
+		.description .title {
+			overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		    font-weight: 500;
+		    font-size: 14px;
+		    color: black;
+			margin:0;
+		}
+		.description .address {
+			margin-top: 6px;
+  			font-size: 12px;
+		}
 		.rm-google-map {
 			margin: 0;
 			padding: 0;
@@ -12,9 +50,20 @@
 		}
 	</style>
 
-	<div class="rm-google-map"></div>
+	<div class="wrapper">
+		<div if={ infoWindow } class="infoWindow">
+			<div class="card">
+				<div class="description">
+					<p class="title">Sunshine Theater</p>
+					<span class="address">120 Central Ave SW, Albuquerque, NM 87102</span>
+				</div>
+			</div>
+		</div>
+		<div class="rm-google-map"></div>
+	</div>
 
 	var me = this;
+
 	
 	this.on('mount',function() {
 		window.RiotModeMap = function() {
@@ -80,7 +129,9 @@
 		me.mapOptions = {
 			center: opts.center || { lat: 35.1107, lng: -106.6100 },
 			zoom: opts.zoom || 5,
-			zoomControl: opts.zoomControl || true,
+			zoomControl: opts.zoomControl || false,
+			panControl: false,
+    		scaleControl: true,
 			mapTypeId: google.maps.MapTypeId[opts.mapType.toUpperCase()] || google.maps.MapTypeId.ROADMAP,
 		};
 	}
