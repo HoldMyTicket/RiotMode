@@ -19,7 +19,7 @@
 
 		riot.route.parser(function(path) {
 			return me.parseUrl(path);
-		})
+		});
 		riot.route.start();
 		riot.route.exec(function(url) {
 			me.load(url || me.parseUrl('/'));

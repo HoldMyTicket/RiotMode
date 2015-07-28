@@ -1,6 +1,17 @@
 <rm-datepicker>
 
 	<style scoped>
+		* {box-sizing:border-box;}
+		table, caption, tbody, tfoot, thead, tr, th, td {
+			margin: 0;
+			padding: 0 !important;
+			border: 0;
+			outline: 0;
+			font-size: 100%;
+			vertical-align: baseline;
+			background: transparent;
+			text-align:center;
+		}
 		a {
 			color: rgb(117,117,117);
 			text-decoration:none;
@@ -14,7 +25,7 @@
 		    -ms-user-select: none;
 		    user-select: none;
 		}
-		.base_input {
+		.base-input {
 			height:40px;
 			padding-left:5px;
 			border:1px solid #D3D3D3;
@@ -38,86 +49,88 @@
 			box-shadow: 0 2px 10px -4px #444;
 			z-index:10;
 		}
-		.view_title {
+		.view-title {
 			display:block;
 			text-align:center;
 			background: rgb(216,27,96);
 			color: #FFF;
 			line-height: 50px;
 		}
-		.view_title a {
+		.view-title a {
 			cursor: pointer;
 		}
-		.left_arrow {
+		.left-arrow {
 			float:left;
 			line-height:50px;
 			margin-left:10px;
 			color:#FFF
 		}
-		.right_arrow {
+		.right-arrow {
 			float:right;
 			line-height:50px;
 			margin-right:10px;
 			color:#FFF
 		}
-		table {
-			padding:5px;
-			width: 100%;
-			text-align:center;
-			table-layout: fixed;
-			border-collapse:collapse;
-			border-spacing:0px;
+		.daysofweek {
+			width:100%;
+			height:23px;
+			color: rgb(0,188,214);
+			font-weight: 700;
 		}
-		table td a{
+		.daysofweek span {
+			float:left;
+			text-align:center;
+			width:14.285714285%;
+		}
+		.weekrow {
+			height:auto;
+			padding:2px 0;
+			width:100%;
+		}
+		.weekrow a {
 			height:40px;
 			border-radius: 20px;
-			display: block;
+			display: inline-block;
 			line-height: 40px;
+			width:14.285714285%;
+			text-align:center;
 		}
-		table td a.today, a.today:hover{
-			box-shadow: 0 0 0 2px rgb(0,188,214);
-		}
-		table td a:hover {
+		.weekrow a:hover {
 			background:rgb(233,229,227);
 			cursor:pointer;
 		}
-		table thead tr {
-			color: rgb(0,188,214);
+		.today {
+			box-shadow: 0 0 0 2px rgb(0,188,214);
 		}
-		.nohover:hover {background:none;cursor:default;}
+		.selected {
+			background: rgb(205,205,205);
+		}
+		.nohover:hover {content:"";background:none;cursor:default;padding:0 !important;}
 	</style>
 
 	<div class="rm-datepicker">
-		<input class="base_input" type="text" onclick="{ show }" value="{ value }" readonly>
+		<input class="base-input" type="text" onclick="{ show }" value="{ value }" readonly>
 		<div show={ open } class="view">
-			<div class="view_title">
-				<a onclick="{ previous }"><i class="material-icons left_arrow">&#xE5C4;</i></a>
+			<div class="view-title">
+				<a onclick="{ previous }"><i class="material-icons left-arrow">&#xE5C4;</i></a>
 				<span class="month">{ header }</span>
-				<a onclick="{ next }"><i class="material-icons right_arrow">&#xE5C8;</i></a>
+				<a onclick="{ next }"><i class="material-icons right-arrow">&#xE5C8;</i></a>
 			</div>
-			
-			<table>
-				<thead>
-					<tr>
-						<th>Mo</th>
-						<th>Tu</th>
-						<th>We</th>
-						<th>Th</th>
-						<th>Fr</th>
-						<th>Sa</th>
-						<th>Su</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr each="{ rows in mydata }">			
-						<td each="{ day in rows }">
-							<a class="{ nohover: day.asNumber < 0, today: day.active, selected:day.selected }" 
-									onclick="{ pick }">{ day.asNumber > 0 ? day.asNumber : '' }</a>	
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+			<div class="daysofweek">
+				<span>Mo</span>
+				<span>Tu</span>
+				<span>We</span>
+				<span>Th</span>
+				<span>Fr</span>
+				<span>Sa</span>
+				<span>Su</span>
+			</div>
+	
+			<div class="weekrow" each="{ rows in mydata }">
+				<a class="{ nohover: day.asNumber < 0, today: day.active, selected:day.selected }" 
+						onclick="{ pick }" each="{ day in rows }">{ day.asNumber > 0 ? day.asNumber : '&nbsp;' }</a>
+			</div>
+		</div>	
 	</div>
 
 	var me = this;
@@ -129,7 +142,7 @@
 	this.open = false;
 	this.format = opts.format || "MMM Do YYYY";
 	this.date = moment(this.month);
-	this.value = this.date.format(this.format);
+	this.value = this.month.format(this.format);
 	
 	this.on('mount', function() {
 		me.build(me.month);
@@ -146,7 +159,9 @@
 				year: me.month.year(),
 				month: me.month.month(),
 				day: target.innerHTML
-		}).format(me.format);		
+		});	
+		me.value = me.date.format(me.format);
+		me.build(me.month);
 		me.open = false;
 		me.update();
 	}
@@ -176,16 +191,18 @@
 					working = false;
 					break;
 				}
-				firstDay--;
 				if(firstDay > 0) {
 			 		week.push({asNumber:-1,active:false});
+					firstDay--;
 				} else {
 					week.push({
 						asNumber: outDay,
-						active: me.today.date() == outDay,
-						selected: me.date.month() == me.month.month()
-									&& me.date.year() == me.month.year()
-									&& me.date.day() == outDay
+						active: me.today.month() == me.month.month()
+									&& me.today.year() == me.month.year()
+									&& me.today.date() == outDay,
+						selected: me.date.month() == date.month()
+									&& me.date.year() == date.year()
+									&& me.date.date() == outDay
 					});
 					outDay++;
 				}

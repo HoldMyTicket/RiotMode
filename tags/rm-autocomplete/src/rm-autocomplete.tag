@@ -1,8 +1,8 @@
 <rm-autocomplete>
     <style scoped>
-        * {box-sizing:border-box;}
+        * {box-sizing: border-box;}
         .active { background:rgb(215,215,215); }
-        .base {height:40px;padding-left:5px;}
+        .base {height:40px;padding-left:5px;margin-bottom:0px;width:100%;}
 		.border {
             heght:40px;
             padding-left:5px;
@@ -14,20 +14,23 @@
 		.border::-webkit-input-placeholder { color: rgb(169,169,169); }
 		.border::-moz-placeholder { color: rgb(169,169,169); /* Firefox 19+ */ }
         .err {border: 1px dashed red; color: rgb(169,169,169);}
-		.filter {padding:0;}
+		.filter {padding:0;margin:0px;}
         .filter:hover {background:none;}
         .filter-input {
 			background:none;
             border:none;
+            border-bottom:1px solid rgba(0, 0, 0, 0.117647);
 			box-sizing:border-box;
 			color: rgb(85, 85, 85);
 			padding:5px;
 			font-size:16px;
 			height:30px;
+            margin:0px;
 			width:100%; }
-        .list {
+        .list-container {
 			position:absolute;
             left:0; right:0;
+            background:#FFF;
             height:auto;
             overflow-x:hidden;
             overflow-y:auto;
@@ -42,12 +45,13 @@
             -ms-user-select: none;
             user-select: none;
         }
-        ul { list-style-type: none; padding:0; maring:0; -webkit-margin-before: 0; -webkit-margin-after: 0;}
-        ul li {
+        .list { list-style-type: none; padding:0; maring:0; -webkit-margin-before: 0; -webkit-margin-after: 0;}
+        .list .list-row {
             padding:5px 15px;
+            margin:0px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
         }
-        ul li:hover { background: rgb(240, 240, 240); }
+        .list .list-row:hover { background: rgb(240, 240, 240); }
 		textarea:focus, input:focus { outline: 0; }
         .wrap { position: relative; }
 	</style>
@@ -59,17 +63,17 @@
                value="{ value }">
 
 
-        <div show={ open } class="list">
-            <ul>
+        <div show={ open } class="list-container">
+            <ul class="list">
                 <li show={ select } class="filter">
                     <input class="filter-input"
                        placeholder="Filter"
                        onkeyup="{ handleText }">
                 </li>
-                <li show={ noResults }>
+                <li class="list-row" show={ noResults }>
                     No results...
                 </li>
-    			<li onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" class="item { active: item.active }">
+    			<li class="list-row" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" class="item { active: item.active }">
                     { item.text }
                 </li>
     		</ul>

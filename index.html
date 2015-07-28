@@ -8,32 +8,37 @@
   <title>Your page title here :)</title>
   <meta name="description" content="">
   <meta name="author" content="">
-
-  <script src="https://use.fonticons.com/0164d950.js"></script>
-
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="/assets/css/normalize.css">
+  <link rel="stylesheet" href="/assets/css/skeleton.css">
+  <style type="riot"></style>
 
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
+  <script src="https://use.fonticons.com/0164d950.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
+  <script src="/mixins/ajaxMixin.js"></script>
+  <script src="/mixins/eventMixin.js"></script>
+
+  <script src="/tags/rm-autocomplete/src/rm-autocomplete.tag" type="riot/tag"></script>
+
+  <script src="/bower_components/moment/moment.js"></script>
+  <script src="/tags/rm-datepicker/src/rm-datepicker.tag" type="riot/tag"></script>
+
+  <script src="/tags/rm-google-map/src/rm-google-map.tag" type="riot/tag"></script>
+
+  <script src="/tags/rm-router/src/rm-router.tag" type="riot/tag"></script>
+  <script src="/bower_components/riot/riot+compiler.min.js"></script>
 </head>
 <body>
 
   <div class="header" onclick="window.location='/'">
-    <i class="entypo entypo-switch"></i> RiotMode<br /><small>by HoldMyTicket</small>
+      <i class="entypo entypo-switch"></i> RiotMode<br /><small>by HoldMyTicket</small>
   </div>
 
   <!-- Primary Page Layout
@@ -44,10 +49,13 @@
     <div class="three columns">
       <ul class="nav">
         <li><a href="#autocomplete">Autocomplete</a></li>
+        <li><a href="#datepicker">Datepicker</a></li>
+        <li><a href="#google-map">Google-Map</a></li>
+        <li><a href="#markdown">Markdown</a></li>
         <li><a href="#modal">Modal</a></li>
-        <li><a href="#text">Text</a></li>
+        <li><a href="#table">Table</a></li>
+        <li><a href="#text-fields">Text-Fields</a></li>
         <li><a href="#toggle">Toggle</a></li>
-        <li><a href="#tooltip">Tooltip</a></li>
       </ul>
     </div>
     <div class="one columns">
@@ -57,17 +65,14 @@
         <rm-router>
             <section route="/" src="/pages/home.tag" />
             <section route="autocomplete" src="/pages/autocomplete.tag" />
+            <section route="datepicker" src="/pages/datepicker.tag" />
+            <section route="google-map" src="/pages/google-map.tag" />
             <section route="toggle" src="/pages/test.tag" />
         </rm-router>
     </div>
   </div>
 
 </div>
-
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="/tags/rm-router/src/rm-router.tag" type="riot/tag"></script>
-
-<script src="js/riot.js"></script>
 
 <script>
     riot.mount('*');
