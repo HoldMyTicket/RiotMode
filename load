@@ -6,7 +6,6 @@ echo $temp
 for dir in tags/*/
 do
     dir=${dir%*/}
-    echo Compiling ${dir##*/}...
     riot $dir/src $dir/dist
     cp $dir/src/*.tag $temp
 done
@@ -15,3 +14,8 @@ echo "======================="
 echo "Compiling main dist..."    
 riot $temp dist/RiotMode.js
 rm -rf $temp
+
+for i in `find mixins -name '*.js'` ; 
+do 
+    cat $i dist/RiotMode.js > tmp && mv tmp dist/RiotMode.js
+done

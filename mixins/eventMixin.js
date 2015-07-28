@@ -11,4 +11,4 @@ var eventMixin = {
 			  this.opts['on'+action].apply(this, args);
 		  }
     }
-}    
+};    
