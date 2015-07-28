@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>RiotMode Markdown</title>
+		<style>
+			body {
+				box-sizing:border-box;
+				padding:20px;
+			}
+			pre {
+			    white-space: pre-wrap;       /* CSS 3 */
+			    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+			    white-space: -pre-wrap;      /* Opera 4-6 */
+			    white-space: -o-pre-wrap;    /* Opera 7 */
+			    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+			}
+			.wrapper {
+			     width: 100%;
+			     margin: 0 auto;
+			}
+			.wrapper p {
+				padding:20px;
+				max-width:900px;
+			}
+			.leftcolumn, .rightcolumn {
+				padding:5px;
+			    border: 1px solid white;
+			    float: left;
+			    min-height: 450px;
+			}
+			.leftcolumn {
+			     width: 350px;
+				 margin: 0px 20px;
+			     border: 1px solid grey;
+			}
+			.rightcolumn {
+			     width: 650px;
+			}
+		</style>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+	</head>
+	<body>
+		<h1>RiotMode Markdown</h1>
+		<div class="wrapper">
+			
+			<p>An example of raw markdown, and parsed markdown inside your html. Simply pass the data as an attribute named content. You may also assign it as so, "riot.mount('rm-markdown', {content:data})". </p>
+			
+		    <div class="leftcolumn">
+		        <pre class="raw"></pre>
+		    </div>
+		    <div class="rightcolumn">
+		        <rm-markdown></rm-markdown>
+		    </div>
+		</div>
+		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script src="/bower_components/marked/marked.min.js"></script>
+		<script src="../src/rm-markdown.tag" type="riot/tag"></script>
+		<script>
+			jQuery.get('test.md', function(data) {
+				console.log(data);
+				jQuery('.raw').html(data);
+				riot.mount('rm-markdown', {content:data});
+			});
+		</script>
+	</body>
+</html>

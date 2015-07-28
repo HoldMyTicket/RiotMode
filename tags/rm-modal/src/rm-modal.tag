@@ -2,76 +2,121 @@
     
     <style scoped>
         .overlay {
-            visibility: hidden;
             position: absolute;
-            left: 0px;
-            top: 0px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             text-align: center;
-            z-index: 1000;
+            z-index: 10;
             background-color: rgba(0, 0, 0, 0.8);
         }
         
-        .overlay.show {
-            visibility: visible;
+        .overlay.fade-in-overlay {
+            -webkit-animation: fadeIn .25s linear;
+            -moz-animation: fadeIn .25s linear;
+            -o-animation: fadeIn .25s linear;
+            animation: fadeIn .25s linear;
+        }
+        
+        .modal.scale-up-modal {
+            -webkit-animation: scaleUp .30s linear;
+            -moz-animation: scaleUp .30s linear;
+            -o-animation: scaleUp .30s linear;
+            animation: scaleUp .30s linear;
+        }
+        
+        .overlay.fade-out-overlay {
+            -webkit-animation: fadeIn .25s reverse;
+            -moz-animation: fadeIn .25s reverse;
+            -o-animation: fadeIn .25s reverse;
+            animation: fadeIn .25s reverse;
+        }
+        
+        .modal.scale-down-modal {
+            -webkit-animation: scaleUp .30s reverse;
+            -moz-animation: scaleUp .30s reverse;
+            -o-animation: scaleUp .30s reverse;
+            animation: scaleUp .30s reverse;
         }
         
         .modal {
-            width: 300px;
-            margin: 100px auto;
+            width: 25%;
             background-color: #fff;
             border: 1px solid #000;
             padding: 15px;
-        }
-        
-        .modal-content {
-            position: relative;
+            position: fixed;
+            left: 35%;
+            z-index: 11;
         }
         
         .affirmative-btn {
-            position: absolute;
-            left: 0;
+            float: left;
         }
         
         .dismissive-btn {
-            position: absolute;
-            right: 0;
+            float: right;
         }
         
-        .close-btn {
-            float: right;
-            cursor: pointer;
+        .clear {
+            clear: both;
+        }
+        
+        /* animation for modal */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes scaleUp {
+            0% {
+                -webkit-transform: scale(0);
+                -moz-transform: scale(0);
+                -o-transform: scale(0);
+                transform: scale(0);
+            }
+            50% {
+                -webkit-transform: scale(0.5);
+                -moz-transform: scale(0.5);
+                -o-transform: scale(0.5);
+                transform: scale(0.5);
+            }
+            100% {
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+            }
         }
     </style>
     
     <div class="wrap">
-        <div class="overlay { show: opts.visible }">
-            <div class="modal">
-                <i class="material-icons close-btn" onclick="{ closeModal }">close</i>
-                <div class="modal-content">
-                    <yield/>
-                </div>
+        <div class="overlay" show="{ opts.opened }" onclick="{ closeModal }"></div>
+        <div class="modal" show="{ opts.opened }">
+            <div class="modal-content">
+                <yield/>
             </div>
+            <div class="clear"></div>
         </div>
     </div>
     
-    <script>
-        /**
-         * Modal component for RiotJS v2.2
-         * 
-         * @author joseph-p
-         */
-        var self = this;
-        
-        this.mixin(eventMixin);
-        
-        openModal(e) {
-            this.fire('openModal', e);
-        }
-        
-        closeModal(e) {
-            this.fire('closeModal', e);
-        }
-    </script>
+    /**
+     * Modal component for RiotJS v2.2
+     * 
+     * @author joseph-p
+     */
+    var me = this;
+    
+    this.mixin(eventMixin);
+    
+    openModal(e) {
+        this.fire('opened', e);
+    }
+    
+    closeModal(e) {
+        opts.onclose();
+        this.fire('closed', e);
+    }
 </rm-modal>

@@ -16,6 +16,8 @@
   ],
   "dependencies": {
     "riot": "~2.2.1",
-    "material-design-lite": "~1.0.0"
+    "material-design-lite": "~1.0.0",
+    "marked": "~0.3.3",
+    "moment": "~2.10.3"
   }
 }

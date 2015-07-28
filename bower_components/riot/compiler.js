@@ -1,5 +1,13 @@
-;(function(window) {
-riot.parsers = {
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd)
+      define(['riot'], factory)
+    else if (typeof exports === 'object')
+      factory(require('riot'))
+    else factory(root.riot)
+}(this, function (riot, undefined) {
+
+  var T_STRING = 'string'
+var parsers = {
   html: {},
   css: {},
   js: {
@@ -14,8 +22,13 @@ riot.parsers = {
     }
   }
 }
+
+// fix 913
+parsers.js.javascript = parsers.js.none
 // 4 the nostalgics
-riot.parsers.js.coffeescript = riot.parsers.js.coffee
+parsers.js.coffeescript = parsers.js.coffee
+
+riot.parsers = parsers
 
 
 var BOOL_ATTR = ('allowfullscreen,async,autofocus,autoplay,checked,compact,controls,declare,default,'+
@@ -204,8 +217,8 @@ function compile(src, opts) {
   })
 
   return src.replace(CUSTOM_TAG, function(_, tagName, attrs, html, js) {
-
     html = html || ''
+    attrs = compileHTML(attrs, '', '')
 
     // js wrapped inside <script> tag
     var type = opts.type
@@ -283,7 +296,7 @@ function compileScripts(fn) {
   if (!scriptsAmount) {
     done()
   } else {
-    ;[].map.call(scripts, function(script) {
+    [].map.call(scripts, function(script) {
       var url = script.getAttribute('src')
 
       function compileTag(source) {
@@ -303,7 +316,7 @@ function compileScripts(fn) {
 riot.compile = function(arg, fn) {
 
   // string
-  if (typeof arg == 'string') {
+  if (typeof arg === T_STRING) {
 
     // compile & return
     if (arg.trim()[0] == '<') {
@@ -322,7 +335,7 @@ riot.compile = function(arg, fn) {
   }
 
   // must be a function
-  if (typeof arg != 'function') arg = undefined
+  if (typeof arg !== 'function') arg = undefined
 
   // all compiled
   if (ready) return arg && arg()
@@ -350,4 +363,4 @@ riot.mount = function(a, b, c) {
 
 // @deprecated
 riot.mountTo = riot.mount
-})(this)
+}));
