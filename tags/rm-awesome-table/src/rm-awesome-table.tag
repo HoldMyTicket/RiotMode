@@ -384,25 +384,23 @@
         }
     </style>
     
-    <div class="table-wrap">
-        <table class="awesometable { tableType }">
-            <thead>
-                <tr>
-                    <th each="{ headerContent,  i in opts.tableHeaders}">{ headerContent }</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr each="{ bodyContentRows, i in opts.tableContent }">
-                    <td each="{ bodyContentData,  i in bodyContentRows }">{ bodyContentData }</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td each="{ footerContent,  i in opts.tableFooter }">{ footerContent }</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+    <table class="awesometable { tableType }">
+        <thead>
+            <tr>
+                <th each="{ headerContent,  i in opts.tableHeaders}">{ headerContent }</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr each="{ bodyContentRows, i in opts.tableContent }">
+                <td each="{ bodyContentData,  i in bodyContentRows }">{ bodyContentData }</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td each="{ footerContent,  i in opts.tableFooter }">{ footerContent }</td>
+            </tr>
+        </tfoot>
+    </table>
     
     /**
      * Table component for RiotJS v2.2
