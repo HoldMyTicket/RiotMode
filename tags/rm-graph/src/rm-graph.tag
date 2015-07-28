@@ -27,7 +27,7 @@
 	            });
 			    chart.yAxis.tickFormat(d3.format(',f'));
 			    chart.y2Axis.tickFormat(d3.format(',f'));
-			    chart.useInteractiveGuideline(true);
+			  //  chart.useInteractiveGuideline(true);
 			    d3.select(me.id)
 			        .datum(me.data)
 			        .call(chart);
