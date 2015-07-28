@@ -1,4 +1,4 @@
-<rm-awesome-table>
+<rm-table>
     
     <style scoped>
         .awesometable {
@@ -410,4 +410,4 @@
     var me = this;
     
     this.tableType = opts.type;
-</rm-awesome-table>
+</rm-table>
