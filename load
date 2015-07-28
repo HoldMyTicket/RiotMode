@@ -1,0 +1,17 @@
+#!/bin/bash
+#Compile Script RiotMode
+
+temp=`mktemp -d -t rm`
+echo $temp
+for dir in tags/*/
+do
+    dir=${dir%*/}
+    echo Compiling ${dir##*/}...
+    riot $dir/src $dir/dist
+    cp $dir/src/*.tag $temp
+done
+    
+echo "======================="
+echo "Compiling main dist..."    
+riot $temp dist/RiotMode.js
+rm -rf $temp
