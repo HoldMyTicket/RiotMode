@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>RiotMode Awesome Table</title>
+		<style>
+			body {
+				box-sizing:border-box;
+				padding:20px;
+			}
+		</style>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+	</head>
+	<body>
+        <h1>RiotMode Awesome Table</h1>
+        
+        <h3>Default Table</h3>
+		<rm-awesome-table></rm-awesome-table>
+        
+        <h3>Striped Table</h3>
+        <rm-awesome-table type="awesometable-striped"></rm-awesome-table>
+        
+        <h3>Condensed Table</h3>
+        <rm-awesome-table type="awesometable-condensed"></rm-awesome-table>
+        
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script src="../src/rm-awesome-table.tag" type="riot/tag"></script>
+        <script>
+            riot.mount('rm-awesome-table', {
+                tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
+                tableContent: [
+                    ['James Bond', '80', 'M', 'Confidential', 'Blue'],
+                    ['Bruce Wayne', '40', 'M', 'Billionare', 'Black'],
+                    ['Batman', 'Unknown', 'Unknown', 'Unknown', 'Black'],
+                ]
+            });
+        </script>
+	</body>
+</html>
