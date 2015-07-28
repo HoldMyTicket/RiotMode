@@ -143,6 +143,8 @@
 			script.type = 'text/javascript';
 			script.src = 'https://maps.googleapis.com/maps/api/js?sensor=false&callback=window.RiotModeMap';
 			document.body.appendChild(script);
+		} else {
+			me.buildMap();
 		}
 	}
 
