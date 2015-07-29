@@ -16,9 +16,13 @@
 	var me = this;
 
 	this.on('mount',function() {
-		google.setOnLoadCallback(function() {
+		if (typeof google === "object" && typeof google.visualization === "object") {
 			me.make();
-		});
+		} else {
+			google.setOnLoadCallback(function() {
+				me.make();
+			});
+		}
 	});
 	
 	make() {
@@ -30,7 +34,8 @@
 			options.explorer = { actions: ['dragToZoom', 'rightClickToReset'], axis: 'horizontal' }
 			
 		var type = {
-			'line': new google.charts.Line(this.chart),
+			'material' : new google.charts.Line(this.chart),
+			'line': new google.visualization.LineChart(this.chart),
 			'bar' : new google.visualization.BarChart(this.chart),
 			'pie' : new google.visualization.PieChart(this.chart)
 		}

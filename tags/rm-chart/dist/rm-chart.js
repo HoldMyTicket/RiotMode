@@ -3,9 +3,13 @@ riot.tag('rm-chart', '<div id="chart" class="noselect" style="width: 100%; heigh
 	var me = this;
 
 	this.on('mount',function() {
-		google.setOnLoadCallback(function() {
+		if (typeof google === "object" && typeof google.visualization === "object") {
 			me.make();
-		});
+		} else {
+			google.setOnLoadCallback(function() {
+				me.make();
+			});
+		}
 	});
 	
 	this.make = function() {
@@ -17,6 +21,7 @@ riot.tag('rm-chart', '<div id="chart" class="noselect" style="width: 100%; heigh
 			options.explorer = { actions: ['dragToZoom', 'rightClickToReset'], axis: 'horizontal' }
 			
 		var type = {
+			'material' : new google.charts.Line(this.chart),
 			'line': new google.visualization.LineChart(this.chart),
 			'bar' : new google.visualization.BarChart(this.chart),
 			'pie' : new google.visualization.PieChart(this.chart)
