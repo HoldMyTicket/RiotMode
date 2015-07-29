@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>RiotMode Table</title>
+		<style>
+			body {
+				box-sizing:border-box;
+				padding:20px;
+			}
+		</style>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+	</head>
+	<body>
+        <h1>RiotMode Table</h1>
+        
+        <h3>Default Table</h3>
+		<rm-table id="defaultTable"></rm-table>
+        
+        <h3>Striped Table</h3>
+        <rm-table id="stripedTable" type="awesometable-striped"></rm-table>
+        
+        <h3>Condensed Table</h3>
+        <rm-table id="condensedTable" type="awesometable-condensed"></rm-table>
+        
+        <h3>Hover/Condensed Table</h3>
+        <rm-table id="combinationTable" type="awesometable-hover awesometable-condensed"></rm-table>
+		
+		<h3>Calculated Table</h3>
+		<rm-table id="calculatedTable"></rm-table>
+        
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script src="../src/rm-table.tag" type="riot/tag"></script>
+        <script>
+            riot.mount('rm-table#defaultTable', {
+				calculateColumns: true,
+                tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
+                tableContent: [
+                    ['James Bond', '80', 'M', 'Confidential', 'Blue'],
+                    ['Bruce Wayne', '40', 'M', 'Billionare', 'Black'],
+                    ['Batman', 'Unknown', 'Unknown', 'Unknown', 'Black'],
+                ]
+            });
+			
+			riot.mount('rm-table#stripedTable', {
+                tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
+                tableContent: [
+                    ['James Bond', '80', 'M', 'Confidential', 'Blue'],
+                    ['Bruce Wayne', '40', 'M', 'Billionare', 'Black'],
+                    ['Batman', 'Unknown', 'Unknown', 'Unknown', 'Black'],
+                ]
+            });
+			
+			riot.mount('rm-table#condensedTable', {
+                tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
+                tableContent: [
+                    ['James Bond', '80', 'M', 'Confidential', 'Blue'],
+                    ['Bruce Wayne', '40', 'M', 'Billionare', 'Black'],
+                    ['Batman', 'Unknown', 'Unknown', 'Unknown', 'Black'],
+                ]
+            });
+			
+			riot.mount('rm-table#combinationTable', {
+                tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
+                tableContent: [
+                    ['James Bond', '80', 'M', 'Confidential', 'Blue'],
+                    ['Bruce Wayne', '40', 'M', 'Billionare', 'Black'],
+                    ['Batman', 'Unknown', 'Unknown', 'Unknown', 'Black'],
+                ]
+            });
+			
+			riot.mount('rm-table#calculatedTable', {
+				calculateColumns: true,
+                tableHeaders: ['Date', 'Cash', 'Credit', 'Check'],
+                tableContent: [
+                    ['4/14/2015', 20, 42, 0],
+                    ['4/13/2015', 20, 42, 0],
+                    ['4/12/2015', 20, 42, 0]
+                ]
+            });
+        </script>
+	</body>
+</html>

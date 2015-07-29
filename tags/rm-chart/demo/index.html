@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>RiotMode Chart</title>
+		<style>
+			body {
+				box-sizing:border-box;
+				padding:10px;
+				width:100%;
+			}
+			.item {
+				width:50%;
+				height:500px;
+				margin:0 auto;
+			}
+		</style>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.css">
+	</head>
+	<body>
+		
+		<h1>RiotMode Chart</h1>
+		<hr>
+		<div class="item" id="first">
+			<rm-chart></rm-chart>
+		</div>
+		<div class="item" id="second">
+			<rm-chart></rm-chart>
+		</div>
+		<div class="item" id="third">
+			<rm-chart></rm-chart>
+		</div>
+		
+		<script src="/bower_components/riot/riot+compiler.min.js"></script>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script src="../src/rm-chart.tag" type="riot/tag"></script>
+		<script>
+			riot.mount('div#first', 'rm-chart',{
+				title:"Line Chart Demo",
+				type:"line",
+				dragToZoom:'true',
+				data:[
+				  ["Team", {type: 'date', label: 'Season Start Date'}, {type: 'date', label: 'Season End Date'}],
+				  ["Baltimore Ravens",     "Date(2000, 8, 5)", "Date(2001, 1, 5)"],
+				  ["New England Patriots", "Date(2001, 8, 5)", "Date(2002, 1, 5)"],
+				  ["Tampa Bay Buccaneers", "Date(2002, 8, 5)", "Date(2003, 1, 5)"],
+				  ["New England Patriots", "Date(2003, 8, 5)", "Date(2004, 1, 5)"],
+				  ["New England Patriots", "Date(2004, 8, 5)", "Date(2005, 1, 5)"],
+				  ["Pittsburgh Steelers",  "Date(2005, 8, 5)", "Date(2006, 1, 5)"],
+				  ["Indianapolis Colts",   "Date(2006, 8, 5)", "Date(2007, 1, 5)"],
+				  ["New York Giants",      "Date(2007, 8, 5)", "Date(2008, 1, 5)"],
+				  ["Pittsburgh Steelers",  "Date(2008, 8, 5)", "Date(2009, 1, 5)"],
+				  ["New Orleans Saints",   "Date(2009, 8, 5)", "Date(2010, 1, 5)"],
+				  ["Green Bay Packers",    "Date(2010, 8, 5)", "Date(2011, 1, 5)"],
+				  ["New York Giants",      "Date(2011, 8, 5)", "Date(2012, 1, 5)"],
+				  ["Baltimore Ravens",     "Date(2012, 8, 5)", "Date(2013, 1, 5)"],
+				  ["Seattle Seahawks",     "Date(2013, 8, 5)", "Date(2014, 1, 5)"]
+				]
+			});
+			riot.mount('div#second', 'rm-chart',{
+				title:"Pie Chart",
+				type:"pie",
+				data:[
+		            ['Year', 'Sales', 'Expenses'],
+		            ['2004',  1000,      400],
+		            ['2005',  1170,      460],
+		            ['2006',  660,       1120],
+		            ['2007',  1030,      540]
+		        ]
+			});
+			riot.mount('div#third', 'rm-chart',{
+				title:"Bar chart title",
+				type:"bar",
+				data:[
+		        	["Element", "Density", { role: "style" } ],
+		        	["Copper", 8.94, "#b87333"],
+		        	["Silver", 10.49, "silver"],
+		        	["Gold", 19.30, "gold"],
+		        	["Platinum", 21.45, "color: #e5e4e2"]
+		        ]
+			});
+			google.load('visualization', '1', {packages: ['corechart', 'line']});
+		</script>
+	</body>
+</html>

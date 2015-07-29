@@ -1,23 +1,34 @@
 {
-  "name": "RiotMode",
-  "version": "0.1.0",
+  "name": "riotmode",
+  "version": "0.2.0",
   "homepage": "https://github.com/HoldMyTicket/RiotMode",
   "authors": [
-    "Evan Fajardo <e.faj33@gmail.com>"
+    "HoldMyTicket"
   ],
-  "description": "Riot.js",
+  "description": "Riot.js tags for everyone to use",
   "license": "MIT",
   "ignore": [
     "**/.*",
+    "assets",
     "node_modules",
     "bower_components",
+    "pages",
     "test",
-    "tests"
+    "tests",
+    "load",
+    "check_bower.js"
   ],
   "dependencies": {
     "riot": "~2.2.1",
     "material-design-lite": "~1.0.0",
     "marked": "~0.3.3",
     "moment": "~2.10.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/HoldMyTicket/RiotMode.git"
+  },
+  "main": [
+    "dist/RiotMode.js"  
+  ]
 }

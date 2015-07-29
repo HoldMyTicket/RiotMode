@@ -27,41 +27,67 @@
 		<script src="../src/rm-autocomplete.tag" type="riot/tag"></script>
 	</head>
 	<body>
-		<h1>RiotMode Autocomplete Demo</h1>
-		<p>There are different types of selections. One is autocomplete type, the other select type.</p>
-		<section>
-			<p>Search for a country (Autocomplete type)</p>
-			<rm-autocomplete
-							 name="text-input"
-							 url="/tags/rm-autocomplete/demo/demo.json"
-							 height="190px"
-							 placeholder="">
-			</rm-autocomplete>
-		</section>
+		<form onsubmit="doSubmit();return false" id="submitForm">			
+			<h1>RiotMode Autocomplete Demo</h1>
+			<p>There are different types of selections. One is autocomplete type, the other select type.</p>
+			<section>
+				<p>Search for a country (Autocomplete type)</p>
+				<rm-autocomplete
+								 name="text-input"
+								 url="/tags/rm-autocomplete/demo/demo.json"
+								 height="190px"
+								 placeholder="">
+				</rm-autocomplete>
+			</section>
 
-		<section>
-			<p>Search for a country (select type)</p>
-			<rm-autocomplete
-							 name="select-input"
-							 height="190px"
-							 placeholder="Country Selection"
-							 filter-placeholder="Filter"
-							 type="select">
-			</rm-autocomplete>
-		</section>
-		<section>
-			<p>What an error looks like</p>
-			<rm-autocomplete
-							 url="/tags/rm-autocomplete/demo/demo.json"
-							 height="190px"
-							 placeholder="Country Selection"
-							 filter-placeholder="Filter"
-							 type="select">
-			</rm-autocomplete>
-		</section>
+			<section>
+				<p>Search for a country (select type)</p>
+				<rm-autocomplete
+								 name="select-input"
+								 height="190px"
+								 placeholder="Country Selection"
+								 filter-placeholder="Filter"
+								 type="select">
+				</rm-autocomplete>
+			</section>
+			<section>
+				<p>Search for a country no border</p>
+				<rm-autocomplete
+								 name="select-input"
+								 height="190px"
+								 placeholder="Country Selection"
+								 filter-placeholder="Filter"
+								 type="select"
+								 noborder="true">
+				</rm-autocomplete>
+			</section>
+			<section>
+				<p>What an error looks like</p>
+				<rm-autocomplete
+								 url="/tags/rm-autocomplete/demo/demo.json"
+								 height="190px"
+								 placeholder="Country Selection"
+								 filter-placeholder="Filter"
+								 type="select">
+				</rm-autocomplete>
+			</section>
+			
+			<section>
+				<button type="submit" name="button">Serialize Form</button>
+			</section>
+			
+		</form>
+
 		<!-- <p>This text is just down here to see how the page reflows as the user interacts with the &lt;rm-autocomplete&gt; tag</p> -->
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- only used for serializing form test -->
 		<script>
 			riot.mount('rm-autocomplete',{list:[{text:'Apple'},{text:'Orange'},{text:'Banana'}]});
+			
+			function doSubmit(){
+				console.log('serialized form', $('#submitForm').serialize())
+				// console.log('serialized form');
+				return false;
+			}
 		</script>
 	</body>
 </html>

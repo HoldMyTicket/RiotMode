@@ -1,15 +1,4 @@
-<rm-graph>
-	
-	<style scoped>
-		div {
-			height:500px; 
-			width:500px;
-		}
-	</style>
-	
-	<div id="chart_{_id}">
-	  <svg></svg>
-	</div>
+riot.tag('rm-graph', '<div id="chart_{_id}"> <svg></svg> </div>', 'rm-graph div { height:500px; width:500px; }', function(opts) {
 	
 	var me = this;
 	
@@ -27,7 +16,7 @@
 	            });
 			    chart.yAxis.tickFormat(d3.format(',f'));
 			    chart.y2Axis.tickFormat(d3.format(',f'));
-			  //  chart.useInteractiveGuideline(true);
+
 			    d3.select(me.id)
 			        .datum(me.data)
 			        .call(chart);
@@ -72,4 +61,5 @@
 		console.log(me.id);
 		me.setup[opts.type]();
 	});
-</rm-graph>
+
+});

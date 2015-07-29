@@ -19,19 +19,10 @@
   <script src="https://use.fonticons.com/0164d950.js"></script>
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 
-
-  <script src="/mixins/ajaxMixin.js"></script>
-  <script src="/mixins/eventMixin.js"></script>
-
-  <script src="/tags/rm-autocomplete/src/rm-autocomplete.tag" type="riot/tag"></script>
-
   <script src="/bower_components/moment/moment.js"></script>
-  <script src="/tags/rm-datepicker/src/rm-datepicker.tag" type="riot/tag"></script>
-
-  <script src="/tags/rm-google-map/src/rm-google-map.tag" type="riot/tag"></script>
-
-  <script src="/tags/rm-router/src/rm-router.tag" type="riot/tag"></script>
+  <script type="text/javascript" src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","line"]}]}'></script>
   <script src="/bower_components/riot/riot+compiler.min.js"></script>
+  <script src="/dist/RiotMode.js"></script>
 </head>
 <body>
 
@@ -47,6 +38,7 @@
     <div class="three columns">
       <ul class="nav">
         <li><a href="#autocomplete">Autocomplete</a></li>
+        <li><a href="#chart">Chart</a></li>
         <li><a href="#datepicker">Datepicker</a></li>
         <li><a href="#google-map">Google-Map</a></li>
         <li><a href="#markdown">Markdown</a></li>
@@ -63,6 +55,7 @@
         <rm-router>
             <section route="/" src="/pages/home.tag" />
             <section route="autocomplete" src="/pages/autocomplete.tag" />
+            <section route="chart" src="/pages/chart.tag" />
             <section route="datepicker" src="/pages/datepicker.tag" />
             <section route="google-map" src="/pages/google-map.tag" />
             <section route="toggle" src="/pages/test.tag" />

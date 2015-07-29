@@ -1,121 +1,4 @@
-<rm-autocomplete>
-  <style scoped>
-    * {
-      box-sizing: border-box;
-    }
-    .active {
-      background:rgb(215,215,215);
-    }
-    .base {
-      height:40px;
-      padding-left:5px;
-      margin-bottom:0px;
-      width:100%;
-    }
-    .noborder .border { border: 0; }
-    .border {
-      
-      height:35px;
-      padding-left:5px;
-      border:1px solid rgba(0,0,0,.12);
-      box-sizing:border-box;
-    }
-    .border:-moz-placeholder { color: rgb(169,169,169); /* Firefox 18- */ }
-    .border:-ms-input-placeholder { color: rgb(169,169,169); }
-    .border::-webkit-input-placeholder { color: rgb(169,169,169); }
-    .border::-moz-placeholder { color: rgb(169,169,169); /* Firefox 19+ */ }
-    .err {border: 1px dashed red; color: rgb(169,169,169);}
-    .filter {padding:0;margin:0px;}
-    .filter:hover {background:none;}
-    .filter-input {
-      background:none;
-      border:none;
-      border-bottom:1px solid rgba(0, 0, 0, 0.117647);
-      box-sizing:border-box;
-      color: rgb(85, 85, 85);
-      padding:5px;
-      font-size:16px;
-      height:35px;
-      margin:0px;
-      width:100%;
-    }
-    .list-container {
-      position:absolute;
-      left:0;
-      right:0;
-      background:#fff;
-      height:auto;
-      overflow-x:hidden;
-      overflow-y:auto;
-      border: 1px solid rgba(0, 0, 0, 0.117647);
-      border-top:none;
-      box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px;
-      z-index: 3;
-    }
-    .noselect {
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-    .list {
-      list-style-type: none;
-      padding:0;
-      margin:0;
-      -webkit-margin-before: 0;
-      -webkit-margin-after: 0;
-    }
-    .list .list-row {
-      display: block;
-      padding:5px 15px;
-      margin:0px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
-    }
-    .list .list-row:hover {
-      background: rgb(240, 240, 240);
-      cursor: pointer;
-    }
-    textarea:focus, input:focus {
-      outline: 0;
-    }
-    .wrap {
-      position: relative;
-    }
-	</style>
-
-  <div class="wrap noselect{opts.noborder ? ' noborder' : ''}">
-    
-    <input 
-      type="text"
-      name="{opts.name}"
-      class="mdl-textfield__input base { border : select }"
-      autocomplete="off"
-      placeholder="{ opts.placeholder || 'Type...' }"
-      onkeyup="{ handleText }"
-      value="{ value }">
-
-    <div show={ open } class="list-container">
-      <ul class="list">
-        <li show={ select } class="filter">
-          <input
-            type="text"
-            class="filter-input"
-            placeholder="Filter"
-            onkeyup="{ handleText }"
-            autocomplete="off">
-        </li>
-        <li class="list-row" show={ noResults }>
-          No results...
-        </li>
-        <li class="list-row item { active: item.active }" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }">
-          { item.text }
-        </li>
-      </ul>
-    </div>
-    
-  </div>
+riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' noborder\' : \'\'}"> <input type="text" name="{opts.name}" class="mdl-textfield__input base { border : select }" autocomplete="off" placeholder="{ opts.placeholder || \'Type...\' }" onkeyup="{ handleText }" value="{ value }"> <div show="{ open }" class="list-container"> <ul class="list"> <li show="{ select }" class="filter"> <input type="text" class="filter-input" placeholder="Filter" onkeyup="{ handleText }" autocomplete="off"> </li> <li class="list-row" show="{ noResults }"> No results... </li> <li class="list-row item { active: item.active }" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }"> { item.text } </li> </ul> </div> </div>', 'rm-autocomplete *, [riot-tag="rm-autocomplete"] *{ box-sizing: border-box; } rm-autocomplete .active, [riot-tag="rm-autocomplete"] .active{ background:rgb(215,215,215); } rm-autocomplete .base, [riot-tag="rm-autocomplete"] .base{ height:40px; padding-left:5px; margin-bottom:0px; width:100%; } rm-autocomplete .noborder .border, [riot-tag="rm-autocomplete"] .noborder .border{ border: 0; } rm-autocomplete .border, [riot-tag="rm-autocomplete"] .border{ height:35px; padding-left:5px; border:1px solid rgba(0,0,0,.12); box-sizing:border-box; } rm-autocomplete .border:-moz-placeholder, [riot-tag="rm-autocomplete"] .border:-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border:-ms-input-placeholder, [riot-tag="rm-autocomplete"] .border:-ms-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-webkit-input-placeholder, [riot-tag="rm-autocomplete"] .border::-webkit-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-moz-placeholder, [riot-tag="rm-autocomplete"] .border::-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .err, [riot-tag="rm-autocomplete"] .err{border: 1px dashed red; color: rgb(169,169,169);} rm-autocomplete .filter, [riot-tag="rm-autocomplete"] .filter{padding:0;margin:0px;} rm-autocomplete .filter:hover, [riot-tag="rm-autocomplete"] .filter:hover{background:none;} rm-autocomplete .filter-input, [riot-tag="rm-autocomplete"] .filter-input{ background:none; border:none; border-bottom:1px solid rgba(0, 0, 0, 0.117647); box-sizing:border-box; color: rgb(85, 85, 85); padding:5px; font-size:16px; height:35px; margin:0px; width:100%; } rm-autocomplete .list-container, [riot-tag="rm-autocomplete"] .list-container{ position:absolute; left:0; right:0; background:#fff; height:auto; overflow-x:hidden; overflow-y:auto; border: 1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; z-index: 3; } rm-autocomplete .noselect, [riot-tag="rm-autocomplete"] .noselect{ -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-autocomplete .list, [riot-tag="rm-autocomplete"] .list{ list-style-type: none; padding:0; margin:0; -webkit-margin-before: 0; -webkit-margin-after: 0; } rm-autocomplete .list .list-row, [riot-tag="rm-autocomplete"] .list .list-row{ display: block; padding:5px 15px; margin:0px; border-bottom: 1px solid rgba(0, 0, 0, 0.117647); } rm-autocomplete .list .list-row:hover, [riot-tag="rm-autocomplete"] .list .list-row:hover{ background: rgb(240, 240, 240); cursor: pointer; } rm-autocomplete textarea:focus, [riot-tag="rm-autocomplete"] textarea:focus,rm-autocomplete input:focus, [riot-tag="rm-autocomplete"] input:focus{ outline: 0; } rm-autocomplete .wrap, [riot-tag="rm-autocomplete"] .wrap{ position: relative; }', function(opts) {
 
   var tag = this;
 
@@ -143,7 +26,6 @@
     else
       tag.error(base,'No name attribute');
 
-    //Handle any focus or click outside of this element to close it
     document.addEventListener('click', tag.globalClose);
     document.addEventListener('focus', tag.globalClose, true);
     
@@ -154,8 +36,7 @@
     document.removeEventListener('focus', tag.globalClose, true);
   });
 
-  //Normal setup logic
-  setup(input) {
+  this.setup = function(input) {
     
     if(tag.select)
       input.readOnly = true;
@@ -176,16 +57,16 @@
       }
     }
     
-  }
+  }.bind(this);
 
-  error(input, message) {
+  this.error = function(input, message) {
     input.readOnly = true;
     input.classList.add('err');
     input.value = message;
     tag.closeWindow();
-  }
+  }.bind(this);
 
-  openWindow(e) {
+  this.openWindow = function(e) {
     
     if(tag.open)
       return;
@@ -193,42 +74,39 @@
     tag.open = true;
     tag.update();
 
-    //If selectbox want to focus filter
     if(tag.select)
       tag.root.querySelector('.filter-input').select();
       
-  }
+  }.bind(this);
 
-  closeWindow(e) {
+  this.closeWindow = function(e) {
     tag.atIndex = -1;
     tag.open = false;
     tag.update();
-  }
+  }.bind(this);
 
-  globalClose(e) {
+  this.globalClose = function(e) {
     if (e != undefined && tag.root.contains(e.target)) {
       return;
     }
     tag.closeWindow();
-  }
+  }.bind(this);
 
-  pick(e) {
+  this.pick = function(e) {
     var target = e.srcElement || e.originalTarget;
     var value = target.getAttribute('data-value') || target.innerHTML;
     tag.value = target.innerHTML.trim();
     tag.closeWindow();
-  }
+  }.bind(this);
 
-  handleText(e) {
+  this.handleText = function(e) {
     
     var target = e.srcElement || e.originalTarget;
 
-    //Ajax on the fly
     if(tag.parameter) {
       
       var path = '';
 
-      //Construct url string with parameter
       var re = new RegExp("([?&])" + tag.parameter + "=.*?(&|$)", "i");
       var separator = tag.url.indexOf('?') !== -1 ? "&" : "?";
       if (tag.url.match(re)) {
@@ -259,9 +137,9 @@
     }
     tag.update();
     
-  }
+  }.bind(this);
 
-  keys(val) {
+  this.keys = function(val) {
     
     if(val == 8) {
       tag.deactivate();
@@ -305,9 +183,9 @@
       
     }
     
-  }
+  }.bind(this);
 
-  activate() {
+  this.activate = function() {
 
     if(typeof tag.filteredList[tag.atIndex] === 'undefined') {
       return;
@@ -327,12 +205,13 @@
       active.scrollIntoView();
     }
     
-  }
+  }.bind(this);
 
-  deactivate() {
+  this.deactivate = function() {
     tag.filteredList.forEach(function(item) {
       item.active = false;
     });
-  }
+  }.bind(this);
 
-</rm-autocomplete>
+
+});
