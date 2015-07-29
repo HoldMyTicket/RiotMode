@@ -34,6 +34,9 @@ done
 
 if [ "$inc" = true ] ; then
     read -p "Type version in the format v0.0.0: " ver
-    git tag $ver
-    git push origin $ver
+    reg="v[0-9]+\.[0-9]+\.[0-9]+"
+    if [[ $ver =~ $reg ]]; then
+      git tag $ver
+      git push origin $ver
+    fi
 fi
