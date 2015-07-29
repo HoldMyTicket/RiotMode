@@ -1,4 +1,4 @@
-<rm-graph>
+<rm-chart>
 	
 	<style scoped>
 		.noselect {
@@ -38,4 +38,4 @@
 		chart.draw(data, options);
 	}
 
-</rm-graph>
+</rm-chart>
