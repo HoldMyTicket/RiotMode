@@ -385,19 +385,19 @@
     </style>
     
     <table class="awesometable { tableType }">
-        <thead>
+        <thead if="{ validateTableSection(opts.tableHeaders) }">
             <tr>
                 <th each="{ headerContent,  i in opts.tableHeaders}">{ headerContent }</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody if="{ validateTableSection(opts.tableContent) }">
             <tr each="{ bodyContentRows, i in opts.tableContent }">
-                <td each="{ bodyContentData,  i in bodyContentRows }">{ bodyContentData }</td>
+                <td each="{ bodyContentData,  i in bodyContentRows }">{ processBody(bodyContentData) }</td>
             </tr>
         </tbody>
-        <tfoot>
-            <tr>
-                <td each="{ footerContent,  i in opts.tableFooter }">{ footerContent }</td>
+        <tfoot if="{ validateTableSection(opts.tableFooter) }">
+            <tr class="awesome-section">
+                <td each="{ footerContent,  i in opts.tableFooter }">{ processFooter(footerContent) }</td>
             </tr>
         </tfoot>
     </table>
@@ -410,4 +410,47 @@
     var me = this;
     
     this.tableType = opts.type;
+    
+    validateTableSection(section) {
+        if(section === null || section === undefined)
+            return false;
+        
+        if(Array.isArray(section) === false)
+            return false;
+            
+        return true;
+    }
+    
+    processBody(cells) {
+        if(cells.indexOf('$') !== -1) {
+            cells = parseFloat(cells.replace('$', ''));
+            cells = cells.toFixed(2, 10);
+            
+            return '$'+cells;
+        }
+        
+        return cells;
+    }
+    
+    processFooter(cells) {
+        var currency_found = false;
+        
+        if(cells.indexOf('total(') !== -1) {
+            var total = 0;
+            var cellIndex = cells.replace('total(', '');
+            
+            cellIndex = parseInt(cellIndex.replace(')', ''));
+            
+            for(var i = 0; i < opts.tableContent.length; i++) {
+                if(opts.tableContent[i][cellIndex].indexOf('$') !== -1) {
+                    currency_found = true;
+                }
+                total += parseFloat(opts.tableContent[i][cellIndex].replace('$', ''));
+            }
+            
+            return currency_found ? '$'+total.toFixed(2, 10) : total;
+        }
+        
+        return cells;
+    }
 </rm-table>
