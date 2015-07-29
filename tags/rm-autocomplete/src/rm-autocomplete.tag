@@ -86,6 +86,7 @@
   <div class="wrap noselect{opts.noborder ? ' noborder' : ''}">
     
     <input 
+      type="text"
       name="{opts.name}"
       class="mdl-textfield__input base { border : select }"
       autocomplete="off"
@@ -97,6 +98,7 @@
       <ul class="list">
         <li show={ select } class="filter">
           <input
+            type="text"
             class="filter-input"
             placeholder="Filter"
             onkeyup="{ handleText }"
