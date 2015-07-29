@@ -30,7 +30,7 @@
 			options.explorer = { actions: ['dragToZoom', 'rightClickToReset'], axis: 'horizontal' }
 			
 		var type = {
-			'line': new google.visualization.LineChart(this.chart),
+			'line': new google.charts.Line(this.chart),
 			'bar' : new google.visualization.BarChart(this.chart),
 			'pie' : new google.visualization.PieChart(this.chart)
 		}
