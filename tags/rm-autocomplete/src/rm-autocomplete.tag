@@ -12,12 +12,12 @@
       margin-bottom:0px;
       width:100%;
     }
+    .noborder .border { border: 0; }
     .border {
       height:35px;
       padding-left:5px;
       border:1px solid rgba(0,0,0,.12);
       box-sizing:border-box;
-      padding-left:5px;
     }
     .border:-moz-placeholder { color: rgb(169,169,169); /* Firefox 18- */ }
     .border:-ms-input-placeholder { color: rgb(169,169,169); }
@@ -83,9 +83,10 @@
     }
 	</style>
 
-  <div class="wrap noselect">
+  <div class="wrap noselect{opts.noborder ? ' noborder' : ''}">
     
     <input 
+      name="{opts.name}"
       class="mdl-textfield__input base { border : select }"
       autocomplete="off"
       placeholder="{ opts.placeholder || 'Type...' }"
