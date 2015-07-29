@@ -108,7 +108,7 @@
         <li class="list-row" show={ noResults }>
           No results...
         </li>
-        <li class="list-row" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" class="item { active: item.active }">
+        <li class="list-row item { active: item.active }" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }">
           { item.text }
         </li>
       </ul>
