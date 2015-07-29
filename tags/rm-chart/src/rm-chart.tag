@@ -27,9 +27,7 @@
 	
 	make() {
 		var data = new google.visualization.arrayToDataTable(opts.data);
-		var options = {
-			title:opts.title
-		}
+		var options = opts.options || {};
 		if(opts.dragToZoom && opts.type === 'line') 
 			options.explorer = { actions: ['dragToZoom', 'rightClickToReset'], axis: 'horizontal' }
 			
@@ -37,7 +35,9 @@
 			'material' : new google.charts.Line(this.chart),
 			'line': new google.visualization.LineChart(this.chart),
 			'bar' : new google.visualization.BarChart(this.chart),
-			'pie' : new google.visualization.PieChart(this.chart)
+			'pie' : new google.visualization.PieChart(this.chart),
+			'area': new google.visualization.AreaChart(this.chart),
+			'spark': new google.visualization.ImageSparkLine(this.chart)
 		}
 		var chart = type[opts.type];
 		chart.draw(data, options);
