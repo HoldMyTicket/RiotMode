@@ -67,6 +67,7 @@
       -webkit-margin-after: 0;
     }
     .list .list-row {
+      display: block;
       padding:5px 15px;
       margin:0px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
