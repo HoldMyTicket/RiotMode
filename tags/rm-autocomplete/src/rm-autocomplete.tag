@@ -14,6 +14,7 @@
     }
     .noborder .border { border: 0; }
     .border {
+      
       height:35px;
       padding-left:5px;
       border:1px solid rgba(0,0,0,.12);
