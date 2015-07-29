@@ -1,8 +1,17 @@
 <rm-autocomplete>
   <style scoped>
-    * {box-sizing: border-box;}
-    .active { background:rgb(215,215,215); }
-    .base {height:40px;padding-left:5px;margin-bottom:0px;width:100%;}
+    * {
+      box-sizing: border-box;
+    }
+    .active {
+      background:rgb(215,215,215);
+    }
+    .base {
+      height:40px;
+      padding-left:5px;
+      margin-bottom:0px;
+      width:100%;
+    }
     .border {
       height:35px;
       padding-left:5px;
@@ -61,9 +70,15 @@
       margin:0px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
     }
-    .list .list-row:hover { background: rgb(240, 240, 240); }
-    textarea:focus, input:focus { outline: 0; }
-    .wrap { position: relative; }
+    .list .list-row:hover {
+      background: rgb(240, 240, 240);
+    }
+    textarea:focus, input:focus {
+      outline: 0;
+    }
+    .wrap {
+      position: relative;
+    }
 	</style>
 
   <div class="wrap noselect">
@@ -81,7 +96,8 @@
           <input
             class="filter-input"
             placeholder="Filter"
-            onkeyup="{ handleText }">
+            onkeyup="{ handleText }"
+            autocomplete="off">
         </li>
         <li class="list-row" show={ noResults }>
           No results...
