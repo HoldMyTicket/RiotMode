@@ -72,6 +72,7 @@
     }
     .list .list-row:hover {
       background: rgb(240, 240, 240);
+      cursor: pointer;
     }
     textarea:focus, input:focus {
       outline: 0;
