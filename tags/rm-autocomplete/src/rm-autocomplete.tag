@@ -49,6 +49,7 @@
       border: 1px solid rgba(0, 0, 0, 0.117647);
       border-top:none;
       box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px;
+      z-index: 3;
     }
     .noselect {
       -webkit-touch-callout: none;
