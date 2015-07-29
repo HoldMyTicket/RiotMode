@@ -434,23 +434,26 @@
     
     processFooter(cells) {
         var currency_found = false;
+        var total = 0;
+        var cellIndex;
         
-        if(cells.indexOf('total(') !== -1) {
-            var total = 0;
-            var cellIndex = cells.replace('total(', '');
-            
-            cellIndex = parseInt(cellIndex.replace(')', ''));
-            
-            for(var i = 0; i < opts.tableContent.length; i++) {
-                if(opts.tableContent[i][cellIndex].indexOf('$') !== -1) {
-                    currency_found = true;
-                }
-                total += parseFloat(opts.tableContent[i][cellIndex].replace('$', ''));
-            }
-            
-            return currency_found ? '$'+total.toFixed(2, 10) : total;
+        if(cells.indexOf('{{') !== -1) {
+            cellIndex = cells.replace(/[^0-9.]/g, '');
+        } else {
+            return cells;
         }
         
-        return cells;
+        for(var i = 0; i < opts.tableContent.length; i++) {
+            if(opts.tableContent[i][cellIndex].indexOf('$') !== -1) {
+                currency_found = true;
+            }
+            total += parseFloat(opts.tableContent[i][cellIndex].replace('$', ''));
+        }
+        
+        if(cells.indexOf('{{total') !== -1)
+            return currency_found ? '$'+total.toFixed(2, 10) : total;
+            
+        if(cells.indexOf('{{average') !== -1)
+            return currency_found ? '$'+(total/opts.tableContent.length).toFixed(2, 10) : (total/opts.tableContent.length).toFixed(2, 10);
     }
 </rm-table>

@@ -34,6 +34,9 @@
 		
 		<h3>Calculated Table</h3>
 		<rm-table class="calculated-table"></rm-table>
+		
+		<h3>Averaged Table</h3>
+		<rm-table class="averaged-table"></rm-table>
         
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
 		<script src="../src/rm-table.tag" type="riot/tag"></script>
@@ -54,8 +57,18 @@
                     ['4/13/2015', '1', '$22.15', '$42', '$0'],
                     ['4/12/2015', '1', '$20.50', '$42', '$0']
                 ],
-				tableFooter: ['Total', 'total(1)', 'total(2)', 'total(3)', 'total(4)']
+				tableFooter: ['Total', '{{total1}}', '{{total2}}', '{{total3}}', '{{total4}}']
             });
+			
+			riot.mount('rm-table.averaged-table', {
+				tableHeaders: ['Date', 'Tickets', 'Cash', 'Credit', 'Check'],
+                tableContent: [
+                    ['4/14/2015', '2', '$25.12', '$42', '$0'],
+                    ['4/13/2015', '1', '$22.15', '$22', '$0'],
+                    ['4/12/2015', '1', '$20.50', '$42', '$0']
+                ],
+				tableFooter: ['Total', '{{averagedl1}}', '{{averagedl2}}', '{{averagedl3}}', '{{averagedl4}}']
+			});
         </script>
 	</body>
 </html>
