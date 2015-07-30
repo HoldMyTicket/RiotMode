@@ -1,7 +1,7 @@
 <rm-text-field>
 
 	<style scoped>
-		//FORM RESET
+		/*FORM RESET*/
 		
 	</style>
 
