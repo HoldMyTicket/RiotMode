@@ -2,8 +2,8 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
 
   var tag = this;
 
-  this.mixin(ajaxMixin);
-  this.mixin(eventMixin);
+  this.mixin(rm-ajax-mixin);
+  this.mixin(rm-event-mixin);
 
   this.open = false;
   this.select = opts.type === "select" ? true : false;

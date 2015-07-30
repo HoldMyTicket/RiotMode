@@ -19,7 +19,7 @@
       \n
   </pre>
 
-  this.mixin(ajaxMixin);
+  this.mixin(rm-ajax-mixin);
   this.on('mount',function() {
     this.ajaxGet('/tags/rm-markdown/demo/test.md',function(data) {
         riot.mount('rm-markdown',{content:data});

@@ -1,4 +1,4 @@
-var eventMixin = {
+var rm-event-mixin = {
     fire: function (action) {
         var args = [];
         if(arguments.length > 1){
@@ -12,7 +12,7 @@ var eventMixin = {
 		  }
     }
 };    
-var ajaxMixin = {
+var rm-ajax-mixin = {
     ajaxGet: function (url, cb) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', encodeURI(url));
@@ -26,8 +26,8 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
 
   var tag = this;
 
-  this.mixin(ajaxMixin);
-  this.mixin(eventMixin);
+  this.mixin(rm-ajax-mixin);
+  this.mixin(rm-event-mixin);
 
   this.open = false;
   this.select = opts.type === "select" ? true : false;
@@ -237,20 +237,6 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
     });
   }.bind(this);
 
-
-});
-riot.tag('rm-card', '<div id="wrap"> <div class="mdl-card mdl-shadow--2dp demo-card-wide"> <div class="mdl-card__title"> <h2 class="mdl-card__title-text">{ title }</h2> </div> <div class="mdl-card__supporting-text"> { text } </div> <div class="mdl-card__actions mdl-card--border"> <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"> Get Started </a> </div> <div class="mdl-card__menu"> <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"> <i class="material-icons">share</i> </button> </div> </div> </div>', function(opts) {
-	
-	var me = this;
-	
-	this.title = opts.title || '';
-	this.text = opts.text || '';
-	this.buttons = '';
-	
-	this.on('mount', function() {
-		var wrap = this.root.children[0];
-
-	});
 
 });
 
@@ -463,7 +449,7 @@ riot.tag('rm-google-map', '<div class="wrapper"> <div if="{ infoWindow }" class=
 
 });
 
-riot.tag('rm-loader', '<div id="wrap"> <div id="progstatic" style="width:250px" class="mdl-js-progress"></div> </div>', function(opts) {
+riot.tag('rm-loader', '<div id="wrap"> <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div> </div>', function(opts) {
 	
 	var me = this;
 	
@@ -478,7 +464,7 @@ riot.tag('rm-loader', '<div id="wrap"> <div id="progstatic" style="width:250px" 
 	
 	this.on('mount', function() {
 		var wrap = this.root.children[0];
-		componentHandler.upgradeElement(wrap);
+		componentHandler.upgradeDom();
 	});
 
 });
@@ -742,7 +728,13 @@ riot.tag('rm-table', '<table class="awesometable { tableType }"> <thead if="{ va
             column.push(this.tableContent[i][columnIndex]);
         }
         
-        column.sort();
+        column.sort(function(a, b) {
+            if(!me.toggleSort)
+                return a - b;
+            
+            if(me.toggleSort)
+                return b - a;
+        });
         
         for(var i = 0; i < column.length; i++) {
             this.tableContent[i][columnIndex] = currency_found ? '$'+column[i] : column[i];

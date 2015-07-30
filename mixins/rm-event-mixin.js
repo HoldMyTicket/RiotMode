@@ -1,4 +1,4 @@
-var eventMixin = {
+var rm-event-mixin = {
     fire: function (action) {
         var args = [];
         if(arguments.length > 1){
