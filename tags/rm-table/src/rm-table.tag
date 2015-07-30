@@ -488,7 +488,13 @@
             column.push(this.tableContent[i][columnIndex]);
         }
         
-        column.sort();
+        column.sort(function(a, b) {
+            if(!me.toggleSort)
+                return a - b;
+            
+            if(me.toggleSort)
+                return b - a;
+        });
         
         for(var i = 0; i < column.length; i++) {
             this.tableContent[i][columnIndex] = currency_found ? '$'+column[i] : column[i];
