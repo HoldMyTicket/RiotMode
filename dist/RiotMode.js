@@ -1,4 +1,4 @@
-var rm-event-mixin = {
+var RMeventMixin = {
     fire: function (action) {
         var args = [];
         if(arguments.length > 1){
@@ -12,7 +12,7 @@ var rm-event-mixin = {
 		  }
     }
 };    
-var rm-ajax-mixin = {
+var RMajaxMixin = {
     ajaxGet: function (url, cb) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', encodeURI(url));
@@ -26,8 +26,8 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
 
   var tag = this;
 
-  this.mixin(rm-ajax-mixin);
-  this.mixin(rm-event-mixin);
+  this.mixin(RMajaxMixin);
+  this.mixin(RMeventMixin);
 
   this.open = false;
   this.select = opts.type === "select" ? true : false;
