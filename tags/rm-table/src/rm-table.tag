@@ -387,12 +387,12 @@
     <table class="awesometable { tableType }">
         <thead if="{ validateTableSection(opts.tableHeaders) }">
             <tr>
-                <th each="{ headerContent,  i in opts.tableHeaders}">{ headerContent }</th>
+                <th onclick="{ sortTableColumn }" data-header-index="{ i }" each="{ headerContent,  i in opts.tableHeaders}">{ headerContent }</th>
             </tr>
         </thead>
         <tbody if="{ validateTableSection(opts.tableContent) }">
             <tr each="{ bodyContentRows, i in opts.tableContent }">
-                <td each="{ bodyContentData,  i in bodyContentRows }">{ processBody(bodyContentData) }</td>
+                <td id="body" each="{ bodyContentData,  i in bodyContentRows }">{ processBody(bodyContentData) }</td>
             </tr>
         </tbody>
         <tfoot if="{ validateTableSection(opts.tableFooter) }">
@@ -446,6 +446,8 @@
         for(var i = 0; i < opts.tableContent.length; i++) {
             if(opts.tableContent[i][cellIndex].indexOf('$') !== -1) {
                 currency_found = true;
+            } else {
+                currency_found = false;
             }
             total += parseFloat(opts.tableContent[i][cellIndex].replace('$', ''));
         }
@@ -455,5 +457,16 @@
             
         if(cells.indexOf('{{average') !== -1)
             return currency_found ? '$'+(total/opts.tableContent.length).toFixed(2, 10) : (total/opts.tableContent.length).toFixed(2, 10);
+    }
+    
+    sortTableColumn(e) {
+        var column = [];
+        var columnIndex = e.target.dataset.headerIndex;
+        
+        for(var i = 0; i < opts.tableContent.length; i++) {
+            column.push(opts.tableContent[i][columnIndex]);
+        }
+        console.log(column);
+        console.log(column.sort());
     }
 </rm-table>
