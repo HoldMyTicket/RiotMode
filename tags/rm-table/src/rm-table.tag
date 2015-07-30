@@ -382,22 +382,30 @@
         .awesometable-nc tr.head th{
             background-color: #f0f0f0;
         }
+        
+        .pointer {
+            cursor: pointer;
+        }
+        
+        .sort-icon {
+            vertical-align: middle;
+        }
     </style>
     
     <table class="awesometable { tableType }">
-        <thead if="{ validateTableSection(opts.tableHeaders) }">
-            <tr>
-                <th onclick="{ sortTableColumn }" data-header-index="{ i }" each="{ headerContent,  i in opts.tableHeaders}">{ headerContent }</th>
+        <thead if="{ validateTableSection(tableHeaders) }">
+            <tr class="{ pointer: sortTable }">
+                <th onclick="{ sortTable ? sortTableColumn : '' }" data-header-index="{ i }" each="{ headerContent,  i in tableHeaders}">{ headerContent }<i data-header-index="{ i }" if="{ sortTable }" class="material-icons sort-icon">keyboard_arrow_down</i></th>
             </tr>
         </thead>
-        <tbody if="{ validateTableSection(opts.tableContent) }">
-            <tr each="{ bodyContentRows, i in opts.tableContent }">
+        <tbody if="{ validateTableSection(tableContent) }">
+            <tr each="{ bodyContentRows, i in tableContent }">
                 <td id="body" each="{ bodyContentData,  i in bodyContentRows }">{ processBody(bodyContentData) }</td>
             </tr>
         </tbody>
-        <tfoot if="{ validateTableSection(opts.tableFooter) }">
+        <tfoot if="{ validateTableSection(tableFooter) }">
             <tr class="awesome-section">
-                <td each="{ footerContent,  i in opts.tableFooter }">{ processFooter(footerContent) }</td>
+                <td each="{ footerContent,  i in tableFooter }">{ processFooter(footerContent) }</td>
             </tr>
         </tfoot>
     </table>
@@ -410,6 +418,11 @@
     var me = this;
     
     this.tableType = opts.type;
+    this.tableHeaders = opts.tableHeaders;
+    this.tableContent = opts.tableContent;
+    this.tableFooter = opts.tableFooter;
+    this.sortTable = opts.sortTable;
+    this.toggleSort = false;
     
     validateTableSection(section) {
         if(section === null || section === undefined)
@@ -443,30 +456,44 @@
             return cells;
         }
         
-        for(var i = 0; i < opts.tableContent.length; i++) {
-            if(opts.tableContent[i][cellIndex].indexOf('$') !== -1) {
+        for(var i = 0; i < this.tableContent.length; i++) {
+            if(this.tableContent[i][cellIndex].indexOf('$') !== -1) {
                 currency_found = true;
             } else {
                 currency_found = false;
             }
-            total += parseFloat(opts.tableContent[i][cellIndex].replace('$', ''));
+            total += parseFloat(this.tableContent[i][cellIndex].replace('$', ''));
         }
         
         if(cells.indexOf('{{total') !== -1)
             return currency_found ? '$'+total.toFixed(2, 10) : total;
             
         if(cells.indexOf('{{average') !== -1)
-            return currency_found ? '$'+(total/opts.tableContent.length).toFixed(2, 10) : (total/opts.tableContent.length).toFixed(2, 10);
+            return currency_found ? '$'+(total/this.tableContent.length).toFixed(2, 10) : (total/this.tableContent.length).toFixed(2, 10);
     }
     
     sortTableColumn(e) {
         var column = [];
+        var currency_found = false;
         var columnIndex = e.target.dataset.headerIndex;
         
-        for(var i = 0; i < opts.tableContent.length; i++) {
-            column.push(opts.tableContent[i][columnIndex]);
+        for(var i = 0; i < this.tableContent.length; i++) {
+            if(this.tableContent[i][columnIndex].indexOf('$') !== -1) {
+                currency_found = true;
+                this.tableContent[i][columnIndex] = this.tableContent[i][columnIndex].replace('$', '');
+            } else {
+                currency_found = false;
+            }
+            
+            column.push(this.tableContent[i][columnIndex]);
         }
-        console.log(column);
-        console.log(column.sort());
+        
+        column.sort();
+        
+        for(var i = 0; i < column.length; i++) {
+            this.tableContent[i][columnIndex] = currency_found ? '$'+column[i] : column[i];
+        }
+        
+        this.toggleSort = !this.toggleSort;
     }
 </rm-table>

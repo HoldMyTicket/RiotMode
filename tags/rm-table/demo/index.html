@@ -70,16 +70,16 @@
                     ['4/13/2015', '5', '$22.15', '$22', '$0'],
                     ['4/12/2015', '4', '$20.50', '$42', '$0']
                 ],
-				tableFooter: ['Average', '{{averagedl1}}', '{{averagedl2}}', '{{averagedl3}}', '{{averagedl4}}']
+				tableFooter: ['Average', '{{averagel1}}', '{{averagel2}}', '{{averagel3}}', '{{averagel4}}']
 			});
 			
 			riot.mount('rm-table.sorted-table', {
 				sortTable: true,
-				tableHeaders: ['Date', 'Tickets', 'Cash', 'Credit', 'Check'],
+				tableHeaders: ['Date', 'Name', 'Tickets', 'Cash', 'Credit', 'Check'],
                 tableContent: [
-                    ['4/14/2015', '8', '$25.12', '$42', '$0'],
-                    ['4/13/2015', '5', '$22.15', '$22', '$0'],
-                    ['4/12/2015', '4', '$20.50', '$42', '$0']
+                    ['4/14/2015', 'James Bond', '8', '$25.12', '$42', '$0'],
+                    ['4/13/2015', 'Bruce Wayne', '5', '$22.15', '$22', '$0'],
+                    ['4/12/2015', 'Batman', '4', '$20.50', '$42', '$0']
                 ]
 			});
         </script>
