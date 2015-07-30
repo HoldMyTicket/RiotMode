@@ -1,4 +1,4 @@
-riot.tag('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textarea if="{ opts.type == \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" rows="{rows}" id="text_{id}" ></textarea> <input if="{ opts.type != \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{_id}">{ opts.placeholder || \'Type...\' }</label> <span if="{ opts.type == \'numeric\' || opts.type == \'email\' || opts.regex }" class="mdl-textfield__error">{ error }</span> <div if="{ opts.type == \'expanding\' }" class="mdl-textfield__expandable-holder"> <input name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{id}">Expandable Input</label> </div> </div>', function(opts) {
+riot.tag('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textarea if="{ opts.type == \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" rows="{rows}" id="text_{id}" ></textarea> <input if="{ opts.type != \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{_id}">{ opts.placeholder || \'Type...\' }</label> <span if="{ opts.type == \'numeric\' || opts.type == \'email\' || opts.regex }" class="mdl-textfield__error">{ error }</span> <div if="{ opts.type == \'expanding\' }" class="mdl-textfield__expandable-holder"> <input name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{id}">Expandable Input</label> </div> </div>', '//FORM RESET', function(opts) {
 
 	
 	var me = this;
@@ -14,28 +14,28 @@ riot.tag('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textare
 		
 
     this.on('mount',function() {
-			var wrap = this.root.children[0];
-			
-			wrap.style.width = me.width;
+		var wrap = this.root.children[0];
+		
+		wrap.style.width = me.width;
 
-			if(!me.name) {
-				wrap.innerHTML = "<span style='color:red;'>Set name attribute!</span>";
-				return;
-			}
+		if(!me.name) {
+			wrap.innerHTML = "<span style='color:red;'>Set name attribute!</span>";
+			return;
+		}
 
 	    if(me.floating) {
 	  		wrap.classList.add('mdl-textfield--floating-label');
 	  	}
 
-			if(me.type === 'expanding') {
-				var label = me.root.querySelector('label');
-				wrap.classList.add('mdl-textfield--expandable');
-				label.setAttribute('class','mdl-button mdl-js-button mdl-button--icon');
-				label.innerHTML = '<i class="material-icons">search</i>';
-			}
+		if(me.type === 'expanding') {
+			var label = me.root.querySelector('label');
+			wrap.classList.add('mdl-textfield--expandable');
+			label.setAttribute('class','mdl-button mdl-js-button mdl-button--icon');
+			label.innerHTML = '<i class="material-icons">search</i>';
+		}
 
-      me.assignRegex();
-			componentHandler.upgradeElement(wrap); //call to load materialdesign on el
+        me.assignRegex();
+		componentHandler.upgradeElement(wrap); //call to load materialdesign on el
     });
 
     this.assignRegex = function() {
