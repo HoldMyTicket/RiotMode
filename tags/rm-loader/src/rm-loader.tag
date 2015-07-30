@@ -1,7 +1,7 @@
 <rm-loader>
 	
 	<div id="wrap">
-		<div id="progstatic" style="width:250px" class="mdl-js-progress"></div>	
+		<div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
 	</div>
 	
 	var me = this;
@@ -17,6 +17,6 @@
 	
 	this.on('mount', function() {
 		var wrap = this.root.children[0];
-		componentHandler.upgradeElement(wrap);
+		componentHandler.upgradeDom();
 	});
 </rm-loader>
