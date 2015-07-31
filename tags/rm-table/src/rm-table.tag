@@ -478,33 +478,31 @@
     }
     
     sortByTableColumn(e) {
-        var column = [];
+        e.preventUpdate = true;
+        var rows = this.tableContent;
         var currency_found = false;
         var columnIndex = e.target.dataset.headerIndex;
         
-        for(var i = 0; i < this.tableContent.length; i++) {
-            if(this.tableContent[i][columnIndex].indexOf('$') !== -1) {
-                currency_found = true;
-                this.tableContent[i][columnIndex] = this.tableContent[i][columnIndex].replace('$', '');
-            } else {
-                currency_found = false;
+        rows.sort(function(a, b) {
+            for(var i = 0; i < rows.length; i++) {
+                rows[i].push(a[i][columnIndex] < b[i][columnIndex] ? -1 : a[i][columnIndex] > b[i][columnIndex] ? 1 : 0);
             }
-            
-            column.push(this.tableContent[i][columnIndex]);
-        }
-        
-        column.sort(function(a, b) {
-            if(!me.toggleSort)
-                return a - b;
-            
-            if(me.toggleSort)
-                return b - a;
         });
         
-        for(var i = 0; i < column.length; i++) {
-            this.tableContent[i][columnIndex] = currency_found ? '$'+column[i] : column[i];
-        }
+        rows.sort(function(a, b) {
+            if(!me.toggleSort)
+                return a[a.length - 1] - b[a.length - 1];
+            
+            if(me.toggleSort)
+                return b[a.length - 1] - a[a.length - 1];
+        });
         
+        for(var i = 0; i < rows.length; i++) {
+            rows[i].pop();
+            rows[i].pop();
+        }
         this.toggleSort = !this.toggleSort;
+        // console.log(rows);
+        this.update();
     }
 </rm-table>
