@@ -26,6 +26,7 @@ html, body {
 	max-width: 990px;
   	padding: 16px 32px;
   	margin: 0 auto;
+  	overflow:hidden
 }
 
 .nav {
@@ -49,7 +50,7 @@ html, body {
 }
 
 .active {
-	background:#e0e0e0;;
+	background:#e0e0e0;
 }
 .main {
 	box-sizing: border-box;
@@ -58,4 +59,16 @@ html, body {
 	float: right;
 	height: auto;
 	width: 720px;
+}
+
+.footer {
+	height:60px;
+	border-top: 1px solid #e0e0e0;
+	width:100%;
+	color:#757575;
+	text-align:center;
+	line-height:60px;
+}
+.footer p {
+	margin-top: 17px;
 }
