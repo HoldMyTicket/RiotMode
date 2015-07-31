@@ -395,7 +395,7 @@
     <table class="awesometable { tableType }">
         <thead if="{ validateTableSection(tableHeaders) }">
             <tr class="{ pointer: sortTable }">
-                <th onclick="{ sortTable ? sortTableColumn : '' }" data-header-index="{ i }" each="{ headerContent,  i in tableHeaders}">{ headerContent }<i data-header-index="{ i }" if="{ sortTable }" class="material-icons sort-icon">keyboard_arrow_down</i></th>
+                <th onclick="{ sortTable ? sortByTableColumn : '' }" data-header-index="{ i }" each="{ headerContent,  i in tableHeaders}">{ headerContent }<i data-header-index="{ i }" if="{ sortTable }" class="material-icons sort-icon">keyboard_arrow_down</i></th>
             </tr>
         </thead>
         <tbody if="{ validateTableSection(tableContent) }">
@@ -472,7 +472,7 @@
             return currency_found ? '$'+(total/this.tableContent.length).toFixed(2, 10) : (total/this.tableContent.length).toFixed(2, 10);
     }
     
-    sortTableColumn(e) {
+    sortByTableColumn(e) {
         var column = [];
         var currency_found = false;
         var columnIndex = e.target.dataset.headerIndex;
