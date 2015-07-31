@@ -7,7 +7,7 @@
   }
   </style>
 
-  <h5>Datepicker</h5>
+  <h3>Datepicker</h3>
   
   <div class="datepicker-demo">
       <rm-datepicker> </rm-datepicker>

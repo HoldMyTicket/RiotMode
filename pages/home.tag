@@ -1,6 +1,6 @@
 <page-home>
 
-  <h5>What is RiotMode?</h5>
+  <h3>What is RiotMode?</h3>
 
   <p>
     RiotMode is a simple group of components built for Riot.js.  They are currently a work in progress, but feel free to submit pull requests :)

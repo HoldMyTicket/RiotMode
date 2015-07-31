@@ -3,7 +3,7 @@
  
   </style>
 
-  <h5>Markdown</h5>
+  <h3>Markdown</h3>
   
   <p>Here is some markdown rendered with our tag.</p>
 

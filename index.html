@@ -37,7 +37,12 @@
     <div class="content">
 
         <div class="nav">
-            <h5>Tags<h5>
+            <h5>Get Started</h5>
+            <ul>
+                <li><a href="#install">Install</a></li>
+                <li><a href="#contribute">Contribute</a></li>
+            </ul>
+            <h5>Tags</h5>
             <ul>
                 <li><a href="#autocomplete">Autocomplete</a></li>
                 <li><a href="#chart">Chart</a></li>
@@ -49,7 +54,7 @@
                 <li><a href="#text-field">Text-Fields</a></li>
                 <li><a href="#toggle">Toggle</a></li>
             </ul>
-            <h5>Mixins<h5>
+            <h5>Mixins</h5>
             <ul>
                 <li><a>Ajax</a></li>
                 <li><a>Event</a></li>
@@ -58,7 +63,14 @@
 
         <div class="main">
             <rm-router>
+                <!-- Home route -->
                 <section route="/" src="/pages/home.tag" />
+
+                <!-- Get started -->
+                <section route="install" src="/pages/install.tag" />
+                <section route="contribute" src="/pages/contribute.tag" />
+
+                <!-- Tags -->
                 <section route="autocomplete" src="/pages/autocomplete.tag" />
                 <section route="chart" src="/pages/chart.tag" />
                 <section route="datepicker" src="/pages/datepicker.tag" />

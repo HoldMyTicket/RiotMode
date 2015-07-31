@@ -6,7 +6,7 @@
   }
   </style>
 
-  <h5>Charts</h5>
+  <h3>Charts</h3>
   
   <div class="chart-demo" id="first"></div>
   <div class="chart-demo" id="second"></div>

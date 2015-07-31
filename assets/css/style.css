@@ -8,6 +8,11 @@ html, body {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
+a {
+	text-decoration: none;
+	color: #6ab344;
+}
+
 .header {
 	background: #6ab344;
   	color: #fff;

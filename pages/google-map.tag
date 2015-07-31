@@ -8,7 +8,7 @@
   }
   </style>
 
-  <h5>Google Map</h5>
+  <h3>Google Map</h3>
   
   <div class="google-map-demo">
       <rm-google-map> </rm-google-map>

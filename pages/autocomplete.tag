@@ -7,7 +7,7 @@
   }
   </style>
 
-  <h5>Autocomplete / Select Menu</h5>
+  <h3>Autocomplete / Select Menu</h3>
   
   <div class="autocomplete-demo">
       <rm-autocomplete
