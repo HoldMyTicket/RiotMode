@@ -14,7 +14,13 @@
     Just make sure to import riot.js and RiotMode.js into your project.  Then you can mount tags.
   </p>
   <p>
-    <pre>&lt;html&gt;&NewLine;&lt;head&gt;&NewLine;  &NewLine;&lt;/head&gt;&NewLine;&lt;body&gt;&NewLine;&NewLine;  &lt;rg-autocomplete&gt;&lt;/rg-autocomplete&gt;&NewLine;&NewLine;  &lt;script src=&quot;riot.js&quot;&gt;&lt;/script&gt;&NewLine;  &lt;script src=&quot;riot.mode.js&quot;&gt;&lt;/script&gt;&NewLine;  &lt;script type=&quot;text/javascript&quot;&gt;&NewLine;    riot.mount(&apos;rg-autocomplete&apos;);&NewLine;  &lt;/script&gt;&NewLine;&NewLine;&lt;/body&gt;&NewLine;&lt;/html&gt;</pre>
+    <pre><code class="html">&lt;html&gt;&NewLine;&lt;head&gt;&NewLine;  &NewLine;&lt;/head&gt;&NewLine;&lt;body&gt;&NewLine;&NewLine;  &lt;rg-autocomplete&gt;&lt;/rg-autocomplete&gt;&NewLine;&NewLine;  &lt;script src=&quot;riot.js&quot;&gt;&lt;/script&gt;&NewLine;  &lt;script src=&quot;RiotMode.js&quot;&gt;&lt;/script&gt;&NewLine;  &lt;script type=&quot;text/javascript&quot;&gt;&NewLine;    riot.mount(&apos;rg-autocomplete&apos;);&NewLine;  &lt;/script&gt;&NewLine;&NewLine;&lt;/body&gt;&NewLine;&lt;/html&gt;<code></pre>
   </p>
   
+  this.on('mount',function() {
+    $('pre code').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
+  });
+
 </page-home>

@@ -45,12 +45,18 @@
   <p>Options</p>
  
   <pre>
+    <code class="json">
       //Markdown string can be placed here\n
       content:''\n
       \n
+    </code>
   </pre>
 
   this.on('mount',function() {
+    $('pre code').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
     riot.mount('text-field');
   });
 </page-text-field>
+

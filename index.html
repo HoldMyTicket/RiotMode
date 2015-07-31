@@ -12,15 +12,16 @@
 
   <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-  
-  <link rel="stylesheet" href="/assets/css/normalize.css">
-  <link rel="stylesheet" href="/assets/css/skeleton.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+  <link rel="stylesheet" href="/assets/css/normalize.css">  
+  <link rel="stylesheet" href="/assets/css/style.css">
+
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
   <style type="riot"></style>
   <link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
 
-  <script src="https://use.fonticons.com/0164d950.js"></script>
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
   <script src="/bower_components/material-design-lite/material.min.js"></script>
   <script src="/bower_components/moment/moment.js"></script>
   <script src="/bower_components/marked/marked.min.js"></script>
@@ -30,49 +31,57 @@
 </head>
 <body>
 
-  <div class="header" onclick="window.location='/'">
-      <i class="entypo entypo-switch"></i> RiotMode<br /><small>by HoldMyTicket</small>
-  </div>
+    <div class="header" onclick="window.location='/'">
+        <h2 class="title">Riot Mode</h2>
+        <span class="author">HoldMyTicket</span>
+    </div>
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
+    <div class="content">
 
-  <div class="row">
-    <div class="three columns">
-      <ul class="nav">
-        <li><a href="#autocomplete">Autocomplete</a></li>
-        <li><a href="#chart">Chart</a></li>
-        <li><a href="#datepicker">Datepicker</a></li>
-        <li><a href="#google-map">Google-Map</a></li>
-        <li><a href="#markdown">Markdown</a></li>
-        <li><a href="#modal">Modal</a></li>
-        <li><a href="#table">Table</a></li>
-        <li><a href="#text-field">Text-Fields</a></li>
-        <li><a href="#toggle">Toggle</a></li>
-      </ul>
-    </div>
-    <div class="one columns">
-    </div>
+        <div class="nav">
+            <h5>Tags<h5>
+            <ul>
+                <li><a href="#autocomplete">Autocomplete</a></li>
+                <li><a href="#chart">Chart</a></li>
+                <li><a href="#datepicker">Datepicker</a></li>
+                <li><a href="#google-map">Google-Map</a></li>
+                <li><a href="#markdown">Markdown</a></li>
+                <li><a href="#modal">Modal</a></li>
+                <li><a href="#table">Table</a></li>
+                <li><a href="#text-field">Text-Fields</a></li>
+                <li><a href="#toggle">Toggle</a></li>
+            </ul>
+            <h5>Mixins<h5>
+            <ul>
+                <li><a>Ajax</a></li>
+                <li><a>Event</a></li>
+            </ul>
+        </div>
 
-    <div class="seven columns" id="pagewrap">
-        <rm-router>
-            <section route="/" src="/pages/home.tag" />
-            <section route="autocomplete" src="/pages/autocomplete.tag" />
-            <section route="chart" src="/pages/chart.tag" />
-            <section route="datepicker" src="/pages/datepicker.tag" />
-            <section route="google-map" src="/pages/google-map.tag" />
-            <section route="markdown" src="/pages/markdown.tag" />
-            <section route="text-field" src="/pages/text-field.tag" />
-        </rm-router>
+        <div class="main">
+            <rm-router>
+                <section route="/" src="/pages/home.tag" />
+                <section route="autocomplete" src="/pages/autocomplete.tag" />
+                <section route="chart" src="/pages/chart.tag" />
+                <section route="datepicker" src="/pages/datepicker.tag" />
+                <section route="google-map" src="/pages/google-map.tag" />
+                <section route="markdown" src="/pages/markdown.tag" />
+                <section route="text-field" src="/pages/text-field.tag" />
+            </rm-router>
+        </div>
     </div>
-  </div>
 
 </div>
 
 <script>
-    riot.mount('*');
+    var router = riot.mount('rm-router',{
+      onload: function() {
+        $('.nav ul li a').removeClass('active');
+        $('.nav ul li a[href*="'+window.location.hash.substring(1)+'"]').addClass('active');
+      }
+    })[0];
 </script>
-
 </body>
 </html>

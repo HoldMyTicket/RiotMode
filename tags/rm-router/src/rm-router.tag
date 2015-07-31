@@ -13,6 +13,7 @@
 	var me = this;
 	this.routes = opts.routes || false;
 	this.mountedTag = false;
+	this.mixin(RMeventMixin);
 
 	this.on('mount', function() {
 		me.initialize();
@@ -133,6 +134,7 @@
 
 				
 			    riot.compile(me.routes[i].path, function() {
+			    	me.fire('load');
 					var fileName = me.routes[i].path.split('/').pop().replace(/\.[^/.]+$/, "");
 			    	me.mountedTag = riot.mount(me.base, 'page-'+fileName)[0];
 					//console.log(me.mountedTag);

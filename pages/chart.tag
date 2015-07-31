@@ -17,6 +17,7 @@
   <p style="margin-top:25px;">Options</p>
  
   <pre>
+    <code class="json">
       //Type of graph, line | bar | pie | area | spark\n
       type:'line'\n
       \n
@@ -29,11 +30,16 @@
       \n
       //Drag to zoom horizontally on line graphs only\n
       dragToZoom:'true'\n
+    </code>
   </pre>
 
   this.textInput = '';
   
   this.on('mount',function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+
       riot.mount('div#first', 'rm-chart',{
           type:"line",
           options: {

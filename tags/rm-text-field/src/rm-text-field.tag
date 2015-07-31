@@ -30,7 +30,7 @@
     this.rows = parseInt(opts.rows) || 2;
     this.regex = opts.regex || false;
     this.error = opts.error || "Input error!";
-		this.name = opts.name || false;
+	this.name = opts.name || false;
 		
 
     this.on('mount',function() {
