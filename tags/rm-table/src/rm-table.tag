@@ -448,6 +448,7 @@
     processFooter(cells) {
         var currency_found = false;
         var total = 0;
+        var averageCount = 0;
         var cellIndex;
         
         if(cells.indexOf('{{') !== -1) {
@@ -462,14 +463,18 @@
             } else {
                 currency_found = false;
             }
-            total += parseFloat(this.tableContent[i][cellIndex].replace('$', ''));
+            
+            if(isNaN(parseFloat(this.tableContent[i][cellIndex].replace('$', ''))) === false) {
+                averageCount++;
+                total += parseFloat(this.tableContent[i][cellIndex].replace('$', ''));
+            }
         }
         
         if(cells.indexOf('{{total') !== -1)
             return currency_found ? '$'+total.toFixed(2, 10) : total;
             
         if(cells.indexOf('{{average') !== -1)
-            return currency_found ? '$'+(total/this.tableContent.length).toFixed(2, 10) : (total/this.tableContent.length).toFixed(2, 10);
+            return currency_found ? '$'+(total/averageCount).toFixed(2, 10) : (total/averageCount).toFixed(2, 10);
     }
     
     sortByTableColumn(e) {
