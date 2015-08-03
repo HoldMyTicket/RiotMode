@@ -74,7 +74,7 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
     }
     .list .list-row .item-value {
-
+      float:left;
     }
     .list .list-row .accent {
       float:right;
@@ -124,7 +124,7 @@
           No results...
         </li>
         <li class="list-row item{ item.active ? ' active' : ''}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }">
-          <span class="item-value">{ item.text }</span><span class="accent">{ item.accent }</span>
+          { item.text }<span class="accent">{ item.accent }</span>
         </li>
       </ul>
     </div>
