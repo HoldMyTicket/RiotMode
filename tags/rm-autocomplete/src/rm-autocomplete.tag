@@ -73,6 +73,17 @@
       margin:0px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
     }
+    .list .list-row .item-value {
+
+    }
+    .list .list-row .accent {
+      float:right;
+      font-size:12px;
+      font-style:italic;
+      color:rgb(169,169,169);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
     .list .list-row:last-child {
       border-bottom:none;
     }
@@ -113,7 +124,7 @@
           No results...
         </li>
         <li class="list-row item{ item.active ? ' active' : ''}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }">
-          { item.text }
+          <span class="item-value">{ item.text }</span><span class="accent">{ item.accent }</span>
         </li>
       </ul>
     </div>

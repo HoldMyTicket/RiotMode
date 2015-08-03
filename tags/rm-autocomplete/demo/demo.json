@@ -2,7 +2,8 @@
     "choices":[  
         {  
             "text":"Dobříš",
-            "value":1
+            "value":1,
+            "accent":"200m"
         },
         {  
             "text":"Belanting",
