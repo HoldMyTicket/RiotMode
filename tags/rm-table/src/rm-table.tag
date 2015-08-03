@@ -421,7 +421,7 @@
     this.tableHeaders = opts.tableHeaders;
     this.tableContent = opts.tableContent;
     this.tableFooter = opts.tableFooter;
-    this.sortTable = opts.sortTable;
+    this.sortTable = opts.sortTable || false;
     this.toggleSort = false;
     
     validateTableSection(section) {
@@ -478,31 +478,34 @@
     }
     
     sortByTableColumn(e) {
-        e.preventUpdate = true;
         var rows = this.tableContent;
         var currency_found = false;
         var columnIndex = e.target.dataset.headerIndex;
         
-        rows.sort(function(a, b) {
-            for(var i = 0; i < rows.length; i++) {
-                rows[i].push(a[i][columnIndex] < b[i][columnIndex] ? -1 : a[i][columnIndex] > b[i][columnIndex] ? 1 : 0);
-            }
+        var mappedRows = rows.map(function(el, i) {
+            return {index: i, value: el};
         });
         
-        rows.sort(function(a, b) {
+        mappedRows.sort(function(a, b) {
             if(!me.toggleSort)
-                return a[a.length - 1] - b[a.length - 1];
+                return +(a.value[columnIndex] > b.value[columnIndex]) || +(a.value[columnIndex] === b.value[columnIndex]) - 1;
             
             if(me.toggleSort)
-                return b[a.length - 1] - a[a.length - 1];
+                return +(a.value[columnIndex] < b.value[columnIndex]) || +(a.value[columnIndex] === b.value[columnIndex]) - 1;
         });
         
-        for(var i = 0; i < rows.length; i++) {
-            rows[i].pop();
-            rows[i].pop();
+        var result = mappedRows.map(function(el) {
+            return rows[el.index];
+        });
+        
+        
+        if(e.target.nodeName === 'TH') {
+            !this.toggleSort ? e.target.querySelector('i').innerText = 'keyboard_arrow_up' : e.target.querySelector('i').innerText = 'keyboard_arrow_down';
+        } else if(e.target.nodeName === 'I') {
+            !this.toggleSort ? e.target.innerText = 'keyboard_arrow_up' : e.target.innerText = 'keyboard_arrow_down';
         }
+        
         this.toggleSort = !this.toggleSort;
-        // console.log(rows);
-        this.update();
+        this.tableContent = result;
     }
 </rm-table>
