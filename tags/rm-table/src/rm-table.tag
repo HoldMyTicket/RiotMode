@@ -382,22 +382,30 @@
         .awesometable-nc tr.head th{
             background-color: #f0f0f0;
         }
+        
+        .pointer {
+            cursor: pointer;
+        }
+        
+        .sort-icon {
+            vertical-align: middle;
+        }
     </style>
     
     <table class="awesometable { tableType }">
-        <thead>
-            <tr>
-                <th each="{ headerContent,  i in opts.tableHeaders}">{ headerContent }</th>
+        <thead if="{ validateTableSection(tableHeaders) }">
+            <tr class="{ pointer: sortTable }">
+                <th onclick="{ sortTable ? sortByTableColumn : '' }" data-header-index="{ i }" each="{ headerContent,  i in tableHeaders}">{ headerContent }<i data-header-index="{ i }" if="{ sortTable }" class="material-icons sort-icon">keyboard_arrow_down</i></th>
             </tr>
         </thead>
-        <tbody>
-            <tr each="{ bodyContentRows, i in opts.tableContent }">
-                <td each="{ bodyContentData,  i in bodyContentRows }">{ bodyContentData }</td>
+        <tbody if="{ validateTableSection(tableContent) }">
+            <tr each="{ bodyContentRows, i in tableContent }">
+                <td id="body" each="{ bodyContentData,  i in bodyContentRows }">{ processBody(bodyContentData) }</td>
             </tr>
         </tbody>
-        <tfoot>
-            <tr>
-                <td each="{ footerContent,  i in opts.tableFooter }">{ footerContent }</td>
+        <tfoot if="{ validateTableSection(tableFooter) }">
+            <tr class="awesome-section">
+                <td each="{ footerContent,  i in tableFooter }">{ processFooter(footerContent) }</td>
             </tr>
         </tfoot>
     </table>
@@ -410,4 +418,93 @@
     var me = this;
     
     this.tableType = opts.type;
+    this.tableHeaders = opts.tableHeaders;
+    this.tableContent = opts.tableContent;
+    this.tableFooter = opts.tableFooter;
+    this.sortTable = opts.sortTable || false;
+    this.toggleSort = false;
+    
+    validateTableSection(section) {
+        if(section === null || section === undefined)
+            return false;
+        
+        if(Array.isArray(section) === false)
+            return false;
+            
+        return true;
+    }
+    
+    processBody(cells) {
+        if(cells.indexOf('$') !== -1) {
+            cells = parseFloat(cells.replace('$', ''));
+            cells = cells.toFixed(2, 10);
+            
+            return '$'+cells;
+        }
+        
+        return cells;
+    }
+    
+    processFooter(cells) {
+        var currency_found = false;
+        var total = 0;
+        var averageCount = 0;
+        var cellIndex;
+        
+        if(cells.indexOf('{{') !== -1) {
+            cellIndex = cells.replace(/[^0-9.]/g, '');
+        } else {
+            return cells;
+        }
+        
+        for(var i = 0; i < this.tableContent.length; i++) {
+            if(this.tableContent[i][cellIndex].indexOf('$') !== -1) {
+                currency_found = true;
+            } else {
+                currency_found = false;
+            }
+            
+            if(isNaN(parseFloat(this.tableContent[i][cellIndex].replace('$', ''))) === false) {
+                averageCount++;
+                total += parseFloat(this.tableContent[i][cellIndex].replace('$', ''));
+            }
+        }
+        
+        if(cells.indexOf('{{total') !== -1)
+            return currency_found ? '$'+total.toFixed(2, 10) : total;
+            
+        if(cells.indexOf('{{average') !== -1)
+            return currency_found ? '$'+(total/averageCount).toFixed(2, 10) : (total/averageCount).toFixed(2, 10);
+    }
+    
+    sortByTableColumn(e) {
+        var rows = this.tableContent;
+        var currency_found = false;
+        var columnIndex = e.target.dataset.headerIndex;
+        
+        var mappedRows = rows.map(function(el, i) {
+            return {index: i, value: el};
+        });
+        
+        mappedRows.sort(function(a, b) {
+            if(!me.toggleSort)
+                return +(a.value[columnIndex] > b.value[columnIndex]) || +(a.value[columnIndex] === b.value[columnIndex]) - 1;
+            
+            if(me.toggleSort)
+                return +(a.value[columnIndex] < b.value[columnIndex]) || +(a.value[columnIndex] === b.value[columnIndex]) - 1;
+        });
+        
+        var result = mappedRows.map(function(el) {
+            return rows[el.index];
+        });
+        
+        if(e.target.nodeName === 'TH') {
+            !this.toggleSort ? e.target.querySelector('i').innerText = 'keyboard_arrow_up' : e.target.querySelector('i').innerText = 'keyboard_arrow_down';
+        } else if(e.target.nodeName === 'I') {
+            !this.toggleSort ? e.target.innerText = 'keyboard_arrow_up' : e.target.innerText = 'keyboard_arrow_down';
+        }
+        
+        this.toggleSort = !this.toggleSort;
+        this.tableContent = result;
+    }
 </rm-table>

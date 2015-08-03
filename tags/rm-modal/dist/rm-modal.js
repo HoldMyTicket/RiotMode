@@ -3,7 +3,7 @@ riot.tag('rm-modal', '<div class="wrap"> <div class="overlay" show="{ opts.opene
     
     var me = this;
     
-    this.mixin(eventMixin);
+    this.mixin(RMeventMixin);
     
     this.openModal = function(e) {
         this.fire('opened', e);

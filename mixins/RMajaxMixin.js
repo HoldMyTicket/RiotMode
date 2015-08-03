@@ -1,4 +1,4 @@
-var ajaxMixin = {
+var RMajaxMixin = {
     ajaxGet: function (url, cb) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', encodeURI(url));

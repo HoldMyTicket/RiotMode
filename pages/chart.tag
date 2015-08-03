@@ -6,35 +6,45 @@
   }
   </style>
 
-  <h5>Charts</h5>
+  <h3>Charts</h3>
   
   <div class="chart-demo" id="first"></div>
   <div class="chart-demo" id="second"></div>
   <div class="chart-demo" id="third"></div>
+  <div class="chart-demo" id="fourth"></div>
+  <div class="chart-demo" id="fifth"></div>
   
-  
-  <p>Options</p>
+  <p style="margin-top:25px;">Options</p>
  
   <pre>
-      //Title of the chartn
-      Title:'Chart' \n
-      \n
-      //Type of graph, line | bar | pie\n
+    <code class="json">
+      //Type of graph, line | bar | pie | area | spark\n
       type:'line'\n
+      \n
+      //Options specific to a chart.\n
+      //Found at https://developers.google.com/chart/interactive/docs/\n
+      options:\{\}\n
       \n
       //Data for chart\n
       data:[]\n
       \n
       //Drag to zoom horizontally on line graphs only\n
       dragToZoom:'true'\n
+    </code>
   </pre>
 
   this.textInput = '';
   
   this.on('mount',function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+
       riot.mount('div#first', 'rm-chart',{
-          title:"Line Chart Demo",
           type:"line",
+          options: {
+              title:"Line Chart Demo",
+          },
           dragToZoom:'true',
           data:[
             ['X','Dogs','Cats'],
@@ -53,8 +63,10 @@
           ]
       });
       riot.mount('div#second', 'rm-chart',{
-          title:"Pie Chart",
           type:"pie",
+          options: {
+              title:"Pie Chart",
+          },
           data:[
               ['Year', 'Sales', 'Expenses'],
               ['2004',  1000,      400],
@@ -64,8 +76,10 @@
           ]
       });
       riot.mount('div#third', 'rm-chart',{
-          title:"Bar chart title",
           type:"bar",
+          options: {
+              title:"Bar chart title",              
+          },
           data:[
               ["Element", "Density", { role: "style" } ],
               ["Copper", 8.94, "#b87333"],
@@ -73,6 +87,38 @@
               ["Gold", 19.30, "gold"],
               ["Platinum", 21.45, "color: #e5e4e2"]
           ]
+      });
+      riot.mount('div#fourth', 'rm-chart',{
+          type:"area",
+          options: {
+              title:"Area chart",
+          },
+          data:[
+              ['Year', 'Sales', 'Expenses'],
+              ['2013',  1000,      400],
+              ['2014',  1170,      460],
+              ['2015',  660,       1120],
+              ['2016',  1030,      540]
+            ]
+      });
+      riot.mount('div#fifth', 'rm-chart',{
+          type:"spark",
+          options: {
+            title:"Spark line",
+          },
+          data:[
+             ['Revenue', 'Licenses'],
+             [435, 132],
+             [438, 131],
+             [512, 137],
+             [460, 142],
+             [491, 140],
+             [487, 139],
+             [552, 147],
+             [511, 146],
+             [505, 151],
+             [509, 149]
+            ]
       });
   });
 </page-chart>

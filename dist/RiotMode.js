@@ -1,4 +1,4 @@
-var eventMixin = {
+var RMeventMixin = {
     fire: function (action) {
         var args = [];
         if(arguments.length > 1){
@@ -12,7 +12,7 @@ var eventMixin = {
 		  }
     }
 };    
-var ajaxMixin = {
+var RMajaxMixin = {
     ajaxGet: function (url, cb) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', encodeURI(url));
@@ -22,12 +22,12 @@ var ajaxMixin = {
         xhr.send();
     }
 };    
-riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' noborder\' : \'\'}"> <input type="text" name="{opts.name}" class="mdl-textfield__input base { border : select }" autocomplete="off" placeholder="{ opts.placeholder || \'Type...\' }" onkeyup="{ handleText }" value="{ value }"> <div show="{ open }" class="list-container"> <ul class="list"> <li show="{ select }" class="filter"> <input type="text" class="filter-input" placeholder="Filter" onkeyup="{ handleText }" autocomplete="off"> </li> <li class="list-row" show="{ noResults }"> No results... </li> <li class="list-row item { active: item.active }" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }"> { item.text } </li> </ul> </div> </div>', 'rm-autocomplete *, [riot-tag="rm-autocomplete"] *{ box-sizing: border-box; } rm-autocomplete .active, [riot-tag="rm-autocomplete"] .active{ background:rgb(215,215,215); } rm-autocomplete .base, [riot-tag="rm-autocomplete"] .base{ height:40px; padding-left:5px; margin-bottom:0px; width:100%; } rm-autocomplete .noborder .border, [riot-tag="rm-autocomplete"] .noborder .border{ border: 0; } rm-autocomplete .border, [riot-tag="rm-autocomplete"] .border{ height:35px; padding-left:5px; border:1px solid rgba(0,0,0,.12); box-sizing:border-box; } rm-autocomplete .border:-moz-placeholder, [riot-tag="rm-autocomplete"] .border:-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border:-ms-input-placeholder, [riot-tag="rm-autocomplete"] .border:-ms-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-webkit-input-placeholder, [riot-tag="rm-autocomplete"] .border::-webkit-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-moz-placeholder, [riot-tag="rm-autocomplete"] .border::-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .err, [riot-tag="rm-autocomplete"] .err{border: 1px dashed red; color: rgb(169,169,169);} rm-autocomplete .filter, [riot-tag="rm-autocomplete"] .filter{padding:0;margin:0px;} rm-autocomplete .filter:hover, [riot-tag="rm-autocomplete"] .filter:hover{background:none;} rm-autocomplete .filter-input, [riot-tag="rm-autocomplete"] .filter-input{ background:none; border:none; border-bottom:1px solid rgba(0, 0, 0, 0.117647); box-sizing:border-box; color: rgb(85, 85, 85); padding:5px; font-size:16px; height:35px; margin:0px; width:100%; } rm-autocomplete .list-container, [riot-tag="rm-autocomplete"] .list-container{ position:absolute; left:0; right:0; background:#fff; height:auto; overflow-x:hidden; overflow-y:auto; border: 1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; z-index: 3; } rm-autocomplete .noselect, [riot-tag="rm-autocomplete"] .noselect{ -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-autocomplete .list, [riot-tag="rm-autocomplete"] .list{ list-style-type: none; padding:0; margin:0; -webkit-margin-before: 0; -webkit-margin-after: 0; } rm-autocomplete .list .list-row, [riot-tag="rm-autocomplete"] .list .list-row{ display: block; padding:5px 15px; margin:0px; border-bottom: 1px solid rgba(0, 0, 0, 0.117647); } rm-autocomplete .list .list-row:hover, [riot-tag="rm-autocomplete"] .list .list-row:hover{ background: rgb(240, 240, 240); cursor: pointer; } rm-autocomplete textarea:focus, [riot-tag="rm-autocomplete"] textarea:focus,rm-autocomplete input:focus, [riot-tag="rm-autocomplete"] input:focus{ outline: 0; } rm-autocomplete .wrap, [riot-tag="rm-autocomplete"] .wrap{ position: relative; }', function(opts) {
+riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' noborder\' : \'\'}"> <input type="text" name="{opts.name}" class="mdl-textfield__input base { border : select }" autocomplete="off" placeholder="{ opts.placeholder || \'Type...\' }" onkeyup="{ handleText }" value="{ value }"> <div show="{ open }" class="list-container"> <ul class="list"> <li show="{ select }" class="filter"> <input type="text" class="filter-input" placeholder="Filter" onkeyup="{ handleText }" autocomplete="off"> </li> <li class="list-row" show="{ noResults }"> No results... </li> <li class="list-row item{ item.active ? \' active\' : \'\'}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }"> { item.text }<span class="accent">{ item.accent }</span> </li> </ul> </div> </div>', 'rm-autocomplete *, [riot-tag="rm-autocomplete"] *{ box-sizing: border-box; } rm-autocomplete .active, [riot-tag="rm-autocomplete"] .active{ background:rgb(215,215,215); } rm-autocomplete .base, [riot-tag="rm-autocomplete"] .base{ height:40px; padding-left:5px; margin-bottom:0px; width:100%; } rm-autocomplete .noborder .border, [riot-tag="rm-autocomplete"] .noborder .border{ border: 0; } rm-autocomplete .border, [riot-tag="rm-autocomplete"] .border{ height:35px; padding-left:5px; border:1px solid rgba(0,0,0,.12); box-sizing:border-box; } rm-autocomplete .border:-moz-placeholder, [riot-tag="rm-autocomplete"] .border:-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border:-ms-input-placeholder, [riot-tag="rm-autocomplete"] .border:-ms-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-webkit-input-placeholder, [riot-tag="rm-autocomplete"] .border::-webkit-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-moz-placeholder, [riot-tag="rm-autocomplete"] .border::-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .err, [riot-tag="rm-autocomplete"] .err{border: 1px dashed red; color: rgb(169,169,169);} rm-autocomplete .filter, [riot-tag="rm-autocomplete"] .filter{padding:0;margin:0px;} rm-autocomplete .filter:hover, [riot-tag="rm-autocomplete"] .filter:hover{background:none;} rm-autocomplete .filter-input, [riot-tag="rm-autocomplete"] .filter-input{ background:none; border:none; border-bottom:1px solid rgba(0, 0, 0, 0.117647); box-sizing:border-box; color: rgb(85, 85, 85); padding:5px; font-size:16px; height:35px; margin:0px; width:100%; } rm-autocomplete .list-container, [riot-tag="rm-autocomplete"] .list-container{ position:absolute; left:0; right:0; background:#fff; height:auto; overflow-x:hidden; overflow-y:auto; border: 1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; z-index: 3; } rm-autocomplete .noselect, [riot-tag="rm-autocomplete"] .noselect{ -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-autocomplete .list, [riot-tag="rm-autocomplete"] .list{ list-style-type: none; padding:0; margin:0; -webkit-margin-before: 0; -webkit-margin-after: 0; } rm-autocomplete .list .list-row, [riot-tag="rm-autocomplete"] .list .list-row{ position:relative; display: block; padding:5px 15px; margin:0px; overflow:auto; border-bottom: 1px solid rgba(0, 0, 0, 0.117647); } rm-autocomplete .list .list-row .accent, [riot-tag="rm-autocomplete"] .list .list-row .accent{ position:absolute; top:0; right:0; padding:5px; font-size:12px; font-style:italic; color:rgb(169,169,169); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } rm-autocomplete .list .list-row:last-child, [riot-tag="rm-autocomplete"] .list .list-row:last-child{ border-bottom:none; } rm-autocomplete .list .list-row:hover, [riot-tag="rm-autocomplete"] .list .list-row:hover{ background: rgb(240, 240, 240); cursor: pointer; } rm-autocomplete textarea:focus, [riot-tag="rm-autocomplete"] textarea:focus,rm-autocomplete input:focus, [riot-tag="rm-autocomplete"] input:focus{ outline: 0; } rm-autocomplete .wrap, [riot-tag="rm-autocomplete"] .wrap{ position: relative; }', function(opts) {
 
   var tag = this;
 
-  this.mixin(ajaxMixin);
-  this.mixin(eventMixin);
+  this.mixin(RMajaxMixin);
+  this.mixin(RMeventMixin);
 
   this.open = false;
   this.select = opts.type === "select" ? true : false;
@@ -118,8 +118,8 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
 
   this.pick = function(e) {
     var target = e.srcElement || e.originalTarget;
-    var value = target.getAttribute('data-value') || target.innerHTML;
-    tag.value = target.innerHTML.trim();
+    var value = target.getAttribute('data-value');
+    tag.value = value;
     tag.closeWindow();
   }.bind(this);
 
@@ -239,43 +239,34 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
 
 
 });
-riot.tag('rm-card', '<div id="wrap"> <div class="mdl-card mdl-shadow--2dp demo-card-wide"> <div class="mdl-card__title"> <h2 class="mdl-card__title-text">{ title }</h2> </div> <div class="mdl-card__supporting-text"> { text } </div> <div class="mdl-card__actions mdl-card--border"> <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"> Get Started </a> </div> <div class="mdl-card__menu"> <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"> <i class="material-icons">share</i> </button> </div> </div> </div>', function(opts) {
-	
-	var me = this;
-	
-	this.title = opts.title || '';
-	this.text = opts.text || '';
-	this.buttons = '';
-	
-	this.on('mount', function() {
-		var wrap = this.root.children[0];
-
-	});
-
-});
 
 riot.tag('rm-chart', '<div id="chart" class="noselect" style="width: 100%; height: 100%"></div>', 'rm-chart .noselect, [riot-tag="rm-chart"] .noselect{ -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }', function(opts) {
 	
 	var me = this;
 
 	this.on('mount',function() {
-		google.setOnLoadCallback(function() {
+		if (typeof google === "object" && typeof google.visualization === "object") {
 			me.make();
-		});
+		} else {
+			google.setOnLoadCallback(function() {
+				me.make();
+			});
+		}
 	});
 	
 	this.make = function() {
 		var data = new google.visualization.arrayToDataTable(opts.data);
-		var options = {
-			title:opts.title
-		}
+		var options = opts.options || {};
 		if(opts.dragToZoom && opts.type === 'line') 
 			options.explorer = { actions: ['dragToZoom', 'rightClickToReset'], axis: 'horizontal' }
 			
 		var type = {
+			'material' : new google.charts.Line(this.chart),
 			'line': new google.visualization.LineChart(this.chart),
 			'bar' : new google.visualization.BarChart(this.chart),
-			'pie' : new google.visualization.PieChart(this.chart)
+			'pie' : new google.visualization.PieChart(this.chart),
+			'area': new google.visualization.AreaChart(this.chart),
+			'spark': new google.visualization.ImageSparkLine(this.chart)
 		}
 		var chart = type[opts.type];
 		chart.draw(data, options);
@@ -320,12 +311,17 @@ riot.tag('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input"
 	}.bind(this);
 
 	this.previous = function(e) {
-		me.month = me.month.subtract(1, 'months');
+		if(me.min && me.min.diff(me.month) > 0)
+			return;
+		me.month.subtract(1, 'months');
 		me.build(me.month);
 	}.bind(this);
 
 	this.next = function(e) {
-		me.month = me.month.add(1, 'months');
+		if(me.max && me.max.diff(me.month,'months') == 0)
+			return;
+	
+		me.month.add(1, 'months');
 		me.build(me.month);
 	}.bind(this);
 	
@@ -336,17 +332,22 @@ riot.tag('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input"
 
 		me.header = date.format("MMMM YYYY");
 		me.mydata = [];
+		
+
+		var maxMonth = me.max && me.max.month() == me.month.month() && me.today.year() == me.month.year();
+		
 		var working = true;
+
 		while(working) {
 			var week = [];
 			for(var day = 0; day < 7; day++) {
-				if((outDay - 1) == totalDays) {
+				if(maxMonth && (outDay - 1)==me.max.date() || (outDay - 1) == totalDays) {
 					working = false;
 					break;
 				}
+				firstDay--;
 				if(firstDay > 0) {
 			 		week.push({asNumber:-1,active:false});
-					firstDay--;
 				} else {
 					week.push({
 						asNumber: outDay,
@@ -458,7 +459,7 @@ riot.tag('rm-google-map', '<div class="wrapper"> <div if="{ infoWindow }" class=
 
 });
 
-riot.tag('rm-loader', '<div id="wrap"> <div id="progstatic" style="width:250px" class="mdl-js-progress"></div> </div>', function(opts) {
+riot.tag('rm-loader', '<div id="wrap"> <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div> </div>', function(opts) {
 	
 	var me = this;
 	
@@ -473,36 +474,34 @@ riot.tag('rm-loader', '<div id="wrap"> <div id="progstatic" style="width:250px" 
 	
 	this.on('mount', function() {
 		var wrap = this.root.children[0];
-		componentHandler.upgradeElement(wrap);
+		componentHandler.upgradeDom();
 	});
 
 });
 
-riot.tag('rm-markdown', '', function(opts) {
-	
-	var me = this;
+riot.tag('rm-markdown', '<raw content="{html}"></raw>', function(opts) {
+
+	this.html = opts.content ? marked(opts.content) : '';
 
 	this.on('mount', function() {
 		if(!window.marked) {
 			me.root.innerHTML = "<span style='color:red;'>Please load the marked library to use this tag.<span>";
-		} else {
-			me.set(opts.content);
 		}
 	});
-	
-	this.set = function(md) {
-		me.root.innerHTML = marked(md);
-	}.bind(this);
 
 
 });
 
+riot.tag('raw', '<span></span>', function(opts) {
+	this.root.innerHTML = opts.content
+
+});
 riot.tag('rm-modal', '<div class="wrap"> <div class="overlay" show="{ opts.opened }" onclick="{ closeModal }"></div> <div class="modal" show="{ opts.opened }"> <div class="modal-content"> <yield></yield> </div> <div class="clear"></div> </div> </div>', 'rm-modal .overlay, [riot-tag="rm-modal"] .overlay{ position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; text-align: center; z-index: 10; background-color: rgba(0, 0, 0, 0.8); } rm-modal .overlay.fade-in-overlay, [riot-tag="rm-modal"] .overlay.fade-in-overlay{ -webkit-animation: fadeIn .25s linear; -moz-animation: fadeIn .25s linear; -o-animation: fadeIn .25s linear; animation: fadeIn .25s linear; } rm-modal .modal.scale-up-modal, [riot-tag="rm-modal"] .modal.scale-up-modal{ -webkit-animation: scaleUp .30s linear; -moz-animation: scaleUp .30s linear; -o-animation: scaleUp .30s linear; animation: scaleUp .30s linear; } rm-modal .overlay.fade-out-overlay, [riot-tag="rm-modal"] .overlay.fade-out-overlay{ -webkit-animation: fadeIn .25s reverse; -moz-animation: fadeIn .25s reverse; -o-animation: fadeIn .25s reverse; animation: fadeIn .25s reverse; } rm-modal .modal.scale-down-modal, [riot-tag="rm-modal"] .modal.scale-down-modal{ -webkit-animation: scaleUp .30s reverse; -moz-animation: scaleUp .30s reverse; -o-animation: scaleUp .30s reverse; animation: scaleUp .30s reverse; } rm-modal .modal, [riot-tag="rm-modal"] .modal{ max-width: 35%; background-color: #fff; border: 1px solid #000; padding: 15px; position: fixed; left: 31%; z-index: 11; text-align: center; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; } rm-modal .affirmative-btn, [riot-tag="rm-modal"] .affirmative-btn{ float: left; } rm-modal .dismissive-btn, [riot-tag="rm-modal"] .dismissive-btn{ float: right; } rm-modal .clear, [riot-tag="rm-modal"] .clear{ clear: both; } @keyframes fadeIn{ 0%{ opacity: 0; } 100%{ opacity: 1; } } @keyframes scaleUp{ 0%{ -webkit-transform: scale(0); -moz-transform: scale(0); -o-transform: scale(0); transform: scale(0); } 50%{ -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); } 100%{ -webkit-transform: scale(1); -moz-transform: scale(1); -o-transform: scale(1); transform: scale(1); } }', function(opts) {
     
     
     var me = this;
     
-    this.mixin(eventMixin);
+    this.mixin(RMeventMixin);
     
     this.openModal = function(e) {
         this.fire('opened', e);
@@ -520,6 +519,7 @@ riot.tag('rm-router', '<div style="display:none;" id="options"> <yield></yield> 
 	var me = this;
 	this.routes = opts.routes || false;
 	this.mountedTag = false;
+	this.mixin(RMeventMixin);
 
 	this.on('mount', function() {
 		me.initialize();
@@ -636,6 +636,7 @@ riot.tag('rm-router', '<div style="display:none;" id="options"> <yield></yield> 
 
 				
 			    riot.compile(me.routes[i].path, function() {
+			    	me.fire('load');
 					var fileName = me.routes[i].path.split('/').pop().replace(/\.[^/.]+$/, "");
 			    	me.mountedTag = riot.mount(me.base, 'page-'+fileName)[0];
 
@@ -661,12 +662,101 @@ riot.tag('rm-router', '<div style="display:none;" id="options"> <yield></yield> 
 
 });
 
-riot.tag('rm-table', '<table class="awesometable { tableType }"> <thead> <tr> <th each="{ headerContent, i in opts.tableHeaders}">{ headerContent }</th> </tr> </thead> <tbody> <tr each="{ bodyContentRows, i in opts.tableContent }"> <td each="{ bodyContentData, i in bodyContentRows }">{ bodyContentData }</td> </tr> </tbody> <tfoot> <tr> <td each="{ footerContent, i in opts.tableFooter }">{ footerContent }</td> </tr> </tfoot> </table>', 'rm-table .awesometable, [riot-tag="rm-table"] .awesometable{ width: 100%; margin-bottom: 20px; max-width: 100%; background-color: transparent; border-collapse: collapse; border-spacing: 0; font-family: helvetica; } rm-table .awesometable-fixed, [riot-tag="rm-table"] .awesometable-fixed{ table-layout: fixed; } rm-table .awesometable th, [riot-tag="rm-table"] .awesometable th,rm-table .awesometable td, [riot-tag="rm-table"] .awesometable td{ padding: 8px; line-height: 20px; text-align: left; vertical-align: top; border-top: 1px solid #dddddd; font-family: helvetica; } rm-table .awesometable.awesometable-small td, [riot-tag="rm-table"] .awesometable.awesometable-small td,rm-table .awesometable.awesometable-small th, [riot-tag="rm-table"] .awesometable.awesometable-small th{ font-size: 10px; } rm-table .awesometable th, [riot-tag="rm-table"] .awesometable th{ font-weight: bold; font-size: 11px; } rm-table .awesometable thead th, [riot-tag="rm-table"] .awesometable thead th{ vertical-align: bottom; } rm-table .awesometable caption + thead tr:first-child th, [riot-tag="rm-table"] .awesometable caption + thead tr:first-child th,rm-table .awesometable caption + thead tr:first-child td, [riot-tag="rm-table"] .awesometable caption + thead tr:first-child td,rm-table .awesometable colgroup + thead tr:first-child th, [riot-tag="rm-table"] .awesometable colgroup + thead tr:first-child th,rm-table .awesometable colgroup + thead tr:first-child td, [riot-tag="rm-table"] .awesometable colgroup + thead tr:first-child td,rm-table .awesometable thead:first-child tr:first-child th, [riot-tag="rm-table"] .awesometable thead:first-child tr:first-child th,rm-table .awesometable thead:first-child tr:first-child td, [riot-tag="rm-table"] .awesometable thead:first-child tr:first-child td{ border-top: 0; } rm-table .awesometable tbody + tbody, [riot-tag="rm-table"] .awesometable tbody + tbody{ border-top: 2px solid #dddddd; } rm-table .awesometable .awesometable, [riot-tag="rm-table"] .awesometable .awesometable{ background-color: #ffffff; } rm-table .awesometable-condensed th, [riot-tag="rm-table"] .awesometable-condensed th,rm-table .awesometable-condensed td, [riot-tag="rm-table"] .awesometable-condensed td{ padding: 4px 5px; font-size: 11px; } rm-table .awesometable-bordered, [riot-tag="rm-table"] .awesometable-bordered{ border: 1px solid #dddddd; border-collapse: separate; *border-collapse: collapse; border-left: 0; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; } rm-table .awesometable-bordered th, [riot-tag="rm-table"] .awesometable-bordered th,rm-table .awesometable-bordered td, [riot-tag="rm-table"] .awesometable-bordered td{ border-left: 1px solid #dddddd; } rm-table .awesometable-bordered caption + thead tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th,rm-table .awesometable-bordered caption + tbody tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child th,rm-table .awesometable-bordered caption + tbody tr:first-child td, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td,rm-table .awesometable-bordered colgroup + thead tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th,rm-table .awesometable-bordered colgroup + tbody tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child th,rm-table .awesometable-bordered colgroup + tbody tr:first-child td, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td,rm-table .awesometable-bordered thead:first-child tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child th,rm-table .awesometable-bordered tbody:first-child tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child th,rm-table .awesometable-bordered tbody:first-child tr:first-child td, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child td{ border-top: 0; } rm-table .awesometable-bordered thead:first-child tr:first-child > th:first-child, [riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child > th:first-child,rm-table .awesometable-bordered tbody:first-child tr:first-child > td:first-child, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child > td:first-child{ -webkit-border-top-left-radius: 4px; -moz-border-radius-topleft: 4px; border-top-left-radius: 4px; } rm-table .awesometable-bordered thead:first-child tr:first-child > th:last-child, [riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child > th:last-child,rm-table .awesometable-bordered tbody:first-child tr:first-child > td:last-child, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child > td:last-child{ -webkit-border-top-right-radius: 4px; -moz-border-radius-topright: 4px; border-top-right-radius: 4px; } rm-table .awesometable-bordered thead:last-child tr:last-child > th:first-child, [riot-tag="rm-table"] .awesometable-bordered thead:last-child tr:last-child > th:first-child,rm-table .awesometable-bordered tbody:last-child tr:last-child > td:first-child, [riot-tag="rm-table"] .awesometable-bordered tbody:last-child tr:last-child > td:first-child,rm-table .awesometable-bordered tfoot:last-child tr:last-child > td:first-child, [riot-tag="rm-table"] .awesometable-bordered tfoot:last-child tr:last-child > td:first-child{ -webkit-border-bottom-left-radius: 4px; -moz-border-radius-bottomleft: 4px; border-bottom-left-radius: 4px; } rm-table .awesometable-bordered thead:last-child tr:last-child > th:last-child, [riot-tag="rm-table"] .awesometable-bordered thead:last-child tr:last-child > th:last-child,rm-table .awesometable-bordered tbody:last-child tr:last-child > td:last-child, [riot-tag="rm-table"] .awesometable-bordered tbody:last-child tr:last-child > td:last-child,rm-table .awesometable-bordered tfoot:last-child tr:last-child > td:last-child, [riot-tag="rm-table"] .awesometable-bordered tfoot:last-child tr:last-child > td:last-child{ -webkit-border-bottom-right-radius: 4px; -moz-border-radius-bottomright: 4px; border-bottom-right-radius: 4px; } rm-table .awesometable-bordered tfoot + tbody:last-child tr:last-child td:first-child, [riot-tag="rm-table"] .awesometable-bordered tfoot + tbody:last-child tr:last-child td:first-child{ -webkit-border-bottom-left-radius: 0; -moz-border-radius-bottomleft: 0; border-bottom-left-radius: 0; } rm-table .awesometable-bordered tfoot + tbody:last-child tr:last-child td:last-child, [riot-tag="rm-table"] .awesometable-bordered tfoot + tbody:last-child tr:last-child td:last-child{ -webkit-border-bottom-right-radius: 0; -moz-border-radius-bottomright: 0; border-bottom-right-radius: 0; } rm-table .awesometable-bordered caption + thead tr:first-child th:first-child, [riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th:first-child,rm-table .awesometable-bordered caption + tbody tr:first-child td:first-child, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td:first-child,rm-table .awesometable-bordered colgroup + thead tr:first-child th:first-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th:first-child,rm-table .awesometable-bordered colgroup + tbody tr:first-child td:first-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td:first-child{ -webkit-border-top-left-radius: 4px; -moz-border-radius-topleft: 4px; border-top-left-radius: 4px; } rm-table .awesometable-bordered caption + thead tr:first-child th:last-child, [riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th:last-child,rm-table .awesometable-bordered caption + tbody tr:first-child td:last-child, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td:last-child,rm-table .awesometable-bordered colgroup + thead tr:first-child th:last-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th:last-child,rm-table .awesometable-bordered colgroup + tbody tr:first-child td:last-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td:last-child{ -webkit-border-top-right-radius: 4px; -moz-border-radius-topright: 4px; border-top-right-radius: 4px; } rm-table .awesometable-striped tbody tr:nth-child(odd) td, [riot-tag="rm-table"] .awesometable-striped tbody tr:nth-child(odd) td{ background-color: #F6F6F6; } rm-table .awesometable-hover tbody tr:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr:hover td,rm-table .awesometable-hover tbody tr:hover th, [riot-tag="rm-table"] .awesometable-hover tbody tr:hover th{ background-color: #f3f3f3; } rm-table .awesometable tr.foot td, [riot-tag="rm-table"] .awesometable tr.foot td{ background: #eee; font-weight: bold; } rm-table table td[class*="span"], [riot-tag="rm-table"] table td[class*="span"],rm-table table th[class*="span"], [riot-tag="rm-table"] table th[class*="span"],rm-table .row-fluid table td[class*="span"], [riot-tag="rm-table"] .row-fluid table td[class*="span"],rm-table .row-fluid table th[class*="span"], [riot-tag="rm-table"] .row-fluid table th[class*="span"]{ display: table-cell; float: none; margin-left: 0; } rm-table .awesometable td.span1, [riot-tag="rm-table"] .awesometable td.span1,rm-table .awesometable th.span1, [riot-tag="rm-table"] .awesometable th.span1{ float: none; width: 44px; margin-left: 0; } rm-table .awesometable td.span2, [riot-tag="rm-table"] .awesometable td.span2,rm-table .awesometable th.span2, [riot-tag="rm-table"] .awesometable th.span2{ float: none; width: 124px; margin-left: 0; } rm-table .awesometable td.span3, [riot-tag="rm-table"] .awesometable td.span3,rm-table .awesometable th.span3, [riot-tag="rm-table"] .awesometable th.span3{ float: none; width: 204px; margin-left: 0; } rm-table .awesometable td.span4, [riot-tag="rm-table"] .awesometable td.span4,rm-table .awesometable th.span4, [riot-tag="rm-table"] .awesometable th.span4{ float: none; width: 284px; margin-left: 0; } rm-table .awesometable td.span5, [riot-tag="rm-table"] .awesometable td.span5,rm-table .awesometable th.span5, [riot-tag="rm-table"] .awesometable th.span5{ float: none; width: 364px; margin-left: 0; } rm-table .awesometable td.span6, [riot-tag="rm-table"] .awesometable td.span6,rm-table .awesometable th.span6, [riot-tag="rm-table"] .awesometable th.span6{ float: none; width: 444px; margin-left: 0; } rm-table .awesometable td.span7, [riot-tag="rm-table"] .awesometable td.span7,rm-table .awesometable th.span7, [riot-tag="rm-table"] .awesometable th.span7{ float: none; width: 524px; margin-left: 0; } rm-table .awesometable td.span8, [riot-tag="rm-table"] .awesometable td.span8,rm-table .awesometable th.span8, [riot-tag="rm-table"] .awesometable th.span8{ float: none; width: 604px; margin-left: 0; } rm-table .awesometable td.span9, [riot-tag="rm-table"] .awesometable td.span9,rm-table .awesometable th.span9, [riot-tag="rm-table"] .awesometable th.span9{ float: none; width: 684px; margin-left: 0; } rm-table .awesometable td.span10, [riot-tag="rm-table"] .awesometable td.span10,rm-table .awesometable th.span10, [riot-tag="rm-table"] .awesometable th.span10{ float: none; width: 764px; margin-left: 0; } rm-table .awesometable td.span11, [riot-tag="rm-table"] .awesometable td.span11,rm-table .awesometable th.span11, [riot-tag="rm-table"] .awesometable th.span11{ float: none; width: 844px; margin-left: 0; } rm-table .awesometable td.span12, [riot-tag="rm-table"] .awesometable td.span12,rm-table .awesometable th.span12, [riot-tag="rm-table"] .awesometable th.span12{ float: none; width: 924px; margin-left: 0; } rm-table .awesometable tbody tr.success td, [riot-tag="rm-table"] .awesometable tbody tr.success td{ background-color: #dff0d8; } rm-table .awesometable tbody tr.error td, [riot-tag="rm-table"] .awesometable tbody tr.error td{ background-color: #f2dede; } rm-table .awesometable tbody tr.warning td, [riot-tag="rm-table"] .awesometable tbody tr.warning td{ background-color: #fcf8e3; } rm-table .awesometable tbody tr.info td, [riot-tag="rm-table"] .awesometable tbody tr.info td{ background-color: #d9edf7; } rm-table .awesometable-hover tbody tr.success:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.success:hover td{ background-color: #d0e9c6; } rm-table .awesometable-hover tbody tr.error:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.error:hover td{ background-color: #ebcccc; } rm-table .awesometable-hover tbody tr.warning:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.warning:hover td{ background-color: #faf2cc; } rm-table .awesometable-hover tbody tr.info:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.info:hover td{ background-color: #c4e3f3; } rm-table .awesometable tr.awesome-section:nth-child(odd), [riot-tag="rm-table"] .awesometable tr.awesome-section:nth-child(odd),rm-table .awesometable tr.awesome-section:nth-child(even), [riot-tag="rm-table"] .awesometable tr.awesome-section:nth-child(even){ background: #eee; font-weight: bold; color: #000; } rm-table .awesometable tr.awesome-section td, [riot-tag="rm-table"] .awesometable tr.awesome-section td{ font-weight: bold; font-size: 15px; } rm-table .awesometable tr.awesome-section2, [riot-tag="rm-table"] .awesometable tr.awesome-section2{ background-color: black; color: #EEE; } rm-table .awesometable div.show-on-hover, [riot-tag="rm-table"] .awesometable div.show-on-hover{ visibility: hidden; opacity:0; } rm-table .awesometable tr:hover .show-on-hover, [riot-tag="rm-table"] .awesometable tr:hover .show-on-hover{ visibility: visible; opacity: 100; } rm-table .awesometable-rowhover tr:hover td, [riot-tag="rm-table"] .awesometable-rowhover tr:hover td{ border-top: 1px solid #999; border-bottom: 1px solid #999; } rm-table .awesometable-rowhover tr:hover td:first-child, [riot-tag="rm-table"] .awesometable-rowhover tr:hover td:first-child{ border-left: 1px solid #999; } rm-table .awesometable-rowhover tr:hover td:last-child, [riot-tag="rm-table"] .awesometable-rowhover tr:hover td:last-child{ border-right: 1px solid #999; } rm-table .awesometable .head-multiple td, [riot-tag="rm-table"] .awesometable .head-multiple td{ background-color: #E9E9E9; } rm-table .awesometable .head-single td, [riot-tag="rm-table"] .awesometable .head-single td{ background-color: #E9E9E9; } rm-table .awesometable .sub-ticket td, [riot-tag="rm-table"] .awesometable .sub-ticket td{ font-size: .8em; color: #333; background-color: white; padding-top: 3px; padding-bottom: 3px; } rm-table .awesometable .sub-ticket td:first-child, [riot-tag="rm-table"] .awesometable .sub-ticket td:first-child{ padding-left: 25px; } rm-table .awesometable .boldfoot td, [riot-tag="rm-table"] .awesometable .boldfoot td{ font-weight: bold; } rm-table .awesometable .reversed-footer td, [riot-tag="rm-table"] .awesometable .reversed-footer td{ font-size: 1.1em; font-weight: bold; } rm-table .awesometable .reversed-footer.small td, [riot-tag="rm-table"] .awesometable .reversed-footer.small td{ padding-top: 3px; padding-bottom: 3px; font-size: .83em; background-color: #CCC; } rm-table .awesometable.table td.span12, [riot-tag="rm-table"] .awesometable.table td.span12,rm-table .awesometable.table th.span12, [riot-tag="rm-table"] .awesometable.table th.span12{ float: none; width: 924px; margin-left: 0; } rm-table .awesometable.table tbody tr.success > td, [riot-tag="rm-table"] .awesometable.table tbody tr.success > td{ background-color: #dff0d8; } rm-table .awesometable.table tbody tr.error > td, [riot-tag="rm-table"] .awesometable.table tbody tr.error > td{ background-color: #f2dede; } rm-table .awesometable.table tbody tr.warning > td, [riot-tag="rm-table"] .awesometable.table tbody tr.warning > td{ background-color: #fcf8e3; } rm-table .awesometable.table tbody tr.info > td, [riot-tag="rm-table"] .awesometable.table tbody tr.info > td{ background-color: #d9edf7; } rm-table .awesometable.table-hover tbody tr.success:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.success:hover > td{ background-color: #d0e9c6; } rm-table .awesometable.table-hover tbody tr.error:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.error:hover > td{ background-color: #ebcccc; } rm-table .awesometable.table-hover tbody tr.warning:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.warning:hover > td{ background-color: #faf2cc; } rm-table .awesometable.table-hover tbody tr.info:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.info:hover > td{ background-color: #c4e3f3; } rm-table .awesometable-nc tr.head th, [riot-tag="rm-table"] .awesometable-nc tr.head th{ background-color: #f0f0f0; }', function(opts) {
+riot.tag('rm-table', '<table class="awesometable { tableType }"> <thead if="{ validateTableSection(tableHeaders) }"> <tr class="{ pointer: sortTable }"> <th onclick="{ sortTable ? sortByTableColumn : \'\' }" data-header-index="{ i }" each="{ headerContent, i in tableHeaders}">{ headerContent }<i data-header-index="{ i }" if="{ sortTable }" class="material-icons sort-icon">keyboard_arrow_down</i></th> </tr> </thead> <tbody if="{ validateTableSection(tableContent) }"> <tr each="{ bodyContentRows, i in tableContent }"> <td id="body" each="{ bodyContentData, i in bodyContentRows }">{ processBody(bodyContentData) }</td> </tr> </tbody> <tfoot if="{ validateTableSection(tableFooter) }"> <tr class="awesome-section"> <td each="{ footerContent, i in tableFooter }">{ processFooter(footerContent) }</td> </tr> </tfoot> </table>', 'rm-table .awesometable, [riot-tag="rm-table"] .awesometable{ width: 100%; margin-bottom: 20px; max-width: 100%; background-color: transparent; border-collapse: collapse; border-spacing: 0; font-family: helvetica; } rm-table .awesometable-fixed, [riot-tag="rm-table"] .awesometable-fixed{ table-layout: fixed; } rm-table .awesometable th, [riot-tag="rm-table"] .awesometable th,rm-table .awesometable td, [riot-tag="rm-table"] .awesometable td{ padding: 8px; line-height: 20px; text-align: left; vertical-align: top; border-top: 1px solid #dddddd; font-family: helvetica; } rm-table .awesometable.awesometable-small td, [riot-tag="rm-table"] .awesometable.awesometable-small td,rm-table .awesometable.awesometable-small th, [riot-tag="rm-table"] .awesometable.awesometable-small th{ font-size: 10px; } rm-table .awesometable th, [riot-tag="rm-table"] .awesometable th{ font-weight: bold; font-size: 11px; } rm-table .awesometable thead th, [riot-tag="rm-table"] .awesometable thead th{ vertical-align: bottom; } rm-table .awesometable caption + thead tr:first-child th, [riot-tag="rm-table"] .awesometable caption + thead tr:first-child th,rm-table .awesometable caption + thead tr:first-child td, [riot-tag="rm-table"] .awesometable caption + thead tr:first-child td,rm-table .awesometable colgroup + thead tr:first-child th, [riot-tag="rm-table"] .awesometable colgroup + thead tr:first-child th,rm-table .awesometable colgroup + thead tr:first-child td, [riot-tag="rm-table"] .awesometable colgroup + thead tr:first-child td,rm-table .awesometable thead:first-child tr:first-child th, [riot-tag="rm-table"] .awesometable thead:first-child tr:first-child th,rm-table .awesometable thead:first-child tr:first-child td, [riot-tag="rm-table"] .awesometable thead:first-child tr:first-child td{ border-top: 0; } rm-table .awesometable tbody + tbody, [riot-tag="rm-table"] .awesometable tbody + tbody{ border-top: 2px solid #dddddd; } rm-table .awesometable .awesometable, [riot-tag="rm-table"] .awesometable .awesometable{ background-color: #ffffff; } rm-table .awesometable-condensed th, [riot-tag="rm-table"] .awesometable-condensed th,rm-table .awesometable-condensed td, [riot-tag="rm-table"] .awesometable-condensed td{ padding: 4px 5px; font-size: 11px; } rm-table .awesometable-bordered, [riot-tag="rm-table"] .awesometable-bordered{ border: 1px solid #dddddd; border-collapse: separate; *border-collapse: collapse; border-left: 0; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; } rm-table .awesometable-bordered th, [riot-tag="rm-table"] .awesometable-bordered th,rm-table .awesometable-bordered td, [riot-tag="rm-table"] .awesometable-bordered td{ border-left: 1px solid #dddddd; } rm-table .awesometable-bordered caption + thead tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th,rm-table .awesometable-bordered caption + tbody tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child th,rm-table .awesometable-bordered caption + tbody tr:first-child td, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td,rm-table .awesometable-bordered colgroup + thead tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th,rm-table .awesometable-bordered colgroup + tbody tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child th,rm-table .awesometable-bordered colgroup + tbody tr:first-child td, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td,rm-table .awesometable-bordered thead:first-child tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child th,rm-table .awesometable-bordered tbody:first-child tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child th,rm-table .awesometable-bordered tbody:first-child tr:first-child td, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child td{ border-top: 0; } rm-table .awesometable-bordered thead:first-child tr:first-child > th:first-child, [riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child > th:first-child,rm-table .awesometable-bordered tbody:first-child tr:first-child > td:first-child, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child > td:first-child{ -webkit-border-top-left-radius: 4px; -moz-border-radius-topleft: 4px; border-top-left-radius: 4px; } rm-table .awesometable-bordered thead:first-child tr:first-child > th:last-child, [riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child > th:last-child,rm-table .awesometable-bordered tbody:first-child tr:first-child > td:last-child, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child > td:last-child{ -webkit-border-top-right-radius: 4px; -moz-border-radius-topright: 4px; border-top-right-radius: 4px; } rm-table .awesometable-bordered thead:last-child tr:last-child > th:first-child, [riot-tag="rm-table"] .awesometable-bordered thead:last-child tr:last-child > th:first-child,rm-table .awesometable-bordered tbody:last-child tr:last-child > td:first-child, [riot-tag="rm-table"] .awesometable-bordered tbody:last-child tr:last-child > td:first-child,rm-table .awesometable-bordered tfoot:last-child tr:last-child > td:first-child, [riot-tag="rm-table"] .awesometable-bordered tfoot:last-child tr:last-child > td:first-child{ -webkit-border-bottom-left-radius: 4px; -moz-border-radius-bottomleft: 4px; border-bottom-left-radius: 4px; } rm-table .awesometable-bordered thead:last-child tr:last-child > th:last-child, [riot-tag="rm-table"] .awesometable-bordered thead:last-child tr:last-child > th:last-child,rm-table .awesometable-bordered tbody:last-child tr:last-child > td:last-child, [riot-tag="rm-table"] .awesometable-bordered tbody:last-child tr:last-child > td:last-child,rm-table .awesometable-bordered tfoot:last-child tr:last-child > td:last-child, [riot-tag="rm-table"] .awesometable-bordered tfoot:last-child tr:last-child > td:last-child{ -webkit-border-bottom-right-radius: 4px; -moz-border-radius-bottomright: 4px; border-bottom-right-radius: 4px; } rm-table .awesometable-bordered tfoot + tbody:last-child tr:last-child td:first-child, [riot-tag="rm-table"] .awesometable-bordered tfoot + tbody:last-child tr:last-child td:first-child{ -webkit-border-bottom-left-radius: 0; -moz-border-radius-bottomleft: 0; border-bottom-left-radius: 0; } rm-table .awesometable-bordered tfoot + tbody:last-child tr:last-child td:last-child, [riot-tag="rm-table"] .awesometable-bordered tfoot + tbody:last-child tr:last-child td:last-child{ -webkit-border-bottom-right-radius: 0; -moz-border-radius-bottomright: 0; border-bottom-right-radius: 0; } rm-table .awesometable-bordered caption + thead tr:first-child th:first-child, [riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th:first-child,rm-table .awesometable-bordered caption + tbody tr:first-child td:first-child, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td:first-child,rm-table .awesometable-bordered colgroup + thead tr:first-child th:first-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th:first-child,rm-table .awesometable-bordered colgroup + tbody tr:first-child td:first-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td:first-child{ -webkit-border-top-left-radius: 4px; -moz-border-radius-topleft: 4px; border-top-left-radius: 4px; } rm-table .awesometable-bordered caption + thead tr:first-child th:last-child, [riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th:last-child,rm-table .awesometable-bordered caption + tbody tr:first-child td:last-child, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td:last-child,rm-table .awesometable-bordered colgroup + thead tr:first-child th:last-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th:last-child,rm-table .awesometable-bordered colgroup + tbody tr:first-child td:last-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td:last-child{ -webkit-border-top-right-radius: 4px; -moz-border-radius-topright: 4px; border-top-right-radius: 4px; } rm-table .awesometable-striped tbody tr:nth-child(odd) td, [riot-tag="rm-table"] .awesometable-striped tbody tr:nth-child(odd) td{ background-color: #F6F6F6; } rm-table .awesometable-hover tbody tr:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr:hover td,rm-table .awesometable-hover tbody tr:hover th, [riot-tag="rm-table"] .awesometable-hover tbody tr:hover th{ background-color: #f3f3f3; } rm-table .awesometable tr.foot td, [riot-tag="rm-table"] .awesometable tr.foot td{ background: #eee; font-weight: bold; } rm-table table td[class*="span"], [riot-tag="rm-table"] table td[class*="span"],rm-table table th[class*="span"], [riot-tag="rm-table"] table th[class*="span"],rm-table .row-fluid table td[class*="span"], [riot-tag="rm-table"] .row-fluid table td[class*="span"],rm-table .row-fluid table th[class*="span"], [riot-tag="rm-table"] .row-fluid table th[class*="span"]{ display: table-cell; float: none; margin-left: 0; } rm-table .awesometable td.span1, [riot-tag="rm-table"] .awesometable td.span1,rm-table .awesometable th.span1, [riot-tag="rm-table"] .awesometable th.span1{ float: none; width: 44px; margin-left: 0; } rm-table .awesometable td.span2, [riot-tag="rm-table"] .awesometable td.span2,rm-table .awesometable th.span2, [riot-tag="rm-table"] .awesometable th.span2{ float: none; width: 124px; margin-left: 0; } rm-table .awesometable td.span3, [riot-tag="rm-table"] .awesometable td.span3,rm-table .awesometable th.span3, [riot-tag="rm-table"] .awesometable th.span3{ float: none; width: 204px; margin-left: 0; } rm-table .awesometable td.span4, [riot-tag="rm-table"] .awesometable td.span4,rm-table .awesometable th.span4, [riot-tag="rm-table"] .awesometable th.span4{ float: none; width: 284px; margin-left: 0; } rm-table .awesometable td.span5, [riot-tag="rm-table"] .awesometable td.span5,rm-table .awesometable th.span5, [riot-tag="rm-table"] .awesometable th.span5{ float: none; width: 364px; margin-left: 0; } rm-table .awesometable td.span6, [riot-tag="rm-table"] .awesometable td.span6,rm-table .awesometable th.span6, [riot-tag="rm-table"] .awesometable th.span6{ float: none; width: 444px; margin-left: 0; } rm-table .awesometable td.span7, [riot-tag="rm-table"] .awesometable td.span7,rm-table .awesometable th.span7, [riot-tag="rm-table"] .awesometable th.span7{ float: none; width: 524px; margin-left: 0; } rm-table .awesometable td.span8, [riot-tag="rm-table"] .awesometable td.span8,rm-table .awesometable th.span8, [riot-tag="rm-table"] .awesometable th.span8{ float: none; width: 604px; margin-left: 0; } rm-table .awesometable td.span9, [riot-tag="rm-table"] .awesometable td.span9,rm-table .awesometable th.span9, [riot-tag="rm-table"] .awesometable th.span9{ float: none; width: 684px; margin-left: 0; } rm-table .awesometable td.span10, [riot-tag="rm-table"] .awesometable td.span10,rm-table .awesometable th.span10, [riot-tag="rm-table"] .awesometable th.span10{ float: none; width: 764px; margin-left: 0; } rm-table .awesometable td.span11, [riot-tag="rm-table"] .awesometable td.span11,rm-table .awesometable th.span11, [riot-tag="rm-table"] .awesometable th.span11{ float: none; width: 844px; margin-left: 0; } rm-table .awesometable td.span12, [riot-tag="rm-table"] .awesometable td.span12,rm-table .awesometable th.span12, [riot-tag="rm-table"] .awesometable th.span12{ float: none; width: 924px; margin-left: 0; } rm-table .awesometable tbody tr.success td, [riot-tag="rm-table"] .awesometable tbody tr.success td{ background-color: #dff0d8; } rm-table .awesometable tbody tr.error td, [riot-tag="rm-table"] .awesometable tbody tr.error td{ background-color: #f2dede; } rm-table .awesometable tbody tr.warning td, [riot-tag="rm-table"] .awesometable tbody tr.warning td{ background-color: #fcf8e3; } rm-table .awesometable tbody tr.info td, [riot-tag="rm-table"] .awesometable tbody tr.info td{ background-color: #d9edf7; } rm-table .awesometable-hover tbody tr.success:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.success:hover td{ background-color: #d0e9c6; } rm-table .awesometable-hover tbody tr.error:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.error:hover td{ background-color: #ebcccc; } rm-table .awesometable-hover tbody tr.warning:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.warning:hover td{ background-color: #faf2cc; } rm-table .awesometable-hover tbody tr.info:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.info:hover td{ background-color: #c4e3f3; } rm-table .awesometable tr.awesome-section:nth-child(odd), [riot-tag="rm-table"] .awesometable tr.awesome-section:nth-child(odd),rm-table .awesometable tr.awesome-section:nth-child(even), [riot-tag="rm-table"] .awesometable tr.awesome-section:nth-child(even){ background: #eee; font-weight: bold; color: #000; } rm-table .awesometable tr.awesome-section td, [riot-tag="rm-table"] .awesometable tr.awesome-section td{ font-weight: bold; font-size: 15px; } rm-table .awesometable tr.awesome-section2, [riot-tag="rm-table"] .awesometable tr.awesome-section2{ background-color: black; color: #EEE; } rm-table .awesometable div.show-on-hover, [riot-tag="rm-table"] .awesometable div.show-on-hover{ visibility: hidden; opacity:0; } rm-table .awesometable tr:hover .show-on-hover, [riot-tag="rm-table"] .awesometable tr:hover .show-on-hover{ visibility: visible; opacity: 100; } rm-table .awesometable-rowhover tr:hover td, [riot-tag="rm-table"] .awesometable-rowhover tr:hover td{ border-top: 1px solid #999; border-bottom: 1px solid #999; } rm-table .awesometable-rowhover tr:hover td:first-child, [riot-tag="rm-table"] .awesometable-rowhover tr:hover td:first-child{ border-left: 1px solid #999; } rm-table .awesometable-rowhover tr:hover td:last-child, [riot-tag="rm-table"] .awesometable-rowhover tr:hover td:last-child{ border-right: 1px solid #999; } rm-table .awesometable .head-multiple td, [riot-tag="rm-table"] .awesometable .head-multiple td{ background-color: #E9E9E9; } rm-table .awesometable .head-single td, [riot-tag="rm-table"] .awesometable .head-single td{ background-color: #E9E9E9; } rm-table .awesometable .sub-ticket td, [riot-tag="rm-table"] .awesometable .sub-ticket td{ font-size: .8em; color: #333; background-color: white; padding-top: 3px; padding-bottom: 3px; } rm-table .awesometable .sub-ticket td:first-child, [riot-tag="rm-table"] .awesometable .sub-ticket td:first-child{ padding-left: 25px; } rm-table .awesometable .boldfoot td, [riot-tag="rm-table"] .awesometable .boldfoot td{ font-weight: bold; } rm-table .awesometable .reversed-footer td, [riot-tag="rm-table"] .awesometable .reversed-footer td{ font-size: 1.1em; font-weight: bold; } rm-table .awesometable .reversed-footer.small td, [riot-tag="rm-table"] .awesometable .reversed-footer.small td{ padding-top: 3px; padding-bottom: 3px; font-size: .83em; background-color: #CCC; } rm-table .awesometable.table td.span12, [riot-tag="rm-table"] .awesometable.table td.span12,rm-table .awesometable.table th.span12, [riot-tag="rm-table"] .awesometable.table th.span12{ float: none; width: 924px; margin-left: 0; } rm-table .awesometable.table tbody tr.success > td, [riot-tag="rm-table"] .awesometable.table tbody tr.success > td{ background-color: #dff0d8; } rm-table .awesometable.table tbody tr.error > td, [riot-tag="rm-table"] .awesometable.table tbody tr.error > td{ background-color: #f2dede; } rm-table .awesometable.table tbody tr.warning > td, [riot-tag="rm-table"] .awesometable.table tbody tr.warning > td{ background-color: #fcf8e3; } rm-table .awesometable.table tbody tr.info > td, [riot-tag="rm-table"] .awesometable.table tbody tr.info > td{ background-color: #d9edf7; } rm-table .awesometable.table-hover tbody tr.success:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.success:hover > td{ background-color: #d0e9c6; } rm-table .awesometable.table-hover tbody tr.error:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.error:hover > td{ background-color: #ebcccc; } rm-table .awesometable.table-hover tbody tr.warning:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.warning:hover > td{ background-color: #faf2cc; } rm-table .awesometable.table-hover tbody tr.info:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.info:hover > td{ background-color: #c4e3f3; } rm-table .awesometable-nc tr.head th, [riot-tag="rm-table"] .awesometable-nc tr.head th{ background-color: #f0f0f0; } rm-table .pointer, [riot-tag="rm-table"] .pointer{ cursor: pointer; } rm-table .sort-icon, [riot-tag="rm-table"] .sort-icon{ vertical-align: middle; }', function(opts) {
     
     
     var me = this;
     
     this.tableType = opts.type;
+    this.tableHeaders = opts.tableHeaders;
+    this.tableContent = opts.tableContent;
+    this.tableFooter = opts.tableFooter;
+    this.sortTable = opts.sortTable || false;
+    this.toggleSort = false;
+    
+    this.validateTableSection = function(section) {
+        if(section === null || section === undefined)
+            return false;
+        
+        if(Array.isArray(section) === false)
+            return false;
+            
+        return true;
+    }.bind(this);
+    
+    this.processBody = function(cells) {
+        if(cells.indexOf('$') !== -1) {
+            cells = parseFloat(cells.replace('$', ''));
+            cells = cells.toFixed(2, 10);
+            
+            return '$'+cells;
+        }
+        
+        return cells;
+    }.bind(this);
+    
+    this.processFooter = function(cells) {
+        var currency_found = false;
+        var total = 0;
+        var averageCount = 0;
+        var cellIndex;
+        
+        if(cells.indexOf('{{') !== -1) {
+            cellIndex = cells.replace(/[^0-9.]/g, '');
+        } else {
+            return cells;
+        }
+        
+        for(var i = 0; i < this.tableContent.length; i++) {
+            if(this.tableContent[i][cellIndex].indexOf('$') !== -1) {
+                currency_found = true;
+            } else {
+                currency_found = false;
+            }
+            
+            if(isNaN(parseFloat(this.tableContent[i][cellIndex].replace('$', ''))) === false) {
+                averageCount++;
+                total += parseFloat(this.tableContent[i][cellIndex].replace('$', ''));
+            }
+        }
+        
+        if(cells.indexOf('{{total') !== -1)
+            return currency_found ? '$'+total.toFixed(2, 10) : total;
+            
+        if(cells.indexOf('{{average') !== -1)
+            return currency_found ? '$'+(total/averageCount).toFixed(2, 10) : (total/averageCount).toFixed(2, 10);
+    }.bind(this);
+    
+    this.sortByTableColumn = function(e) {
+        var rows = this.tableContent;
+        var currency_found = false;
+        var columnIndex = e.target.dataset.headerIndex;
+        
+        var mappedRows = rows.map(function(el, i) {
+            return {index: i, value: el};
+        });
+        
+        mappedRows.sort(function(a, b) {
+            if(!me.toggleSort)
+                return +(a.value[columnIndex] > b.value[columnIndex]) || +(a.value[columnIndex] === b.value[columnIndex]) - 1;
+            
+            if(me.toggleSort)
+                return +(a.value[columnIndex] < b.value[columnIndex]) || +(a.value[columnIndex] === b.value[columnIndex]) - 1;
+        });
+        
+        var result = mappedRows.map(function(el) {
+            return rows[el.index];
+        });
+        
+        if(e.target.nodeName === 'TH') {
+            !this.toggleSort ? e.target.querySelector('i').innerText = 'keyboard_arrow_up' : e.target.querySelector('i').innerText = 'keyboard_arrow_down';
+        } else if(e.target.nodeName === 'I') {
+            !this.toggleSort ? e.target.innerText = 'keyboard_arrow_up' : e.target.innerText = 'keyboard_arrow_down';
+        }
+        
+        this.toggleSort = !this.toggleSort;
+        this.tableContent = result;
+    }.bind(this);
 
 });
 riot.tag('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textarea if="{ opts.type == \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" rows="{rows}" id="text_{id}" ></textarea> <input if="{ opts.type != \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{_id}">{ opts.placeholder || \'Type...\' }</label> <span if="{ opts.type == \'numeric\' || opts.type == \'email\' || opts.regex }" class="mdl-textfield__error">{ error }</span> <div if="{ opts.type == \'expanding\' }" class="mdl-textfield__expandable-holder"> <input name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{id}">Expandable Input</label> </div> </div>', function(opts) {
@@ -681,32 +771,32 @@ riot.tag('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textare
     this.rows = parseInt(opts.rows) || 2;
     this.regex = opts.regex || false;
     this.error = opts.error || "Input error!";
-		this.name = opts.name || false;
+	this.name = opts.name || false;
 		
 
     this.on('mount',function() {
-			var wrap = this.root.children[0];
-			
-			wrap.style.width = me.width;
+		var wrap = this.root.children[0];
+		
+		wrap.style.width = me.width;
 
-			if(!me.name) {
-				wrap.innerHTML = "<span style='color:red;'>Set name attribute!</span>";
-				return;
-			}
+		if(!me.name) {
+			wrap.innerHTML = "<span style='color:red;'>Set name attribute!</span>";
+			return;
+		}
 
 	    if(me.floating) {
 	  		wrap.classList.add('mdl-textfield--floating-label');
 	  	}
 
-			if(me.type === 'expanding') {
-				var label = me.root.querySelector('label');
-				wrap.classList.add('mdl-textfield--expandable');
-				label.setAttribute('class','mdl-button mdl-js-button mdl-button--icon');
-				label.innerHTML = '<i class="material-icons">search</i>';
-			}
+		if(me.type === 'expanding') {
+			var label = me.root.querySelector('label');
+			wrap.classList.add('mdl-textfield--expandable');
+			label.setAttribute('class','mdl-button mdl-js-button mdl-button--icon');
+			label.innerHTML = '<i class="material-icons">search</i>';
+		}
 
-      me.assignRegex();
-			componentHandler.upgradeElement(wrap); //call to load materialdesign on el
+        me.assignRegex();
+		componentHandler.upgradeElement(wrap); //call to load materialdesign on el
     });
 
     this.assignRegex = function() {
@@ -746,7 +836,7 @@ riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleClass } mdl-
     
     var me = this;
     
-    this.mixin(eventMixin);
+    this.mixin(RMeventMixin);
     this.toggleType = '';
     this.toggleClass = '';
     this.toggleValue = opts.value || '';

@@ -68,10 +68,26 @@
       -webkit-margin-after: 0;
     }
     .list .list-row {
+      position:relative;
       display: block;
       padding:5px 15px;
       margin:0px;
+      overflow:auto;
       border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
+    }
+    .list .list-row .accent {
+      position:absolute;
+      top:0;
+      right:0;
+      padding:5px;
+      font-size:12px;
+      font-style:italic;
+      color:rgb(169,169,169);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .list .list-row:last-child {
+      border-bottom:none;
     }
     .list .list-row:hover {
       background: rgb(240, 240, 240);
@@ -109,8 +125,8 @@
         <li class="list-row" show={ noResults }>
           No results...
         </li>
-        <li class="list-row item { active: item.active }" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }">
-          { item.text }
+        <li class="list-row item{ item.active ? ' active' : ''}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }">
+          { item.text }<span class="accent">{ item.accent }</span>
         </li>
       </ul>
     </div>
@@ -119,8 +135,8 @@
 
   var tag = this;
 
-  this.mixin(ajaxMixin);
-  this.mixin(eventMixin);
+  this.mixin(RMajaxMixin);
+  this.mixin(RMeventMixin);
 
   this.open = false;
   this.select = opts.type === "select" ? true : false;
@@ -214,8 +230,8 @@
 
   pick(e) {
     var target = e.srcElement || e.originalTarget;
-    var value = target.getAttribute('data-value') || target.innerHTML;
-    tag.value = target.innerHTML.trim();
+    var value = target.getAttribute('data-value');
+    tag.value = value;
     tag.closeWindow();
   }
 

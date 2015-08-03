@@ -167,12 +167,17 @@
 	}
 
 	previous(e) {
-		me.month = me.month.subtract(1, 'months');
+		if(me.min && me.min.diff(me.month) > 0)
+			return;
+		me.month.subtract(1, 'months');
 		me.build(me.month);
 	}
 
 	next(e) {
-		me.month = me.month.add(1, 'months');
+		if(me.max && me.max.diff(me.month,'months') == 0)
+			return;
+	
+		me.month.add(1, 'months');
 		me.build(me.month);
 	}
 	
@@ -183,17 +188,22 @@
 
 		me.header = date.format("MMMM YYYY");
 		me.mydata = [];
+		
+
+		var maxMonth = me.max && me.max.month() == me.month.month() && me.today.year() == me.month.year();
+		
 		var working = true;
+
 		while(working) {
 			var week = [];
 			for(var day = 0; day < 7; day++) {
-				if((outDay - 1) == totalDays) {
+				if(maxMonth && (outDay - 1)==me.max.date() || (outDay - 1) == totalDays) {
 					working = false;
 					break;
 				}
+				firstDay--;
 				if(firstDay > 0) {
 			 		week.push({asNumber:-1,active:false});
-					firstDay--;
 				} else {
 					week.push({
 						asNumber: outDay,

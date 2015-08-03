@@ -18,25 +18,33 @@
         <h1>RiotMode Table</h1>
         
         <h3>Default Table</h3>
-		<rm-table id="defaultTable"></rm-table>
+		<rm-table class="styled-table"></rm-table>
         
         <h3>Striped Table</h3>
-        <rm-table id="stripedTable" type="awesometable-striped"></rm-table>
+        <rm-table class="styled-table" type="awesometable-striped"></rm-table>
         
         <h3>Condensed Table</h3>
-        <rm-table id="condensedTable" type="awesometable-condensed"></rm-table>
+        <rm-table class="styled-table" type="awesometable-condensed"></rm-table>
+		
+		<h3>Bordered Table</h3>
+		<rm-table class="styled-table" type="awesometable-bordered"></rm-table>
         
         <h3>Hover/Condensed Table</h3>
-        <rm-table id="combinationTable" type="awesometable-hover awesometable-condensed"></rm-table>
+        <rm-table class="styled-table" type="awesometable-hover awesometable-condensed"></rm-table>
 		
 		<h3>Calculated Table</h3>
-		<rm-table id="calculatedTable"></rm-table>
+		<rm-table class="calculated-table"></rm-table>
+		
+		<h3>Averaged Table</h3>
+		<rm-table class="averaged-table"></rm-table>
+		
+		<h3>Sorted Table</h3>
+		<rm-table class="sorted-table"></rm-table>
         
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
 		<script src="../src/rm-table.tag" type="riot/tag"></script>
         <script>
-            riot.mount('rm-table#defaultTable', {
-				calculateColumns: true,
+            riot.mount('rm-table.styled-table', {
                 tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
                 tableContent: [
                     ['James Bond', '80', 'M', 'Confidential', 'Blue'],
@@ -45,42 +53,35 @@
                 ]
             });
 			
-			riot.mount('rm-table#stripedTable', {
-                tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
+			riot.mount('rm-table.calculated-table', {
+                tableHeaders: ['Date', 'Tickets', 'Cash', 'Credit', 'Check'],
                 tableContent: [
-                    ['James Bond', '80', 'M', 'Confidential', 'Blue'],
-                    ['Bruce Wayne', '40', 'M', 'Billionare', 'Black'],
-                    ['Batman', 'Unknown', 'Unknown', 'Unknown', 'Black'],
-                ]
+                    ['4/14/2015', '12', '$25.12', '$42', '$0'],
+                    ['4/13/2015', '10', '$22.15', '$42', '$0'],
+                    ['4/12/2015', '8', '$20.50', '$42', '$0']
+                ],
+				tableFooter: ['Total', '{{total1}}', '{{total2}}', '{{total3}}', '{{total4}}']
             });
 			
-			riot.mount('rm-table#condensedTable', {
-                tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
+			riot.mount('rm-table.averaged-table', {
+				tableHeaders: ['Date', 'Tickets', 'Cash', 'Credit', 'Check'],
                 tableContent: [
-                    ['James Bond', '80', 'M', 'Confidential', 'Blue'],
-                    ['Bruce Wayne', '40', 'M', 'Billionare', 'Black'],
-                    ['Batman', 'Unknown', 'Unknown', 'Unknown', 'Black'],
-                ]
-            });
+                    ['4/14/2015', '8', '$22.12', '$42', '$0'],
+                    ['4/13/2015', '4', '$25.15', '$22', '$0'],
+                    ['4/12/2015', '5', '$22.12', '$42', '$0']
+                ],
+				tableFooter: ['Average', '{{average1}}', '{{average2}}', '{{average3}}', '{{average4}}']
+			});
 			
-			riot.mount('rm-table#combinationTable', {
-                tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
+			riot.mount('rm-table.sorted-table', {
+				sortTable: true,
+				tableHeaders: ['Date', 'Name', 'Tickets', 'Cash', 'Credit', 'Check'],
                 tableContent: [
-                    ['James Bond', '80', 'M', 'Confidential', 'Blue'],
-                    ['Bruce Wayne', '40', 'M', 'Billionare', 'Black'],
-                    ['Batman', 'Unknown', 'Unknown', 'Unknown', 'Black'],
+                    ['4/14/2015', 'James Bond', '8', '$25.12', '$42', '$0'],
+                    ['4/13/2015', 'Bruce Wayne', '5', '$22.15', '$22', '$0'],
+                    ['4/12/2015', 'Batman', '4', '$20.50', '$42', '$0']
                 ]
-            });
-			
-			riot.mount('rm-table#calculatedTable', {
-				calculateColumns: true,
-                tableHeaders: ['Date', 'Cash', 'Credit', 'Check'],
-                tableContent: [
-                    ['4/14/2015', 20, 42, 0],
-                    ['4/13/2015', 20, 42, 0],
-                    ['4/12/2015', 20, 42, 0]
-                ]
-            });
+			});
         </script>
 	</body>
 </html>

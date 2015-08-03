@@ -7,12 +7,12 @@
   }
   </style>
 
-  <h5>Autocomplete / Select Menu</h5>
+  <h3>Autocomplete / Select Menu</h3>
   
   <div class="autocomplete-demo">
       <rm-autocomplete
                        name="text-input"
-                       height='400px';
+                       height='400px'
                        url="/tags/rm-autocomplete/demo/demo.json"
                        placeholder="Enter text here">
       </rm-autocomplete>
@@ -20,17 +20,18 @@
   
   <div class="autocomplete-demo">
       <rm-autocomplete
+                       type="select"
                        name="text-input"
-                       height='400px';
+                       height='400px'
                        url="/tags/rm-autocomplete/demo/demo.json"
-                       placeholder="Enter text here"
-                       type="select">
+                       placeholder="Select a country">
       </rm-autocomplete>
   </div>
   
   <p>Options</p>
  
   <pre>
+    <code class="json">
         //Normal name attribute, required\n
         name:'input1' \n
         \n
@@ -49,12 +50,15 @@
         //Respective placeholder text\n
         placeholder="Country Selection"\n
         filter-placeholder="Filter"\n
+    </code>
   </pre>
 
   this.textInput = '';
   
   this.on('mount',function() {
+    $('pre code').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
     riot.mount('rm-autcomplete');
-    riot.mount('rg-datepicker');
   });
 </page-autocomplete>

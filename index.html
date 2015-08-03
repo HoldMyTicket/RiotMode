@@ -2,72 +2,100 @@
 <html lang="en">
 <head>
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Your page title here :)</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>RiotMode</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/assets/css/normalize.css">
-  <link rel="stylesheet" href="/assets/css/skeleton.css">
-  <style type="riot"></style>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    <link rel="stylesheet" href="/assets/css/normalize.css">  
+    <link rel="stylesheet" href="/assets/css/style.css">
 
-  <script src="https://use.fonticons.com/0164d950.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+    <style type="riot"></style>
+    <link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
 
-  <script src="/bower_components/moment/moment.js"></script>
-  <script type="text/javascript" src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","line"]}]}'></script>
-  <script src="/bower_components/riot/riot+compiler.min.js"></script>
-  <script src="/dist/RiotMode.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+    <script src="/bower_components/material-design-lite/material.min.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/marked/marked.min.js"></script>
+    <script type="text/javascript" src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","line","imagesparkline"]}]}'></script>
+    <script src="/bower_components/riot/riot+compiler.min.js"></script>
+    <script src="/dist/RiotMode.js"></script>
 </head>
 <body>
 
-  <div class="header" onclick="window.location='/'">
-      <i class="entypo entypo-switch"></i> RiotMode<br /><small>by HoldMyTicket</small>
-  </div>
-
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-
-  <div class="row">
-    <div class="three columns">
-      <ul class="nav">
-        <li><a href="#autocomplete">Autocomplete</a></li>
-        <li><a href="#chart">Chart</a></li>
-        <li><a href="#datepicker">Datepicker</a></li>
-        <li><a href="#google-map">Google-Map</a></li>
-        <li><a href="#markdown">Markdown</a></li>
-        <li><a href="#modal">Modal</a></li>
-        <li><a href="#table">Table</a></li>
-        <li><a href="#text-fields">Text-Fields</a></li>
-        <li><a href="#toggle">Toggle</a></li>
-      </ul>
-    </div>
-    <div class="one columns">
+    <div class="header" onclick="window.location='/'">
+        <h2 class="title">Riot Mode</h2>
+        <span class="author">HoldMyTicket</span>
     </div>
 
-    <div class="seven columns" id="pagewrap">
-        <rm-router>
-            <section route="/" src="/pages/home.tag" />
-            <section route="autocomplete" src="/pages/autocomplete.tag" />
-            <section route="chart" src="/pages/chart.tag" />
-            <section route="datepicker" src="/pages/datepicker.tag" />
-            <section route="google-map" src="/pages/google-map.tag" />
-            <section route="toggle" src="/pages/test.tag" />
-        </rm-router>
+    <div class="content">
+
+        <div class="nav">
+            <h5>Get Started</h5>
+            <ul>
+                <li><a href="#install">Install</a></li>
+                <li><a href="#contribute">Contribute</a></li>
+            </ul>
+            <h5>Tags</h5>
+            <ul>
+                <li><a href="#autocomplete">Autocomplete</a></li>
+                <li><a href="#chart">Chart</a></li>
+                <li><a href="#datepicker">Datepicker</a></li>
+                <li><a href="#google-map">Google-Map</a></li>
+                <li><a href="#markdown">Markdown</a></li>
+                <li><a href="#modal">Modal</a></li>
+                <li><a href="#table">Table</a></li>
+                <li><a href="#text-field">Text-Fields</a></li>
+                <li><a href="#toggle">Toggle</a></li>
+            </ul>
+            <h5>Mixins</h5>
+            <ul>
+                <li><a>Ajax</a></li>
+                <li><a>Event</a></li>
+            </ul>
+        </div>
+
+        <div class="main">
+            <rm-router>
+                <!-- Home route -->
+                <section route="/" src="/pages/home.tag" />
+
+                <!-- Get started -->
+                <section route="install" src="/pages/install.tag" />
+                <section route="contribute" src="/pages/contribute.tag" />
+
+                <!-- Tags -->
+                <section route="autocomplete" src="/pages/autocomplete.tag" />
+                <section route="chart" src="/pages/chart.tag" />
+                <section route="datepicker" src="/pages/datepicker.tag" />
+                <section route="google-map" src="/pages/google-map.tag" />
+                <section route="markdown" src="/pages/markdown.tag" />
+                <section route="table" src="/pages/table.tag" />
+                <section route="text-field" src="/pages/text-field.tag" />
+                <section route="toggle" src="/pages/toggle.tag" />
+            </rm-router>
+        </div>
     </div>
-  </div>
+
+    <div class="footer">
+        <p>An open source project by <a style="text-decoration:none;color:#6ab344;" href="http://holdmyticket.com">HoldMyTicket</a><p>
+    </div>
 
 </div>
 
 <script>
-    riot.mount('*');
+    var router = riot.mount('rm-router',{
+      onload: function() {
+        $('.nav ul li a').removeClass('active');
+        $('.nav ul li a[href*="'+window.location.hash.substring(1)+'"]').addClass('active');
+      }
+    })[0];
 </script>
-
 </body>
 </html>

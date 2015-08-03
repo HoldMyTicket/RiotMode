@@ -114,7 +114,7 @@
      */
     var me = this;
     
-    this.mixin(eventMixin);
+    this.mixin(RMeventMixin);
     
     openModal(e) {
         this.fire('opened', e);

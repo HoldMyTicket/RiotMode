@@ -37,6 +37,6 @@ if [ "$inc" = true ] ; then
     reg="v[0-9]+\.[0-9]+\.[0-9]+"
     if [[ $ver =~ $reg ]]; then
       git tag $ver
-      git push origin $ver
+      git push origin master --tags
     fi
 fi

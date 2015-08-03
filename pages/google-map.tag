@@ -8,7 +8,7 @@
   }
   </style>
 
-  <h5>Google Map</h5>
+  <h3>Google Map</h3>
   
   <div class="google-map-demo">
       <rm-google-map> </rm-google-map>
@@ -17,10 +17,15 @@
   <p>Options</p>
  
   <pre>
+    <code class="json">
         Will fill in soon
+    </code>
   </pre>
   
   this.on('mount',function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });    
       riot.mount('rm-google-map', {
           zoom: 5,
           center: { lat: 35.1107, lng: -106.6100},    

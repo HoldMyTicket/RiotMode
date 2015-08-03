@@ -10,32 +10,32 @@ riot.tag('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textare
     this.rows = parseInt(opts.rows) || 2;
     this.regex = opts.regex || false;
     this.error = opts.error || "Input error!";
-		this.name = opts.name || false;
+	this.name = opts.name || false;
 		
 
     this.on('mount',function() {
-			var wrap = this.root.children[0];
-			
-			wrap.style.width = me.width;
+		var wrap = this.root.children[0];
+		
+		wrap.style.width = me.width;
 
-			if(!me.name) {
-				wrap.innerHTML = "<span style='color:red;'>Set name attribute!</span>";
-				return;
-			}
+		if(!me.name) {
+			wrap.innerHTML = "<span style='color:red;'>Set name attribute!</span>";
+			return;
+		}
 
 	    if(me.floating) {
 	  		wrap.classList.add('mdl-textfield--floating-label');
 	  	}
 
-			if(me.type === 'expanding') {
-				var label = me.root.querySelector('label');
-				wrap.classList.add('mdl-textfield--expandable');
-				label.setAttribute('class','mdl-button mdl-js-button mdl-button--icon');
-				label.innerHTML = '<i class="material-icons">search</i>';
-			}
+		if(me.type === 'expanding') {
+			var label = me.root.querySelector('label');
+			wrap.classList.add('mdl-textfield--expandable');
+			label.setAttribute('class','mdl-button mdl-js-button mdl-button--icon');
+			label.innerHTML = '<i class="material-icons">search</i>';
+		}
 
-      me.assignRegex();
-			componentHandler.upgradeElement(wrap); //call to load materialdesign on el
+        me.assignRegex();
+		componentHandler.upgradeElement(wrap); //call to load materialdesign on el
     });
 
     this.assignRegex = function() {

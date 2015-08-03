@@ -3,7 +3,7 @@ riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleClass } mdl-
     
     var me = this;
     
-    this.mixin(eventMixin);
+    this.mixin(RMeventMixin);
     this.toggleType = '';
     this.toggleClass = '';
     this.toggleValue = opts.value || '';

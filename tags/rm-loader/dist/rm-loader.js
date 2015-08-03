@@ -1,4 +1,4 @@
-riot.tag('rm-loader', '<div id="wrap"> <div id="progstatic" style="width:250px" class="mdl-js-progress"></div> </div>', function(opts) {
+riot.tag('rm-loader', '<div id="wrap"> <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div> </div>', function(opts) {
 	
 	var me = this;
 	
@@ -13,7 +13,7 @@ riot.tag('rm-loader', '<div id="wrap"> <div id="progstatic" style="width:250px" 
 	
 	this.on('mount', function() {
 		var wrap = this.root.children[0];
-		componentHandler.upgradeElement(wrap);
+		componentHandler.upgradeDom();
 	});
 
 });

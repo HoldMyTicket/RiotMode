@@ -2,15 +2,14 @@
     "choices":[  
         {  
             "text":"Dobříš",
-            "value":1
+            "accent":"200m"
         },
         {  
             "text":"Belanting",
-            "value":2
+            "accent":"54 miles"
         },
         {  
-            "text":"Verin Dvin",
-            "value":3
+            "text":"Verin Dvin"
         },
         {  
             "text":"Oliveiras",
