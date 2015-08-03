@@ -1,17 +1,18 @@
 <rm-markdown>
-	
-	var me = this;
+
+	<raw content="{html}"/>
+
+	this.html = opts.content ? marked(opts.content) : '';
 
 	this.on('mount', function() {
 		if(!window.marked) {
 			me.root.innerHTML = "<span style='color:red;'>Please load the marked library to use this tag.<span>";
-		} else {
-			me.set(opts.content);
 		}
 	});
-	
-	set(md) {
-		me.root.innerHTML = marked(md);
-	}
 
 </rm-markdown>
+
+<raw>
+	<span></span>
+	this.root.innerHTML = opts.content
+</raw>
