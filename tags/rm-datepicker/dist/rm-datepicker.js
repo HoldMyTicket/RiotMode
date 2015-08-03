@@ -56,7 +56,9 @@ riot.tag('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input"
 		me.header = date.format("MMMM YYYY");
 		me.mydata = [];
 		
-		var maxMonth = me.max.month() == me.month.month() && me.today.year() == me.month.year();
+
+		var maxMonth = me.max && me.max.month() == me.month.month() && me.today.year() == me.month.year();
+		
 		var working = true;
 
 		while(working) {
