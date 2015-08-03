@@ -68,6 +68,7 @@
       -webkit-margin-after: 0;
     }
     .list .list-row {
+      position:relative;
       display: block;
       padding:5px 15px;
       margin:0px;
