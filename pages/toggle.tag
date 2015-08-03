@@ -22,14 +22,21 @@
     <p>Options</p>
     
     <pre>
-        <code class="json">
-            // need to fill in
+        <h6>Type</h6>
+        <code class="html">
+            &ltrm-toggle type="switch"&gt&lt/rm-toggle&gt
+        </code>
+        
+        <h6>Label Text</h6>
+        <code class="html">
+            &ltrm-toggle label-text="A switch toggle!"&gt&lt/rm-toggle&gt
         </code>
     </pre>
     
     this.on('mount', function() {
         $('pre code').each(function(i, block) {
-          hljs.highlightBlock(block);
+            console.log(block);
+            hljs.highlightBlock(block);
         });
         
         riot.mount('rm-toggle');
