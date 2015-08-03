@@ -74,12 +74,11 @@
       overflow:auto;
       border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
     }
-    .list .list-row .item-value {
-      float:left;
-      display:block;
-    }
     .list .list-row .accent {
-      float:right;
+      position:absolute;
+      top:0;
+      right:0;
+      padding:5px;
       font-size:12px;
       font-style:italic;
       color:rgb(169,169,169);
@@ -126,7 +125,7 @@
           No results...
         </li>
         <li class="list-row item{ item.active ? ' active' : ''}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }">
-          <span class="item-value">{ item.text }</span><span class="accent">{ item.accent }</span>
+          { item.text }<span class="accent">{ item.accent }</span>
         </li>
       </ul>
     </div>
