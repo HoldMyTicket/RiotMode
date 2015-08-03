@@ -498,7 +498,6 @@
             return rows[el.index];
         });
         
-        
         if(e.target.nodeName === 'TH') {
             !this.toggleSort ? e.target.querySelector('i').innerText = 'keyboard_arrow_up' : e.target.querySelector('i').innerText = 'keyboard_arrow_down';
         } else if(e.target.nodeName === 'I') {
