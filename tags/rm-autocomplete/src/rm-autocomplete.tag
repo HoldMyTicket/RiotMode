@@ -73,6 +73,9 @@
       margin:0px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
     }
+    .list .list-row:last-child {
+      border-bottom:none;
+    }
     .list .list-row:hover {
       background: rgb(240, 240, 240);
       cursor: pointer;
