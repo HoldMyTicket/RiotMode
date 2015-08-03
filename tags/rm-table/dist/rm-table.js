@@ -34,6 +34,7 @@ riot.tag('rm-table', '<table class="awesometable { tableType }"> <thead if="{ va
     this.processFooter = function(cells) {
         var currency_found = false;
         var total = 0;
+        var averageCount = 0;
         var cellIndex;
         
         if(cells.indexOf('{{') !== -1) {
@@ -48,45 +49,47 @@ riot.tag('rm-table', '<table class="awesometable { tableType }"> <thead if="{ va
             } else {
                 currency_found = false;
             }
-            total += parseFloat(this.tableContent[i][cellIndex].replace('$', ''));
+            
+            if(isNaN(parseFloat(this.tableContent[i][cellIndex].replace('$', ''))) === false) {
+                averageCount++;
+                total += parseFloat(this.tableContent[i][cellIndex].replace('$', ''));
+            }
         }
         
         if(cells.indexOf('{{total') !== -1)
             return currency_found ? '$'+total.toFixed(2, 10) : total;
             
         if(cells.indexOf('{{average') !== -1)
-            return currency_found ? '$'+(total/this.tableContent.length).toFixed(2, 10) : (total/this.tableContent.length).toFixed(2, 10);
+            return currency_found ? '$'+(total/averageCount).toFixed(2, 10) : (total/averageCount).toFixed(2, 10);
     }.bind(this);
     
     this.sortByTableColumn = function(e) {
-        var column = [];
+        e.preventUpdate = true;
+        var rows = this.tableContent;
         var currency_found = false;
         var columnIndex = e.target.dataset.headerIndex;
         
-        for(var i = 0; i < this.tableContent.length; i++) {
-            if(this.tableContent[i][columnIndex].indexOf('$') !== -1) {
-                currency_found = true;
-                this.tableContent[i][columnIndex] = this.tableContent[i][columnIndex].replace('$', '');
-            } else {
-                currency_found = false;
+        rows.sort(function(a, b) {
+            for(var i = 0; i < rows.length; i++) {
+                rows[i].push(a[i][columnIndex] < b[i][columnIndex] ? -1 : a[i][columnIndex] > b[i][columnIndex] ? 1 : 0);
             }
-            
-            column.push(this.tableContent[i][columnIndex]);
-        }
-        
-        column.sort(function(a, b) {
-            if(!me.toggleSort)
-                return a - b;
-            
-            if(me.toggleSort)
-                return b - a;
         });
         
-        for(var i = 0; i < column.length; i++) {
-            this.tableContent[i][columnIndex] = currency_found ? '$'+column[i] : column[i];
-        }
+        rows.sort(function(a, b) {
+            if(!me.toggleSort)
+                return a[a.length - 1] - b[a.length - 1];
+            
+            if(me.toggleSort)
+                return b[a.length - 1] - a[a.length - 1];
+        });
         
+        for(var i = 0; i < rows.length; i++) {
+            rows[i].pop();
+            rows[i].pop();
+        }
         this.toggleSort = !this.toggleSort;
+
+        this.update();
     }.bind(this);
 
 });

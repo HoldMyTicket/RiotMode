@@ -32,7 +32,11 @@
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
 		<script src="../src/rm-datepicker.tag" type="riot/tag"></script>
 		<script>
-			riot.mount('rm-datepicker');
+			riot.mount('rm-datepicker',{
+				initial:'2015-2-10',
+				max:'2015-3-20',
+				min:'2014-11-2'
+			});
 		</script>
 	</body>
 </html>

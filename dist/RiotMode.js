@@ -22,7 +22,7 @@ var RMajaxMixin = {
         xhr.send();
     }
 };    
-riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' noborder\' : \'\'}"> <input type="text" name="{opts.name}" class="mdl-textfield__input base { border : select }" autocomplete="off" placeholder="{ opts.placeholder || \'Type...\' }" onkeyup="{ handleText }" value="{ value }"> <div show="{ open }" class="list-container"> <ul class="list"> <li show="{ select }" class="filter"> <input type="text" class="filter-input" placeholder="Filter" onkeyup="{ handleText }" autocomplete="off"> </li> <li class="list-row" show="{ noResults }"> No results... </li> <li class="list-row item { active: item.active }" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }"> { item.text } </li> </ul> </div> </div>', 'rm-autocomplete *, [riot-tag="rm-autocomplete"] *{ box-sizing: border-box; } rm-autocomplete .active, [riot-tag="rm-autocomplete"] .active{ background:rgb(215,215,215); } rm-autocomplete .base, [riot-tag="rm-autocomplete"] .base{ height:40px; padding-left:5px; margin-bottom:0px; width:100%; } rm-autocomplete .noborder .border, [riot-tag="rm-autocomplete"] .noborder .border{ border: 0; } rm-autocomplete .border, [riot-tag="rm-autocomplete"] .border{ height:35px; padding-left:5px; border:1px solid rgba(0,0,0,.12); box-sizing:border-box; } rm-autocomplete .border:-moz-placeholder, [riot-tag="rm-autocomplete"] .border:-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border:-ms-input-placeholder, [riot-tag="rm-autocomplete"] .border:-ms-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-webkit-input-placeholder, [riot-tag="rm-autocomplete"] .border::-webkit-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-moz-placeholder, [riot-tag="rm-autocomplete"] .border::-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .err, [riot-tag="rm-autocomplete"] .err{border: 1px dashed red; color: rgb(169,169,169);} rm-autocomplete .filter, [riot-tag="rm-autocomplete"] .filter{padding:0;margin:0px;} rm-autocomplete .filter:hover, [riot-tag="rm-autocomplete"] .filter:hover{background:none;} rm-autocomplete .filter-input, [riot-tag="rm-autocomplete"] .filter-input{ background:none; border:none; border-bottom:1px solid rgba(0, 0, 0, 0.117647); box-sizing:border-box; color: rgb(85, 85, 85); padding:5px; font-size:16px; height:35px; margin:0px; width:100%; } rm-autocomplete .list-container, [riot-tag="rm-autocomplete"] .list-container{ position:absolute; left:0; right:0; background:#fff; height:auto; overflow-x:hidden; overflow-y:auto; border: 1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; z-index: 3; } rm-autocomplete .noselect, [riot-tag="rm-autocomplete"] .noselect{ -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-autocomplete .list, [riot-tag="rm-autocomplete"] .list{ list-style-type: none; padding:0; margin:0; -webkit-margin-before: 0; -webkit-margin-after: 0; } rm-autocomplete .list .list-row, [riot-tag="rm-autocomplete"] .list .list-row{ display: block; padding:5px 15px; margin:0px; border-bottom: 1px solid rgba(0, 0, 0, 0.117647); } rm-autocomplete .list .list-row:hover, [riot-tag="rm-autocomplete"] .list .list-row:hover{ background: rgb(240, 240, 240); cursor: pointer; } rm-autocomplete textarea:focus, [riot-tag="rm-autocomplete"] textarea:focus,rm-autocomplete input:focus, [riot-tag="rm-autocomplete"] input:focus{ outline: 0; } rm-autocomplete .wrap, [riot-tag="rm-autocomplete"] .wrap{ position: relative; }', function(opts) {
+riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' noborder\' : \'\'}"> <input type="text" name="{opts.name}" class="mdl-textfield__input base { border : select }" autocomplete="off" placeholder="{ opts.placeholder || \'Type...\' }" onkeyup="{ handleText }" value="{ value }"> <div show="{ open }" class="list-container"> <ul class="list"> <li show="{ select }" class="filter"> <input type="text" class="filter-input" placeholder="Filter" onkeyup="{ handleText }" autocomplete="off"> </li> <li class="list-row" show="{ noResults }"> No results... </li> <li class="list-row item{ item.active ? \' active\' : \'\'}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }"> { item.text } </li> </ul> </div> </div>', 'rm-autocomplete *, [riot-tag="rm-autocomplete"] *{ box-sizing: border-box; } rm-autocomplete .active, [riot-tag="rm-autocomplete"] .active{ background:rgb(215,215,215); } rm-autocomplete .base, [riot-tag="rm-autocomplete"] .base{ height:40px; padding-left:5px; margin-bottom:0px; width:100%; } rm-autocomplete .noborder .border, [riot-tag="rm-autocomplete"] .noborder .border{ border: 0; } rm-autocomplete .border, [riot-tag="rm-autocomplete"] .border{ height:35px; padding-left:5px; border:1px solid rgba(0,0,0,.12); box-sizing:border-box; } rm-autocomplete .border:-moz-placeholder, [riot-tag="rm-autocomplete"] .border:-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border:-ms-input-placeholder, [riot-tag="rm-autocomplete"] .border:-ms-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-webkit-input-placeholder, [riot-tag="rm-autocomplete"] .border::-webkit-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-moz-placeholder, [riot-tag="rm-autocomplete"] .border::-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .err, [riot-tag="rm-autocomplete"] .err{border: 1px dashed red; color: rgb(169,169,169);} rm-autocomplete .filter, [riot-tag="rm-autocomplete"] .filter{padding:0;margin:0px;} rm-autocomplete .filter:hover, [riot-tag="rm-autocomplete"] .filter:hover{background:none;} rm-autocomplete .filter-input, [riot-tag="rm-autocomplete"] .filter-input{ background:none; border:none; border-bottom:1px solid rgba(0, 0, 0, 0.117647); box-sizing:border-box; color: rgb(85, 85, 85); padding:5px; font-size:16px; height:35px; margin:0px; width:100%; } rm-autocomplete .list-container, [riot-tag="rm-autocomplete"] .list-container{ position:absolute; left:0; right:0; background:#fff; height:auto; overflow-x:hidden; overflow-y:auto; border: 1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; z-index: 3; } rm-autocomplete .noselect, [riot-tag="rm-autocomplete"] .noselect{ -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-autocomplete .list, [riot-tag="rm-autocomplete"] .list{ list-style-type: none; padding:0; margin:0; -webkit-margin-before: 0; -webkit-margin-after: 0; } rm-autocomplete .list .list-row, [riot-tag="rm-autocomplete"] .list .list-row{ display: block; padding:5px 15px; margin:0px; border-bottom: 1px solid rgba(0, 0, 0, 0.117647); } rm-autocomplete .list .list-row:hover, [riot-tag="rm-autocomplete"] .list .list-row:hover{ background: rgb(240, 240, 240); cursor: pointer; } rm-autocomplete textarea:focus, [riot-tag="rm-autocomplete"] textarea:focus,rm-autocomplete input:focus, [riot-tag="rm-autocomplete"] input:focus{ outline: 0; } rm-autocomplete .wrap, [riot-tag="rm-autocomplete"] .wrap{ position: relative; }', function(opts) {
 
   var tag = this;
 
@@ -311,12 +311,17 @@ riot.tag('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input"
 	}.bind(this);
 
 	this.previous = function(e) {
-		me.month = me.month.subtract(1, 'months');
+		if(me.min && me.min.diff(me.month) > 0)
+			return;
+		me.month.subtract(1, 'months');
 		me.build(me.month);
 	}.bind(this);
 
 	this.next = function(e) {
-		me.month = me.month.add(1, 'months');
+		if(me.max && me.max.diff(me.month,'months') == 0)
+			return;
+	
+		me.month.add(1, 'months');
 		me.build(me.month);
 	}.bind(this);
 	
@@ -327,17 +332,20 @@ riot.tag('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input"
 
 		me.header = date.format("MMMM YYYY");
 		me.mydata = [];
+		
+		var maxMonth = me.max.month() == me.month.month() && me.today.year() == me.month.year();
 		var working = true;
+
 		while(working) {
 			var week = [];
 			for(var day = 0; day < 7; day++) {
-				if((outDay - 1) == totalDays) {
+				if(maxMonth && (outDay - 1)==me.max.date() || (outDay - 1) == totalDays) {
 					working = false;
 					break;
 				}
+				firstDay--;
 				if(firstDay > 0) {
 			 		week.push({asNumber:-1,active:false});
-					firstDay--;
 				} else {
 					week.push({
 						asNumber: outDay,
@@ -493,7 +501,7 @@ riot.tag('rm-modal', '<div class="wrap"> <div class="overlay" show="{ opts.opene
     
     var me = this;
     
-    this.mixin(eventMixin);
+    this.mixin(RMeventMixin);
     
     this.openModal = function(e) {
         this.fire('opened', e);
@@ -690,6 +698,7 @@ riot.tag('rm-table', '<table class="awesometable { tableType }"> <thead if="{ va
     this.processFooter = function(cells) {
         var currency_found = false;
         var total = 0;
+        var averageCount = 0;
         var cellIndex;
         
         if(cells.indexOf('{{') !== -1) {
@@ -704,45 +713,47 @@ riot.tag('rm-table', '<table class="awesometable { tableType }"> <thead if="{ va
             } else {
                 currency_found = false;
             }
-            total += parseFloat(this.tableContent[i][cellIndex].replace('$', ''));
+            
+            if(isNaN(parseFloat(this.tableContent[i][cellIndex].replace('$', ''))) === false) {
+                averageCount++;
+                total += parseFloat(this.tableContent[i][cellIndex].replace('$', ''));
+            }
         }
         
         if(cells.indexOf('{{total') !== -1)
             return currency_found ? '$'+total.toFixed(2, 10) : total;
             
         if(cells.indexOf('{{average') !== -1)
-            return currency_found ? '$'+(total/this.tableContent.length).toFixed(2, 10) : (total/this.tableContent.length).toFixed(2, 10);
+            return currency_found ? '$'+(total/averageCount).toFixed(2, 10) : (total/averageCount).toFixed(2, 10);
     }.bind(this);
     
     this.sortByTableColumn = function(e) {
-        var column = [];
+        e.preventUpdate = true;
+        var rows = this.tableContent;
         var currency_found = false;
         var columnIndex = e.target.dataset.headerIndex;
         
-        for(var i = 0; i < this.tableContent.length; i++) {
-            if(this.tableContent[i][columnIndex].indexOf('$') !== -1) {
-                currency_found = true;
-                this.tableContent[i][columnIndex] = this.tableContent[i][columnIndex].replace('$', '');
-            } else {
-                currency_found = false;
+        rows.sort(function(a, b) {
+            for(var i = 0; i < rows.length; i++) {
+                rows[i].push(a[i][columnIndex] < b[i][columnIndex] ? -1 : a[i][columnIndex] > b[i][columnIndex] ? 1 : 0);
             }
-            
-            column.push(this.tableContent[i][columnIndex]);
-        }
-        
-        column.sort(function(a, b) {
-            if(!me.toggleSort)
-                return a - b;
-            
-            if(me.toggleSort)
-                return b - a;
         });
         
-        for(var i = 0; i < column.length; i++) {
-            this.tableContent[i][columnIndex] = currency_found ? '$'+column[i] : column[i];
-        }
+        rows.sort(function(a, b) {
+            if(!me.toggleSort)
+                return a[a.length - 1] - b[a.length - 1];
+            
+            if(me.toggleSort)
+                return b[a.length - 1] - a[a.length - 1];
+        });
         
+        for(var i = 0; i < rows.length; i++) {
+            rows[i].pop();
+            rows[i].pop();
+        }
         this.toggleSort = !this.toggleSort;
+
+        this.update();
     }.bind(this);
 
 });
@@ -823,7 +834,7 @@ riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleClass } mdl-
     
     var me = this;
     
-    this.mixin(eventMixin);
+    this.mixin(RMeventMixin);
     this.toggleType = '';
     this.toggleClass = '';
     this.toggleValue = opts.value || '';
