@@ -94,8 +94,8 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
 
   this.pick = function(e) {
     var target = e.srcElement || e.originalTarget;
-    var value = target.getAttribute('data-value') || target.children[0].innerHTML;
-    tag.value = target.innerHTML.trim();
+    var value = target.getAttribute('data-value');
+    tag.value = value;
     tag.closeWindow();
   }.bind(this);
 
