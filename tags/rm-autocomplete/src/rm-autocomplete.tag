@@ -114,7 +114,7 @@
 
     <div show={ open } class="list-container">
       <ul class="list">
-        <li show={ select } class="filter">
+        <li show={ select && !noFilter } class="filter">
           <input
             type="text"
             class="filter-input"
@@ -141,6 +141,7 @@
   this.open = false;
   this.select = opts.type === "select" ? true : false;
   this.maxHeight = opts.height || '520px';
+  this.noFilter = opts.nofilter || false;
   this.url = opts.url || false;
   if(this.url !== false)
     this.ajax = true;

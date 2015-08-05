@@ -23,7 +23,7 @@
                        type="select"
                        name="text-input"
                        height='400px'
-                       url="/tags/rm-autocomplete/demo/demo.json"
+                       items="{ locations }"
                        placeholder="Select a country">
       </rm-autocomplete>
   </div>
@@ -54,6 +54,12 @@
   </pre>
 
   this.textInput = '';
+  
+  this.locations = [
+      {"text":"Albuequerque, NM","value":"Albuquerque, NM","accent":"2.5 miles"},
+      {"text":"Santa Fe, NM","value":"Santa Fe, NM","accent":"45 miles"},
+      {"text":"Taos, NM","value":"Taos, NM"}
+    ];
   
   this.on('mount',function() {
     $('pre code').each(function(i, block) {
