@@ -48,8 +48,8 @@
         <div class="modal" show="{ modalOpen }">
             <div class="modal-content">
                 <yield/>
-                <button onclick="{ confirmBtn }" show="{ confirmBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
-                <button onclick="{ declineBtn }" show="{ cancelBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Cancel</button>
+                <button onclick="{ confirmBtn }" show="{ affirmativeBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
+                <button onclick="{ cancelBtn }" show="{ dismissiveBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Cancel</button>
             </div>
             <div class="clear"></div>
         </div>
@@ -63,13 +63,13 @@
     var me = this;
     
     this.mixin(RMeventMixin);
-    this.confirmBtn = opts['confirm-btn'] || false;
-    this.cancelBtn = opts['cancel-btn'] || false;
+    this.affirmativeBtn = opts['confirm-btn'] == 'true' ? true : false;
+    this.dismissiveBtn = opts['cancel-btn'] == 'true' ? true : false;
     this.modalOpen = false;
     
     //load all opts if they are functions
     for(var i in opts){
-        if(opts.hasOwnProperty(i) ) {
+        if(opts.hasOwnProperty(i)) {
             if(typeof opts[i] == 'function') {
                 this[i] = opts[i];
             }
@@ -90,7 +90,7 @@
         opts.onconfirm();
     }
     
-    declineBtn(e) {
+    cancelBtn(e) {
         opts.oncancel();
     }
 </rm-modal>
