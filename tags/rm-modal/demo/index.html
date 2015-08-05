@@ -21,34 +21,70 @@
 		
 		<script type="riot/tag">
 			<modal-demo>
-                <button onclick="{ openModal }">Open Modal</button>
-            
-				<rm-modal id="modal" onclose="{ closeModal }" opened="{ opened }">
+			
+				<rm-modal 
+				open-btn-text="Open Modal" 
+				open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+				customCallback="{ customcallback }">
+					<h4>Are you sure you want to?</h4>
+					<p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+					<p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+					
+					<button onclick="{ customcallback }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button>
+				</rm-modal>
+				
+				<rm-modal 
+				open-btn-text="Open Modal 2" 
+				open-btn-class="mdl-button mdl-js-button mdl-js-ripple-effect" 
+				customCallback2="{ customcallback2 }">
                     <h4>Are you sure you want to?</h4>
                     <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
 					<p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
-                    <button onclick="{ confirmBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
-                    <button onclick="{ declineBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Decline</button>
+                    <button onclick="{ customcallback2 }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button>
+                </rm-modal>
+				
+				<rm-modal 
+				open-btn-text="Open Modal 3" 
+				open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  
+				customCallback3="{ customcallback3 }">
+                    <h4>Hells no I dont want to!</h4>
+                    <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+					<p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+                    <button onclick="{ customcallback3 }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button>
+                </rm-modal>
+				
+				<rm-modal 
+				open-btn-text="Open Modal 4" 
+				open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  
+				confirm-btn="true"
+				cancel-btn="false"
+				onconfirm="{ confirmBtn }"
+				oncancel="{ cancelBtn }">
+                    <h4>Hells no I dont want to!</h4>
+                    <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+					<p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
                 </rm-modal>
 				
 				var me = this;
-	            opened = false;
-	            openModal(e) {
-	                opened = true;
-					me.update();
-	            }
 				
-				closeModal(e) {
-					opened = false;
-					me.update();
+				customcallback(e) {
+					console.log('custom callback');
+				}
+				
+				customcallback2(e) {
+					console.log('custom callback two');
+				}
+				
+				customcallback3(e) {
+					console.log('custom callback three');
 				}
 				
 				confirmBtn(e) {
-					console.log('confirm');
-				}
+					console.log('confirm!');
+				} 
 				
-				declineBtn(e) {
-					console.log('decline');
+				cancelBtn(e) {
+					console.log('cancel!');
 				}
 			</modal-demo>
 		</script>

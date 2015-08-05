@@ -26,7 +26,7 @@
     /**
      * Toggle component for RiotJS v2.2
      * 
-     * @author joseph-p
+     * @author joseph-perez
      */
     var me = this;
     
@@ -38,8 +38,11 @@
     this.toggleLabelText = opts['label-text'] || '';
     
     this.on('mount', function() {
+        var wrap = me.root.children[0].querySelector('label');
+        
         me.initType(opts.type);
         me.update();
+        componentHandler.upgradeElement(wrap); //call to load materialdesign on el
     });
     
     initType(toggleType) {

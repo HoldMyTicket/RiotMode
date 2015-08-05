@@ -14,34 +14,6 @@
             background-color: rgba(0, 0, 0, 0.8);
         }
         
-        .overlay.fade-in-overlay {
-            -webkit-animation: fadeIn .25s linear;
-            -moz-animation: fadeIn .25s linear;
-            -o-animation: fadeIn .25s linear;
-            animation: fadeIn .25s linear;
-        }
-        
-        .modal.scale-up-modal {
-            -webkit-animation: scaleUp .30s linear;
-            -moz-animation: scaleUp .30s linear;
-            -o-animation: scaleUp .30s linear;
-            animation: scaleUp .30s linear;
-        }
-        
-        .overlay.fade-out-overlay {
-            -webkit-animation: fadeIn .25s reverse;
-            -moz-animation: fadeIn .25s reverse;
-            -o-animation: fadeIn .25s reverse;
-            animation: fadeIn .25s reverse;
-        }
-        
-        .modal.scale-down-modal {
-            -webkit-animation: scaleUp .30s reverse;
-            -moz-animation: scaleUp .30s reverse;
-            -o-animation: scaleUp .30s reverse;
-            animation: scaleUp .30s reverse;
-        }
-        
         .modal {
             max-width: 35%;
             background-color: #fff;
@@ -68,40 +40,16 @@
         .clear {
             clear: both;
         }
-        
-        /* animation for modal */
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        
-        @keyframes scaleUp {
-            0% {
-                -webkit-transform: scale(0);
-                -moz-transform: scale(0);
-                -o-transform: scale(0);
-                transform: scale(0);
-            }
-            50% {
-                -webkit-transform: scale(0.5);
-                -moz-transform: scale(0.5);
-                -o-transform: scale(0.5);
-                transform: scale(0.5);
-            }
-            100% {
-                -webkit-transform: scale(1);
-                -moz-transform: scale(1);
-                -o-transform: scale(1);
-                transform: scale(1);
-            }
-        }
     </style>
     
     <div class="wrap">
-        <div class="overlay" show="{ opts.opened }" onclick="{ closeModal }"></div>
-        <div class="modal" show="{ opts.opened }">
+        <button onclick="{ openModal }" class="{ opts['open-btn-class'] }">{ opts['open-btn-text'] }</button>
+        <div class="overlay" show="{ modalOpen }" onclick="{ closeModal }"></div>
+        <div class="modal" show="{ modalOpen }">
             <div class="modal-content">
                 <yield/>
+                <button onclick="{ confirmBtn }" show="{ confirmBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
+                <button onclick="{ declineBtn }" show="{ cancelBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Cancel</button>
             </div>
             <div class="clear"></div>
         </div>
@@ -110,18 +58,41 @@
     /**
      * Modal component for RiotJS v2.2
      * 
-     * @author joseph-p
+     * @author joseph-perez
      */
     var me = this;
     
     this.mixin(RMeventMixin);
+    this.confirmBtn = opts['confirm-btn'] || false;
+    this.cancelBtn = opts['cancel-btn'] || false;
+    this.modalOpen = false;
+    
+    //load all opts if they are functions
+    for(var i in opts){
+        if(opts.hasOwnProperty(i) ) {
+            if(typeof opts[i] == 'function') {
+                this[i] = opts[i];
+            }
+        }
+    }
+    // console.log(this);
+    // console.log(opts);
     
     openModal(e) {
-        this.fire('opened', e);
+        this.modalOpen = true;
+        this.fire('open', e);
     }
     
     closeModal(e) {
-        opts.onclose();
-        this.fire('closed', e);
+        this.modalOpen = false;
+        this.fire('close', e);
+    }
+    
+    confirmBtn(e) {
+        opts.onconfirm();
+    }
+    
+    declineBtn(e) {
+        opts.oncancel();
     }
 </rm-modal>

@@ -413,7 +413,7 @@
     /**
      * Table component for RiotJS v2.2
      * 
-     * @author joseph-p
+     * @author joseph-perez
      */
     var me = this;
     
