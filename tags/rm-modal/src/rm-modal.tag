@@ -75,8 +75,6 @@
             }
         }
     }
-    // console.log(this);
-    // console.log(opts);
     
     openModal(e) {
         this.modalOpen = true;
