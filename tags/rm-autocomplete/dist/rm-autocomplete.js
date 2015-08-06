@@ -1,4 +1,4 @@
-riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' noborder\' : \'\'}"> <input type="text" name="{opts.name}" class="mdl-textfield__input base { border : select }" autocomplete="off" placeholder="{ opts.placeholder || \'Type...\' }" onkeyup="{ handleText }" value="{ value }"> <div show="{ open }" class="list-container"> <ul class="list"> <li show="{ select && !noFilter }" class="filter"> <input type="text" class="filter-input" placeholder="Filter" onkeyup="{ handleText }" autocomplete="off"> </li> <li class="list-row" show="{ noResults }"> No results... </li> <li class="list-row item{ item.active ? \' active\' : \'\'}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }"> { item.text }<span class="accent">{ item.accent }</span> </li> </ul> </div> </div>', 'rm-autocomplete *, [riot-tag="rm-autocomplete"] *{ box-sizing: border-box; } rm-autocomplete .active, [riot-tag="rm-autocomplete"] .active{ background:rgb(215,215,215); } rm-autocomplete .base, [riot-tag="rm-autocomplete"] .base{ height:40px; padding-left:5px; margin-bottom:0px; width:100%; } rm-autocomplete .noborder .border, [riot-tag="rm-autocomplete"] .noborder .border{ border: 0; } rm-autocomplete .border, [riot-tag="rm-autocomplete"] .border{ height:35px; padding-left:5px; border:1px solid rgba(0,0,0,.12); box-sizing:border-box; } rm-autocomplete .border:-moz-placeholder, [riot-tag="rm-autocomplete"] .border:-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border:-ms-input-placeholder, [riot-tag="rm-autocomplete"] .border:-ms-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-webkit-input-placeholder, [riot-tag="rm-autocomplete"] .border::-webkit-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-moz-placeholder, [riot-tag="rm-autocomplete"] .border::-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .err, [riot-tag="rm-autocomplete"] .err{border: 1px dashed red; color: rgb(169,169,169);} rm-autocomplete .filter, [riot-tag="rm-autocomplete"] .filter{padding:0;margin:0px;} rm-autocomplete .filter:hover, [riot-tag="rm-autocomplete"] .filter:hover{background:none;} rm-autocomplete .filter-input, [riot-tag="rm-autocomplete"] .filter-input{ background:none; border:none; border-bottom:1px solid rgba(0, 0, 0, 0.117647); box-sizing:border-box; color: rgb(85, 85, 85); padding:5px; font-size:16px; height:35px; margin:0px; width:100%; } rm-autocomplete .list-container, [riot-tag="rm-autocomplete"] .list-container{ position:absolute; left:0; right:0; background:#fff; height:auto; overflow-x:hidden; overflow-y:auto; border: 1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; z-index: 3; } rm-autocomplete .noselect, [riot-tag="rm-autocomplete"] .noselect{ -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-autocomplete .list, [riot-tag="rm-autocomplete"] .list{ list-style-type: none; padding:0; margin:0; -webkit-margin-before: 0; -webkit-margin-after: 0; } rm-autocomplete .list .list-row, [riot-tag="rm-autocomplete"] .list .list-row{ position:relative; display: block; padding:5px 15px; margin:0px; overflow:auto; border-bottom: 1px solid rgba(0, 0, 0, 0.117647); } rm-autocomplete .list .list-row .accent, [riot-tag="rm-autocomplete"] .list .list-row .accent{ position:absolute; top:0; right:0; padding:5px; font-size:12px; font-style:italic; color:rgb(169,169,169); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } rm-autocomplete .list .list-row:last-child, [riot-tag="rm-autocomplete"] .list .list-row:last-child{ border-bottom:none; } rm-autocomplete .list .list-row:hover, [riot-tag="rm-autocomplete"] .list .list-row:hover{ background: rgb(240, 240, 240); cursor: pointer; } rm-autocomplete textarea:focus, [riot-tag="rm-autocomplete"] textarea:focus,rm-autocomplete input:focus, [riot-tag="rm-autocomplete"] input:focus{ outline: 0; } rm-autocomplete .wrap, [riot-tag="rm-autocomplete"] .wrap{ position: relative; }', function(opts) {
+riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' noborder\' : \'\'}"> <input type="text" name="{opts.name}" class="mdl-textfield__input base { border : select }" autocomplete="off" placeholder="{ opts.placeholder || \'Type...\' }" onkeyup="{ handleText }" value="{ value }"> <div show="{ open }" class="list-container"> <ul class="list"> <li show="{ select && !noFilter }" class="filter"> <input type="text" class="filter-input" placeholder="Filter" onkeyup="{ handleText }" autocomplete="off"> </li> <li class="list-row" show="{ noResults && value.length > 1}"> { noResultsMessage } </li> <li class="list-row item{ item.active ? \' active\' : \'\'}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }"> { item.text }<span class="accent">{ item.accent }</span> </li> </ul> </div> </div>', 'rm-autocomplete *, [riot-tag="rm-autocomplete"] *{ box-sizing: border-box; } rm-autocomplete .active, [riot-tag="rm-autocomplete"] .active{ background:rgb(215,215,215); } rm-autocomplete .base, [riot-tag="rm-autocomplete"] .base{ height:40px; padding-left:5px; margin-bottom:0px; width:100%; } rm-autocomplete .noborder .border, [riot-tag="rm-autocomplete"] .noborder .border{ border: 0; } rm-autocomplete .border, [riot-tag="rm-autocomplete"] .border{ height:35px; padding-left:5px; border:1px solid rgba(0,0,0,.12); box-sizing:border-box; } rm-autocomplete .border:-moz-placeholder, [riot-tag="rm-autocomplete"] .border:-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border:-ms-input-placeholder, [riot-tag="rm-autocomplete"] .border:-ms-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-webkit-input-placeholder, [riot-tag="rm-autocomplete"] .border::-webkit-input-placeholder{ color: rgb(169,169,169); } rm-autocomplete .border::-moz-placeholder, [riot-tag="rm-autocomplete"] .border::-moz-placeholder{ color: rgb(169,169,169); } rm-autocomplete .err, [riot-tag="rm-autocomplete"] .err{border: 1px dashed red; color: rgb(169,169,169);} rm-autocomplete .filter, [riot-tag="rm-autocomplete"] .filter{padding:0;margin:0px;} rm-autocomplete .filter:hover, [riot-tag="rm-autocomplete"] .filter:hover{background:none;} rm-autocomplete .filter-input, [riot-tag="rm-autocomplete"] .filter-input{ background:none; border:none; border-bottom:1px solid rgba(0, 0, 0, 0.117647); box-sizing:border-box; color: rgb(85, 85, 85); padding:5px; font-size:16px; height:35px; margin:0px; width:100%; } rm-autocomplete .list-container, [riot-tag="rm-autocomplete"] .list-container{ position:absolute; left:0; right:0; background:#fff; height:auto; overflow-x:hidden; overflow-y:auto; border: 1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; z-index: 3; } rm-autocomplete .noselect, [riot-tag="rm-autocomplete"] .noselect{ -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-autocomplete .list, [riot-tag="rm-autocomplete"] .list{ list-style-type: none; padding:0; margin:0; -webkit-margin-before: 0; -webkit-margin-after: 0; } rm-autocomplete .list .list-row, [riot-tag="rm-autocomplete"] .list .list-row{ position:relative; display: block; padding:5px 15px; margin:0px; overflow:auto; border-bottom: 1px solid rgba(0, 0, 0, 0.117647); } rm-autocomplete .list .list-row .accent, [riot-tag="rm-autocomplete"] .list .list-row .accent{ position:absolute; top:0; right:0; padding:5px; font-size:12px; font-style:italic; color:rgb(169,169,169); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } rm-autocomplete .list .list-row:last-child, [riot-tag="rm-autocomplete"] .list .list-row:last-child{ border-bottom:none; } rm-autocomplete .list .list-row:hover, [riot-tag="rm-autocomplete"] .list .list-row:hover{ background: rgb(240, 240, 240); cursor: pointer; } rm-autocomplete textarea:focus, [riot-tag="rm-autocomplete"] textarea:focus,rm-autocomplete input:focus, [riot-tag="rm-autocomplete"] input:focus{ outline: 0; } rm-autocomplete .wrap, [riot-tag="rm-autocomplete"] .wrap{ position: relative; }', function(opts) {
 
   var tag = this;
 
@@ -16,7 +16,10 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
   this.list = opts.list || [];
   this.filteredList = opts.list || [];
   this.noResults = false;
+  this.noResultsMessage = opts.message || 'No results...';
   this.atIndex = -1;
+
+  this.timeout = false;
 
   this.on('mount',function(){
     
@@ -45,8 +48,8 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
     if(tag.ajax) {
       tag.ajaxGet(tag.url, function(res) {
         var json = JSON.parse(res);
-        tag.list = json.choices;
-        tag.filteredList = json.choices;
+        tag.list = json;
+        tag.filteredList = json;
         tag.update();
       });
     }
@@ -101,33 +104,40 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
   }.bind(this);
 
   this.handleText = function(e) {
-    
-    var target = e.srcElement || e.originalTarget;
-
-    if(tag.parameter) {
-      
-      var path = tag.url + '/' + tag.parameter + '/' + target.value;
-
-      tag.ajaxGet(path, function(res) {
-        var json = JSON.parse(res);
-        tag.filteredList = json.choices;
-      });
-    } else {
-      tag.filteredList = tag.list.filter(function(c) {
-        return c.text.match(RegExp(target.value,'i'));
-      });
-    }
-
-    tag.noResults = false;
-    if(tag.filteredList.length < 1)
-      tag.noResults = true;
 
     if ([8, 13, 27, 38, 40].indexOf(e.keyCode) > -1) {
       e.preventDefault();
       tag.keys(e.keyCode)
     } else {
-      tag.atIndex = -1;
+
+      var target = e.srcElement || e.originalTarget;
+
+      if(tag.parameter && target.value.length > 1) {
+      
+        var path = tag.url + '/' + tag.parameter + '/' + target.value;
+
+        clearTimeout(tag.timeout);
+
+        tag.timeout = setTimeout(function() {
+          tag.ajaxGet(path, function(res) {
+            var json = JSON.parse(res);
+            tag.filteredList = json;
+          });
+        });
+
+      } else {
+
+        tag.filteredList = tag.list.filter(function(c) {
+          return c.text.match(RegExp(target.value,'i'));
+        });
+
+      }
+
+      tag.noResults = false;
+      if(tag.filteredList.length < 1)
+        tag.noResults = true;
     }
+    
     tag.update();
     
   }.bind(this);
