@@ -237,6 +237,7 @@
     var target = e.srcElement || e.originalTarget;
     var value = target.getAttribute('data-value');
     tag.value = value;
+    tag.fire('change',{'value':value});
     tag.closeWindow();
   }
 
@@ -306,6 +307,7 @@
         tag.filteredList.forEach(function(item) {
           if(item.active) {
             tag.value = item.text;
+            tag.fire('change',{'value':item.text});
             tag.closeWindow();
           }
         });
