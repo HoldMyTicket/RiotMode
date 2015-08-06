@@ -154,6 +154,7 @@
 
   this.timeout = false;
 
+
   this.on('mount',function(){
     
     var base = this.root.querySelector('.base');
@@ -245,13 +246,18 @@
       e.preventDefault();
       tag.keys(e.keyCode)
     } else {
-      
+
       tag.deactivate();
 
       var target = e.srcElement || e.originalTarget;
 
+      if(target.value.length < 2) {
+        tag.filteredList = tag.list;
+        return;
+      }
+
       //Ajax on the fly
-      if(tag.parameter && target.value.length > 1) {
+      if(tag.parameter) {
       
         var path = tag.url + '/' + tag.parameter + '/' + target.value;
 
@@ -261,6 +267,7 @@
           tag.ajaxGet(path, function(res) {
             var json = JSON.parse(res);
             tag.filteredList = json;
+            tag.update();
           });
         });
 

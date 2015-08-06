@@ -45,6 +45,7 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
 
   this.timeout = false;
 
+
   this.on('mount',function(){
     
     var base = this.root.querySelector('.base');
@@ -129,14 +130,21 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
 
   this.handleText = function(e) {
 
-    if ([8, 13, 27, 38, 40].indexOf(e.keyCode) > -1) {
+    if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
       e.preventDefault();
       tag.keys(e.keyCode)
     } else {
 
+      tag.deactivate();
+
       var target = e.srcElement || e.originalTarget;
 
-      if(tag.parameter && target.value.length > 1) {
+      if(target.value.length < 2) {
+        tag.filteredList = tag.list;
+        return;
+      }
+
+      if(tag.parameter) {
       
         var path = tag.url + '/' + tag.parameter + '/' + target.value;
 
@@ -146,6 +154,7 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
           tag.ajaxGet(path, function(res) {
             var json = JSON.parse(res);
             tag.filteredList = json;
+            tag.update();
           });
         });
 
@@ -161,16 +170,14 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
       if(tag.filteredList.length < 1)
         tag.noResults = true;
     }
-    
+
     tag.update();
     
   }.bind(this);
 
   this.keys = function(val) {
     
-    if(val == 8) {
-      tag.deactivate();
-    } else if (val == 27) {
+    if (val == 27) {
       tag.closeWindow();
     } else if (val == 13) {
       
