@@ -67,7 +67,8 @@
     this.dismissiveBtn = opts['cancel-btn'] == 'true' ? true : false;
     this.modalOpen = false;
     
-    //load all opts if they are functions
+    //load all opts if they are functionsa
+    
     for(var i in opts){
         if(opts.hasOwnProperty(i)) {
             if(typeof opts[i] == 'function') {

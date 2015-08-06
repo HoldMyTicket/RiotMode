@@ -8,6 +8,7 @@ riot.tag('rm-modal', '<div class="wrap"> <button onclick="{ openModal }" class="
     this.dismissiveBtn = opts['cancel-btn'] == 'true' ? true : false;
     this.modalOpen = false;
 
+    
     for(var i in opts){
         if(opts.hasOwnProperty(i)) {
             if(typeof opts[i] == 'function') {
