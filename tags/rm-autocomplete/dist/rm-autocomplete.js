@@ -106,15 +106,7 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
 
     if(tag.parameter) {
       
-      var path = '';
-
-      var re = new RegExp("([?&])" + tag.parameter + "=.*?(&|$)", "i");
-      var separator = tag.url.indexOf('?') !== -1 ? "&" : "?";
-      if (tag.url.match(re)) {
-        path = tag.url.replace(re, '$1' + tag.parameter + "=" + target.value + '$2');
-      } else {
-        path = tag.url + separator + tag.parameter + "=" + target.value;
-      }
+      var path = tag.url + '/' + tag.parameter + '/' + target.value;
 
       tag.ajaxGet(path, function(res) {
         var json = JSON.parse(res);

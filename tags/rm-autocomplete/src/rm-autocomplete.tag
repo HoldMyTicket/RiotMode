@@ -243,16 +243,7 @@
     //Ajax on the fly
     if(tag.parameter) {
       
-      var path = '';
-
-      //Construct url string with parameter
-      var re = new RegExp("([?&])" + tag.parameter + "=.*?(&|$)", "i");
-      var separator = tag.url.indexOf('?') !== -1 ? "&" : "?";
-      if (tag.url.match(re)) {
-        path = tag.url.replace(re, '$1' + tag.parameter + "=" + target.value + '$2');
-      } else {
-        path = tag.url + separator + tag.parameter + "=" + target.value;
-      }
+      var path = tag.url + '/' + tag.parameter + '/' + target.value;
 
       tag.ajaxGet(path, function(res) {
         var json = JSON.parse(res);
