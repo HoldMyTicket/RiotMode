@@ -57,6 +57,7 @@
 								 name="select-input"
 								 height="190px"
 								 placeholder="Country Selection"
+								 url="/tags/rm-autocomplete/demo/demo.json"
 								 filter-placeholder="Filter"
 								 type="select"
 								 nofilter="true"
@@ -83,7 +84,7 @@
 		<!-- <p>This text is just down here to see how the page reflows as the user interacts with the &lt;rm-autocomplete&gt; tag</p> -->
 		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- only used for serializing form test -->
 		<script>
-			riot.mount('rm-autocomplete',{list:[{text:'Apple'},{text:'Orange'},{text:'Banana'}]});
+			riot.mount('rm-autocomplete');
 			
 			function doSubmit(){
 				console.log('serialized form', $('#submitForm').serialize())

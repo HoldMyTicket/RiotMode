@@ -122,8 +122,8 @@
             onkeyup="{ handleText }"
             autocomplete="off">
         </li>
-        <li class="list-row" show={ noResults }>
-          No results...
+        <li class="list-row" show={ noResults && value.length > 1}>
+          { noResultsMessage }
         </li>
         <li class="list-row item{ item.active ? ' active' : ''}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }">
           { item.text }<span class="accent">{ item.accent }</span>
@@ -149,7 +149,10 @@
   this.list = opts.list || [];
   this.filteredList = opts.list || [];
   this.noResults = false;
+  this.noResultsMessage = opts.message || 'No results...';
   this.atIndex = -1;
+
+  this.timeout = false;
 
   this.on('mount',function(){
     
@@ -180,8 +183,8 @@
     if(tag.ajax) {
       tag.ajaxGet(tag.url, function(res) {
         var json = JSON.parse(res);
-        tag.list = json.choices;
-        tag.filteredList = json.choices;
+        tag.list = json;
+        tag.filteredList = json;
         tag.update();
       });
     }
@@ -237,34 +240,41 @@
   }
 
   handleText(e) {
-    
-    var target = e.srcElement || e.originalTarget;
-
-    //Ajax on the fly
-    if(tag.parameter) {
-      
-      var path = tag.url + '/' + tag.parameter + '/' + target.value;
-
-      tag.ajaxGet(path, function(res) {
-        var json = JSON.parse(res);
-        tag.filteredList = json.choices;
-      });
-    } else {
-      tag.filteredList = tag.list.filter(function(c) {
-        return c.text.match(RegExp(target.value,'i'));
-      });
-    }
-
-    tag.noResults = false;
-    if(tag.filteredList.length < 1)
-      tag.noResults = true;
 
     if ([8, 13, 27, 38, 40].indexOf(e.keyCode) > -1) {
       e.preventDefault();
       tag.keys(e.keyCode)
     } else {
-      tag.atIndex = -1;
+
+      var target = e.srcElement || e.originalTarget;
+
+      //Ajax on the fly
+      if(tag.parameter && target.value.length > 1) {
+      
+        var path = tag.url + '/' + tag.parameter + '/' + target.value;
+
+        clearTimeout(tag.timeout);
+
+        tag.timeout = setTimeout(function() {
+          tag.ajaxGet(path, function(res) {
+            var json = JSON.parse(res);
+            tag.filteredList = json;
+          });
+        });
+
+      } else {
+
+        tag.filteredList = tag.list.filter(function(c) {
+          return c.text.match(RegExp(target.value,'i'));
+        });
+
+      }
+
+      tag.noResults = false;
+      if(tag.filteredList.length < 1)
+        tag.noResults = true;
     }
+    
     tag.update();
     
   }

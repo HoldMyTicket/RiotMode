@@ -1,5 +1,4 @@
-{  
-    "choices":[  
+[
         {  
             "text":"Dobříš",
             "accent":"200m"
@@ -79,5 +78,4 @@
             "text":"Zehak",
             "value":20
         }
-    ]
-}
+]
