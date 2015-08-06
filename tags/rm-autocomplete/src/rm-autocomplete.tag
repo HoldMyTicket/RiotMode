@@ -241,10 +241,12 @@
 
   handleText(e) {
 
-    if ([8, 13, 27, 38, 40].indexOf(e.keyCode) > -1) {
+    if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
       e.preventDefault();
       tag.keys(e.keyCode)
     } else {
+      
+      tag.deactivate();
 
       var target = e.srcElement || e.originalTarget;
 
@@ -274,16 +276,14 @@
       if(tag.filteredList.length < 1)
         tag.noResults = true;
     }
-    
+
     tag.update();
     
   }
 
   keys(val) {
     
-    if(val == 8) {
-      tag.deactivate();
-    } else if (val == 27) {
+    if (val == 27) {
       tag.closeWindow();
     } else if (val == 13) {
       
