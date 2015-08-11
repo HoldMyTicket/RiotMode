@@ -235,9 +235,8 @@
 
   pick(e) {
     var target = e.srcElement || e.originalTarget;
-    var value = target.getAttribute('data-value');
-    tag.value = value;
-    tag.fire('change',{'value':value});
+    tag.value = target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim();
+    tag.fire('change',{'value':tag.value});
     tag.closeWindow();
   }
 
