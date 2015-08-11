@@ -99,8 +99,8 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
 
   this.pick = function(e) {
     var target = e.srcElement || e.originalTarget;
-    var value = target.getAttribute('data-value');
-    tag.value = value;
+    tag.value = target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim();
+    tag.fire('change',{'value':tag.value});
     tag.closeWindow();
   }.bind(this);
 
@@ -169,6 +169,7 @@ riot.tag('rm-autocomplete', '<div class="wrap noselect{opts.noborder ? \' nobord
         tag.filteredList.forEach(function(item) {
           if(item.active) {
             tag.value = item.text;
+            tag.fire('change',{'value':item.text});
             tag.closeWindow();
           }
         });
