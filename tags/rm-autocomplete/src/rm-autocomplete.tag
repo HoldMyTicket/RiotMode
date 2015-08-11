@@ -104,12 +104,16 @@
   <div class="wrap noselect{opts.noborder ? ' noborder' : ''}">
     
     <input 
+      id="text_rep_input"
       type="text"
-      name="{opts.name}"
       class="mdl-textfield__input base { border : select }"
       autocomplete="off"
       placeholder="{ opts.placeholder || 'Type...' }"
-      onkeyup="{ handleText }"
+      onkeyup="{ handleText }">
+
+    <input
+      type="hidden"
+      name="{opts.name}"
       value="{ value }">
 
     <div show={ open } class="list-container">
@@ -153,7 +157,7 @@
   this.atIndex = -1;
 
   this.timeout = false;
-
+  this.value = opts.value || '';
 
   this.on('mount',function(){
     
@@ -235,7 +239,8 @@
 
   pick(e) {
     var target = e.srcElement || e.originalTarget;
-    var value = target.getAttribute('data-value');
+    var value = target.getAttribute('data-value') || target.value;
+    tag.text_rep_input.value = target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim();
     tag.value = value;
     tag.fire('change',{'value':value});
     tag.closeWindow();
