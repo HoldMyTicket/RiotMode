@@ -37,12 +37,19 @@
     this.toggleName = opts.name || '';
     this.toggleLabelText = opts['label-text'] || '';
     
+    this.on('update', function() {
+        me.initType(opts.type);
+        
+        setTimeout(function() {
+            me.checkToggle(opts.type);
+        }, 100);
+    });
+    
     this.on('mount', function() {
         var wrap = me.root.children[0].querySelector('label');
         
-        me.initType(opts.type);
-        me.update();
         componentHandler.upgradeElement(wrap); //call to load materialdesign on el
+        me.update();
     });
     
     initType(toggleType) {
@@ -69,8 +76,27 @@
         }
     }
     
+    checkToggle(toggleType) {
+        switch(toggleType) {
+            case 'checkbox':
+                me.root.checked ? me.root.querySelector('label').MaterialCheckbox.check() : me.root.querySelector('label').MaterialCheckbox.uncheck();
+                break;
+            case 'radio':
+                me.root.checked ? me.root.querySelector('label').MaterialRadio.check() : me.root.querySelector('label').MaterialRadio.uncheck();
+                break;
+            case 'icon-toggle':
+                me.root.checked ? me.root.querySelector('label').MaterialIconToggle.check() : me.root.querySelector('label').MaterialIconToggle.uncheck();
+                break;
+            case 'switch':
+                me.root.checked ? me.root.querySelector('label').MaterialSwitch.on() : me.root.querySelector('label').MaterialSwitch.off();
+                break;
+            default:
+                me.root.checked ? me.root.querySelector('label').MaterialCheckbox.check() : me.root.querySelector('label').MaterialCheckbox.uncheck();
+        }
+    }
+    
     toggle(e) {
-        opts.checked = !opts.checked;
+        me.root.checked = !me.root.checked;
         this.fire('toggle', e);
     }
     
