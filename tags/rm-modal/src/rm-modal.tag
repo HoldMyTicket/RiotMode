@@ -41,17 +41,15 @@
         }
     </style>
     
-    <div class="wrap">
-        <button onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
-        <div class="overlay { opts['overlay-animation'] }" show="{ modalOpen }" onclick="{ closeModal }"></div>
-        <div class="modal { opts['modal-animation'] }" show="{ modalOpen }">
-            <div class="modal-content">
-                <yield/>
-                <button onclick="{ confirmBtn }" show="{ affirmativeBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
-                <button onclick="{ cancelBtn }" show="{ dismissiveBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Cancel</button>
-            </div>
-            <div class="clear"></div>
+    <button onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
+    <div class="overlay { opts['overlay-animation'] }" show="{ modalOpen }" onclick="{ closeModal }"></div>
+    <div class="modal { opts['modal-animation'] }" show="{ modalOpen }">
+        <div class="modal-content">
+            <yield/>
+            <button onclick="{ confirmBtn }" show="{ affirmativeBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
+            <button onclick="{ cancelBtn }" show="{ dismissiveBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Cancel</button>
         </div>
+        <div class="clear"></div>
     </div>
     
     /**
