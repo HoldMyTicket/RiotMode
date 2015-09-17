@@ -26,7 +26,6 @@
             left: 0;
             padding: 15px;
             background-color: #fff;
-            border: 1px solid #000;
             z-index: 11;
             text-align: center;
             -webkit-border-radius: 5px;
@@ -50,8 +49,8 @@
     
     <div class="wrap">
         <button onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
-        <div class="overlay" show="{ modalOpen }" onclick="{ closeModal }"></div>
-        <div class="modal" show="{ modalOpen }">
+        <div class="overlay { opts['overlay-animation'] }" show="{ modalOpen }" onclick="{ closeModal }"></div>
+        <div class="modal { opts['modal-animation'] }" show="{ modalOpen }">
             <div class="modal-content">
                 <yield/>
                 <button onclick="{ confirmBtn }" show="{ affirmativeBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
