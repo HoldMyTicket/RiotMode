@@ -16,18 +16,12 @@
         
         .modal {
             max-width: 35%;
-            max-height: 32%;
-            margin: auto;
-            overflow: auto;
             position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
+            left: 33%;
+            top: 20%;
             padding: 15px;
             background-color: #fff;
             z-index: 11;
-            text-align: center;
             -webkit-border-radius: 5px;
             -moz-border-radius: 5px;
             -o-border-radius: 5px;
