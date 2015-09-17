@@ -16,11 +16,17 @@
         
         .modal {
             max-width: 35%;
+            max-height: 32%;
+            margin: auto;
+            overflow: auto;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 15px;
             background-color: #fff;
             border: 1px solid #000;
-            padding: 15px;
-            position: fixed;
-            left: 31%;
             z-index: 11;
             text-align: center;
             -webkit-border-radius: 5px;
@@ -43,7 +49,7 @@
     </style>
     
     <div class="wrap">
-        <button onclick="{ openModal }" class="{ opts['open-btn-class'] }">{ opts['open-btn-text'] }</button>
+        <button onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
         <div class="overlay" show="{ modalOpen }" onclick="{ closeModal }"></div>
         <div class="modal" show="{ modalOpen }">
             <div class="modal-content">
