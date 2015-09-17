@@ -7,8 +7,6 @@
             right: 0;
             bottom: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
             text-align: center;
             z-index: 10;
             background-color: rgba(0, 0, 0, 0.8);
@@ -16,7 +14,7 @@
         
         .modal {
             max-width: 35%;
-            position: absolute;
+            position: fixed;
             left: 33%;
             top: 20%;
             padding: 15px;
