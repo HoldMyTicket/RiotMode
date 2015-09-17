@@ -507,7 +507,7 @@ riot.tag('raw', '<span></span>', function(opts) {
 	this.root.innerHTML = opts.content
 
 });
-riot.tag('rm-modal', '<div class="wrap"> <button onclick="{ openModal }" class="{ opts[\'open-btn-class\'] }">{ opts[\'open-btn-text\'] }</button> <div class="overlay" show="{ modalOpen }" onclick="{ closeModal }"></div> <div class="modal" show="{ modalOpen }"> <div class="modal-content"> <yield></yield> <button onclick="{ confirmBtn }" show="{ affirmativeBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button> <button onclick="{ cancelBtn }" show="{ dismissiveBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Cancel</button> </div> <div class="clear"></div> </div> </div>', 'rm-modal .overlay, [riot-tag="rm-modal"] .overlay{ position: fixed; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; text-align: center; z-index: 10; background-color: rgba(0, 0, 0, 0.8); } rm-modal .modal, [riot-tag="rm-modal"] .modal{ max-width: 35%; background-color: #fff; border: 1px solid #000; padding: 15px; position: fixed; left: 31%; z-index: 11; text-align: center; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; } rm-modal .affirmative-btn, [riot-tag="rm-modal"] .affirmative-btn{ float: left; } rm-modal .dismissive-btn, [riot-tag="rm-modal"] .dismissive-btn{ float: right; } rm-modal .clear, [riot-tag="rm-modal"] .clear{ clear: both; }', function(opts) {
+riot.tag('rm-modal', '<div class="wrap"> <button onclick="{ openModal }" class="{ opts[\'open-btn-class\'] }"><i class="{ opts[\'open-btn-icon\'] }"></i> { opts[\'open-btn-text\'] }</button> <div class="overlay { opts[\'overlay-animation\'] }" show="{ modalOpen }" onclick="{ closeModal }"></div> <div class="modal { opts[\'modal-animation\'] }" show="{ modalOpen }"> <div class="modal-content"> <yield></yield> <button onclick="{ confirmBtn }" show="{ affirmativeBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button> <button onclick="{ cancelBtn }" show="{ dismissiveBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Cancel</button> </div> <div class="clear"></div> </div> </div>', 'rm-modal .overlay, [riot-tag="rm-modal"] .overlay{ position: fixed; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; text-align: center; z-index: 10; background-color: rgba(0, 0, 0, 0.8); } rm-modal .modal, [riot-tag="rm-modal"] .modal{ max-width: 35%; max-height: 32%; margin: auto; overflow: auto; position: absolute; top: 0; right: 0; bottom: 0; left: 0; padding: 15px; background-color: #fff; z-index: 11; text-align: center; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; } rm-modal .affirmative-btn, [riot-tag="rm-modal"] .affirmative-btn{ float: left; } rm-modal .dismissive-btn, [riot-tag="rm-modal"] .dismissive-btn{ float: right; } rm-modal .clear, [riot-tag="rm-modal"] .clear{ clear: both; }', function(opts) {
     
     
     var me = this;
@@ -875,12 +875,19 @@ riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleClass } mdl-
     this.toggleName = opts.name || '';
     this.toggleLabelText = opts['label-text'] || '';
     
+    this.on('update', function() {
+        me.initType(opts.type);
+        
+        setTimeout(function() {
+            me.checkToggle(opts.type);
+        }, 100);
+    });
+    
     this.on('mount', function() {
         var wrap = me.root.children[0].querySelector('label');
         
-        me.initType(opts.type);
-        me.update();
         componentHandler.upgradeElement(wrap); //call to load materialdesign on el
+        me.update();
     });
     
     this.initType = function(toggleType) {
@@ -907,8 +914,27 @@ riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleClass } mdl-
         }
     }.bind(this);
     
+    this.checkToggle = function(toggleType) {
+        switch(toggleType) {
+            case 'checkbox':
+                me.root.checked ? me.root.querySelector('label').MaterialCheckbox.check() : me.root.querySelector('label').MaterialCheckbox.uncheck();
+                break;
+            case 'radio':
+                me.root.checked ? me.root.querySelector('label').MaterialRadio.check() : me.root.querySelector('label').MaterialRadio.uncheck();
+                break;
+            case 'icon-toggle':
+                me.root.checked ? me.root.querySelector('label').MaterialIconToggle.check() : me.root.querySelector('label').MaterialIconToggle.uncheck();
+                break;
+            case 'switch':
+                me.root.checked ? me.root.querySelector('label').MaterialSwitch.on() : me.root.querySelector('label').MaterialSwitch.off();
+                break;
+            default:
+                me.root.checked ? me.root.querySelector('label').MaterialCheckbox.check() : me.root.querySelector('label').MaterialCheckbox.uncheck();
+        }
+    }.bind(this);
+    
     this.toggle = function(e) {
-        opts.checked = !opts.checked;
+        me.root.checked = !me.root.checked;
         this.fire('toggle', e);
     }.bind(this);
     
