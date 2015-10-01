@@ -62,14 +62,21 @@
     this.dismissiveBtn = opts['cancel-btn'] == 'true' ? true : false;
     this.modalOpen = false;
     
-    //load all opts if they are functionsa
+    this.on('mount', function() {
+        
+    });
     
+    //load all opts if they are functions
     for(var i in opts){
         if(opts.hasOwnProperty(i)) {
             if(typeof opts[i] == 'function') {
                 this[i] = opts[i];
             }
         }
+    }
+    
+    createModal() {
+        var modalHtml = '<div class="overlay { opts[\'overlay-animation\'] }" show="{ modalOpen }" onclick="{ closeModal }"></div>';
     }
     
     openModal(e) {
