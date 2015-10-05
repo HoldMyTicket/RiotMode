@@ -37,18 +37,13 @@
         .clear {
             clear: both;
         }
+        
+        .hidden {
+            display: none;
+        }
     </style>
     
-    <button onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
-    <div class="overlay { opts['overlay-animation'] }" show="{ modalOpen }" onclick="{ closeModal }"></div>
-    <div class="modal { opts['modal-animation'] }" show="{ modalOpen }">
-        <div class="modal-content">
-            <yield/>
-            <button onclick="{ confirmBtn }" show="{ affirmativeBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>
-            <button onclick="{ cancelBtn }" show="{ dismissiveBtn }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Cancel</button>
-        </div>
-        <div class="clear"></div>
-    </div>
+    <button onclick="{ createModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
     
     /**
      * Modal component for RiotJS v2.2
@@ -62,10 +57,6 @@
     this.dismissiveBtn = opts['cancel-btn'] == 'true' ? true : false;
     this.modalOpen = false;
     
-    this.on('mount', function() {
-        
-    });
-    
     //load all opts if they are functions
     for(var i in opts){
         if(opts.hasOwnProperty(i)) {
@@ -76,7 +67,24 @@
     }
     
     createModal() {
-        var modalHtml = '<div class="overlay { opts[\'overlay-animation\'] }" show="{ modalOpen }" onclick="{ closeModal }"></div>';
+        var modalHtml = '<div class="overlay { opts[\'overlay-animation\'] }" show="{ '+this.modalOpen+' }" onclick="{ closeModal }"></div>';
+        modalHtml += '<div class="modal { '+opts['modal-animation']+' }" show="{ '+this.modalOpen+' }">';
+        modalHtml += '<div class="modal-content"><yield/>';
+        modalHtml += '<button onclick="{ confirmBtn }" show="{ '+this.affirmativeBtn+' }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Confirm</button>';
+        modalHtml += '<button onclick="{ cancelBtn }" show="{ '+this.dismissiveBtn+' }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent dismissive-btn">Cancel</button>';
+        modalHtml += '</div><div class="clear"></div></div>';
+        
+        if(document.getElementById('rm-modal')) {
+            document.getElementById('rm-modal').innerHTML = modalHtml;
+            this.openModal();
+        } else {
+            var modalWrapper = document.createElement('div');
+            modalWrapper.setAttribute('id', 'rm-modal');
+            modalWrapper.setAttribute('class', 'hidden');
+            modalWrapper.innerHTML = modalHtml;
+            document.querySelector('body').appendChild(modalWrapper);
+            this.openModal();
+        }
     }
     
     openModal(e) {
