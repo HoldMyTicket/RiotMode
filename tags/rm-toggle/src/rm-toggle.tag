@@ -39,16 +39,13 @@
     
     this.on('update', function() {
         me.initType(opts.type);
-        
-        setTimeout(function() {
-            me.checkToggle(opts.type);
-        }, 100);
     });
     
     this.on('mount', function() {
         var wrap = me.root.children[0].querySelector('label');
         
         componentHandler.upgradeElement(wrap); //call to load materialdesign on el
+        me.checkToggle(opts.type);
         me.update();
     });
     
