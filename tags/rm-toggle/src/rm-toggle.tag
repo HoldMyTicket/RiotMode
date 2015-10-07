@@ -40,19 +40,6 @@
 
     this.mdl_timer = false;
 
-
-
-    // this.on('off', function(){
-    //   me.ischecked = false;
-    //   me.opts.ischecked = false;
-    //   me.checkToggle();
-    // });
-    // this.on('on', function(){
-    //   me.ischecked = true;
-    //   me.opts.ischecked = true;
-    //   me.checkToggle();
-    // });
-
     this.on('mount', function() {
 
       Object.observe(me.opts, function (changes) {
