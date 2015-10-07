@@ -883,7 +883,7 @@ riot.tag('rm-toast', '<h2>Yum toast</h2> <div class="message_container" if="{ op
 
 });
 
-riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleType } mdl-js-{ toggleType } mdl-js-ripple-effect"> <input type="{ toggleType }" name="{ toggleName }" class="mdl-{ toggleType }__{ toggleType === \'radio\' ? \'button\' : \'input\' }" value="{ toggleValue }" onclick="{ toggle }" __checked="{ ischecked }"> <span if="{ toggleLabelText && toggleType !== \'icon-toggle\' }" class="mdl-{ toggleType }__label">{ toggleLabelText }</span> <i if="{ toggleType === \'icon-toggle\' }" class="mdl-icon-toggle__label material-icons">{ opts.icon }</i> </label> </div>', function(opts) {
+riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleType } mdl-js-{ toggleType } mdl-js-ripple-effect"> <input type="{ toggleType != \'switch\' ? toggleType : \'checkbox\' }" name="{ toggleName }" class="mdl-{ toggleType }__{ toggleType === \'radio\' ? \'button\' : \'input\' }" value="{ toggleValue }" onclick="{ toggle }" __checked="{ ischecked }"> <span if="{ toggleLabelText && toggleType !== \'icon-toggle\' }" class="mdl-{ toggleType }__label">{ toggleLabelText }</span> <i if="{ toggleType === \'icon-toggle\' }" class="mdl-icon-toggle__label material-icons">{ opts.icon }</i> </label> </div>', function(opts) {
     
     
     var me = this;
@@ -897,26 +897,28 @@ riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleType } mdl-j
 
     this.mdl_timer = false;
 
-    this.on('off', function(){
-      me.ischecked = false;
-      me.opts.ischecked = false;
-      me.checkToggle();
-    });
-    this.on('on', function(){
-      me.ischecked = true;
-      me.opts.ischecked = true;
-      me.checkToggle();
-    });
+
+
+
+
+
+
+
+
+
 
     this.on('mount', function() {
-      
-      me.root.querySelector('label').addEventListener('mdl-componentupgraded', function(e) {
-        clearTimeout(me.mdl_timer);
-        me.mdl_timer = setTimeout(function(){
-          me.checkToggle();
-        },300);
-      });
 
+      Object.observe(me.opts, function (changes) {
+        if(changes[0].name == 'ischecked' && changes[0].type == "update" && me.ischecked != me.opts.ischecked){
+          me.ischecked = me.opts.ischecked;
+          me.checkToggle();
+        }
+      });
+      
+      var wrap = me.root.children[0].querySelector('label');
+      componentHandler.upgradeElement(wrap);
+      
     });
 
     this.checkToggle = function() {
@@ -939,9 +941,7 @@ riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleType } mdl-j
     
     this.toggle = function(e) {
 
-      me.ischecked = !me.ischecked;
       me.opts.ischecked = me.ischecked;
-      me.checkToggle();
       me.fire('toggle', e);
 
     }.bind(this);

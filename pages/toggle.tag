@@ -39,8 +39,8 @@
 		<rm-toggle type="switch" label-text="No State" ontoggle="{ myToggle }"></rm-toggle>
 		<rm-toggle type="switch" label-text="Off State" ontoggle="{ myToggle }" ischecked={off_switch}></rm-toggle>
 		<rm-toggle type="switch" label-text="On State" ontoggle="{ myToggle }" ischecked="true"></rm-toggle>
-		<rm-toggle id="delayed_on_switch" type="switch" label-text="Delayed On" ontoggle="{ myToggle }" ischecked={off_switch}></rm-toggle>
-		<rm-toggle id="delayed_off_switch" type="switch" label-text="Delayed Off" ontoggle="{ myToggle }" ischecked={on_switch}></rm-toggle>
+		<rm-toggle id="delayed_on_switch" type="switch" label-text="Delayed On" ontoggle="{ myToggle }" ischecked={delayed_on_switch}></rm-toggle>
+		<rm-toggle id="delayed_off_switch" type="switch" label-text="Delayed Off" ontoggle="{ myToggle }" ischecked={delayed_off_switch}></rm-toggle>
 	
 		<div class="hidden-message" show="{ show }">This is a hidden message! :D</div>
 
@@ -56,11 +56,11 @@
     <pre>
       <code>
         
-        &lt;rm-toggle id=&quot;myswitch&quot; type=&quot;switch&quot; label-text=&quot;My Special Switch&quot; ischecked=true&gt;&lt;/rm-toggle&gt;
+        &lt;rm-toggle id=&quot;myswitch&quot; type=&quot;switch&quot; label-text=&quot;My Special Switch&quot; ischecked=&#123;this.ischecked&#125;&gt;&lt;/rm-toggle&gt;
         <br />
         <br />
         somefunction(){<br />
-          &nbsp;&nbsp;me.myswitch._tag.trigger(&#39;on&#39;);<br />
+          this.ischecked = true
         }
         
       </code>
@@ -94,12 +94,6 @@
 
     <h5>EVENTS</h5>
 
-    <h6>on</h6>
-    <p>Turn on your toggle switch</p>
-
-    <h6>off</h6>
-    <p>Turn off your toggle switch</p>
-
     <h6>toggle</h6>
     <p>When your toggle switch was manually toggled this will be fired</p>
 		
@@ -111,6 +105,9 @@
 		this.on_switch = true; // stays on
 		this.delayed_check = false; // will turn in 2 seconds
 		
+    this.delayed_on_switch = false;
+    this.delayed_off_switch = true;
+    
 		this.on('mount',function(){
 
       $('pre code').each(function(i, block) {
@@ -119,14 +116,14 @@
 
 			this.update();
 			setTimeout(function(){
-				me.delayed_on_switch._tag.trigger('on');
-				me.delayed_off_switch._tag.trigger('off');
+				me.delayed_on_switch = true;
+				me.delayed_off_switch = false;
 				me.update()
 			},2000);
 		})
 		
 		myToggle(e) {
-			show = !show;
+			console.log('toggle Switched');
 			me.update();
 		}
       

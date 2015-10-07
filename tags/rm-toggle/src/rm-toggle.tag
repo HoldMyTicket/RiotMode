@@ -5,7 +5,7 @@
         <label class="mdl-{ toggleType } mdl-js-{ toggleType } mdl-js-ripple-effect">
                 
             <input 
-                type="{ toggleType }"
+                type="{ toggleType != 'switch' ? toggleType : 'checkbox' }"
                 name="{ toggleName }" 
                 class="mdl-{ toggleType }__{ toggleType === 'radio' ? 'button' : 'input' }" 
                 value="{ toggleValue }" 
@@ -40,26 +40,31 @@
 
     this.mdl_timer = false;
 
-    this.on('off', function(){
-      me.ischecked = false;
-      me.opts.ischecked = false;
-      me.checkToggle();
-    });
-    this.on('on', function(){
-      me.ischecked = true;
-      me.opts.ischecked = true;
-      me.checkToggle();
-    });
+
+
+    // this.on('off', function(){
+    //   me.ischecked = false;
+    //   me.opts.ischecked = false;
+    //   me.checkToggle();
+    // });
+    // this.on('on', function(){
+    //   me.ischecked = true;
+    //   me.opts.ischecked = true;
+    //   me.checkToggle();
+    // });
 
     this.on('mount', function() {
-      
-      me.root.querySelector('label').addEventListener('mdl-componentupgraded', function(e) {
-        clearTimeout(me.mdl_timer);
-        me.mdl_timer = setTimeout(function(){
-          me.checkToggle();
-        },300);
-      });
 
+      Object.observe(me.opts, function (changes) {
+        if(changes[0].name == 'ischecked' && changes[0].type == "update" && me.ischecked != me.opts.ischecked){
+          me.ischecked = me.opts.ischecked;
+          me.checkToggle();
+        }
+      });
+      
+      var wrap = me.root.children[0].querySelector('label');
+      componentHandler.upgradeElement(wrap);
+      
     });
 
     checkToggle() {
@@ -82,9 +87,7 @@
     
     toggle(e) {
 
-      me.ischecked = !me.ischecked;
       me.opts.ischecked = me.ischecked;
-      me.checkToggle();
       me.fire('toggle', e);
 
     }

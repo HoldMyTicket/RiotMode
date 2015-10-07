@@ -1,6 +1,6 @@
 {
   "name": "riotmode",
-  "version": "0.7.1",
+  "version": "1.0.3",
   "homepage": "https://github.com/HoldMyTicket/RiotMode",
   "authors": [
     "HoldMyTicket"
@@ -20,7 +20,7 @@
   ],
   "dependencies": {
     "riot": "~2.2.1",
-    "material-design-lite": "~1.0.0",
+    "material-design-lite": "~1.0.5",
     "marked": "~0.3.3",
     "moment": "~2.10.3"
   },

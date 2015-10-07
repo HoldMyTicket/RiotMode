@@ -52,14 +52,17 @@
 					Several states with delays
 				</p>
 
-				<rm-toggle type="switch" label-text="No State" ontoggle="{ myToggle }"></rm-toggle>
-				<rm-toggle type="switch" label-text="Off State" ontoggle="{ myToggle }" ischecked={off_switch}></rm-toggle>
-				<rm-toggle type="switch" label-text="On State" ontoggle="{ myToggle }" ischecked="true"></rm-toggle>
-				<rm-toggle id="delayed_on_switch" type="switch" label-text="Delayed On" ontoggle="{ myToggle }" ischecked={off_switch}></rm-toggle>
-				<rm-toggle id="delayed_off_switch" type="switch" label-text="Delayed Off" ontoggle="{ myToggle }" ischecked={on_switch}></rm-toggle>
-			
+				<rm-toggle type="switch" label-text="No State"></rm-toggle>
+				<rm-toggle type="switch" label-text="Off State" ischecked={off_switch}></rm-toggle>
+				<rm-toggle type="switch" label-text="On State" ischecked="true"></rm-toggle>
+				<rm-toggle type="switch" label-text="Delayed On" ischecked={delayed_on_switch}></rm-toggle>
+				<rm-toggle type="switch" label-text="Delayed Off" ischecked={delayed_off_switch}></rm-toggle>
+
+				<br />
+				<rm-toggle type="switch" label-text="Click Event" ontoggle="{ myToggle }" ischecked={on_switch}></rm-toggle>
+
 				<div class="hidden-message" show="{ show }">This is a hidden message! :D</div>
-				
+			
 				var me = this;
 				
 				this.show = false;
@@ -68,19 +71,25 @@
 				this.on_switch = true; // stays on
 				this.delayed_check = false; // will turn in 2 seconds
 				
+				this.delayed_on_switch = false;
+				this.delayed_off_switch = true;
+				
 				this.on('mount',function(){
 					this.update();
 					setTimeout(function(){
-						me.delayed_on_switch._tag.trigger('on');
-						me.delayed_off_switch._tag.trigger('off');
+						me.delayed_on_switch = true;
+						me.delayed_off_switch = false;
+						// me.delayed_on_switch._tag.trigger('on');
+						// me.delayed_off_switch._tag.trigger('off');
 						me.update()
 					},2000);
 				})
 				
 				myToggle(e) {
-					show = !show;
-					me.update();
+					this.show = !this.show;
+					this.update()
 				}
+				
 			</toggle-demo>
 		</script>
         
