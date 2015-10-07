@@ -28,8 +28,23 @@
 			<toggle-demo>
 
 				<h3>STANDARD TOGGLES</h3>
-				<rm-toggle type="checkbox" label-text="Checkbox" ontoggle="{ myToggle }"></rm-toggle>
-				<rm-toggle type="radio" label-text="Radio Button" ontoggle="{ myToggle }"></rm-toggle>
+				<rm-toggle type="checkbox" label-text="Checkbox Off" ontoggle="{ myToggle }"></rm-toggle>
+				<rm-toggle type="checkbox" label-text="Checkbox On" ontoggle="{ myToggle }" ischecked="{on_switch}"></rm-toggle>
+				
+				<br />
+				
+				<rm-toggle type="radio" name="group1" label-text="Radio 1" ontoggle="{ myToggle }"></rm-toggle>
+				<rm-toggle type="radio" name="group1" label-text="Radio 2" ontoggle="{ myToggle }"></rm-toggle>
+				<rm-toggle type="radio" name="group1" label-text="Radio 3" ontoggle="{ myToggle }"></rm-toggle>
+
+				<br />
+
+				<rm-toggle type="radio" name="group2" label-text="Radio A" ontoggle="{ myToggle }"></rm-toggle>
+				<rm-toggle type="radio" name="group2" label-text="Radio B" ontoggle="{ myToggle }"></rm-toggle>
+				<rm-toggle type="radio" name="group2" label-text="Radio C" ontoggle="{ myToggle }"></rm-toggle>
+				
+				<br />
+				
 				<rm-toggle type="icon-toggle" icon="feedback" ontoggle="{ myToggle }"></rm-toggle>
 
 				<h3>TOGGLE SWITCHES</h3>
