@@ -522,16 +522,18 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div class="overla
     this.openModal = function(e) {
       this.open = true;
       this.update();
-      if(RiotControl)
+      if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalopened');
+      }
       this.fire('open', e);
     }.bind(this);
     
     this.closeModal = function(e) {
       this.open = false;
       this.update();
-      if(RiotControl)
+      if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalclosed');
+      }
       this.fire('close', e);
     }.bind(this);
     
