@@ -3,7 +3,7 @@
     <div class="wrap">
       
         <label class="mdl-{ toggleType } mdl-js-{ toggleType } mdl-js-ripple-effect">
-                
+
             <input 
                 type="{ toggleType != 'switch' ? toggleType : 'checkbox' }"
                 name="{ toggleName }" 
