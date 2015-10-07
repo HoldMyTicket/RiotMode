@@ -52,9 +52,10 @@
 		.view-title {
 			display:block;
 			text-align:center;
-			background: rgb(216,27,96);
-			color: #FFF;
+			background: #f5f5f5;
+			color: #666;
 			line-height: 50px;
+			text-transform: uppercase;
 		}
 		.view-title a {
 			cursor: pointer;
@@ -63,18 +64,19 @@
 			float:left;
 			line-height:50px;
 			margin-left:10px;
-			color:#FFF
+			color:#555;
 		}
 		.right-arrow {
 			float:right;
 			line-height:50px;
 			margin-right:10px;
-			color:#FFF
+			color:#555;
 		}
 		.daysofweek {
+			background: #f5f5f5;
 			width:100%;
 			height:23px;
-			color: rgb(0,188,214);
+			color: #222;
 			font-weight: 700;
 		}
 		.daysofweek span {
@@ -89,7 +91,7 @@
 		}
 		.weekrow a {
 			height:40px;
-			border-radius: 20px;
+			border-radius: 40px;
 			display: inline-block;
 			line-height: 40px;
 			width:14.285714285%;
@@ -100,10 +102,10 @@
 			cursor:pointer;
 		}
 		.today {
-			box-shadow: 0 0 0 2px rgb(0,188,214);
 		}
 		.selected {
-			background: rgb(205,205,205);
+			background: #fff;
+			border: 2px solid #119ec3;
 		}
 		.nohover:hover {content:"";background:none;cursor:default;padding:0 !important;}
 	</style>
