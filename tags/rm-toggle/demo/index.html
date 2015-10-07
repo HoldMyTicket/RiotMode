@@ -26,15 +26,42 @@
 		
 		<script type="riot/tag">
 			<toggle-demo>
+
+				<h3>STANDARD TOGGLES</h3>
 				<rm-toggle type="checkbox" label-text="Checkbox" ontoggle="{ myToggle }"></rm-toggle>
 				<rm-toggle type="radio" label-text="Radio Button" ontoggle="{ myToggle }"></rm-toggle>
 				<rm-toggle type="icon-toggle" icon="feedback" ontoggle="{ myToggle }"></rm-toggle>
-				<rm-toggle type="switch" label-text="Switch Toggle" ontoggle="{ myToggle }"></rm-toggle>
+
+				<h3>TOGGLE SWITCHES</h3>
+				<p>
+					Several states with delays
+				</p>
+
+				<rm-toggle type="switch" label-text="No State" ontoggle="{ myToggle }"></rm-toggle>
+				<rm-toggle type="switch" label-text="Off State" ontoggle="{ myToggle }" ischecked={off_switch}></rm-toggle>
+				<rm-toggle type="switch" label-text="On State" ontoggle="{ myToggle }" ischecked="true"></rm-toggle>
+				<rm-toggle id="delayed_on_switch" type="switch" label-text="Delayed On" ontoggle="{ myToggle }" ischecked={off_switch}></rm-toggle>
+				<rm-toggle id="delayed_off_switch" type="switch" label-text="Delayed Off" ontoggle="{ myToggle }" ischecked={on_switch}></rm-toggle>
 			
 				<div class="hidden-message" show="{ show }">This is a hidden message! :D</div>
 				
 				var me = this;
-				show = false;
+				
+				this.show = false;
+				
+				this.off_switch = false; // stays off
+				this.on_switch = true; // stays on
+				this.delayed_check = false; // will turn in 2 seconds
+				
+				this.on('mount',function(){
+					this.update();
+					setTimeout(function(){
+						me.delayed_on_switch._tag.trigger('on');
+						me.delayed_off_switch._tag.trigger('off');
+						me.update()
+					},2000);
+				})
+				
 				myToggle(e) {
 					show = !show;
 					me.update();
@@ -46,6 +73,7 @@
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
 		<script src="/mixins/RMeventMixin.js"></script>
 		<script src="../src/rm-toggle.tag" type="riot/tag"></script>
-        <script>riot.mount('toggle-demo')</script>
+    <script>riot.mount('toggle-demo')</script>
+		
 	</body>
 </html>
