@@ -66,7 +66,6 @@
       </code>
     </pre>
 
-
     <h5>TYPES</h5>
     
     <h6>checkbox</h6>
