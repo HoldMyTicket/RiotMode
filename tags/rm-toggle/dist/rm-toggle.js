@@ -12,16 +12,6 @@ riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleType } mdl-j
 
     this.mdl_timer = false;
 
-
-
-
-
-
-
-
-
-
-
     this.on('mount', function() {
 
       Object.observe(me.opts, function (changes) {
