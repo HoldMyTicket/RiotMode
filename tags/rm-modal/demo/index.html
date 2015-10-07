@@ -79,7 +79,37 @@
 					<p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
         </rm-modal>
 
+
+
 				</div>
+				
+							<rm-modal 
+							      open-btn-text="HAVE A PROMO CODEaaa?" 
+							      open-btn-class="btn btn-sm btn-outline btn-noline btn-black btn-round" 
+							      open-btn-icon="fi fi-price-tag" 
+							      modal-animation="animated fadeInDown" 
+							      submit_promo="{submit_promo}" 
+							      id="promo_code_modal" 
+							      class="promo-code-modal">
+							      
+							      <h1>Promo Code</h1>
+							      
+							      <input id="promo_code_input" class="width-50" type="text" name="promo_code" placeholder="Enter your promo code...">
+							      <button id="submit_promo_code_btn" onclick="{submit_promo}" class="btn btn-red btn-outline btn-smaller">SUBMIT</button>
+							      
+							      <div class='error_msg'>
+							        <div hide="{show_error}">
+							          <p class="fine">Enter <strong>Coupon Codes</strong> at the end of checkout (not here)</p>
+							        </div>
+							        <div show="{show_error}">
+							          <p class="fine">{error_msg}</p>
+							        </div>
+							      </div>
+							    
+							      <div class="error" id="promo_code_response_area"></div>
+							      
+							  </rm-modal>
+
 				
 				var me = this;
 				
