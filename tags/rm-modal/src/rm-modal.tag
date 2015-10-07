@@ -78,16 +78,18 @@
     openModal(e) {
       this.open = true;
       this.update();
-      if(RiotControl)
+      if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalopened');
+      }
       this.fire('open', e);
     }
     
     closeModal(e) {
       this.open = false;
       this.update();
-      if(RiotControl)
+      if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalclosed');
+      }
       this.fire('close', e);
     }
     
