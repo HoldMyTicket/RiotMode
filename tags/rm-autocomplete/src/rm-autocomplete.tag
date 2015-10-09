@@ -259,17 +259,21 @@
       //Ajax on the fly
       if(tag.parameter) {
       
-        var path = tag.url + '/' + tag.parameter + '/' + target.value;
+        var path = tag.url + '/' + tag.parameter + '/' + encodeURIComponent(target.value);
 
         clearTimeout(tag.timeout);
 
         tag.timeout = setTimeout(function() {
           tag.ajaxGet(path, function(res) {
             var json = JSON.parse(res);
+            if(json.length > 0)
+              tag.noResults = false;
+            else
+              tag.noResults = true;
             tag.filteredList = json;
             tag.update();
           });
-        });
+        },100);
 
       } else {
 
@@ -280,7 +284,7 @@
       }
 
       tag.noResults = false;
-      if(tag.filteredList.length < 1)
+      if(tag.filteredList.length < 1 && !tag.parameter)
         tag.noResults = true;
     }
 
@@ -323,7 +327,7 @@
       
     } else if (val == 40) {
       
-      if(tag.atIndex + 1 >= tag.list.length)
+      if(tag.atIndex + 1 >= tag.filteredList.length)
         return;
 
       tag.atIndex++;

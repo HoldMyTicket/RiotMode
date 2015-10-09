@@ -33,12 +33,14 @@
 			<section>
 				<p>Search for a country (Autocomplete type)</p>
 				<rm-autocomplete
-								 name="text-input"
-								 url="/tags/rm-autocomplete/demo/demo.json"
-								 parameter="q"
-								 height="190px"
-								 placeholder="">
-				</rm-autocomplete>
+					id="location_field"
+					name="location_field"
+					url="http://holdmyticket.loc/api/locations/query"
+					parameter="q"
+					placeholder="Nearby Location"
+					onchange="{location_changed}"
+					value="{current_location}">
+              </rm-autocomplete>
 			</section>
 
 			<section>
