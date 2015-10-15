@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <button onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
+    <button hide="{hide_btn}" onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
     
     <style scoped>
         .modalMaster {
@@ -74,6 +74,7 @@
     this.affirmativeBtn = opts['confirm-btn'] == 'true' ? true : false;
     this.dismissiveBtn = opts['cancel-btn'] == 'true' ? true : false;
     this.open = false;
+    this.hide_btn = false;
     
     openModal(e) {
       this.open = true;
@@ -81,6 +82,8 @@
       if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalopened');
       }
+      if(!this.opts['open-btn-text'])
+        this.hide_btn = true;
       this.fire('open', e);
     }
     
@@ -94,11 +97,11 @@
     }
     
     confirmBtn(e) {
-        opts.onconfirm();
+      opts.onconfirm();
     }
     
     cancelBtn(e) {
-        opts.oncancel();
+      opts.oncancel();
     }
     
 </rm-modal>
