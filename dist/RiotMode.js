@@ -523,6 +523,12 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div class="overla
     this.dismissiveBtn = opts['cancel-btn'] == 'true' ? true : false;
     this.open = false;
     this.hide_btn = false;
+
+    this.on('mount',function(){
+      if(!this.opts['open-btn-text'])
+        this.hide_btn = true;
+      this.update();
+    })
     
     this.openModal = function(e) {
       this.open = true;
@@ -530,8 +536,6 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div class="overla
       if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalopened');
       }
-      if(!this.opts['open-btn-text'])
-        this.hide_btn = true;
       this.fire('open', e);
     }.bind(this);
     
