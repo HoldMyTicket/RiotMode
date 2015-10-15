@@ -75,6 +75,12 @@
     this.dismissiveBtn = opts['cancel-btn'] == 'true' ? true : false;
     this.open = false;
     this.hide_btn = false;
+
+    this.on('mount',function(){
+      if(!this.opts['open-btn-text'])
+        this.hide_btn = true;
+      this.update();
+    })
     
     openModal(e) {
       this.open = true;
@@ -82,8 +88,6 @@
       if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalopened');
       }
-      if(!this.opts['open-btn-text'])
-        this.hide_btn = true;
       this.fire('open', e);
     }
     
