@@ -28,6 +28,7 @@
      * Toggle component for RiotJS v2.2
      * 
      * @author joseph-perez
+     * @author wes
      */
     var me = this;
     
