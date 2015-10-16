@@ -1,7 +1,7 @@
 <rm-toast>
 
-	<div show="{showToast}" class="message-container">
-		<div onclick="{close}" class="toast { opts.position }">{ parseHTML(opts.text) }</div>
+	<div show="{displayToast}" class="message-container">
+		<div onclick="{hideToast}" class="toast { toastPosition }">{ parseHTML(opts.text) }</div>
 	</div>
 	
 	<style scoped>
@@ -50,27 +50,28 @@
 	var me = this;
 	
 	this.mixin(RMeventMixin);
-	this.showToast = false;
+	this.displayToast = false;
 	this.toastDuration = opts.duration || 1500;
+	this.toastPosition = opts.position || 'bottom-right';
 	
 	this.on('mount', function() {
 		me.update();
 	});
 	
-	open(e) {
-		this.showToast = true;
+	showToast(e) {
+		this.displayToast = true;
 		this.update();
 		if(typeof RiotControl != 'undefined')
 			RiotControl.trigger('toastopened');
 		this.fire('open', e);
 		
 		setTimeout(function() {
-			me.close();
+			me.hideToast();
 		}, me.toastDuration);
 	}
 	
-	close(e) {
-		this.showToast = false;
+	hideToast(e) {
+		this.displayToast = false;
 		this.update();
 		if(typeof RiotControl != 'undefined')
 			RiotControl.trigger('toastclosed');

@@ -41,13 +41,13 @@
 				var me = this;
 				
 				createDocument(e) {
-					me.createDocumentToast._tag.open();
+					me.createDocumentToast._tag.showToast();
 				}
 				
 				sendEmail(e) {
 					setTimeout(function() {
 						me.sendEmailToast._tag.opts.text = 'Email Successfully Sent!';
-						me.sendEmailToast._tag.open();
+						me.sendEmailToast._tag.showToast();
 					}, 2000);
 				}
 			</toast-demo>
