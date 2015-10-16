@@ -41,6 +41,12 @@
 		
 	</style>
 	
+	/**
+     * Toast component for RiotJS v2.2
+     * 
+     * @author joseph-perez
+     */
+	
 	var me = this;
 	
 	this.mixin(RMeventMixin);
@@ -54,6 +60,8 @@
 	open(e) {
 		this.showToast = true;
 		this.update();
+		if(typeof RiotControl != 'undefined')
+			RiotControl.trigger('toastopened');
 		this.fire('open', e);
 		
 		setTimeout(function() {
@@ -64,6 +72,8 @@
 	close(e) {
 		this.showToast = false;
 		this.update();
+		if(typeof RiotControl != 'undefined')
+			RiotControl.trigger('toastclosed');
 		this.fire('close', e);
 	}
 	
