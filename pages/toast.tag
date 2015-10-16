@@ -41,10 +41,6 @@
       </code>
     </pre>
 
-    <h5>TYPES</h5>
-
-    <hr />
-
     <h5>ATTRIBUTES</h5>
 
     <h6>duration</h6>
@@ -75,7 +71,6 @@
 	});
       
     createDocument(e) {
-        console.log(me.createDocumentToast._tag);
         me.createDocumentToast._tag.showToast();
     }
       
