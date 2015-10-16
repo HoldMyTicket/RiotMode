@@ -3,6 +3,7 @@
     <div class="modalMaster" show="{open}">
       <div class="overlay" onclick="{closeModal}"></div>
       <div class="modal">
+        <button class="close-btn" onclick="{closeModal}">X</button>
         <div class="modal-content"><yield/></div>
         <div class="clear"></div>
       </div>
@@ -41,6 +42,14 @@
             -moz-border-radius: 5px;
             -o-border-radius: 5px;
             border-radius: 5px;
+        }
+        .close-btn {
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 15px;
+            float: right;
         }
         
         .affirmative-btn {
