@@ -52,14 +52,6 @@
             float: right;
         }
         
-        .affirmative-btn {
-            float: left;
-        }
-        
-        .dismissive-btn {
-            float: right;
-        }
-        
         .clear {
             clear: both;
         }
@@ -81,8 +73,6 @@
     var me = this;
     
     this.mixin(RMeventMixin);
-    this.affirmativeBtn = opts['confirm-btn'] == 'true' ? true : false;
-    this.dismissiveBtn = opts['cancel-btn'] == 'true' ? true : false;
     this.open = false;
     this.hide_btn = false;
 
@@ -108,14 +98,6 @@
         RiotControl.trigger('modalclosed');
       }
       this.fire('close', e);
-    }
-    
-    confirmBtn(e) {
-      opts.onconfirm();
-    }
-    
-    cancelBtn(e) {
-      opts.oncancel();
     }
     
 </rm-modal>

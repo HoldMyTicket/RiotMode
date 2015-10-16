@@ -159,6 +159,7 @@
       }
       
       noButtonModalLoad(e){
+          console.log(me.noButtonModal._tag);
           me.noButtonModal._tag.openModal()
       }
       
