@@ -22,7 +22,11 @@
 			
 			<toast-demo>
 				
-				<rm-toast duration="2000" id="sendEmailToast" position="top-right"></rm-toast>
+				<rm-toast 
+					duration="2000" 
+					id="sendEmailToast" 
+					position="top-right">
+				</rm-toast>
 				
 				<rm-toast 
 					id="createDocumentToast" 
@@ -31,22 +35,20 @@
 					text="Successfully created! You can view the document <a target='_blank' href='http://google.com'>here</a>">
 				</rm-toast>
 				
+				<button onclick="{sendEmail}">Send Email</button>
 				<button onclick="{createDocument}">Create Document</button>
 				
 				var me = this;
-				
-				this.on('mount', function() {
-					setTimeout(function() {
-						me.sendEmail();
-					}, 2000);
-				});
 				
 				createDocument(e) {
 					me.createDocumentToast._tag.open();
 				}
 				
 				sendEmail(e) {
-					me.sendEmailToast._tag.open();
+					setTimeout(function() {
+						me.sendEmailToast._tag.opts.text = 'Email Successfully Sent!';
+						me.sendEmailToast._tag.open();
+					}, 2000);
 				}
 			</toast-demo>
 		
