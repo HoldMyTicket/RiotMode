@@ -22,11 +22,32 @@
 			
 			<toast-demo>
 				
+				<rm-toast duration="2000" id="sendEmailToast" position="top-right"></rm-toast>
+				
 				<rm-toast 
+					id="createDocumentToast" 
 					position="bottom-right" 
+					duration="3000" 
 					text="Successfully created! You can view the document <a target='_blank' href='http://google.com'>here</a>">
 				</rm-toast>
 				
+				<button onclick="{createDocument}">Create Document</button>
+				
+				var me = this;
+				
+				this.on('mount', function() {
+					setTimeout(function() {
+						me.sendEmail();
+					}, 2000);
+				});
+				
+				createDocument(e) {
+					me.createDocumentToast._tag.open();
+				}
+				
+				sendEmail(e) {
+					me.sendEmailToast._tag.open();
+				}
 			</toast-demo>
 		
 		</script>

@@ -1,7 +1,7 @@
 <rm-toast>
 
-	<div show="{open}" class="message-container">
-		<div class="toast { opts.position }">{ parseHTML(opts.text) }</div>
+	<div show="{showToast}" class="message-container">
+		<div onclick="{close}" class="toast { opts.position }">{ parseHTML(opts.text) }</div>
 	</div>
 	
 	<style scoped>
@@ -44,20 +44,25 @@
 	var me = this;
 	
 	this.mixin(RMeventMixin);
-	this.open = true;
+	this.showToast = false;
+	this.toastDuration = opts.duration || 1500;
 	
 	this.on('mount', function() {
 		me.update();
 	});
 	
-	openToast(e) {
-		this.open = true;
+	open(e) {
+		this.showToast = true;
 		this.update();
 		this.fire('open', e);
+		
+		setTimeout(function() {
+			me.close();
+		}, me.toastDuration);
 	}
 	
-	closeToast(e) {
-		this.open = false;
+	close(e) {
+		this.showToast = false;
 		this.update();
 		this.fire('close', e);
 	}
