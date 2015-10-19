@@ -12,6 +12,7 @@
 			color: rgba(255, 255, 255, 1);
 			background-color: rgba(0, 0, 0, 0.8);
 			padding: 20px;
+			z-index: 10;
 			-webkit-border-radius: 5px;
             -moz-border-radius: 5px;
             -o-border-radius: 5px;
