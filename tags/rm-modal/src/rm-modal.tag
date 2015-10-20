@@ -48,14 +48,14 @@
             overflow-y: auto;
         }
         .close-btn {
-            background-color: black;
+            background-color: #de2c3b;
             color: white;
             border: none;
             outline: none;
             cursor: pointer;
             font-size: 15px;
             position: absolute;
-            top: -10px;
+            top: -7px;
             right: -7px;
             -webkit-border-radius: 10px;
             -moz-border-radius: 10px;
