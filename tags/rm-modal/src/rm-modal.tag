@@ -32,8 +32,6 @@
         }
         .modal {
             max-width: 35%;
-            max-height: 50%;
-            overflow-y: auto;
             position: fixed;
             left: 33%;
             top: 20%;
@@ -44,6 +42,10 @@
             -moz-border-radius: 5px;
             -o-border-radius: 5px;
             border-radius: 5px;
+        }
+        .modal-content {
+            max-height: 500px;
+            overflow-y: auto;
         }
         .close-btn {
             background-color: black;
