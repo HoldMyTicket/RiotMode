@@ -48,19 +48,25 @@
             overflow-y: auto;
         }
         .close-btn {
-            background-color: #de2c3b;
+            background-color: black;
             color: white;
-            border: none;
+            font-weight: 200;
+            width: 30px;
+            height: 30px;
+            border: 2px solid white;
             outline: none;
             cursor: pointer;
             font-size: 15px;
             position: absolute;
             top: -7px;
             right: -7px;
-            -webkit-border-radius: 10px;
-            -moz-border-radius: 10px;
-            -o-border-radius: 10px;
-            border-radius: 10px;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            -o-border-radius: 15px;
+            border-radius: 15px;
+            -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
+            -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
+            box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
         }
         
         .clear {
