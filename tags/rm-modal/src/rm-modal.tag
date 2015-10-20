@@ -32,6 +32,8 @@
         }
         .modal {
             max-width: 35%;
+            max-height: 50%;
+            overflow-y: auto;
             position: fixed;
             left: 33%;
             top: 20%;
@@ -44,12 +46,19 @@
             border-radius: 5px;
         }
         .close-btn {
-            background: transparent;
+            background-color: black;
+            color: white;
             border: none;
             outline: none;
             cursor: pointer;
             font-size: 15px;
-            float: right;
+            position: absolute;
+            top: -10px;
+            right: -7px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -o-border-radius: 10px;
+            border-radius: 10px;
         }
         
         .clear {
