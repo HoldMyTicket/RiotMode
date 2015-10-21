@@ -58,8 +58,8 @@
             cursor: pointer;
             font-size: 15px;
             position: absolute;
-            top: -7px;
-            right: -7px;
+            top: -10px;
+            right: -10px;
             -webkit-border-radius: 15px;
             -moz-border-radius: 15px;
             -o-border-radius: 15px;
@@ -67,6 +67,14 @@
             -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
             -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
             box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
+        }
+        .close-btn:hover {
+            background-color: white;
+            color: black;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
         
         .clear {
