@@ -25,6 +25,7 @@
 		<script src="/mixins/RMajaxMixin.js"></script>
 		<script src="/mixins/RMeventMixin.js"></script>
 		<script src="../src/rm-autocomplete.tag" type="riot/tag"></script>
+		<script src="../src/rm-a.tag" type="riot/tag"></script>
 	</head>
 	<body>
 		<form onsubmit="doSubmit();return false" id="submitForm">			
@@ -32,15 +33,14 @@
 			<p>There are different types of selections. One is autocomplete type, the other select type.</p>
 			<section>
 				<p>Search for a country (Autocomplete type)</p>
-				<rm-autocomplete
+				<rm-a
 					id="location_field"
 					name="location_field"
 					url="http://holdmyticket.loc/api/locations/query"
 					parameter="q"
 					placeholder="Nearby Location"
-					onchange="{location_changed}"
-					value="{current_location}">
-              </rm-autocomplete>
+					onchange="{location_changed}">
+              </rm-a>
 			</section>
 
 			<section>
@@ -86,7 +86,7 @@
 		<!-- <p>This text is just down here to see how the page reflows as the user interacts with the &lt;rm-autocomplete&gt; tag</p> -->
 		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- only used for serializing form test -->
 		<script>
-			riot.mount('rm-autocomplete');
+			riot.mount('*');
 			
 			function doSubmit(){
 				console.log('serialized form', $('#submitForm').serialize())

@@ -252,7 +252,7 @@
       var target = e.srcElement || e.originalTarget;
 
       if(target.value.length < 2) {
-        tag.filteredList = tag.list;
+        tag.filteredList = tag.list || [];
         return;
       }
 
