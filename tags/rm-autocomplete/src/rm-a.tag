@@ -162,8 +162,8 @@
   });
   
   handleText(e) {
+    e.preventDefault();
     if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
-      e.preventDefault();
       this.keys(e.keyCode)
     } else {
       var target = e.srcElement || e.originalTarget;
@@ -223,9 +223,9 @@
         me.ajaxGet(path, function(res) { 
           me.filteredList = JSON.parse(res);
           if(me.filteredList && me.filteredList.length > 0) {
-            me.open = true;
+            me.openWindow();
           } else {
-            me.open = false;
+            me.closeWindow();
           }
           me.update(); 
         });
@@ -282,6 +282,7 @@
 
   closeWindow(e) {
     this.open = false;
+    this.atIndex = -1;
     this.update();
   }
 
