@@ -10,12 +10,12 @@
       placeholder="{ }"
       onkeyup="{ handleText }">
 
-    <div show={ open } class="list_container">
+    <div show="{open}" class="list_container">
       <ul class="list">         
-        <li class="list-row" show={ noResults && value.length > 1}>
+        <li class="list_row" show={ noResults && value.length > 1}>
           { noResultsMessage }
         </li>
-        <li class="list-row item{ item.active ? ' active' : ''}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }">
+        <li class="list_row item{ item.active ? ' active' : ''}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }">
           { item.text }
         </li>
       </ul>
@@ -48,34 +48,7 @@
       color: inherit; 
     }
     .base_input:focus { outline: 0; }
-    .noborder .border { border: 0; }
-    .border {
-      
-      height:35px;
-      padding-left:5px;
-      border:1px solid rgba(0,0,0,.12);
-      box-sizing:border-box;
-    }
-    .border:-moz-placeholder { color: rgb(169,169,169); /* Firefox 18- */ }
-    .border:-ms-input-placeholder { color: rgb(169,169,169); }
-    .border::-webkit-input-placeholder { color: rgb(169,169,169); }
-    .border::-moz-placeholder { color: rgb(169,169,169); /* Firefox 19+ */ }
-    .err {border: 1px dashed red; color: rgb(169,169,169);}
-    .filter {padding:0;margin:0px;}
-    .filter:hover {background:none;}
-    .filter-input {
-      background:none;
-      border:none;
-      border-bottom:1px solid rgba(0, 0, 0, 0.117647);
-      box-sizing:border-box;
-      color: rgb(85, 85, 85);
-      padding:5px;
-      font-size:16px;
-      height:35px;
-      margin:0px;
-      width:100%;
-    }
-    .list-container {
+    .list_container {
       position:absolute;
       left:0;
       right:0;
@@ -103,7 +76,7 @@
       -webkit-margin-before: 0;
       -webkit-margin-after: 0;
     }
-    .list .list-row {
+    .list .list_row {
       position:relative;
       display: block;
       padding:5px 15px;
@@ -111,7 +84,7 @@
       overflow:auto;
       border-bottom: 1px solid rgba(0, 0, 0, 0.117647);
     }
-    .list .list-row .accent {
+    .list .list_row .accent {
       position:absolute;
       top:0;
       right:0;
@@ -122,10 +95,10 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    .list .list-row:last-child {
+    .list .list_row:last-child {
       border-bottom:none;
     }
-    .list .list-row:hover {
+    .list .list_row:hover {
       background: rgb(240, 240, 240);
       cursor: pointer;
     }
@@ -155,11 +128,12 @@
   
   this.noResults = false;
   this.noResultsMessage = opts.message || 'No results...';
+  this.atIndex = -1;
   
   this.on('mount',function(){
     
     if(this.ajax) {
-      this.ajaxGetTesting(this.url, function(res) {
+      this.ajaxGet(this.url, function(res) {
         var json = JSON.parse(res);
         me.list = json;
         me.filteredList = json;
@@ -180,19 +154,59 @@
     document.removeEventListener('focus', me.globalClose, true);
   });
   
+  this.on('update', function() {
+    var input = this.root.querySelector('.base_input');
+    if(input != null) this.value = input.value;
+    //this.value = this.root.querySelector('.base_input').value;
+  });
+  
   handleText(e) {
-    //Important keys
     if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
       e.preventDefault();
       this.keys(e.keyCode)
     } else {
       var target = e.srcElement || e.originalTarget;
-      this.getList(target.value);
+      this.filteredList = this.getList(target.value);
+      console.log()
+      if(this.filteredList && this.filteredList.length > 0) {
+        this.open = true;
+      }
+      this.update();
     }
   }
   
-  keys() {
-    
+  keys(val) {
+    if (val == 27) {
+      this.closeWindow();
+    } else if (val == 13) {
+      
+      if(this.filteredList.length == 1) {
+        //Assign
+        this.closeWindow();
+        this.root.querySelector('.base_input').blur();
+        return;
+      } else {
+        this.filteredList.forEach(function(item) {
+          if(item.active) {
+            this.value = item.text;
+            this.fire('change',{'value':item.text});
+            this.closeWindow();
+          }
+        });
+      }
+      
+    } else if (val == 38) {
+      if(this.atIndex <= 0)
+        return;
+      this.atIndex--;
+      this.activate();
+    } else if (val == 40) {
+      if(this.atIndex + 1 >= this.filteredList.length)
+        return;
+
+      this.atIndex++;
+      this.activate();
+    }
   }
   
   getList(value) {
@@ -211,11 +225,39 @@
       
     } else {
       
-      return this.list.filter(function(e) {
-        return c.text.match(RegExp(target.value,'i'));
+      var ret = this.list.filter(function(c) {
+        return c.text.match(RegExp(value,'i'));
       });
-        
+      return ret;
     }
+  }
+  
+  activate() {
+
+    if(typeof this.filteredList[this.atIndex] === 'undefined') {
+      return;
+    }
+
+    this.deactivate();
+    this.filteredList[this.atIndex].active = true;
+    this.update();
+
+    var active = this.root.querySelector('.active');
+    var table = this.root.querySelector('.list');
+
+    var diff = active.getBoundingClientRect().top - table.getBoundingClientRect().top;
+    var max = parseInt(table.style.maxHeight);
+
+    if(diff >= max || diff < 0) {
+      active.scrollIntoView();
+    }
+    
+  }
+
+  deactivate() {
+    this.filteredList.forEach(function(item) {
+      item.active = false;
+    });
   }
   
   openWindow(e) {
