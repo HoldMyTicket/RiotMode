@@ -7,7 +7,7 @@
       name="{opts.name}"
       class="base_input"
       autocomplete="off"
-      placeholder="{ }"
+      placeholder="{ placeholder }"
       onkeyup="{ handleText }">
 
     <div show="{open}" class="list_container">
@@ -119,6 +119,7 @@
   this.select = opts.type === "select" ? true : false;
   this.maxHeight = opts.height || '520px';
   this.parameter = opts.parameter || false;
+  this.placeholder = opts.placeholder || '';
   
   this.url = opts.url || false;
   if(this.url !== false)
@@ -166,12 +167,7 @@
       this.keys(e.keyCode)
     } else {
       var target = e.srcElement || e.originalTarget;
-      this.filteredList = this.getList(target.value);
-      console.log()
-      if(this.filteredList && this.filteredList.length > 0) {
-        this.open = true;
-      }
-      this.update();
+      this.getList(target.value);
     }
   }
   
@@ -181,16 +177,15 @@
     } else if (val == 13) {
       
       if(this.filteredList.length == 1) {
-        //Assign
+        this.root.querySelector('.base_input').value = this.filteredList[0].text;
         this.closeWindow();
         this.root.querySelector('.base_input').blur();
         return;
       } else {
         this.filteredList.forEach(function(item) {
           if(item.active) {
-            this.value = item.text;
-            this.fire('change',{'value':item.text});
-            this.closeWindow();
+            me.root.querySelector('.base_input').value = item.text;
+            me.closeWindow();
           }
         });
       }
@@ -210,8 +205,13 @@
   }
   
   getList(value) {
-    if(value.length < 2)
-      return;
+    
+    if(value.length < 3) {
+      this.filteredList = [];
+      this.open = false;
+      this.update();
+      return; 
+    }
       
     //Gonna return ajax list
     if(this.parameter) {
@@ -220,7 +220,15 @@
       clearTimeout(this.timeout);
 
       this.timeout = setTimeout(function() {
-        this.ajaxGet(path, function(res) { return JSON.parse(res); });
+        me.ajaxGet(path, function(res) { 
+          me.filteredList = JSON.parse(res);
+          if(me.filteredList && me.filteredList.length > 0) {
+            me.open = true;
+          } else {
+            me.open = false;
+          }
+          me.update(); 
+        });
       });
       
     } else {
@@ -228,7 +236,12 @@
       var ret = this.list.filter(function(c) {
         return c.text.match(RegExp(value,'i'));
       });
-      return ret;
+      
+      this.filteredList = ret;
+      if(this.filteredList && this.filteredList.length > 0) {
+        this.open = true;
+      }
+      this.update();
     }
   }
   
