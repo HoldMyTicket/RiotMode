@@ -75,8 +75,8 @@ riot.tag('rm-a', '<div class="wrap"> <input type="text" name="{opts.name}" class
   });
   
   this.handleText = function(e) {
+    e.preventDefault();
     if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
-      e.preventDefault();
       this.keys(e.keyCode)
     } else {
       var target = e.srcElement || e.originalTarget;
@@ -135,9 +135,9 @@ riot.tag('rm-a', '<div class="wrap"> <input type="text" name="{opts.name}" class
         me.ajaxGet(path, function(res) { 
           me.filteredList = JSON.parse(res);
           if(me.filteredList && me.filteredList.length > 0) {
-            me.open = true;
+            me.openWindow();
           } else {
-            me.open = false;
+            me.closeWindow();
           }
           me.update(); 
         });
@@ -194,6 +194,7 @@ riot.tag('rm-a', '<div class="wrap"> <input type="text" name="{opts.name}" class
 
   this.closeWindow = function(e) {
     this.open = false;
+    this.atIndex = -1;
     this.update();
   }.bind(this);
 
