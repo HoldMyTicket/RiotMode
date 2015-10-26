@@ -110,6 +110,17 @@
 							      
 							  </rm-modal>
 
+					<rm-modal 
+					id="noButtonModal"
+					onconfirm="{ confirmBtn }"
+					oncancel="{ cancelBtn }">
+											<h4>Hells no I dont want to!</h4>
+											<p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+						<p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+					</rm-modal>
+					
+					<a href="javascript:void(0)" onclick="{noButtonModalLoad}">OPEN MODAL WITHOUT BUTTON</a>
+
 				
 				var me = this;
 				
@@ -131,6 +142,10 @@
 				
 				cancelBtn(e) {
 					alert('cancel');
+				}
+				
+				noButtonModalLoad(e){
+					me.noButtonModal._tag.openModal()
 				}
 			</modal-demo>
 		</script>

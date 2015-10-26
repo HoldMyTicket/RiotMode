@@ -614,7 +614,7 @@ riot.tag('raw', '<span></span>', function(opts) {
 	this.root.innerHTML = opts.content
 
 });
-riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div class="overlay" onclick="{closeModal}"></div> <div class="modal"> <div class="modal-content"><yield></yield></div> <div class="clear"></div> </div> </div> <button onclick="{ openModal }" class="{ opts[\'open-btn-class\'] }"><i class="{ opts[\'open-btn-icon\'] }"></i> { opts[\'open-btn-text\'] }</button>', 'rm-modal .modalMaster, [riot-tag="rm-modal"] .modalMaster{ position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; } rm-modal .overlay, [riot-tag="rm-modal"] .overlay{ position: fixed; top: 0; right: 0; bottom: 0; left: 0; text-align: center; z-index: 101; background-color: rgba(0, 0, 0, 0.8); } rm-modal .modal, [riot-tag="rm-modal"] .modal{ max-width: 35%; position: fixed; left: 33%; top: 20%; padding: 15px; background-color: #fff; z-index: 102; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; } rm-modal .affirmative-btn, [riot-tag="rm-modal"] .affirmative-btn{ float: left; } rm-modal .dismissive-btn, [riot-tag="rm-modal"] .dismissive-btn{ float: right; } rm-modal .clear, [riot-tag="rm-modal"] .clear{ clear: both; } rm-modal .hidden, [riot-tag="rm-modal"] .hidden{ display: none; }', function(opts) {
+riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div class="overlay" onclick="{closeModal}"></div> <div class="modal"> <button class="close-btn" onclick="{closeModal}">X</button> <div class="modal-content"><yield></yield></div> <div class="clear"></div> </div> </div> <button hide="{hide_btn}" onclick="{ openModal }" class="{ opts[\'open-btn-class\'] }"><i class="{ opts[\'open-btn-icon\'] }"></i> { opts[\'open-btn-text\'] }</button>', 'rm-modal .modalMaster, [riot-tag="rm-modal"] .modalMaster{ position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; } rm-modal .overlay, [riot-tag="rm-modal"] .overlay{ position: fixed; top: 0; right: 0; bottom: 0; left: 0; text-align: center; z-index: 101; background-color: rgba(0, 0, 0, 0.8); } rm-modal .modal, [riot-tag="rm-modal"] .modal{ max-width: 35%; position: fixed; left: 33%; top: 20%; padding: 15px; background-color: #fff; z-index: 102; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; } rm-modal .modal-content, [riot-tag="rm-modal"] .modal-content{ max-height: 500px; overflow-y: auto; } rm-modal .close-btn, [riot-tag="rm-modal"] .close-btn{ background-color: black; color: white; font-weight: 200; width: 30px; height: 30px; border: 2px solid white; outline: none; cursor: pointer; font-size: 15px; position: absolute; top: -10px; right: -10px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -o-border-radius: 15px; border-radius: 15px; -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75); -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75); box-shadow: 0 0 5px 0 rgba(0,0,0,0.75); } rm-modal .close-btn:hover, [riot-tag="rm-modal"] .close-btn:hover{ background-color: white; color: black; -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; } rm-modal .clear, [riot-tag="rm-modal"] .clear{ clear: both; } rm-modal .hidden, [riot-tag="rm-modal"] .hidden{ display: none; }', function(opts) {
     
     
     
@@ -622,9 +622,14 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div class="overla
     var me = this;
     
     this.mixin(RMeventMixin);
-    this.affirmativeBtn = opts['confirm-btn'] == 'true' ? true : false;
-    this.dismissiveBtn = opts['cancel-btn'] == 'true' ? true : false;
     this.open = false;
+    this.hide_btn = false;
+
+    this.on('mount',function(){
+      if(!this.opts['open-btn-text'])
+        this.hide_btn = true;
+      this.update();
+    })
     
     this.openModal = function(e) {
       this.open = true;
@@ -642,14 +647,6 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div class="overla
         RiotControl.trigger('modalclosed');
       }
       this.fire('close', e);
-    }.bind(this);
-    
-    this.confirmBtn = function(e) {
-        opts.onconfirm();
-    }.bind(this);
-    
-    this.cancelBtn = function(e) {
-        opts.oncancel();
     }.bind(this);
     
 
@@ -966,9 +963,44 @@ riot.tag('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textare
 
 });
 
-riot.tag('rm-toast', '<h2>Yum toast</h2> <div class="message_container" if="{ opts.toasts.length > 0 }"> <div class="toast" each="{ opts.toasts }" onclick="{ parent.toastClicked }"> { text } </div> </div>', function(opts) {
+riot.tag('rm-toast', '<div show="{displayToast}" class="message-container"> <div onclick="{hideToast}" class="toast { toastPosition }">{ parseHTML(opts.text) }</div> </div>', 'rm-toast .toast, [riot-tag="rm-toast"] .toast{ position: absolute; margin: 20px; max-width: 200px; color: rgba(255, 255, 255, 1); background-color: rgba(0, 0, 0, 0.8); padding: 20px; z-index: 10; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; } rm-toast .top-left, [riot-tag="rm-toast"] .top-left{ top: 0; left: 0; } rm-toast .top-right, [riot-tag="rm-toast"] .top-right{ top: 0; right: 0; } rm-toast .bottom-left, [riot-tag="rm-toast"] .bottom-left{ left: 0; bottom: 0; } rm-toast .bottom-right, [riot-tag="rm-toast"] .bottom-right{ right: 0; bottom: 0; }', function(opts) {
+	
+	
 	
 	var me = this;
+	
+	this.mixin(RMeventMixin);
+	this.displayToast = false;
+	this.toastDuration = opts.duration || 1500;
+	this.toastPosition = opts.position || 'bottom-right';
+	
+	this.on('mount', function() {
+		me.update();
+	});
+	
+	this.showToast = function(e) {
+		this.displayToast = true;
+		this.update();
+		if(typeof RiotControl != 'undefined')
+			RiotControl.trigger('toastopened');
+		this.fire('open', e);
+		
+		setTimeout(function() {
+			me.hideToast();
+		}, me.toastDuration);
+	}.bind(this);
+	
+	this.hideToast = function(e) {
+		this.displayToast = false;
+		this.update();
+		if(typeof RiotControl != 'undefined')
+			RiotControl.trigger('toastclosed');
+		this.fire('close', e);
+	}.bind(this);
+	
+	this.parseHTML = function(text) {
+		this.root.querySelector('.toast').innerHTML = text;
+	}.bind(this);
 
 });
 

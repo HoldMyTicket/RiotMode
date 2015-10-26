@@ -3,7 +3,7 @@
 	<head lang="en">
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>RiotMode Toast</title>
+		<title>RiotMode Toast Demo</title>
 		<style>
 			body {
 				box-sizing:border-box;
@@ -15,23 +15,49 @@
 		<link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
 	</head>
 	<body>
-		<h1>RiotMode Toast</h1>
-		<div class="wrapper">
+		<h1>RiotMode Toast Demo</h1>
+		<toast-demo></toast-demo>
+		
+		<script type="riot/tag">
 			
-			<p>I like toast</p>
-			
-		    <div class="leftcolumn">
-		        <pre class="raw"></pre>
-		    </div>
-		    <div class="rightcolumn">
-		        <rm-toast></rm-toast>
-		    </div>
-		</div>
+			<toast-demo>
+				
+				<rm-toast 
+					duration="2000" 
+					id="sendEmailToast" 
+					position="top-right">
+				</rm-toast>
+				
+				<rm-toast 
+					id="createDocumentToast" 
+					position="bottom-right" 
+					duration="3000" 
+					text="Successfully created! You can view the document <a target='_blank' href='http://google.com'>here</a>">
+				</rm-toast>
+				
+				<button onclick="{sendEmail}">Send Email</button>
+				<button onclick="{createDocument}">Create Document</button>
+				
+				var me = this;
+				
+				createDocument(e) {
+					me.createDocumentToast._tag.showToast();
+				}
+				
+				sendEmail(e) {
+					setTimeout(function() {
+						me.sendEmailToast._tag.opts.text = 'Email Successfully Sent!';
+						me.sendEmailToast._tag.showToast();
+					}, 2000);
+				}
+			</toast-demo>
+		
+		</script>
+		
 		<script src="/bower_components/riot/riot+compiler.min.js"></script>
 		<script src="/bower_components/marked/marked.min.js"></script>
+		<script src="/mixins/RMeventMixin.js"></script>
 		<script src="../src/rm-toast.tag" type="riot/tag"></script>
-		<script>
-			riot.mount('rm-toast');
-		</script>
+		<script>riot.mount('toast-demo')</script>
 	</body>
 </html>

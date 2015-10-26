@@ -3,12 +3,13 @@
     <div class="modalMaster" show="{open}">
       <div class="overlay" onclick="{closeModal}"></div>
       <div class="modal">
+        <button class="close-btn" onclick="{closeModal}">X</button>
         <div class="modal-content"><yield/></div>
         <div class="clear"></div>
       </div>
     </div>
 
-    <button onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
+    <button hide="{hide_btn}" onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
     
     <style scoped>
         .modalMaster {
@@ -42,13 +43,38 @@
             -o-border-radius: 5px;
             border-radius: 5px;
         }
-        
-        .affirmative-btn {
-            float: left;
+        .modal-content {
+            max-height: 500px;
+            overflow-y: auto;
         }
-        
-        .dismissive-btn {
-            float: right;
+        .close-btn {
+            background-color: black;
+            color: white;
+            font-weight: 200;
+            width: 30px;
+            height: 30px;
+            border: 2px solid white;
+            outline: none;
+            cursor: pointer;
+            font-size: 15px;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            -o-border-radius: 15px;
+            border-radius: 15px;
+            -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
+            -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
+            box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
+        }
+        .close-btn:hover {
+            background-color: white;
+            color: black;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
         
         .clear {
@@ -67,13 +93,19 @@
      * Modal component for RiotJS v2.2
      * 
      * @author joseph-perez
+     * @author wes
      */
     var me = this;
     
     this.mixin(RMeventMixin);
-    this.affirmativeBtn = opts['confirm-btn'] == 'true' ? true : false;
-    this.dismissiveBtn = opts['cancel-btn'] == 'true' ? true : false;
     this.open = false;
+    this.hide_btn = false;
+
+    this.on('mount',function(){
+      if(!this.opts['open-btn-text'])
+        this.hide_btn = true;
+      this.update();
+    })
     
     openModal(e) {
       this.open = true;
@@ -91,14 +123,6 @@
         RiotControl.trigger('modalclosed');
       }
       this.fire('close', e);
-    }
-    
-    confirmBtn(e) {
-        opts.onconfirm();
-    }
-    
-    cancelBtn(e) {
-        opts.oncancel();
     }
     
 </rm-modal>
