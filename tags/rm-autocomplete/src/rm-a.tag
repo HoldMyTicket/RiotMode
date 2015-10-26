@@ -8,7 +8,8 @@
       class="base_input"
       autocomplete="off"
       placeholder="{ placeholder }"
-      onkeyup="{ handleText }">
+      onkeyup="{ handleText }"
+      value="{ value }">
 
     <div show="{open}" class="list_container">
       <ul class="list">         
@@ -160,6 +161,12 @@
     if(input != null) this.value = input.value;
     //this.value = this.root.querySelector('.base_input').value;
   });
+  
+  pick(e) {
+    var target = e.srcElement || e.originalTarget;
+    this.root.querySelector('.base_input').value = target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim();
+    this.closeWindow();
+  }
   
   handleText(e) {
     e.preventDefault();
