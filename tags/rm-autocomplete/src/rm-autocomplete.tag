@@ -158,9 +158,10 @@
   });
   
   setValue(val) {
-    this.root.querySelector('.base_input').value = val
-    this.value = val;
-    this.fire('set',{'value':me.value});  
+    var chosen = val || this.root.querySelector('.base_input').value
+    this.root.querySelector('.base_input').value = chosen
+    this.value = chosen;
+    this.fire('set',{'value':chosen});  
   }
   
   pick(e) {
@@ -196,7 +197,9 @@
             me.closeWindow();
           }
         });
+        this.setValue();
       }
+      
       
     } else if (val == 38) {
       if(this.atIndex <= 0)
