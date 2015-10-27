@@ -157,10 +157,15 @@
     document.removeEventListener('focus', me.globalClose, true);
   });
   
+  setValue(val) {
+    this.root.querySelector('.base_input').value = val
+    this.value = val;
+    this.fire('set',{'value':me.value});  
+  }
+  
   pick(e) {
     var target = e.srcElement || e.originalTarget;
-    this.root.querySelector('.base_input').value = target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim();
-    this.fire('set',{'value':me.value});
+    this.setValue(target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim());
     this.closeWindow();
   }
   
@@ -180,16 +185,14 @@
     } else if (val == 13) {
       
       if(this.filteredList.length == 1) {
-        this.value = this.filteredList[0].text;
-        this.fire('set',{'value':me.value});
+        this.setValue(this.filteredList[0].text);
         this.closeWindow();
         this.root.querySelector('.base_input').blur();
         return;
       } else {
         this.filteredList.forEach(function(item) {
           if(item.active) {
-            me.value = item.text;
-            me.fire('set',{'value':me.value});
+            me.setValue(item.text);
             me.closeWindow();
           }
         });

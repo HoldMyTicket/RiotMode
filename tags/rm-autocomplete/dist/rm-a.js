@@ -45,10 +45,15 @@ riot.tag('rm-a', '<div class="wrap"> <input type="text" name="{opts.name}" class
     document.removeEventListener('focus', me.globalClose, true);
   });
   
+  this.setValue = function(val) {
+    this.root.querySelector('.base_input').value = val
+    this.value = val;
+    this.fire('set',{'value':me.value});  
+  }.bind(this);
+  
   this.pick = function(e) {
     var target = e.srcElement || e.originalTarget;
-    this.root.querySelector('.base_input').value = target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim();
-    this.fire('change',{'value':me.value});
+    this.setValue(target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim());
     this.closeWindow();
   }.bind(this);
   
@@ -68,16 +73,14 @@ riot.tag('rm-a', '<div class="wrap"> <input type="text" name="{opts.name}" class
     } else if (val == 13) {
       
       if(this.filteredList.length == 1) {
-        this.value = this.filteredList[0].text;
-        this.fire('change',{'value':me.value});
+        this.setValue(this.filteredList[0].text);
         this.closeWindow();
         this.root.querySelector('.base_input').blur();
         return;
       } else {
         this.filteredList.forEach(function(item) {
           if(item.active) {
-            me.value = item.text;
-            me.fire('change',{'value':me.value});
+            me.setValue(item.text);
             me.closeWindow();
           }
         });
