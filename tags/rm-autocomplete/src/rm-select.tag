@@ -1,4 +1,4 @@
-<rm-autocomplete>
+<rm-select>
   <style scoped>
     * {
       box-sizing: border-box;
@@ -365,4 +365,4 @@
     });
   }
 
-</rm-autocomplete>
+</rm-select>
