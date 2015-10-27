@@ -7,9 +7,9 @@
       name="{opts.name}"
       class="base_input"
       autocomplete="off"
-      placeholder="{ placeholder }"
-      onkeyup="{ handleText }"
-      value="{ value }">
+      placeholder="{placeholder}"
+      onkeyup="{handleText}"
+      value="{value}">
 
     <div show="{open}" class="list_container">
       <ul class="list">         
@@ -121,6 +121,7 @@
   this.maxHeight = opts.height || '520px';
   this.parameter = opts.parameter || false;
   this.placeholder = opts.placeholder || '';
+  this.value = '';
   
   this.url = opts.url || false;
   if(this.url !== false)
