@@ -160,7 +160,7 @@
   pick(e) {
     var target = e.srcElement || e.originalTarget;
     this.root.querySelector('.base_input').value = target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim();
-    this.fire('change',{'value':me.value});
+    this.fire('set',{'value':me.value});
     this.closeWindow();
   }
   
@@ -181,7 +181,7 @@
       
       if(this.filteredList.length == 1) {
         this.value = this.filteredList[0].text;
-        this.fire('change',{'value':me.value});
+        this.fire('set',{'value':me.value});
         this.closeWindow();
         this.root.querySelector('.base_input').blur();
         return;
@@ -189,7 +189,7 @@
         this.filteredList.forEach(function(item) {
           if(item.active) {
             me.value = item.text;
-            me.fire('change',{'value':me.value});
+            me.fire('set',{'value':me.value});
             me.closeWindow();
           }
         });
