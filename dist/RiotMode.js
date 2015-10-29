@@ -35,6 +35,8 @@ riot.tag('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.n
   this.parameter = opts.parameter || false;
   this.placeholder = opts.placeholder || '';
   this.value = '';
+  this.data_value = '';
+  this.input_name = '';
   
   this.url = opts.url || false;
   if(this.url !== false)
@@ -69,15 +71,18 @@ riot.tag('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.n
     document.removeEventListener('focus', me.globalClose, true);
   });
   
-  this.setValue = function(val) {
-    this.root.querySelector('.base_input').value = val
-    this.value = val;
-    this.fire('set',{'value':me.value});  
+  this.setValue = function(val, dataVal) {
+    var chosen = val || this.root.querySelector('.base_input').value
+    this.root.querySelector('.base_input').value = chosen
+    this.value = chosen;
+    this.data_value = dataVal;
+    this.input_name = this.root.querySelector('.base_input').name;
+    this.fire('set',{'value':chosen, 'data_value':dataVal, 'input_name':this.input_name});  
   }.bind(this);
   
   this.pick = function(e) {
     var target = e.srcElement || e.originalTarget;
-    this.setValue(target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim());
+    this.setValue(target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim(), target.dataset.value);
     this.closeWindow();
   }.bind(this);
   
@@ -95,20 +100,20 @@ riot.tag('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.n
     if (val == 27) {
       this.closeWindow();
     } else if (val == 13) {
-      
       if(this.filteredList.length == 1) {
-        this.setValue(this.filteredList[0].text);
+        this.setValue(this.filteredList[0].text, this.filteredList[0].value);
         this.closeWindow();
         this.root.querySelector('.base_input').blur();
         return;
       } else {
         this.filteredList.forEach(function(item) {
           if(item.active) {
-            me.setValue(item.text);
+            me.setValue(item.text, item.value);
             me.closeWindow();
           }
         });
       }
+      
       
     } else if (val == 38) {
       if(this.atIndex <= 0)
