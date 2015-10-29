@@ -25,7 +25,7 @@
   
   <style scoped>
     * {
-      box-sizing: border-box;
+      box-sizing: border-box; 
     }
     .active {
       background:rgb(215,215,215);
