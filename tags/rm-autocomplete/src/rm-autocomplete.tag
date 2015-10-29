@@ -146,6 +146,12 @@
       });
     }
     
+    if(opts.value) {
+      this.root.querySelector('.base_input').value = opts.value
+      this.value = opts.value;
+      this.update();
+    }
+    
     this.root.querySelector('.list').style.maxHeight = this.maxHeight;
 
     //Handle any focus or click outside of this element to close it
@@ -171,6 +177,7 @@
   pick(e) {
     var target = e.srcElement || e.originalTarget;
     this.setValue(target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim(), target.dataset.value);
+    this.atIndex = -1;
     this.closeWindow();
   }
   
