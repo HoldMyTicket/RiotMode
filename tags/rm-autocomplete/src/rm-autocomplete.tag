@@ -122,6 +122,8 @@
   this.parameter = opts.parameter || false;
   this.placeholder = opts.placeholder || '';
   this.value = '';
+  this.data_value = '';
+  this.input_name = '';
   
   this.url = opts.url || false;
   if(this.url !== false)
@@ -157,16 +159,18 @@
     document.removeEventListener('focus', me.globalClose, true);
   });
   
-  setValue(val) {
+  setValue(val, dataVal) {
     var chosen = val || this.root.querySelector('.base_input').value
     this.root.querySelector('.base_input').value = chosen
     this.value = chosen;
-    this.fire('set',{'value':chosen});  
+    this.data_value = dataVal;
+    this.input_name = this.root.querySelector('.base_input').name;
+    this.fire('set',{'value':chosen, 'data_value':dataVal, 'input_name':this.input_name});  
   }
   
   pick(e) {
     var target = e.srcElement || e.originalTarget;
-    this.setValue(target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim());
+    this.setValue(target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim(), target.dataset.value);
     this.closeWindow();
   }
   
@@ -184,20 +188,18 @@
     if (val == 27) {
       this.closeWindow();
     } else if (val == 13) {
-      
       if(this.filteredList.length == 1) {
-        this.setValue(this.filteredList[0].text);
+        this.setValue(this.filteredList[0].text, this.filteredList[0].value);
         this.closeWindow();
         this.root.querySelector('.base_input').blur();
         return;
       } else {
         this.filteredList.forEach(function(item) {
           if(item.active) {
-            me.setValue(item.text);
+            me.setValue(item.text, item.value);
             me.closeWindow();
           }
         });
-        this.setValue();
       }
       
       
