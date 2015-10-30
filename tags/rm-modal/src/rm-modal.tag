@@ -43,10 +43,6 @@
             -o-border-radius: 5px;
             border-radius: 5px;
         }
-        .modal-content {
-            max-height: 500px;
-            overflow-y: auto;
-        }
         .close-btn {
             background-color: black;
             color: white;
