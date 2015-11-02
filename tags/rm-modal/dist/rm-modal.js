@@ -19,7 +19,7 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div class="overla
       this.open = true;
       this.update();
       if(typeof RiotControl != 'undefined'){
-        RiotControl.trigger('modalopened', e);
+        RiotControl.trigger('modalopened');
       }
       this.fire('open', e);
     }.bind(this);
@@ -28,7 +28,7 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div class="overla
       this.open = false;
       this.update();
       if(typeof RiotControl != 'undefined'){
-        RiotControl.trigger('modalclosed', e);
+        RiotControl.trigger('modalclosed');
       }
       this.fire('close', e);
     }.bind(this);

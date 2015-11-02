@@ -107,7 +107,7 @@
       this.open = true;
       this.update();
       if(typeof RiotControl != 'undefined'){
-        RiotControl.trigger('modalopened');
+        RiotControl.trigger('modalopened', e);
       }
       this.fire('open', e);
     }
@@ -116,7 +116,7 @@
       this.open = false;
       this.update();
       if(typeof RiotControl != 'undefined'){
-        RiotControl.trigger('modalclosed');
+        RiotControl.trigger('modalclosed', e);
       }
       this.fire('close', e);
     }
