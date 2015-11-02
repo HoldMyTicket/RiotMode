@@ -504,7 +504,7 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div class="overla
       this.open = true;
       this.update();
       if(typeof RiotControl != 'undefined'){
-        RiotControl.trigger('modalopened');
+        RiotControl.trigger('modalopened', e);
       }
       this.fire('open', e);
     }.bind(this);
@@ -513,7 +513,7 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div class="overla
       this.open = false;
       this.update();
       if(typeof RiotControl != 'undefined'){
-        RiotControl.trigger('modalclosed');
+        RiotControl.trigger('modalclosed', e);
       }
       this.fire('close', e);
     }.bind(this);
