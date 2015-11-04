@@ -157,7 +157,7 @@
   this.noResultsMessage = opts.message || 'No results...';
   this.atIndex = -1;
 
-  this.value = ''
+  this.value = opts.value || '';
   this.data_value = '';
 
 
@@ -245,14 +245,12 @@
   }
 
   handleText(e) {
-
+    e.preventDefault();
     if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
-      e.preventDefault();
       tag.keys(e.keyCode)
     } else {
 
       tag.deactivate();
-
       var target = e.srcElement || e.originalTarget;
 
       if(target.value.length < 2) {
@@ -282,6 +280,7 @@
       if(tag.filteredList.length == 1) {
         
         tag.value = tag.filteredList[0].text;
+        tag.data_value = tag.filteredList[0].value || tag.filteredList[0].text
         tag.closeWindow();
         tag.root.querySelector('.base').blur();
         return;

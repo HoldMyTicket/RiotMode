@@ -28,7 +28,7 @@
 		<script src="../src/rm-select.tag" type="riot/tag"></script>
 	</head>
 	<body>
-		<form onsubmit="doSubmit();return false" id="submitForm">			
+					
 			<h1>RiotMode Autocomplete Demo</h1>
 			<p>There are different types of selections. One is autocomplete type, the other select type.</p>
 			<section>
@@ -38,15 +38,15 @@
 					name="location_field"
 					url="/tags/rm-autocomplete/demo/demo.json"
 					placeholder="Nearby Location"
-					onchange="{location_changed}">
+					onset="{location_changed}">
               </rm-select>
 			</section>
 			
 			<section>
-				<button type="submit" name="button">Serialize Form</button>
+				<button type="submit" name="button" onclick="doSubmit();">Serialize Form</button>
 			</section>
 			
-		</form>
+		
 
 		<!-- <p>This text is just down here to see how the page reflows as the user interacts with the &lt;rm-autocomplete&gt; tag</p> -->
 		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> <!-- only used for serializing form test -->
