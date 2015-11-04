@@ -151,7 +151,11 @@
       this.value = opts.value;
       this.update();
     }
-    
+    if(parseInt(opts.limit) == 0) {
+      this.root.querySelector('.base_input').onfocus = function(e) {
+        me.openWindow(e);
+      }
+    } 
     this.root.querySelector('.list').style.maxHeight = this.maxHeight;
 
     //Handle any focus or click outside of this element to close it
@@ -227,7 +231,7 @@
   
   getList(value) {
     
-    if(value.length < 3) {
+    if(value.length < (parseInt(opts.limit) || 3)) {
       this.filteredList = [];
       this.open = false;
       this.update();
