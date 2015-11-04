@@ -7,13 +7,11 @@
       class="mdl-textfield__input base { border : select }"
       autocomplete="off"
       placeholder="{ opts.placeholder || 'Type...' }"
-      onkeyup="{ handleText }"
       value="{ value }">
     
     <input 
       type="text"
       name="{opts.name}"
-      onkeyup="{ handleText }"
       value="{ data_value }" hidden>
 
     <div show={ open } class="list-container">
@@ -23,7 +21,7 @@
             type="text"
             class="filter-input"
             placeholder="{ opts.filter_placeholder || 'Filter...' }"
-            onkeyup="{ handleText }"
+            onkeydown="{ handleText }"
             autocomplete="off">
         </li>
         <li class="list-row" show={ noResults && value.length > 1}>
@@ -243,10 +241,11 @@
     tag.fire('set',{'text':tag.value, 'value':tag.data_value});
     tag.closeWindow();
   }
-
+  
   handleText(e) {
-    e.preventDefault();
+  
     if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
+      e.preventDefault();
       tag.keys(e.keyCode)
     } else {
 
