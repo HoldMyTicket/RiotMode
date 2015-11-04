@@ -254,7 +254,7 @@
 
       if(target.value.length < 2) {
         tag.filteredList = tag.list || [];
-        return;
+        return true;
       }
     
       tag.filteredList = tag.list.filter(function(c) {
@@ -267,7 +267,7 @@
     }
 
     tag.update();
-    
+    return true;
   }
 
   keys(val) {
