@@ -25,7 +25,7 @@
 		<script src="/mixins/RMajaxMixin.js"></script>
 		<script src="/mixins/RMeventMixin.js"></script>
 		<script src="../src/rm-autocomplete.tag" type="riot/tag"></script>
-		<script src="../src/rm-a.tag" type="riot/tag"></script>
+		<script src="../src/rm-select.tag" type="riot/tag"></script>
 	</head>
 	<body>
 		<form onsubmit="doSubmit();return false" id="submitForm">			
@@ -33,47 +33,13 @@
 			<p>There are different types of selections. One is autocomplete type, the other select type.</p>
 			<section>
 				<p>Search for a country (Autocomplete type)</p>
-				<rm-a
+				<rm-select
 					id="location_field"
 					name="location_field"
 					url="/tags/rm-autocomplete/demo/demo.json"
 					placeholder="Nearby Location"
 					onchange="{location_changed}">
-              </rm-a>
-			</section>
-
-			<section>
-				<p>Search for a country (select type)</p>
-				<rm-autocomplete
-								 name="select-input"
-								 height="190px"
-								 placeholder="Country Selection"
-								 filter-placeholder="Filter"
-								 type="select">
-				</rm-autocomplete>
-			</section>
-			<section>
-				<p>Search for a country no border</p>
-				<rm-autocomplete
-								 name="select-input"
-								 height="190px"
-								 placeholder="Country Selection"
-								 url="/tags/rm-autocomplete/demo/demo.json"
-								 filter-placeholder="Filter"
-								 type="select"
-								 nofilter="true"
-								 noborder="true">
-				</rm-autocomplete>
-			</section>
-			<section>
-				<p>What an error looks like</p>
-				<rm-autocomplete
-								 url="/tags/rm-autocomplete/demo/demo.json"
-								 height="190px"
-								 placeholder="Country Selection"
-								 filter-placeholder="Filter"
-								 type="select">
-				</rm-autocomplete>
+              </rm-select>
 			</section>
 			
 			<section>

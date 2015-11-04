@@ -1,4 +1,42 @@
 <rm-select>
+
+  <div class="wrap noselect{opts.noborder ? ' noborder' : ''}">
+    
+    <input 
+      type="text"
+      class="mdl-textfield__input base { border : select }"
+      autocomplete="off"
+      placeholder="{ opts.placeholder || 'Type...' }"
+      onkeyup="{ handleText }"
+      value="{ value }">
+    
+    <input 
+      type="text"
+      name="{opts.name}"
+      onkeyup="{ handleText }"
+      value="{ data_value }" hidden>
+
+    <div show={ open } class="list-container">
+      <ul class="list">
+        <li show={ select && !noFilter } class="filter">
+          <input
+            type="text"
+            class="filter-input"
+            placeholder="{ opts.filter_placeholder || 'Filter...' }"
+            onkeyup="{ handleText }"
+            autocomplete="off">
+        </li>
+        <li class="list-row" show={ noResults && value.length > 1}>
+          { noResultsMessage }
+        </li>
+        <li class="list-row item{ item.active ? ' active' : ''}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }">
+          { item.text }
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+
   <style scoped>
     * {
       box-sizing: border-box;
@@ -101,68 +139,33 @@
     }
 	</style>
 
-  <div class="wrap noselect{opts.noborder ? ' noborder' : ''}">
-    
-    <input 
-      type="text"
-      name="{opts.name}"
-      class="mdl-textfield__input base { border : select }"
-      autocomplete="off"
-      placeholder="{ opts.placeholder || 'Type...' }"
-      onkeyup="{ handleText }"
-      value="{ value }">
-
-    <div show={ open } class="list-container">
-      <ul class="list">
-        <li show={ select && !noFilter } class="filter">
-          <input
-            type="text"
-            class="filter-input"
-            placeholder="Filter"
-            onkeyup="{ handleText }"
-            autocomplete="off">
-        </li>
-        <li class="list-row" show={ noResults && value.length > 1}>
-          { noResultsMessage }
-        </li>
-        <li class="list-row item{ item.active ? ' active' : ''}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }">
-          { item.text }<span class="accent">{ item.accent }</span>
-        </li>
-      </ul>
-    </div>
-    
-  </div>
-
   var tag = this;
 
   this.mixin(RMajaxMixin);
   this.mixin(RMeventMixin);
 
   this.open = false;
-  this.select = opts.type === "select" ? true : false;
+  this.select = true;
   this.maxHeight = opts.height || '520px';
   this.noFilter = opts.nofilter || false;
   this.url = opts.url || false;
   if(this.url !== false)
     this.ajax = true;
-  this.parameter = opts.parameter || false;
   this.list = opts.list || [];
   this.filteredList = opts.list || [];
   this.noResults = false;
   this.noResultsMessage = opts.message || 'No results...';
   this.atIndex = -1;
 
-  this.timeout = false;
+  this.value = ''
+  this.data_value = '';
 
 
   this.on('mount',function(){
     
     var base = this.root.querySelector('.base');
 
-    if(opts.name)
-      tag.setup(base);
-    else
-      tag.error(base,'No name attribute');
+    tag.setup(base);
 
     //Handle any focus or click outside of this element to close it
     document.addEventListener('click', tag.globalClose);
@@ -236,7 +239,8 @@
   pick(e) {
     var target = e.srcElement || e.originalTarget;
     tag.value = target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim();
-    tag.fire('change',{'value':tag.value});
+    tag.data_value = target.getAttribute('data-value').trim();
+    tag.fire('set',{'text':tag.value, 'value':tag.data_value});
     tag.closeWindow();
   }
 
@@ -255,33 +259,10 @@
         tag.filteredList = tag.list || [];
         return;
       }
-
-      //Ajax on the fly
-      if(tag.parameter) {
-      
-        var path = tag.url + '/' + tag.parameter + '/' + encodeURIComponent(target.value);
-
-        clearTimeout(tag.timeout);
-
-        tag.timeout = setTimeout(function() {
-          tag.ajaxGet(path, function(res) {
-            var json = JSON.parse(res);
-            if(json.length > 0)
-              tag.noResults = false;
-            else
-              tag.noResults = true;
-            tag.filteredList = json;
-            tag.update();
-          });
-        },100);
-
-      } else {
-
-        tag.filteredList = tag.list.filter(function(c) {
-          return c.text.match(RegExp(target.value,'i'));
-        });
-
-      }
+    
+      tag.filteredList = tag.list.filter(function(c) {
+        return c.text.match(RegExp(target.value,'i'));
+      });
 
       tag.noResults = false;
       if(tag.filteredList.length < 1 && !tag.parameter)
@@ -310,7 +291,8 @@
         tag.filteredList.forEach(function(item) {
           if(item.active) {
             tag.value = item.text;
-            tag.fire('change',{'value':item.text});
+            tag.data_value = item.value || item.text
+            tag.fire('set',{'text':item.text, 'value':tag.data_value});
             tag.closeWindow();
           }
         });
