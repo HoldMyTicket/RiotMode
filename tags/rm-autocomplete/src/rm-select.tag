@@ -223,6 +223,9 @@
 
   closeWindow(e) {
     tag.atIndex = -1;
+    tag.root.querySelector('.filter-input').value = '';
+    tag.filteredList = tag.list;
+    tag.deactivate();
     tag.open = false;
     tag.update();
   }

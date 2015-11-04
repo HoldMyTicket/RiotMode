@@ -8,7 +8,7 @@
       class="base_input"
       autocomplete="off"
       placeholder="{placeholder}"
-      onkeyup="{handleText}"
+      onkeydown="{handleText}"
       value="{value}">
 
     <div show="{open}" class="list_container">
@@ -182,13 +182,14 @@
   }
   
   handleText(e) {
-    e.preventDefault();
     if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
+      e.preventDefault();
       this.keys(e.keyCode)
     } else {
       var target = e.srcElement || e.originalTarget;
       this.getList(target.value);
     }
+    return true;
   }
   
   keys(val) {

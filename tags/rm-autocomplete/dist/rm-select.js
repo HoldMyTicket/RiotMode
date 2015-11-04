@@ -83,6 +83,9 @@ riot.tag('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' :
 
   this.closeWindow = function(e) {
     tag.atIndex = -1;
+    tag.root.querySelector('.filter-input').value = '';
+    tag.filteredList = tag.list;
+    tag.deactivate();
     tag.open = false;
     tag.update();
   }.bind(this);
@@ -114,7 +117,7 @@ riot.tag('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' :
 
       if(target.value.length < 2) {
         tag.filteredList = tag.list || [];
-        return;
+        return true;
       }
     
       tag.filteredList = tag.list.filter(function(c) {
@@ -127,7 +130,7 @@ riot.tag('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' :
     }
 
     tag.update();
-    
+    return true;
   }.bind(this);
 
   this.keys = function(val) {
