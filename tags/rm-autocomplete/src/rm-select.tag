@@ -232,6 +232,7 @@
 
   globalClose(e) {
     if (e != undefined && tag.root.contains(e.target)) {
+      this.root.querySelector('.filter-input').focus();
       return;
     }
     tag.closeWindow();
