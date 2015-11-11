@@ -228,7 +228,7 @@
     tag.deactivate();
     tag.open = false;
     
-    tag.fire('close', tag.value, tag.data_value);
+    tag.fire('close', opts.name || '', tag.value, tag.data_value);
     
     tag.update();
   }
