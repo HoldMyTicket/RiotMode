@@ -227,6 +227,9 @@
     tag.filteredList = tag.list;
     tag.deactivate();
     tag.open = false;
+    
+    tag.fire('close', tag.value, tag.data_value);
+    
     tag.update();
   }
 
@@ -235,6 +238,8 @@
       this.root.querySelector('.filter-input').focus();
       return;
     }
+    if(!this.open)
+      return;
     tag.closeWindow();
   }
 
