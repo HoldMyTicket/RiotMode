@@ -1,24 +1,25 @@
-<rm-modal>    
-    
+<rm-modal>
     <div class="modalMaster" show="{open}">
-      <div class="overlay" onclick="{closeModal}"></div>
-      <div class="modal">
-        <button class="close-btn" onclick="{closeModal}">X</button>
-        <div class="modal-content"><yield/></div>
-        <div class="clear"></div>
+      <div class="overlay"></div>
+      <div class="modalWrap" onclick="{closeModal}">
+        <div class="modal">
+          <button class="close-btn" onclick="{closeModal}">X</button>
+          <div class="modal-content"><yield/></div>
+          <div class="clear"></div>
+        </div>
       </div>
     </div>
 
     <button hide="{hide_btn}" onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
     
     <style scoped>
-        .modalMaster {
+        .modalMaster, .modalWrap {
             position: fixed;
             top: 0;
             right: 0;
             bottom: 0;
             left: 0;
-            z-index: 100;
+            z-index: 99;
         }
         .overlay {
             position: fixed;
@@ -27,14 +28,18 @@
             bottom: 0;
             left: 0;
             text-align: center;
-            z-index: 101;
+            z-index: 100;
             background-color: rgba(0, 0, 0, 0.8);
+        }
+        .modalWrap {
+          z-index: 101;
+          overflow: auto;
         }
         .modal {
             max-width: 35%;
             position: absolute;
             left: 50%;
-            top: 30%;
+            top: 15%;
             padding: 15px;
             background-color: #fff;
             z-index: 102;
