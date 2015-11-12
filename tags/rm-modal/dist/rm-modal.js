@@ -37,7 +37,7 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}"
     this.calcModal = function() {
       var modal = this.root.querySelector('.modal');
       var overlay = this.root.querySelector('.overlay');
-      var modalMasterHeight = (this.root.querySelector('.modalMaster').scrollHeight + 1).toString();
+      var modalMasterHeight = this.root.querySelector('.modalMaster').scrollHeight.toString();
       var modalWidth = modal.clientWidth.toString();
       var modalLeft = '-'+(modalWidth / 2).toString();
       
