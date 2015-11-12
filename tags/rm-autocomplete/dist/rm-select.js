@@ -87,13 +87,19 @@ riot.tag('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' :
     tag.filteredList = tag.list;
     tag.deactivate();
     tag.open = false;
+    
+    tag.fire('close', opts.name || '', tag.value, tag.data_value);
+    
     tag.update();
   }.bind(this);
 
   this.globalClose = function(e) {
     if (e != undefined && tag.root.contains(e.target)) {
+      this.root.querySelector('.filter-input').focus();
       return;
     }
+    if(!this.open)
+      return;
     tag.closeWindow();
   }.bind(this);
 

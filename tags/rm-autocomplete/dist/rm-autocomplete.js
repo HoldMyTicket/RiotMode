@@ -26,7 +26,7 @@ riot.tag('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.n
   
   this.on('mount',function(){
     
-    if(this.ajax) {
+    if(this.ajax && !this.parameter) {
       this.ajaxGet(this.url, function(res) {
         var json = JSON.parse(res);
         me.list = json;
@@ -40,7 +40,11 @@ riot.tag('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.n
       this.value = opts.value;
       this.update();
     }
-    
+    if(parseInt(opts.limit) == 0) {
+      this.root.querySelector('.base_input').onfocus = function(e) {
+        me.openWindow(e);
+      }
+    } 
     this.root.querySelector('.list').style.maxHeight = this.maxHeight;
 
     document.addEventListener('click', me.globalClose);
@@ -115,7 +119,7 @@ riot.tag('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.n
   
   this.getList = function(value) {
     
-    if(value.length < 3) {
+    if(value.length < (parseInt(opts.limit) || 3)) {
       this.filteredList = [];
       this.open = false;
       this.update();
