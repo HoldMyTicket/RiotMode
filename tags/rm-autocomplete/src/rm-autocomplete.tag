@@ -137,7 +137,7 @@
   
   this.on('mount',function(){
     
-    if(this.ajax) {
+    if(this.ajax && !this.parameter) {
       this.ajaxGet(this.url, function(res) {
         var json = JSON.parse(res);
         me.list = json;
