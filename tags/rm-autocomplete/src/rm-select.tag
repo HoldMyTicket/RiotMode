@@ -181,15 +181,6 @@
     
     if(tag.select)
       input.readOnly = true;
-
-    if(tag.ajax) {
-      tag.ajaxGet(tag.url, function(res) {
-        var json = JSON.parse(res);
-        tag.list = json;
-        tag.filteredList = json;
-        tag.update();
-      });
-    }
     
     tag.root.querySelector('.list').style.maxHeight = tag.maxHeight;
     input.onfocus = function(e) {
