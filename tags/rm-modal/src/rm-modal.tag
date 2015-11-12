@@ -1,28 +1,27 @@
 <rm-modal>
     <div class="modalMaster" show="{open}">
-      <div class="overlay"></div>
-      <div class="modalWrap" onclick="{closeModal}">
+      <div show="{open}" class="overlay" onclick="{closeModal}"></div>
         <div class="modal">
           <button class="close-btn" onclick="{closeModal}">X</button>
           <div class="modal-content"><yield/></div>
           <div class="clear"></div>
         </div>
-      </div>
     </div>
 
     <button hide="{hide_btn}" onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
     
     <style scoped>
-        .modalMaster, .modalWrap {
+        .modalMaster {
             position: fixed;
             top: 0;
             right: 0;
             bottom: 0;
             left: 0;
-            z-index: 99;
+            z-index: 100;
+            overflow: auto;
         }
         .overlay {
-            position: fixed;
+            position: absolute;
             top: 0;
             right: 0;
             bottom: 0;
@@ -31,18 +30,15 @@
             z-index: 100;
             background-color: rgba(0, 0, 0, 0.8);
         }
-        .modalWrap {
-          z-index: 101;
-          overflow: auto;
-        }
         .modal {
             max-width: 35%;
             position: absolute;
             left: 50%;
-            top: 15%;
             padding: 15px;
             background-color: #fff;
             z-index: 102;
+            margin-bottom: 50px;
+            margin: 50px 0;
             -webkit-border-radius: 5px;
             -moz-border-radius: 5px;
             -o-border-radius: 5px;
@@ -129,8 +125,12 @@
     
     calcModal() {
       var modal = this.root.querySelector('.modal');
+      var overlay = this.root.querySelector('.overlay');
+      var modalMasterHeight = (this.root.querySelector('.modalMaster').scrollHeight + 1).toString();
       var modalWidth = modal.clientWidth.toString();
       var modalLeft = '-'+(modalWidth / 2).toString();
+      
+      overlay.style.height = modalMasterHeight+'px';
       
       modal.setAttribute('style','width: '+modalWidth+'px; '+'margin-left: '+modalLeft+'px;');
       modal.style.width = modalWidth+'px';
