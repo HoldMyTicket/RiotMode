@@ -32,9 +32,9 @@
         }
         .modal {
             max-width: 35%;
-            position: fixed;
-            left: 33%;
-            top: 20%;
+            position: absolute;
+            left: 50%;
+            top: 30%;
             padding: 15px;
             background-color: #fff;
             z-index: 102;
@@ -106,6 +106,7 @@
     openModal(e) {
       this.open = true;
       this.update();
+      this.calcModal();
       if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalopened', e);
       }
@@ -119,6 +120,16 @@
         RiotControl.trigger('modalclosed', e);
       }
       this.fire('close', e);
+    }
+    
+    calcModal() {
+      var modal = this.root.querySelector('.modal');
+      var modalWidth = modal.clientWidth.toString();
+      var modalLeft = '-'+(modalWidth / 2).toString();
+      
+      modal.setAttribute('style','width: '+modalWidth+'px; '+'margin-left: '+modalLeft+'px;');
+      modal.style.width = modalWidth+'px';
+      modal.style.marginLeft = modalLeft+'px';
     }
     
 </rm-modal>
