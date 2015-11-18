@@ -14,21 +14,22 @@
       name="{opts.name}"
       value="{ data_value }" hidden>
 
-    <div show={ open } class="list-container">
-      <ul class="list">
-        <li show={ select && !noFilter } class="filter">
+      <div show={ open && select && !noFilter } class="filter">
           <input
             type="text"
             class="filter-input"
             placeholder="{ opts.filter_placeholder || 'Filter...' }"
             onkeydown="{ handleText }"
             autocomplete="off">
-        </li>
+      </div>
+
+    <div show={ open } class="list-container">
+      <ul class="list">
         <li class="list-row" show={ noResults && value.length > 1}>
           { noResultsMessage }
         </li>
         <li class="list-row item{ item.active ? ' active' : ''}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }">
-          { item.text }
+          {item.text}
         </li>
       </ul>
     </div>
@@ -61,24 +62,25 @@
     .border::-webkit-input-placeholder { color: rgb(169,169,169); }
     .border::-moz-placeholder { color: rgb(169,169,169); /* Firefox 19+ */ }
     .err {border: 1px dashed red; color: rgb(169,169,169);}
-    .filter {padding:0;margin:0px;}
+    .filter {position:absolute;padding:0;margin:0px;width:100%;z-index:4;background:#fff;}
     .filter:hover {background:none;}
     .filter-input {
       background:none;
       border:none;
-      border-bottom:1px solid rgba(0, 0, 0, 0.117647);
+      border:1px solid rgba(0, 0, 0, 0.117647);
+      border-top:none;
       box-sizing:border-box;
       color: rgb(85, 85, 85);
       padding:5px;
       font-size:16px;
       height:35px;
       margin:0px;
-      width:100%;
+      width:inherit;
     }
     .list-container {
       position:absolute;
-      left:0;
-      right:0;
+      width:100%;
+      top:70px;
       background:#fff;
       height:auto;
       overflow-x:hidden;
@@ -102,9 +104,9 @@
       margin:0;
       -webkit-margin-before: 0;
       -webkit-margin-after: 0;
+      
     }
     .list .list-row {
-      position:relative;
       display: block;
       padding:5px 15px;
       margin:0px;
@@ -134,6 +136,7 @@
     }
     .wrap {
       position: relative;
+      height:100%;
     }
 	</style>
 
@@ -156,7 +159,7 @@
   this.atIndex = -1;
 
   this.value = opts.value || '';
-  this.data_value = '';
+  this.data_value = opts.dataValue || '';
 
 
   this.on('mount',function(){
@@ -211,6 +214,13 @@
     
     if(tag.open)
       return;
+
+    //todo offset
+    //var current_list = tag.root.querySelectorAll(".list .item");
+    //for(var i = 0; i < current_list.length; i++) {
+    //  if(current_list[i].innerHTML.trim() == tag.value)
+    //    console.log("current", current_list[i].offsetTop);
+    //}
 
     tag.open = true;
     tag.update();
