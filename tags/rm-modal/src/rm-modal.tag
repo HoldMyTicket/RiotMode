@@ -71,8 +71,7 @@
             -webkit-transition: all 0.3s ease-in-out;
             -moz-transition: all 0.3s ease-in-out;
             -o-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;
-            
+            transition: all 0.3s ease-in-out;   
         }
         
         .clear {
@@ -100,9 +99,9 @@
     this.hide_btn = false;
 
     this.on('mount',function(){
-      if(!this.opts['open-btn-text'])
-        this.hide_btn = true;
-      this.update();
+      if(!me.opts['open-btn-text'])
+        me.hide_btn = true;
+      me.update();
     })
     
     openModal(e) {
@@ -112,6 +111,7 @@
       if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalopened', e);
       }
+      document.addEventListener('keyup', me.modalKeyUp);
       this.fire('open', e);
     }
     
@@ -121,7 +121,14 @@
       if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalclosed', e);
       }
+      document.removeEventListener('keyup', me.modalKeyUp);
       this.fire('close', e);
+    }
+    
+    modalKeyUp(e) {
+      if(e.keyCode == 27) {
+        this.closeModal();
+      }
     }
     
     calcModal() {
