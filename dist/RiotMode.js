@@ -500,9 +500,9 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}"
     this.hide_btn = false;
 
     this.on('mount',function(){
-      if(!this.opts['open-btn-text'])
-        this.hide_btn = true;
-      this.update();
+      if(!me.opts['open-btn-text'])
+        me.hide_btn = true;
+      me.update();
     })
     
     this.openModal = function(e) {
@@ -512,16 +512,25 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}"
       if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalopened', e);
       }
+      document.addEventListener('keyup', me.modalKeyUp);
       this.fire('open', e);
     }.bind(this);
     
     this.closeModal = function(e) {
       this.open = false;
       this.update();
+      this.resetModal();
       if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalclosed', e);
       }
+      document.removeEventListener('keyup', me.modalKeyUp);
       this.fire('close', e);
+    }.bind(this);
+    
+    this.modalKeyUp = function(e) {
+      if(e.keyCode == 27) {
+        this.closeModal();
+      }
     }.bind(this);
     
     this.calcModal = function() {
@@ -531,11 +540,23 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}"
       var modalWidth = modal.clientWidth.toString();
       var modalLeft = '-'+(modalWidth / 2).toString();
       
+      overlay.setAttribute('style','height: '+modalMasterHeight+'px;');
       overlay.style.height = modalMasterHeight+'px';
       
       modal.setAttribute('style','width: '+modalWidth+'px; '+'margin-left: '+modalLeft+'px;');
       modal.style.width = modalWidth+'px';
       modal.style.marginLeft = modalLeft+'px';
+    }.bind(this);
+    
+    this.resetModal = function() {
+      var modal = this.root.querySelector('.modal');
+      var overlay = this.root.querySelector('.overlay');
+      
+      modal.setAttribute('style','width: auto;');
+      modal.style.width = 'auto';
+      
+      overlay.setAttribute('style','height: auto');
+      overlay.style.height = 'auto';
     }.bind(this);
     
 
