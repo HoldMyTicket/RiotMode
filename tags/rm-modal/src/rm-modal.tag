@@ -118,6 +118,7 @@
     closeModal(e) {
       this.open = false;
       this.update();
+      this.resetModal();
       if(typeof RiotControl != 'undefined'){
         RiotControl.trigger('modalclosed', e);
       }
@@ -138,11 +139,23 @@
       var modalWidth = modal.clientWidth.toString();
       var modalLeft = '-'+(modalWidth / 2).toString();
       
+      overlay.setAttribute('style','height: '+modalMasterHeight+'px;');
       overlay.style.height = modalMasterHeight+'px';
       
       modal.setAttribute('style','width: '+modalWidth+'px; '+'margin-left: '+modalLeft+'px;');
       modal.style.width = modalWidth+'px';
       modal.style.marginLeft = modalLeft+'px';
+    }
+    
+    resetModal() {
+      var modal = this.root.querySelector('.modal');
+      var overlay = this.root.querySelector('.overlay');
+      
+      modal.setAttribute('style','width: auto;');
+      modal.style.width = 'auto';
+      
+      overlay.setAttribute('style','height: auto');
+      overlay.style.height = 'auto';
     }
     
 </rm-modal>
