@@ -7,7 +7,8 @@
       class="mdl-textfield__input base { border : select }"
       autocomplete="off"
       placeholder="{ opts.placeholder || 'Type...' }"
-      value="{ value }">
+      value="{ value }"
+      onkeydown="{noFilter ? closeKey : ''}">
     
     <input 
       type="text"
@@ -44,14 +45,13 @@
       background:rgb(215,215,215);
     }
     .base {
-      height:40px;
+      height:100%;
       padding-left:5px;
       margin-bottom:0px;
       width:100%;
     }
     .noborder .border { border: 0; }
     .border {
-      
       height:35px;
       padding-left:5px;
       border:1px solid rgba(0,0,0,.12);
@@ -136,7 +136,7 @@
     }
     .wrap {
       position: relative;
-      height:100%;
+      height:35px;
     }
 	</style>
 
@@ -251,6 +251,15 @@
     if(!this.open)
       return;
     tag.closeWindow();
+  }
+
+  closeKey(e) {
+    e.preventDefault();
+    if (e.keyCode == 27) {
+      tag.closeWindow();
+      tag.root.querySelector('.base').blur();
+    } else
+      return false;
   }
 
   pick(e) {
