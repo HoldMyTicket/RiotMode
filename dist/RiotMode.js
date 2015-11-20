@@ -498,6 +498,8 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}"
     this.mixin(RMeventMixin);
     this.open = false;
     this.hide_btn = false;
+    this.modalWidth = opts.width || false;
+    this.modalHeight = opts.height || false;
 
     this.on('mount',function(){
       if(!me.opts['open-btn-text'])
@@ -537,14 +539,17 @@ riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}"
       var modal = this.root.querySelector('.modal');
       var overlay = this.root.querySelector('.overlay');
       var modalMasterHeight = this.root.querySelector('.modalMaster').scrollHeight.toString();
-      var modalWidth = modal.clientWidth.toString();
+      var modalWidth = this.modalWidth || modal.clientWidth.toString();
       var modalLeft = '-'+(modalWidth / 2).toString();
       
       overlay.setAttribute('style','height: '+modalMasterHeight+'px;');
       overlay.style.height = modalMasterHeight+'px';
       
-      modal.setAttribute('style','width: '+modalWidth+'px; '+'margin-left: '+modalLeft+'px;');
+      modal.setAttribute('style','width: '+modalWidth+'px; '+'margin-left: '+modalLeft+'px;'+(this.modalHeight ? ' height: '+this.modalHeight+'px;' : ''));
       modal.style.width = modalWidth+'px';
+      if(this.modalHeight) {
+        modal.style.height = this.modalHeight+'px';
+      }
       modal.style.marginLeft = modalLeft+'px';
     }.bind(this);
     
