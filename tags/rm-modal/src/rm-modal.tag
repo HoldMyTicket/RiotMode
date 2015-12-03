@@ -12,74 +12,74 @@
     
     <style scoped>
         .modalMaster {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 100;
-            overflow: auto;
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 100;
+          overflow: auto;
         }
         .overlay {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            text-align: center;
-            z-index: 100;
-            background-color: rgba(0, 0, 0, 0.8);
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          text-align: center;
+          z-index: 100;
+          background-color: rgba(0, 0, 0, 0.8);
         }
         .modal {
-            max-width: 35%;
-            position: absolute;
-            left: 50%;
-            padding: 15px;
-            background-color: #fff;
-            z-index: 102;
-            margin-bottom: 50px;
-            margin: 50px 0;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            -o-border-radius: 5px;
-            border-radius: 5px;
+          max-width: 35%;
+          position: absolute;
+          left: 50%;
+          padding: 15px;
+          background-color: #fff;
+          z-index: 102;
+          margin-bottom: 50px;
+          margin: 50px 0;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          -o-border-radius: 5px;
+          border-radius: 5px;
         }
         .close-btn {
-            background-color: black;
-            color: white;
-            font-weight: 200;
-            width: 30px;
-            height: 30px;
-            border: 2px solid white;
-            outline: none;
-            cursor: pointer;
-            font-size: 15px;
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-            -o-border-radius: 15px;
-            border-radius: 15px;
-            -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
-            -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
-            box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
+          background-color: black;
+          color: white;
+          font-weight: 200;
+          width: 30px;
+          height: 30px;
+          border: 2px solid white;
+          outline: none;
+          cursor: pointer;
+          font-size: 15px;
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          -webkit-border-radius: 15px;
+          -moz-border-radius: 15px;
+          -o-border-radius: 15px;
+          border-radius: 15px;
+          -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
+          -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
+          box-shadow: 0 0 5px 0 rgba(0,0,0,0.75);
         }
         .close-btn:hover {
-            background-color: white;
-            color: black;
-            -webkit-transition: all 0.3s ease-in-out;
-            -moz-transition: all 0.3s ease-in-out;
-            -o-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;   
+          background-color: white;
+          color: black;
+          -webkit-transition: all 0.3s ease-in-out;
+          -moz-transition: all 0.3s ease-in-out;
+          -o-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
         }
         
         .clear {
-            clear: both;
+          clear: both;
         }
         
         .hidden {
-            display: none;
+          display: none;
         }
         
     </style>
