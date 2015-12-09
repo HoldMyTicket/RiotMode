@@ -1,15 +1,16 @@
 <rm-modal>
+
     <div class="modalMaster" show="{open}">
-      <div show="{open}" class="overlay" onclick="{closeModal}"></div>
-        <div class="modal">
-          <button class="close-btn" onclick="{closeModal}">X</button>
-          <div class="modal-content"><yield/></div>
-          <div class="clear"></div>
-        </div>
+      <div show="{open}" class="overlay" onclick="{closeModalIfNotObtrusive}"></div>
+      <div class="modal">
+        <button hide="{opts.obtrusive}" class="close-btn" onclick="{closeModalIfNotObtrusive}">X</button>
+        <div class="modal-content"><yield/></div>
+        <div class="clear"></div>
+      </div>
     </div>
 
     <button hide="{hide_btn}" onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
-    
+
     <style scoped>
         .modalMaster {
           position: fixed;
@@ -73,27 +74,27 @@
           -o-transition: all 0.3s ease-in-out;
           transition: all 0.3s ease-in-out;
         }
-        
+
         .clear {
           clear: both;
         }
-        
+
         .hidden {
           display: none;
         }
-        
+
     </style>
-    
-    
-    
+
+
+
     /**
      * Modal component for RiotJS v2.2
-     * 
+     *
      * @author joseph-perez
      * @author wes
      */
     var me = this;
-    
+
     this.mixin(RMeventMixin);
     this.open = false;
     this.hide_btn = false;
@@ -105,7 +106,7 @@
         me.hide_btn = true;
       me.update();
     })
-    
+
     openModal(e) {
       this.open = true;
       this.update();
@@ -116,7 +117,12 @@
       document.addEventListener('keyup', me.modalKeyUp);
       this.fire('open', e);
     }
-    
+
+    closeModalIfNotObtrusive(e){
+      if(!opts.obtrusive)
+        this.closeModal();
+    }
+
     closeModal(e) {
       this.open = false;
       this.update();
@@ -127,23 +133,23 @@
       document.removeEventListener('keyup', me.modalKeyUp);
       this.fire('close', e);
     }
-    
+
     modalKeyUp(e) {
-      if(e.keyCode == 27) {
+      if(e.keyCode == 27 && !opts.obtrusive) {
         this.closeModal();
       }
     }
-    
+
     calcModal() {
       var modal = this.root.querySelector('.modal');
       var overlay = this.root.querySelector('.overlay');
       var modalMasterHeight = this.root.querySelector('.modalMaster').scrollHeight.toString();
       var modalWidth = this.modalWidth || modal.clientWidth.toString();
       var modalLeft = '-'+(modalWidth / 2).toString();
-      
+
       overlay.setAttribute('style','height: '+modalMasterHeight+'px;');
       overlay.style.height = modalMasterHeight+'px';
-      
+
       modal.setAttribute('style','width: '+modalWidth+'px; '+'margin-left: '+modalLeft+'px;'+(this.modalHeight ? ' height: '+this.modalHeight+'px;' : ''));
       modal.style.width = modalWidth+'px';
       if(this.modalHeight) {
@@ -151,16 +157,16 @@
       }
       modal.style.marginLeft = modalLeft+'px';
     }
-    
+
     resetModal() {
       var modal = this.root.querySelector('.modal');
       var overlay = this.root.querySelector('.overlay');
-      
+
       modal.setAttribute('style','width: auto;');
       modal.style.width = 'auto';
-      
+
       overlay.setAttribute('style','height: auto');
       overlay.style.height = 'auto';
     }
-    
+
 </rm-modal>
