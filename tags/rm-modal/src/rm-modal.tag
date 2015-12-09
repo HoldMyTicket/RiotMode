@@ -118,6 +118,7 @@
       this.fire('open', e);
     }
 
+    // checks for obtrusive to close first
     closeModalIfNotObtrusive(e){
       if(!opts.obtrusive)
         this.closeModal();
