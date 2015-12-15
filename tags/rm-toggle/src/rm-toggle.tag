@@ -40,19 +40,19 @@
     this.ischecked = this.opts.ischecked || false;
 
     this.mdl_timer = false;
-
-    this.on('mount', function() {
-
-      Object.observe(me.opts, function (changes) {
-        if(changes[0].name == 'ischecked' && changes[0].type == "update" && me.ischecked != me.opts.ischecked){
+    
+    this.on('updated', function() {
+      if(me.ischecked != me.opts.ischecked) {
+        setTimeout(function() {
           me.ischecked = me.opts.ischecked;
           me.checkToggle();
-        }
-      });
-      
+        }, 100);
+      }
+    });
+
+    this.on('mount', function() {
       var wrap = me.root.children[0].querySelector('label');
       componentHandler.upgradeElement(wrap);
-      
     });
 
     checkToggle() {
