@@ -82,6 +82,19 @@
         .hidden {
           display: none;
         }
+        
+        @media only screen and (max-width: 767px) {
+          .modal {
+            max-width: 100%;
+            width: 90% !important;
+            margin-left: 0 !important;
+            left: 0;
+          }
+          
+          .close-btn {
+            right: 0;
+          }
+        }
 
     </style>
 
