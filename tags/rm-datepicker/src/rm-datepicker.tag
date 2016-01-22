@@ -127,25 +127,25 @@
 				<span>Sa</span>
 				<span>Su</span>
 			</div>
-	
+
 			<div class="weekrow" each="{ rows in mydata }">
-				<a class="{ nohover: day.asNumber < 0, today: day.active, selected:day.selected }" 
+				<a class="{ nohover: day.asNumber < 0, today: day.active, selected:day.selected }"
 						onclick="{ pick }" each="{ day in rows }">{ day.asNumber > 0 ? day.asNumber : '&nbsp;' }</a>
 			</div>
-		</div>	
+		</div>
 	</div>
 
 	var me = this;
-	
+
 	this.today = moment();
 	this.month = opts.initial ? moment(opts.initial) : moment();
 	this.min = opts.min ? moment(opts.min) : false;
-	this.max = opts.max ? moment(opts.max) : false;		
+	this.max = opts.max ? moment(opts.max) : false;
 	this.open = false;
 	this.format = opts.format || "MMM Do YYYY";
 	this.date = moment(this.month);
 	this.value = this.month.format(this.format);
-	
+
 	this.on('mount', function() {
 		me.build(me.month);
 		me.update();
@@ -161,8 +161,12 @@
 				year: me.month.year(),
 				month: me.month.month(),
 				day: target.innerHTML
-		});	
+		});
 		me.value = me.date.format(me.format);
+
+		if(me.opts.onset != 'undefined')
+			me.opts.onset();
+
 		me.build(me.month);
 		me.open = false;
 		me.update();
@@ -178,11 +182,11 @@
 	next(e) {
 		if(me.max && me.max.diff(me.month,'months') == 0)
 			return;
-	
+
 		me.month.add(1, 'months');
 		me.build(me.month);
 	}
-	
+
 	build(date) {
 		var firstDay = date.startOf('month').day();
 		var totalDays = date.daysInMonth();
@@ -190,10 +194,10 @@
 
 		me.header = date.format("MMMM YYYY");
 		me.mydata = [];
-		
+
 
 		var maxMonth = me.max && me.max.month() == me.month.month() && me.today.year() == me.month.year();
-		
+
 		var working = true;
 
 		while(working) {

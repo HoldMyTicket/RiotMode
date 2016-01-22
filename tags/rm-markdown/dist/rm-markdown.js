@@ -1,4 +1,4 @@
-riot.tag('rm-markdown', '<raw content="{html}"></raw>', function(opts) {
+riot.tag2('rm-markdown', '<raw content="{html}"></raw>', '', '', function(opts) {
 
 	this.html = opts.content ? marked(opts.content) : '';
 
@@ -8,10 +8,8 @@ riot.tag('rm-markdown', '<raw content="{html}"></raw>', function(opts) {
 		}
 	});
 
+}, '{ }');
 
-});
-
-riot.tag('raw', '<span></span>', function(opts) {
+riot.tag2('raw', '<span></span>', '', '', function(opts) {
 	this.root.innerHTML = opts.content
-
 });

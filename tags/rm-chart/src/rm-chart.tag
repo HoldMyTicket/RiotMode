@@ -1,5 +1,5 @@
 <rm-chart>
-	
+
 	<style scoped>
 		.noselect {
 		    -webkit-touch-callout: none;
@@ -10,9 +10,9 @@
 		    user-select: none;
 		}
 	</style>
-	
+
 	<div id="chart" class="noselect" style="width: 100%; height: 100%"></div>
-	
+
 	var me = this;
 
 	this.on('mount',function() {
@@ -24,13 +24,13 @@
 			});
 		}
 	});
-	
+
 	make() {
-		var data = new google.visualization.arrayToDataTable(opts.data);
+		var data = opts.data;
 		var options = opts.options || {};
-		if(opts.dragToZoom && opts.type === 'line') 
+		if(opts.dragToZoom && opts.type === 'line')
 			options.explorer = { actions: ['dragToZoom', 'rightClickToReset'], axis: 'horizontal' }
-			
+
 		var type = {
 			'material' : new google.charts.Line(this.chart),
 			'line': new google.visualization.LineChart(this.chart),
