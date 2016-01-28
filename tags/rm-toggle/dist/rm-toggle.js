@@ -1,8 +1,8 @@
-riot.tag2('rm-toggle', '<div class="wrap"> <label class="mdl-{toggleType} mdl-js-{toggleType} mdl-js-ripple-effect"> <input type="{toggleType != \'switch\' ? toggleType : \'checkbox\'}" name="{toggleName}" class="mdl-{toggleType}__{toggleType === \'radio\' ? \'button\' : \'input\'}" value="{toggleValue}" onclick="{toggle}" __checked="{ischecked}"> <span if="{toggleLabelText && toggleType !== \'icon-toggle\'}" class="mdl-{toggleType}__label">{toggleLabelText}</span> <i if="{toggleType === \'icon-toggle\'}" class="mdl-icon-toggle__label material-icons">{opts.icon}</i> </label> </div>', '', '', function(opts) {
-
-
+riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleType } mdl-js-{ toggleType } mdl-js-ripple-effect"> <input type="{ toggleType != \'switch\' ? toggleType : \'checkbox\' }" name="{ toggleName }" class="mdl-{ toggleType }__{ toggleType === \'radio\' ? \'button\' : \'input\' }" value="{ toggleValue }" onclick="{ toggle }" __checked="{ ischecked }"> <span if="{ toggleLabelText && toggleType !== \'icon-toggle\' }" class="mdl-{ toggleType }__label">{ toggleLabelText }</span> <i if="{ toggleType === \'icon-toggle\' }" class="mdl-icon-toggle__label material-icons">{ opts.icon }</i> </label> </div>', function(opts) {
+    
+    
     var me = this;
-
+    
     this.mixin(RMeventMixin);
     this.toggleType = opts.type || 'checkbox';
     this.toggleValue = opts.value || '';
@@ -11,7 +11,7 @@ riot.tag2('rm-toggle', '<div class="wrap"> <label class="mdl-{toggleType} mdl-js
     this.ischecked = this.opts.ischecked || false;
 
     this.mdl_timer = false;
-
+    
     this.on('updated', function() {
       if(me.ischecked != me.opts.ischecked) {
         setTimeout(function() {
@@ -42,13 +42,14 @@ riot.tag2('rm-toggle', '<div class="wrap"> <label class="mdl-{toggleType} mdl-js
         break;
       }
       me.update();
-    }.bind(this)
-
+    }.bind(this);
+    
     this.toggle = function(e) {
 
       me.opts.ischecked = me.ischecked;
       me.fire('toggle', e);
 
-    }.bind(this)
+    }.bind(this);
+    
 
-}, '{ }');
+});

@@ -1,6 +1,6 @@
-riot.tag2('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textarea if="{opts.type == \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" rows="{rows}" id="text_{id}"></textarea> <input if="{opts.type != \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{_id}">{opts.placeholder || \'Type...\'}</label> <span if="{opts.type == \'numeric\' || opts.type == \'email\' || opts.regex}" class="mdl-textfield__error">{error}</span> <div if="{opts.type == \'expanding\'}" class="mdl-textfield__expandable-holder"> <input name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{id}">Expandable Input</label> </div> </div>', '', '', function(opts) {
+riot.tag('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textarea if="{ opts.type == \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" rows="{rows}" id="text_{id}" ></textarea> <input if="{ opts.type != \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{_id}">{ opts.placeholder || \'Type...\' }</label> <span if="{ opts.type == \'numeric\' || opts.type == \'email\' || opts.regex }" class="mdl-textfield__error">{ error }</span> <div if="{ opts.type == \'expanding\' }" class="mdl-textfield__expandable-holder"> <input name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{id}">Expandable Input</label> </div> </div>', function(opts) {
 
-
+	
 	var me = this;
 
     this.value = '';
@@ -11,10 +11,11 @@ riot.tag2('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textar
     this.regex = opts.regex || false;
     this.error = opts.error || "Input error!";
 	this.name = opts.name || false;
+		
 
     this.on('mount',function() {
 		var wrap = this.root.children[0];
-
+		
 		wrap.style.width = me.width;
 
 		if(!me.name) {
@@ -34,7 +35,7 @@ riot.tag2('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textar
 		}
 
         me.assignRegex();
-		componentHandler.upgradeElement(wrap);
+		componentHandler.upgradeElement(wrap); //call to load materialdesign on el
     });
 
     this.assignRegex = function() {
@@ -58,6 +59,7 @@ riot.tag2('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textar
             input.setAttribute('pattern',opts.regex);
 		    		me.update();
         }
-    }.bind(this)
+    }.bind(this);
 
-}, '{ }');
+
+});

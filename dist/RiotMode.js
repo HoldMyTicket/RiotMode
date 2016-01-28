@@ -22,9 +22,8 @@ var RMajaxMixin = {
         xhr.send();
     }
 };    
-riot.tag2('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.name}" class="base_input" autocomplete="off" placeholder="{placeholder}" onkeydown="{handleText}" value="{value}"> <div show="{open}" class="list_container"> <ul class="list"> <li class="list_row" show="{noResults && value.length > 1}"> {noResultsMessage} </li> <li class="list_row item{item.active ? \' active\' : \'\'}" onclick="{parent.pick}" each="{item, i in filteredList}" onclick="{parent.select}" data-value="{item.value || item.text}"> {item.text} </li> </ul> </div> </div>', 'rm-autocomplete *,[riot-tag="rm-autocomplete"] * { box-sizing: border-box; } rm-autocomplete .active,[riot-tag="rm-autocomplete"] .active { background:rgb(215,215,215); } rm-autocomplete .base,[riot-tag="rm-autocomplete"] .base { height:40px; padding-left:5px; margin-bottom:0px; width:100%; } rm-autocomplete .base_input,[riot-tag="rm-autocomplete"] .base_input { border: none; border-bottom: 1px solid rgba(0,0,0,.12); display: block; font-size: 16px; margin: 0; padding: 4px 0; width: 100%; background: 0 0; text-align: left; color: inherit; } rm-autocomplete .base_input:focus,[riot-tag="rm-autocomplete"] .base_input:focus { outline: 0; } rm-autocomplete .list_container,[riot-tag="rm-autocomplete"] .list_container { position:absolute; left:0; right:0; background:#fff; height:auto; overflow-x:hidden; overflow-y:auto; border: 1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; z-index: 3; } rm-autocomplete .noselect,[riot-tag="rm-autocomplete"] .noselect { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-autocomplete .list,[riot-tag="rm-autocomplete"] .list { list-style-type: none; padding:0; margin:0; -webkit-margin-before: 0; -webkit-margin-after: 0; } rm-autocomplete .list .list_row,[riot-tag="rm-autocomplete"] .list .list_row { position:relative; display: block; padding:5px 15px; margin:0px; overflow:auto; border-bottom: 1px solid rgba(0, 0, 0, 0.117647); } rm-autocomplete .list .list_row .accent,[riot-tag="rm-autocomplete"] .list .list_row .accent { position:absolute; top:0; right:0; padding:5px; font-size:12px; font-style:italic; color:rgb(169,169,169); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } rm-autocomplete .list .list_row:last-child,[riot-tag="rm-autocomplete"] .list .list_row:last-child { border-bottom:none; } rm-autocomplete .list .list_row:hover,[riot-tag="rm-autocomplete"] .list .list_row:hover { background: rgb(240, 240, 240); cursor: pointer; } rm-autocomplete textarea:focus,[riot-tag="rm-autocomplete"] textarea:focus,rm-autocomplete input:focus,[riot-tag="rm-autocomplete"] input:focus { outline: 0; } rm-autocomplete .wrap,[riot-tag="rm-autocomplete"] .wrap { position: relative; }', '', function(opts) {
-
-
+riot.tag('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.name}" class="base_input" autocomplete="off" placeholder="{placeholder}" onkeydown="{handleText}" value="{value}"> <div show="{open}" class="list_container"> <ul class="list"> <li class="list_row" show="{ noResults && value.length > 1}"> { noResultsMessage } </li> <li class="list_row item{ item.active ? \' active\' : \'\'}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }"> { item.text } </li> </ul> </div> </div>', 'rm-autocomplete *, [riot-tag="rm-autocomplete"] *{ box-sizing: border-box; } rm-autocomplete .active, [riot-tag="rm-autocomplete"] .active{ background:rgb(215,215,215); } rm-autocomplete .base, [riot-tag="rm-autocomplete"] .base{ height:40px; padding-left:5px; margin-bottom:0px; width:100%; } rm-autocomplete .base_input, [riot-tag="rm-autocomplete"] .base_input{ border: none; border-bottom: 1px solid rgba(0,0,0,.12); display: block; font-size: 16px; margin: 0; padding: 4px 0; width: 100%; background: 0 0; text-align: left; color: inherit; } rm-autocomplete .base_input:focus, [riot-tag="rm-autocomplete"] .base_input:focus{ outline: 0; } rm-autocomplete .list_container, [riot-tag="rm-autocomplete"] .list_container{ position:absolute; left:0; right:0; background:#fff; height:auto; overflow-x:hidden; overflow-y:auto; border: 1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; z-index: 3; } rm-autocomplete .noselect, [riot-tag="rm-autocomplete"] .noselect{ -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-autocomplete .list, [riot-tag="rm-autocomplete"] .list{ list-style-type: none; padding:0; margin:0; -webkit-margin-before: 0; -webkit-margin-after: 0; } rm-autocomplete .list .list_row, [riot-tag="rm-autocomplete"] .list .list_row{ position:relative; display: block; padding:5px 15px; margin:0px; overflow:auto; border-bottom: 1px solid rgba(0, 0, 0, 0.117647); } rm-autocomplete .list .list_row .accent, [riot-tag="rm-autocomplete"] .list .list_row .accent{ position:absolute; top:0; right:0; padding:5px; font-size:12px; font-style:italic; color:rgb(169,169,169); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } rm-autocomplete .list .list_row:last-child, [riot-tag="rm-autocomplete"] .list .list_row:last-child{ border-bottom:none; } rm-autocomplete .list .list_row:hover, [riot-tag="rm-autocomplete"] .list .list_row:hover{ background: rgb(240, 240, 240); cursor: pointer; } rm-autocomplete textarea:focus, [riot-tag="rm-autocomplete"] textarea:focus,rm-autocomplete input:focus, [riot-tag="rm-autocomplete"] input:focus{ outline: 0; } rm-autocomplete .wrap, [riot-tag="rm-autocomplete"] .wrap{ position: relative; }', function(opts) {
+   
   var me = this;
 
   this.mixin(RMajaxMixin);
@@ -38,19 +37,19 @@ riot.tag2('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.
   this.value = '';
   this.data_value = '';
   this.input_name = '';
-
+  
   this.url = opts.url || false;
   if(this.url !== false)
     this.ajax = true;
   this.list = opts.list || [];
   this.filteredList = opts.list || [];
-
+  
   this.noResults = false;
   this.noResultsMessage = opts.message || 'No results...';
   this.atIndex = -1;
-
+  
   this.on('mount',function(){
-
+    
     if(this.ajax && !this.parameter) {
       this.ajaxGet(this.url, function(res) {
         var json = JSON.parse(res);
@@ -59,7 +58,7 @@ riot.tag2('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.
         me.update();
       });
     }
-
+    
     if(opts.value) {
       this.root.querySelector('.base_input').value = opts.value
       this.value = opts.value;
@@ -69,35 +68,35 @@ riot.tag2('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.
       this.root.querySelector('.base_input').onfocus = function(e) {
         me.openWindow(e);
       }
-    }
+    } 
     this.root.querySelector('.list').style.maxHeight = this.maxHeight;
 
     document.addEventListener('click', me.globalClose);
     document.addEventListener('focus', me.globalClose, true);
-
+    
   });
 
   this.on('unmount', function () {
     document.removeEventListener('click', me.globalClose);
     document.removeEventListener('focus', me.globalClose, true);
   });
-
+  
   this.setValue = function(val, dataVal) {
     var chosen = val || this.root.querySelector('.base_input').value
     this.root.querySelector('.base_input').value = chosen
     this.value = chosen;
     this.data_value = dataVal;
     this.input_name = this.root.querySelector('.base_input').name;
-    this.fire('set',{'value':chosen, 'data_value':dataVal, 'input_name':this.input_name});
-  }.bind(this)
-
+    this.fire('set',{'value':chosen, 'data_value':dataVal, 'input_name':this.input_name});  
+  }.bind(this);
+  
   this.pick = function(e) {
     var target = e.srcElement || e.originalTarget;
     this.setValue(target.innerHTML.replace(/<(?:.|\n)*?>/gm, '').trim(), target.dataset.value);
     this.atIndex = -1;
     this.closeWindow();
-  }.bind(this)
-
+  }.bind(this);
+  
   this.handleText = function(e) {
     if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
       e.preventDefault();
@@ -107,8 +106,8 @@ riot.tag2('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.
       this.getList(target.value);
     }
     return true;
-  }.bind(this)
-
+  }.bind(this);
+  
   this.keys = function(val) {
     if (val == 27) {
       this.closeWindow();
@@ -126,7 +125,8 @@ riot.tag2('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.
           }
         });
       }
-
+      
+      
     } else if (val == 38) {
       if(this.atIndex <= 0)
         return;
@@ -139,48 +139,48 @@ riot.tag2('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.
       this.atIndex++;
       this.activate();
     }
-  }.bind(this)
-
+  }.bind(this);
+  
   this.getList = function(value) {
-
+    
     if(value.length < (parseInt(opts.limit) || 3)) {
       this.filteredList = [];
       this.open = false;
       this.update();
-      return;
+      return; 
     }
 
     if(this.parameter) {
       var path = this.url + '/' + this.parameter + '/' + encodeURIComponent(value);
-
+      
       clearTimeout(this.timeout);
 
       this.timeout = setTimeout(function() {
-        me.ajaxGet(path, function(res) {
+        me.ajaxGet(path, function(res) { 
           me.filteredList = JSON.parse(res);
           if(me.filteredList && me.filteredList.length > 0) {
             me.openWindow();
           } else {
             me.closeWindow();
           }
-          me.update();
+          me.update(); 
         });
       });
-
+      
     } else {
-
+      
       var ret = this.list.filter(function(c) {
         return c.text.match(RegExp(value,'i'));
       });
-
+      
       this.filteredList = ret;
       if(this.filteredList && this.filteredList.length > 0) {
         this.open = true;
       }
       this.update();
     }
-  }.bind(this)
-
+  }.bind(this);
+  
   this.activate = function() {
 
     if(typeof this.filteredList[this.atIndex] === 'undefined') {
@@ -200,38 +200,39 @@ riot.tag2('rm-autocomplete', '<div class="wrap"> <input type="text" name="{opts.
     if(diff >= max || diff < 0) {
       active.scrollIntoView();
     }
-
-  }.bind(this)
+    
+  }.bind(this);
 
   this.deactivate = function() {
     this.filteredList.forEach(function(item) {
       item.active = false;
     });
-  }.bind(this)
-
+  }.bind(this);
+  
   this.openWindow = function(e) {
     if(this.open)
       return;
     this.open = true;
-    this.update();
-  }.bind(this)
+    this.update();      
+  }.bind(this);
 
   this.closeWindow = function(e) {
     this.open = false;
     this.atIndex = -1;
     this.update();
-  }.bind(this)
+  }.bind(this);
 
   this.globalClose = function(e) {
     if (e != undefined && this.root.contains(e.target)) {
       return;
     }
     this.closeWindow();
-  }.bind(this)
+  }.bind(this);
+ 
 
-}, '{ }');
+});
 
-riot.tag2('rm-chart', '<div id="chart" class="noselect" style="width: 100%; height: 100%"></div>', 'rm-chart .noselect,[riot-tag="rm-chart"] .noselect { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }', '', function(opts) {
+riot.tag('rm-chart', '<div id="chart" class="noselect" style="width: 100%; height: 100%"></div>', 'rm-chart .noselect, [riot-tag="rm-chart"] .noselect{ -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }', function(opts) {
 
 	var me = this;
 
@@ -261,11 +262,12 @@ riot.tag2('rm-chart', '<div id="chart" class="noselect" style="width: 100%; heig
 		}
 		var chart = type[opts.type];
 		chart.draw(data, options);
-	}.bind(this)
+	}.bind(this);
+
 
 });
 
-riot.tag2('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input" type="text" onclick="{show}" value="{value}" readonly> <div show="{open}" class="view"> <div class="view-title"> <a onclick="{previous}"><i class="material-icons left-arrow">&#xE5C4;</i></a> <span class="month">{header}</span> <a onclick="{next}"><i class="material-icons right-arrow">&#xE5C8;</i></a> </div> <div class="daysofweek"> <span>Mo</span> <span>Tu</span> <span>We</span> <span>Th</span> <span>Fr</span> <span>Sa</span> <span>Su</span> </div> <div class="weekrow" each="{rows in mydata}"> <a class="{nohover: day.asNumber < 0, today: day.active, selected:day.selected}" onclick="{pick}" each="{day in rows}">{day.asNumber > 0 ? day.asNumber : \'&nbsp;\'}</a> </div> </div> </div>', 'rm-datepicker *,[riot-tag="rm-datepicker"] * {box-sizing:border-box;} rm-datepicker table,[riot-tag="rm-datepicker"] table,rm-datepicker caption,[riot-tag="rm-datepicker"] caption,rm-datepicker tbody,[riot-tag="rm-datepicker"] tbody,rm-datepicker tfoot,[riot-tag="rm-datepicker"] tfoot,rm-datepicker thead,[riot-tag="rm-datepicker"] thead,rm-datepicker tr,[riot-tag="rm-datepicker"] tr,rm-datepicker th,[riot-tag="rm-datepicker"] th,rm-datepicker td,[riot-tag="rm-datepicker"] td { margin: 0; padding: 0 !important; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; text-align:center; } rm-datepicker a,[riot-tag="rm-datepicker"] a { color: rgb(117,117,117); text-decoration:none; } rm-datepicker .rm-datepicker,[riot-tag="rm-datepicker"] .rm-datepicker { position: relative; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-datepicker .base-input,[riot-tag="rm-datepicker"] .base-input { height:40px; padding-left:5px; border:1px solid #D3D3D3; box-sizing:border-box; padding-left:5px; cursor: pointer; color: rgb(85, 85, 85); font-size:1em; } rm-datepicker .view,[riot-tag="rm-datepicker"] .view { position: absolute; background: #FFF; border: 1px solid #D3D3D3; width:280px; height:auto; margin-top:5px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-shadow: 0 2px 10px -4px #444; -moz-box-shadow: 0 2px 10px -4px #444; box-shadow: 0 2px 10px -4px #444; z-index:10; } rm-datepicker .view-title,[riot-tag="rm-datepicker"] .view-title { display:block; text-align:center; background: #f5f5f5; color: #666; line-height: 50px; text-transform: uppercase; } rm-datepicker .view-title a,[riot-tag="rm-datepicker"] .view-title a { cursor: pointer; } rm-datepicker .left-arrow,[riot-tag="rm-datepicker"] .left-arrow { float:left; line-height:50px; margin-left:10px; color:#555; } rm-datepicker .right-arrow,[riot-tag="rm-datepicker"] .right-arrow { float:right; line-height:50px; margin-right:10px; color:#555; } rm-datepicker .daysofweek,[riot-tag="rm-datepicker"] .daysofweek { background: #f5f5f5; width:100%; height:23px; color: #222; font-weight: 700; } rm-datepicker .daysofweek span,[riot-tag="rm-datepicker"] .daysofweek span { float:left; text-align:center; width:14.285714285%; } rm-datepicker .weekrow,[riot-tag="rm-datepicker"] .weekrow { height:auto; padding:2px 0; width:100%; } rm-datepicker .weekrow a,[riot-tag="rm-datepicker"] .weekrow a { height:40px; border-radius: 40px; display: inline-block; line-height: 40px; width:14.285714285%; text-align:center; } rm-datepicker .weekrow a:hover,[riot-tag="rm-datepicker"] .weekrow a:hover { background:rgb(233,229,227); cursor:pointer; } rm-datepicker .today,[riot-tag="rm-datepicker"] .today { } rm-datepicker .selected,[riot-tag="rm-datepicker"] .selected { background: #fff; border: 2px solid #119ec3; } rm-datepicker .nohover:hover,[riot-tag="rm-datepicker"] .nohover:hover {content:"";background:none;cursor:default;padding:0 !important;}', '', function(opts) {
+riot.tag('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input" type="text" onclick="{ show }" value="{ value }" readonly> <div show="{ open }" class="view"> <div class="view-title"> <a onclick="{ previous }"><i class="material-icons left-arrow">&#xE5C4;</i></a> <span class="month">{ header }</span> <a onclick="{ next }"><i class="material-icons right-arrow">&#xE5C8;</i></a> </div> <div class="daysofweek"> <span>Mo</span> <span>Tu</span> <span>We</span> <span>Th</span> <span>Fr</span> <span>Sa</span> <span>Su</span> </div> <div class="weekrow" each="{ rows in mydata }"> <a class="{ nohover: day.asNumber < 0, today: day.active, selected:day.selected }" onclick="{ pick }" each="{ day in rows }">{ day.asNumber > 0 ? day.asNumber : \'&nbsp;\' }</a> </div> </div> </div>', 'rm-datepicker *, [riot-tag="rm-datepicker"] *{box-sizing:border-box;} rm-datepicker table, [riot-tag="rm-datepicker"] table,rm-datepicker caption, [riot-tag="rm-datepicker"] caption,rm-datepicker tbody, [riot-tag="rm-datepicker"] tbody,rm-datepicker tfoot, [riot-tag="rm-datepicker"] tfoot,rm-datepicker thead, [riot-tag="rm-datepicker"] thead,rm-datepicker tr, [riot-tag="rm-datepicker"] tr,rm-datepicker th, [riot-tag="rm-datepicker"] th,rm-datepicker td, [riot-tag="rm-datepicker"] td{ margin: 0; padding: 0 !important; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; text-align:center; } rm-datepicker a, [riot-tag="rm-datepicker"] a{ color: rgb(117,117,117); text-decoration:none; } rm-datepicker .rm-datepicker, [riot-tag="rm-datepicker"] .rm-datepicker{ position: relative; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-datepicker .base-input, [riot-tag="rm-datepicker"] .base-input{ height:40px; padding-left:5px; border:1px solid #D3D3D3; box-sizing:border-box; padding-left:5px; cursor: pointer; color: rgb(85, 85, 85); font-size:1em; } rm-datepicker .view, [riot-tag="rm-datepicker"] .view{ position: absolute; background: #FFF; border: 1px solid #D3D3D3; width:280px; height:auto; margin-top:5px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-shadow: 0 2px 10px -4px #444; -moz-box-shadow: 0 2px 10px -4px #444; box-shadow: 0 2px 10px -4px #444; z-index:10; } rm-datepicker .view-title, [riot-tag="rm-datepicker"] .view-title{ display:block; text-align:center; background: #f5f5f5; color: #666; line-height: 50px; text-transform: uppercase; } rm-datepicker .view-title a, [riot-tag="rm-datepicker"] .view-title a{ cursor: pointer; } rm-datepicker .left-arrow, [riot-tag="rm-datepicker"] .left-arrow{ float:left; line-height:50px; margin-left:10px; color:#555; } rm-datepicker .right-arrow, [riot-tag="rm-datepicker"] .right-arrow{ float:right; line-height:50px; margin-right:10px; color:#555; } rm-datepicker .daysofweek, [riot-tag="rm-datepicker"] .daysofweek{ background: #f5f5f5; width:100%; height:23px; color: #222; font-weight: 700; } rm-datepicker .daysofweek span, [riot-tag="rm-datepicker"] .daysofweek span{ float:left; text-align:center; width:14.285714285%; } rm-datepicker .weekrow, [riot-tag="rm-datepicker"] .weekrow{ height:auto; padding:2px 0; width:100%; } rm-datepicker .weekrow a, [riot-tag="rm-datepicker"] .weekrow a{ height:40px; border-radius: 40px; display: inline-block; line-height: 40px; width:14.285714285%; text-align:center; } rm-datepicker .weekrow a:hover, [riot-tag="rm-datepicker"] .weekrow a:hover{ background:rgb(233,229,227); cursor:pointer; } rm-datepicker .today, [riot-tag="rm-datepicker"] .today{ } rm-datepicker .selected, [riot-tag="rm-datepicker"] .selected{ background: #fff; border: 2px solid #119ec3; } rm-datepicker .nohover:hover, [riot-tag="rm-datepicker"] .nohover:hover{content:"";background:none;cursor:default;padding:0 !important;}', function(opts) {
 
 	var me = this;
 
@@ -285,7 +287,7 @@ riot.tag2('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input
 
 	this.show = function(e) {
 		me.open = !me.open;
-	}.bind(this)
+	}.bind(this);
 
 	this.pick = function(e) {
 		var target = e.target || e.srcElement;
@@ -302,14 +304,14 @@ riot.tag2('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input
 		me.build(me.month);
 		me.open = false;
 		me.update();
-	}.bind(this)
+	}.bind(this);
 
 	this.previous = function(e) {
 		if(me.min && me.min.diff(me.month) > 0)
 			return;
 		me.month.subtract(1, 'months');
 		me.build(me.month);
-	}.bind(this)
+	}.bind(this);
 
 	this.next = function(e) {
 		if(me.max && me.max.diff(me.month,'months') == 0)
@@ -317,7 +319,7 @@ riot.tag2('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input
 
 		me.month.add(1, 'months');
 		me.build(me.month);
-	}.bind(this)
+	}.bind(this);
 
 	this.build = function(date) {
 		var firstDay = date.startOf('month').day();
@@ -326,6 +328,7 @@ riot.tag2('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input
 
 		me.header = date.format("MMMM YYYY");
 		me.mydata = [];
+
 
 		var maxMonth = me.max && me.max.month() == me.month.month() && me.today.year() == me.month.year();
 
@@ -357,14 +360,16 @@ riot.tag2('rm-datepicker', '<div class="rm-datepicker"> <input class="base-input
 			me.mydata.push(week);
 		}
 		me.update();
-	}.bind(this)
+	}.bind(this);
 
-}, '{ }');
 
-riot.tag2('rm-google-map', '<div class="wrapper"> <div if="{infoWindow}" class="infoWindow"> <div class="card"> <div class="description"> <p class="title">Sunshine Theater</p> <span class="address">120 Central Ave SW, Albuquerque, NM 87102</span> </div> </div> </div> <div class="rm-google-map"></div> </div>', 'rm-google-map .wrapper,[riot-tag="rm-google-map"] .wrapper{ position:relative; height:100%; width:100%; } rm-google-map .infoWindow,[riot-tag="rm-google-map"] .infoWindow { position:absolute; top:0px; left:0px; width:auto; height:auto; margin: 10px; padding: 1px; -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-radius: 2px; background-color: white; z-index:10; } rm-google-map .card,[riot-tag="rm-google-map"] .card {padding: 9px 4px 9px 11px;} rm-google-map .description,[riot-tag="rm-google-map"] .description { width: 200px; display: inline-block; color: #5B5B5B; } rm-google-map .description .title,[riot-tag="rm-google-map"] .description .title { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: 500; font-size: 14px; color: black; margin:0; } rm-google-map .description .address,[riot-tag="rm-google-map"] .description .address { margin-top: 6px; font-size: 12px; } rm-google-map .rm-google-map,[riot-tag="rm-google-map"] .rm-google-map { margin: 0; padding: 0; width: 100%; height: 100%; } rm-google-map .rm-google-map img,[riot-tag="rm-google-map"] .rm-google-map img { max-width: inherit; }', '', function(opts) {
+});
+
+riot.tag('rm-google-map', '<div class="wrapper"> <div if="{ infoWindow }" class="infoWindow"> <div class="card"> <div class="description"> <p class="title">Sunshine Theater</p> <span class="address">120 Central Ave SW, Albuquerque, NM 87102</span> </div> </div> </div> <div class="rm-google-map"></div> </div>', 'rm-google-map .wrapper, [riot-tag="rm-google-map"] .wrapper{ position:relative; height:100%; width:100%; } rm-google-map .infoWindow, [riot-tag="rm-google-map"] .infoWindow{ position:absolute; top:0px; left:0px; width:auto; height:auto; margin: 10px; padding: 1px; -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-radius: 2px; background-color: white; z-index:10; } rm-google-map .card, [riot-tag="rm-google-map"] .card{padding: 9px 4px 9px 11px;} rm-google-map .description, [riot-tag="rm-google-map"] .description{ width: 200px; display: inline-block; color: #5B5B5B; } rm-google-map .description .title, [riot-tag="rm-google-map"] .description .title{ overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: 500; font-size: 14px; color: black; margin:0; } rm-google-map .description .address, [riot-tag="rm-google-map"] .description .address{ margin-top: 6px; font-size: 12px; } rm-google-map .rm-google-map, [riot-tag="rm-google-map"] .rm-google-map{ margin: 0; padding: 0; width: 100%; height: 100%; } rm-google-map .rm-google-map img, [riot-tag="rm-google-map"] .rm-google-map img{ max-width: inherit; }', function(opts) {
 
 	var me = this;
 
+	
 	this.on('mount',function() {
 		window.RiotModeMap = function() {
 			me.buildMap();
@@ -375,11 +380,11 @@ riot.tag2('rm-google-map', '<div class="wrapper"> <div if="{infoWindow}" class="
 	this.buildMap = function() {
 		me.buildOpts();
 		var map = new google.maps.Map(me.root.querySelector('.rm-google-map'), me.mapOptions);
-
+		
 		if(opts.address) {
-
+			
 			var geocoder = new google.maps.Geocoder();
-
+			
 			if(Array.isArray(opts.address)) {
 				opts.address.forEach(function(item) {
 					me.address(map,geocoder,item);
@@ -388,8 +393,13 @@ riot.tag2('rm-google-map', '<div class="wrapper"> <div if="{infoWindow}" class="
 				me.address(map,geocoder,opts,address);
 			}
 
-		}
 
+
+
+
+
+		}
+		
 		if(opts.markers.length > 0) {
 			for (var i = 0; i < opts.markers.length; i++) {
 				var location = opts.markers[i];
@@ -403,8 +413,8 @@ riot.tag2('rm-google-map', '<div class="wrapper"> <div if="{infoWindow}" class="
 			    });
 			}
 		}
-	}.bind(this)
-
+	}.bind(this);
+	
 	this.address = function(map, geo, location) {
 		geo.geocode({ 'address': location }, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
@@ -417,8 +427,8 @@ riot.tag2('rm-google-map', '<div class="wrapper"> <div if="{infoWindow}" class="
 				});
 			}
 		});
-	}.bind(this)
-
+	}.bind(this);
+	
 	this.buildOpts = function() {
 		me.mapOptions = {
 			center: opts.center || { lat: 35.1107, lng: -106.6100 },
@@ -428,7 +438,7 @@ riot.tag2('rm-google-map', '<div class="wrapper"> <div if="{infoWindow}" class="
     		scaleControl: true,
 			mapTypeId: google.maps.MapTypeId[opts.mapType.toUpperCase()] || google.maps.MapTypeId.ROADMAP,
 		};
-	}.bind(this)
+	}.bind(this);
 
 	this.loadScript = function() {
 		if (!document.getElementById('gmap_script')) {
@@ -440,30 +450,32 @@ riot.tag2('rm-google-map', '<div class="wrapper"> <div if="{infoWindow}" class="
 		} else {
 			me.buildMap();
 		}
-	}.bind(this)
+	}.bind(this);
 
-}, '{ }');
 
-riot.tag2('rm-loader', '<div id="wrap"> <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div> </div>', '', '', function(opts) {
+});
 
+riot.tag('rm-loader', '<div id="wrap"> <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div> </div>', function(opts) {
+	
 	var me = this;
-
+	
 	this.config = {
 		'spinner' : function() {
-
+			
 		},
 		'spinner-single-color' : function() {
-
+			
 		},
 	}
-
+	
 	this.on('mount', function() {
 		var wrap = this.root.children[0];
 		componentHandler.upgradeDom();
 	});
+
 });
 
-riot.tag2('rm-markdown', '<raw content="{html}"></raw>', '', '', function(opts) {
+riot.tag('rm-markdown', '<raw content="{html}"></raw>', function(opts) {
 
 	this.html = opts.content ? marked(opts.content) : '';
 
@@ -473,14 +485,18 @@ riot.tag2('rm-markdown', '<raw content="{html}"></raw>', '', '', function(opts) 
 		}
 	});
 
-}, '{ }');
 
-riot.tag2('raw', '<span></span>', '', '', function(opts) {
-	this.root.innerHTML = opts.content
 });
-riot.tag2('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}" class="overlay" onclick="{closeModalIfNotObtrusive}"></div> <div class="modal"> <button hide="{opts.obtrusive}" class="close-btn" onclick="{closeModalIfNotObtrusive}">X</button> <div class="modal-content"><yield></yield></div> <div class="clear"></div> </div> </div> <button hide="{hide_btn}" onclick="{openModal}" class="{opts[\'open-btn-class\']}"><i class="{opts[\'open-btn-icon\']}"></i> {opts[\'open-btn-text\']}</button>', 'rm-modal .modalMaster,[riot-tag="rm-modal"] .modalMaster { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; overflow: auto; } rm-modal .overlay,[riot-tag="rm-modal"] .overlay { position: absolute; top: 0; right: 0; bottom: 0; left: 0; text-align: center; z-index: 100; background-color: rgba(0, 0, 0, 0.8); } rm-modal .modal,[riot-tag="rm-modal"] .modal { max-width: 35%; position: absolute; left: 50%; padding: 15px; background-color: #fff; z-index: 102; margin-bottom: 50px; margin: 50px 0; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; } rm-modal .close-btn,[riot-tag="rm-modal"] .close-btn { background-color: black; color: white; font-weight: 200; width: 30px; height: 30px; border: 2px solid white; outline: none; cursor: pointer; font-size: 15px; position: absolute; top: -10px; right: -10px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -o-border-radius: 15px; border-radius: 15px; -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75); -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75); box-shadow: 0 0 5px 0 rgba(0,0,0,0.75); } rm-modal .close-btn:hover,[riot-tag="rm-modal"] .close-btn:hover { background-color: white; color: black; -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; } rm-modal .clear,[riot-tag="rm-modal"] .clear { clear: both; } rm-modal .hidden,[riot-tag="rm-modal"] .hidden { display: none; } @media only screen and (max-width: 767px) { rm-modal .modal,[riot-tag="rm-modal"] .modal { max-width: 100%; width: 100% !important; margin-left: 0 !important; left: 0; } rm-modal .close-btn,[riot-tag="rm-modal"] .close-btn { right: 0; } }', '', function(opts) {
+
+riot.tag('raw', '<span></span>', function(opts) {
+	this.root.innerHTML = opts.content
+
+});
+riot.tag('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}" class="overlay" onclick="{closeModalIfNotObtrusive}"></div> <div class="modal"> <button hide="{opts.obtrusive}" class="close-btn" onclick="{closeModalIfNotObtrusive}">X</button> <div class="modal-content"><yield></yield></div> <div class="clear"></div> </div> </div> <button hide="{hide_btn}" onclick="{ openModal }" class="{ opts[\'open-btn-class\'] }"><i class="{ opts[\'open-btn-icon\'] }"></i> { opts[\'open-btn-text\'] }</button>', 'rm-modal .modalMaster, [riot-tag="rm-modal"] .modalMaster{ position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; overflow: auto; } rm-modal .overlay, [riot-tag="rm-modal"] .overlay{ position: absolute; top: 0; right: 0; bottom: 0; left: 0; text-align: center; z-index: 100; background-color: rgba(0, 0, 0, 0.8); } rm-modal .modal, [riot-tag="rm-modal"] .modal{ max-width: 35%; position: absolute; left: 50%; padding: 15px; background-color: #fff; z-index: 102; margin-bottom: 50px; margin: 50px 0; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; } rm-modal .close-btn, [riot-tag="rm-modal"] .close-btn{ background-color: black; color: white; font-weight: 200; width: 30px; height: 30px; border: 2px solid white; outline: none; cursor: pointer; font-size: 15px; position: absolute; top: -10px; right: -10px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -o-border-radius: 15px; border-radius: 15px; -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75); -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.75); box-shadow: 0 0 5px 0 rgba(0,0,0,0.75); } rm-modal .close-btn:hover, [riot-tag="rm-modal"] .close-btn:hover{ background-color: white; color: black; -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; } rm-modal .clear, [riot-tag="rm-modal"] .clear{ clear: both; } rm-modal .hidden, [riot-tag="rm-modal"] .hidden{ display: none; } @media only screen and (max-width: 767px){ rm-modal .modal, [riot-tag="rm-modal"] .modal{ max-width: 100%; width: 100% !important; margin-left: 0 !important; left: 0; } rm-modal .close-btn, [riot-tag="rm-modal"] .close-btn{ right: 0; } }', function(opts) {
 
 
+
+    
     var me = this;
 
     this.mixin(RMeventMixin);
@@ -504,12 +520,12 @@ riot.tag2('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}
       }
       document.addEventListener('keyup', me.modalKeyUp);
       this.fire('open', e);
-    }.bind(this)
+    }.bind(this);
 
-    this.closeModalIfNotObtrusive = function(e){
+    this.closeModalIfNotObtrusive = function(e) {
       if(!opts.obtrusive)
         this.closeModal();
-    }.bind(this)
+    }.bind(this);
 
     this.closeModal = function(e) {
       this.open = false;
@@ -520,13 +536,13 @@ riot.tag2('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}
       }
       document.removeEventListener('keyup', me.modalKeyUp);
       this.fire('close', e);
-    }.bind(this)
+    }.bind(this);
 
     this.modalKeyUp = function(e) {
       if(e.keyCode == 27 && !opts.obtrusive) {
         this.closeModal();
       }
-    }.bind(this)
+    }.bind(this);
 
     this.calcModal = function() {
       var modal = this.root.querySelector('.modal');
@@ -544,7 +560,7 @@ riot.tag2('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}
         modal.style.height = this.modalHeight+'px';
       }
       modal.style.marginLeft = modalLeft+'px';
-    }.bind(this)
+    }.bind(this);
 
     this.resetModal = function() {
       var modal = this.root.querySelector('.modal');
@@ -555,12 +571,13 @@ riot.tag2('rm-modal', '<div class="modalMaster" show="{open}"> <div show="{open}
 
       overlay.setAttribute('style','height: auto');
       overlay.style.height = 'auto';
-    }.bind(this)
+    }.bind(this);
 
-}, '{ }');
 
-riot.tag2('rm-router', '<div style="display:none;" id="options"> <yield></yield> </div> <div id="base"></div>', '', '', function(opts) {
+});
 
+riot.tag('rm-router', '<div style="display:none;" id="options"> <yield></yield> </div> <div id="base"></div>', function(opts) {
+	
 
 	var me = this;
 	this.routes = opts.routes || false;
@@ -603,9 +620,10 @@ riot.tag2('rm-router', '<div style="display:none;" id="options"> <yield></yield>
 		} else {
 			console.log("RiotMode: rm-router has no options!");
 		}
-	}.bind(this)
+	}.bind(this);
 
 	this.parseUrl = function(path, mode) {
+
 
 		mode = 'hash';
 		var url = {
@@ -631,6 +649,7 @@ riot.tag2('rm-router', '<div style="display:none;" id="options"> <yield></yield>
 		}
 
 		if (mode !== 'pushstate') {
+
 
 		    if (url.hash.substring(0, 2) === '#/') {
 
@@ -667,10 +686,10 @@ riot.tag2('rm-router', '<div style="display:none;" id="options"> <yield></yield>
 		}
 
 		return url;
-	}.bind(this)
+	}.bind(this);
 
 	this.load = function(url) {
-
+		
 		var found = false;
 		for (i = 0; i < me.routes.length; ++i) {
 			found = me.compare(url.path, me.routes[i].route);
@@ -678,32 +697,35 @@ riot.tag2('rm-router', '<div style="display:none;" id="options"> <yield></yield>
 			    if(me.mountedTag)
 			    	me.mountedTag.unmount(true);
 
+				
 			    riot.compile(me.routes[i].path, function() {
 			    	me.fire('load');
 					var fileName = me.routes[i].path.split('/').pop().replace(/\.[^/.]+$/, "");
 			    	me.mountedTag = riot.mount(me.base, 'page-'+fileName)[0];
 
+
+
 			    });
 				return;
 			}
 		}
-	}.bind(this)
+	}.bind(this);
 
 	this.compare = function(base, match) {
 		if(base === match) {
 			return true;
 		}
 		return false;
-	}.bind(this)
+	}.bind(this);
 
 	this.error = function() {
 
-	}.bind(this)
+	}.bind(this);
+
 
 });
 
-riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' : \'\'}"> <input type="text" class="mdl-textfield__input base {border : select}" autocomplete="off" placeholder="{opts.placeholder || \'Type...\'}" value="{value}" onkeydown="{noFilter ? closeKey : \'\'}"> <input type="text" name="{opts.name}" value="{data_value}" hidden> <div show="{open && select && !noFilter}" class="filter"> <input type="text" class="filter-input" placeholder="{opts.filter_placeholder || \'Filter...\'}" onkeydown="{handleText}" autocomplete="off"> </div> <div show="{open}" class="list-container"> <ul class="list"> <li class="list-row" show="{noResults && value.length > 1}"> {noResultsMessage} </li> <li class="list-row item{item.active ? \' active\' : \'\'}" onclick="{parent.pick}" each="{item, i in filteredList}" onclick="{parent.select}" data-value="{item.value || item.text}"> {item.text} </li> </ul> </div> </div>', 'rm-select *,[riot-tag="rm-select"] * { box-sizing: border-box; } rm-select .active,[riot-tag="rm-select"] .active { background:rgb(215,215,215); } rm-select .base,[riot-tag="rm-select"] .base { height:100%; padding-left:5px; margin-bottom:0px; width:100%; } rm-select .noborder .border,[riot-tag="rm-select"] .noborder .border { border: 0; } rm-select .border,[riot-tag="rm-select"] .border { height:35px; padding-left:5px; border:1px solid rgba(0,0,0,.12); box-sizing:border-box; } rm-select .border:-moz-placeholder,[riot-tag="rm-select"] .border:-moz-placeholder { color: rgb(169,169,169); } rm-select .border:-ms-input-placeholder,[riot-tag="rm-select"] .border:-ms-input-placeholder { color: rgb(169,169,169); } rm-select .border::-webkit-input-placeholder,[riot-tag="rm-select"] .border::-webkit-input-placeholder { color: rgb(169,169,169); } rm-select .border::-moz-placeholder,[riot-tag="rm-select"] .border::-moz-placeholder { color: rgb(169,169,169); } rm-select .err,[riot-tag="rm-select"] .err {border: 1px dashed red; color: rgb(169,169,169);} rm-select .filter,[riot-tag="rm-select"] .filter {position:absolute;padding:0;margin:0px;width:100%;z-index:4;background:#fff;} rm-select .filter:hover,[riot-tag="rm-select"] .filter:hover {background:none;} rm-select .filter-input,[riot-tag="rm-select"] .filter-input { background:none; border:none; border:1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-sizing:border-box; color: rgb(85, 85, 85); padding:5px; font-size:16px; height:35px; margin:0px; width:inherit; } rm-select .list-container,[riot-tag="rm-select"] .list-container { position:absolute; width:100%; top:70px; background:#fff; height:auto; overflow-x:hidden; overflow-y:auto; border: 1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; z-index: 3; } rm-select .noselect,[riot-tag="rm-select"] .noselect { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-select .list,[riot-tag="rm-select"] .list { list-style-type: none; padding:0; margin:0; -webkit-margin-before: 0; -webkit-margin-after: 0; } rm-select .list .list-row,[riot-tag="rm-select"] .list .list-row { display: block; padding:5px 15px; margin:0px; overflow:auto; border-bottom: 1px solid rgba(0, 0, 0, 0.117647); } rm-select .list .list-row .accent,[riot-tag="rm-select"] .list .list-row .accent { position:absolute; top:0; right:0; padding:5px; font-size:12px; font-style:italic; color:rgb(169,169,169); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } rm-select .list .list-row:last-child,[riot-tag="rm-select"] .list .list-row:last-child { border-bottom:none; } rm-select .list .list-row:hover,[riot-tag="rm-select"] .list .list-row:hover { background: rgb(240, 240, 240); cursor: pointer; } rm-select textarea:focus,[riot-tag="rm-select"] textarea:focus,rm-select input:focus,[riot-tag="rm-select"] input:focus { outline: 0; } rm-select .wrap,[riot-tag="rm-select"] .wrap { position: relative; height:35px; }', '', function(opts) {
-
+riot.tag('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' : \'\'}"> <input type="text" class="mdl-textfield__input base { border : select }" autocomplete="off" placeholder="{ opts.placeholder || \'Type...\' }" value="{ value }" onkeydown="{noFilter ? closeKey : \'\'}"> <input type="text" name="{opts.name}" value="{ data_value }" hidden> <div show="{ open && select && !noFilter }" class="filter"> <input type="text" class="filter-input" placeholder="{ opts.filter_placeholder || \'Filter...\' }" onkeydown="{ handleText }" autocomplete="off"> </div> <div show="{ open }" class="list-container"> <ul class="list"> <li class="list-row" show="{ noResults && value.length > 1}"> { noResultsMessage } </li> <li class="list-row item{ item.active ? \' active\' : \'\'}" onclick="{ parent.pick }" each="{ item, i in filteredList }" onclick="{ parent.select }" data-value="{ item.value || item.text }"> {item.text} </li> </ul> </div> </div>', 'rm-select *, [riot-tag="rm-select"] *{ box-sizing: border-box; } rm-select .active, [riot-tag="rm-select"] .active{ background:rgb(215,215,215); } rm-select .base, [riot-tag="rm-select"] .base{ height:100%; padding-left:5px; margin-bottom:0px; width:100%; } rm-select .noborder .border, [riot-tag="rm-select"] .noborder .border{ border: 0; } rm-select .border, [riot-tag="rm-select"] .border{ height:35px; padding-left:5px; border:1px solid rgba(0,0,0,.12); box-sizing:border-box; } rm-select .border:-moz-placeholder, [riot-tag="rm-select"] .border:-moz-placeholder{ color: rgb(169,169,169); } rm-select .border:-ms-input-placeholder, [riot-tag="rm-select"] .border:-ms-input-placeholder{ color: rgb(169,169,169); } rm-select .border::-webkit-input-placeholder, [riot-tag="rm-select"] .border::-webkit-input-placeholder{ color: rgb(169,169,169); } rm-select .border::-moz-placeholder, [riot-tag="rm-select"] .border::-moz-placeholder{ color: rgb(169,169,169); } rm-select .err, [riot-tag="rm-select"] .err{border: 1px dashed red; color: rgb(169,169,169);} rm-select .filter, [riot-tag="rm-select"] .filter{position:absolute;padding:0;margin:0px;width:100%;z-index:4;background:#fff;} rm-select .filter:hover, [riot-tag="rm-select"] .filter:hover{background:none;} rm-select .filter-input, [riot-tag="rm-select"] .filter-input{ background:none; border:none; border:1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-sizing:border-box; color: rgb(85, 85, 85); padding:5px; font-size:16px; height:35px; margin:0px; width:inherit; } rm-select .list-container, [riot-tag="rm-select"] .list-container{ position:absolute; width:100%; top:70px; background:#fff; height:auto; overflow-x:hidden; overflow-y:auto; border: 1px solid rgba(0, 0, 0, 0.117647); border-top:none; box-shadow: rgb(68, 68, 68) 0px 2px 10px -4px; z-index: 3; } rm-select .noselect, [riot-tag="rm-select"] .noselect{ -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } rm-select .list, [riot-tag="rm-select"] .list{ list-style-type: none; padding:0; margin:0; -webkit-margin-before: 0; -webkit-margin-after: 0; } rm-select .list .list-row, [riot-tag="rm-select"] .list .list-row{ display: block; padding:5px 15px; margin:0px; overflow:auto; border-bottom: 1px solid rgba(0, 0, 0, 0.117647); } rm-select .list .list-row .accent, [riot-tag="rm-select"] .list .list-row .accent{ position:absolute; top:0; right:0; padding:5px; font-size:12px; font-style:italic; color:rgb(169,169,169); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } rm-select .list .list-row:last-child, [riot-tag="rm-select"] .list .list-row:last-child{ border-bottom:none; } rm-select .list .list-row:hover, [riot-tag="rm-select"] .list .list-row:hover{ background: rgb(240, 240, 240); cursor: pointer; } rm-select textarea:focus, [riot-tag="rm-select"] textarea:focus,rm-select input:focus, [riot-tag="rm-select"] input:focus{ outline: 0; } rm-select .wrap, [riot-tag="rm-select"] .wrap{ position: relative; height:35px; }', function(opts) {
 
   var tag = this;
 
@@ -726,15 +748,16 @@ riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' 
   this.value = opts.value || '';
   this.data_value = opts.dataValue || '';
 
-  this.on('mount',function(){
 
+  this.on('mount',function(){
+    
     var base = this.root.querySelector('.base');
 
     tag.setup(base);
 
     document.addEventListener('click', tag.globalClose);
     document.addEventListener('focus', tag.globalClose, true);
-
+    
   });
 
   this.on('unmount', function () {
@@ -743,7 +766,7 @@ riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' 
   });
 
   this.setup = function(input) {
-
+    
     if(tag.select)
       input.readOnly = true;
 
@@ -755,35 +778,41 @@ riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' 
         tag.update();
       });
     }
-
+    
     tag.root.querySelector('.list').style.maxHeight = tag.maxHeight;
     input.onfocus = function(e) {
       if(!tag.open) {
         tag.openWindow(e);
       }
     }
-
-  }.bind(this)
+    
+  }.bind(this);
 
   this.error = function(input, message) {
     input.readOnly = true;
     input.classList.add('err');
     input.value = message;
     tag.closeWindow();
-  }.bind(this)
+  }.bind(this);
 
   this.openWindow = function(e) {
-
+    
     if(tag.open)
       return;
+
+
+
+
+
+
 
     tag.open = true;
     tag.update();
 
     if(tag.select)
       tag.root.querySelector('.filter-input').select();
-
-  }.bind(this)
+      
+  }.bind(this);
 
   this.closeWindow = function(e) {
     tag.atIndex = -1;
@@ -791,11 +820,11 @@ riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' 
     tag.filteredList = tag.list;
     tag.deactivate();
     tag.open = false;
-
+    
     tag.fire('close', opts.name || '', tag.value, tag.data_value);
-
+    
     tag.update();
-  }.bind(this)
+  }.bind(this);
 
   this.globalClose = function(e) {
     if (e != undefined && tag.root.contains(e.target)) {
@@ -805,7 +834,7 @@ riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' 
     if(!this.open)
       return;
     tag.closeWindow();
-  }.bind(this)
+  }.bind(this);
 
   this.closeKey = function(e) {
     e.preventDefault();
@@ -814,7 +843,7 @@ riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' 
       tag.root.querySelector('.base').blur();
     } else
       return false;
-  }.bind(this)
+  }.bind(this);
 
   this.pick = function(e) {
     var target = e.srcElement || e.originalTarget;
@@ -822,10 +851,10 @@ riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' 
     tag.data_value = target.getAttribute('data-value').trim();
     tag.fire('set',{'text':tag.value, 'value':tag.data_value});
     tag.closeWindow();
-  }.bind(this)
-
+  }.bind(this);
+  
   this.handleText = function(e) {
-
+  
     if ([13, 27, 38, 40].indexOf(e.keyCode) > -1) {
       e.preventDefault();
       tag.keys(e.keyCode)
@@ -838,7 +867,7 @@ riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' 
         tag.filteredList = tag.list || [];
         return true;
       }
-
+    
       tag.filteredList = tag.list.filter(function(c) {
         return c.text.match(RegExp(target.value,'i'));
       });
@@ -850,24 +879,24 @@ riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' 
 
     tag.update();
     return true;
-  }.bind(this)
+  }.bind(this);
 
   this.keys = function(val) {
-
+    
     if (val == 27) {
       tag.closeWindow();
     } else if (val == 13) {
-
+      
       if(tag.filteredList.length == 1) {
-
+        
         tag.value = tag.filteredList[0].text;
         tag.data_value = tag.filteredList[0].value || tag.filteredList[0].text
         tag.closeWindow();
         tag.root.querySelector('.base').blur();
         return;
-
+        
       } else {
-
+        
         tag.filteredList.forEach(function(item) {
           if(item.active) {
             tag.value = item.text;
@@ -876,28 +905,28 @@ riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' 
             tag.closeWindow();
           }
         });
-
+        
       }
-
+      
     } else if (val == 38) {
 
       if(tag.atIndex <= 0)
         return;
-
+      
       tag.atIndex--;
       tag.activate();
-
+      
     } else if (val == 40) {
-
+      
       if(tag.atIndex + 1 >= tag.filteredList.length)
         return;
 
       tag.atIndex++;
       tag.activate();
-
+      
     }
-
-  }.bind(this)
+    
+  }.bind(this);
 
   this.activate = function() {
 
@@ -918,116 +947,118 @@ riot.tag2('rm-select', '<div class="wrap noselect{opts.noborder ? \' noborder\' 
     if(diff >= max || diff < 0) {
       active.scrollIntoView();
     }
-
-  }.bind(this)
+    
+  }.bind(this);
 
   this.deactivate = function() {
     tag.filteredList.forEach(function(item) {
       item.active = false;
     });
-  }.bind(this)
-
-}, '{ }');
-
-riot.tag2('rm-table', '<table class="awesometable {tableType}"> <thead if="{validateTableSection(tableHeaders)}"> <tr class="{pointer: sortTable}"> <th onclick="{sortTable ? sortByTableColumn : \'\'}" data-header-index="{i}" each="{headerContent,  i in tableHeaders}">{headerContent}<i data-header-index="{i}" if="{sortTable}" class="material-icons sort-icon">keyboard_arrow_down</i></th> </tr> </thead> <tbody if="{validateTableSection(tableContent)}"> <tr each="{bodyContentRows, i in tableContent}"> <td id="body" each="{bodyContentData,  i in bodyContentRows}">{processBody(bodyContentData)}</td> </tr> </tbody> <tfoot if="{validateTableSection(tableFooter)}"> <tr class="awesome-section"> <td each="{footerContent,  i in tableFooter}">{processFooter(footerContent)}</td> </tr> </tfoot> </table>', 'rm-table .awesometable,[riot-tag="rm-table"] .awesometable { width: 100%; margin-bottom: 20px; max-width: 100%; background-color: transparent; border-collapse: collapse; border-spacing: 0; font-family: helvetica; } rm-table .awesometable-fixed,[riot-tag="rm-table"] .awesometable-fixed { table-layout: fixed; } rm-table .awesometable th,[riot-tag="rm-table"] .awesometable th,rm-table .awesometable td,[riot-tag="rm-table"] .awesometable td { padding: 8px; line-height: 20px; text-align: left; vertical-align: top; border-top: 1px solid #dddddd; font-family: helvetica; } rm-table .awesometable.awesometable-small td,[riot-tag="rm-table"] .awesometable.awesometable-small td,rm-table .awesometable.awesometable-small th,[riot-tag="rm-table"] .awesometable.awesometable-small th { font-size: 10px; } rm-table .awesometable th,[riot-tag="rm-table"] .awesometable th { font-weight: bold; font-size: 11px; } rm-table .awesometable thead th,[riot-tag="rm-table"] .awesometable thead th { vertical-align: bottom; } rm-table .awesometable caption + thead tr:first-child th,[riot-tag="rm-table"] .awesometable caption + thead tr:first-child th,rm-table .awesometable caption + thead tr:first-child td,[riot-tag="rm-table"] .awesometable caption + thead tr:first-child td,rm-table .awesometable colgroup + thead tr:first-child th,[riot-tag="rm-table"] .awesometable colgroup + thead tr:first-child th,rm-table .awesometable colgroup + thead tr:first-child td,[riot-tag="rm-table"] .awesometable colgroup + thead tr:first-child td,rm-table .awesometable thead:first-child tr:first-child th,[riot-tag="rm-table"] .awesometable thead:first-child tr:first-child th,rm-table .awesometable thead:first-child tr:first-child td,[riot-tag="rm-table"] .awesometable thead:first-child tr:first-child td { border-top: 0; } rm-table .awesometable tbody + tbody,[riot-tag="rm-table"] .awesometable tbody + tbody { border-top: 2px solid #dddddd; } rm-table .awesometable .awesometable,[riot-tag="rm-table"] .awesometable .awesometable { background-color: #ffffff; } rm-table .awesometable-condensed th,[riot-tag="rm-table"] .awesometable-condensed th,rm-table .awesometable-condensed td,[riot-tag="rm-table"] .awesometable-condensed td { padding: 4px 5px; font-size: 11px; } rm-table .awesometable-bordered,[riot-tag="rm-table"] .awesometable-bordered { border: 1px solid #dddddd; border-collapse: separate; *border-collapse: collapse; border-left: 0; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; } rm-table .awesometable-bordered th,[riot-tag="rm-table"] .awesometable-bordered th,rm-table .awesometable-bordered td,[riot-tag="rm-table"] .awesometable-bordered td { border-left: 1px solid #dddddd; } rm-table .awesometable-bordered caption + thead tr:first-child th,[riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th,rm-table .awesometable-bordered caption + tbody tr:first-child th,[riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child th,rm-table .awesometable-bordered caption + tbody tr:first-child td,[riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td,rm-table .awesometable-bordered colgroup + thead tr:first-child th,[riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th,rm-table .awesometable-bordered colgroup + tbody tr:first-child th,[riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child th,rm-table .awesometable-bordered colgroup + tbody tr:first-child td,[riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td,rm-table .awesometable-bordered thead:first-child tr:first-child th,[riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child th,rm-table .awesometable-bordered tbody:first-child tr:first-child th,[riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child th,rm-table .awesometable-bordered tbody:first-child tr:first-child td,[riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child td { border-top: 0; } rm-table .awesometable-bordered thead:first-child tr:first-child > th:first-child,[riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child > th:first-child,rm-table .awesometable-bordered tbody:first-child tr:first-child > td:first-child,[riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child > td:first-child { -webkit-border-top-left-radius: 4px; -moz-border-radius-topleft: 4px; border-top-left-radius: 4px; } rm-table .awesometable-bordered thead:first-child tr:first-child > th:last-child,[riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child > th:last-child,rm-table .awesometable-bordered tbody:first-child tr:first-child > td:last-child,[riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child > td:last-child { -webkit-border-top-right-radius: 4px; -moz-border-radius-topright: 4px; border-top-right-radius: 4px; } rm-table .awesometable-bordered thead:last-child tr:last-child > th:first-child,[riot-tag="rm-table"] .awesometable-bordered thead:last-child tr:last-child > th:first-child,rm-table .awesometable-bordered tbody:last-child tr:last-child > td:first-child,[riot-tag="rm-table"] .awesometable-bordered tbody:last-child tr:last-child > td:first-child,rm-table .awesometable-bordered tfoot:last-child tr:last-child > td:first-child,[riot-tag="rm-table"] .awesometable-bordered tfoot:last-child tr:last-child > td:first-child { -webkit-border-bottom-left-radius: 4px; -moz-border-radius-bottomleft: 4px; border-bottom-left-radius: 4px; } rm-table .awesometable-bordered thead:last-child tr:last-child > th:last-child,[riot-tag="rm-table"] .awesometable-bordered thead:last-child tr:last-child > th:last-child,rm-table .awesometable-bordered tbody:last-child tr:last-child > td:last-child,[riot-tag="rm-table"] .awesometable-bordered tbody:last-child tr:last-child > td:last-child,rm-table .awesometable-bordered tfoot:last-child tr:last-child > td:last-child,[riot-tag="rm-table"] .awesometable-bordered tfoot:last-child tr:last-child > td:last-child { -webkit-border-bottom-right-radius: 4px; -moz-border-radius-bottomright: 4px; border-bottom-right-radius: 4px; } rm-table .awesometable-bordered tfoot + tbody:last-child tr:last-child td:first-child,[riot-tag="rm-table"] .awesometable-bordered tfoot + tbody:last-child tr:last-child td:first-child { -webkit-border-bottom-left-radius: 0; -moz-border-radius-bottomleft: 0; border-bottom-left-radius: 0; } rm-table .awesometable-bordered tfoot + tbody:last-child tr:last-child td:last-child,[riot-tag="rm-table"] .awesometable-bordered tfoot + tbody:last-child tr:last-child td:last-child { -webkit-border-bottom-right-radius: 0; -moz-border-radius-bottomright: 0; border-bottom-right-radius: 0; } rm-table .awesometable-bordered caption + thead tr:first-child th:first-child,[riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th:first-child,rm-table .awesometable-bordered caption + tbody tr:first-child td:first-child,[riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td:first-child,rm-table .awesometable-bordered colgroup + thead tr:first-child th:first-child,[riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th:first-child,rm-table .awesometable-bordered colgroup + tbody tr:first-child td:first-child,[riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td:first-child { -webkit-border-top-left-radius: 4px; -moz-border-radius-topleft: 4px; border-top-left-radius: 4px; } rm-table .awesometable-bordered caption + thead tr:first-child th:last-child,[riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th:last-child,rm-table .awesometable-bordered caption + tbody tr:first-child td:last-child,[riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td:last-child,rm-table .awesometable-bordered colgroup + thead tr:first-child th:last-child,[riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th:last-child,rm-table .awesometable-bordered colgroup + tbody tr:first-child td:last-child,[riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td:last-child { -webkit-border-top-right-radius: 4px; -moz-border-radius-topright: 4px; border-top-right-radius: 4px; } rm-table .awesometable-striped tbody tr:nth-child(odd) td,[riot-tag="rm-table"] .awesometable-striped tbody tr:nth-child(odd) td { background-color: #F6F6F6; } rm-table .awesometable-hover tbody tr:hover td,[riot-tag="rm-table"] .awesometable-hover tbody tr:hover td,rm-table .awesometable-hover tbody tr:hover th,[riot-tag="rm-table"] .awesometable-hover tbody tr:hover th { background-color: #f3f3f3; } rm-table .awesometable tr.foot td,[riot-tag="rm-table"] .awesometable tr.foot td { background: #eee; font-weight: bold; } rm-table table td[class*="span"],[riot-tag="rm-table"] table td[class*="span"],rm-table table th[class*="span"],[riot-tag="rm-table"] table th[class*="span"],rm-table .row-fluid table td[class*="span"],[riot-tag="rm-table"] .row-fluid table td[class*="span"],rm-table .row-fluid table th[class*="span"],[riot-tag="rm-table"] .row-fluid table th[class*="span"] { display: table-cell; float: none; margin-left: 0; } rm-table .awesometable td.span1,[riot-tag="rm-table"] .awesometable td.span1,rm-table .awesometable th.span1,[riot-tag="rm-table"] .awesometable th.span1 { float: none; width: 44px; margin-left: 0; } rm-table .awesometable td.span2,[riot-tag="rm-table"] .awesometable td.span2,rm-table .awesometable th.span2,[riot-tag="rm-table"] .awesometable th.span2 { float: none; width: 124px; margin-left: 0; } rm-table .awesometable td.span3,[riot-tag="rm-table"] .awesometable td.span3,rm-table .awesometable th.span3,[riot-tag="rm-table"] .awesometable th.span3 { float: none; width: 204px; margin-left: 0; } rm-table .awesometable td.span4,[riot-tag="rm-table"] .awesometable td.span4,rm-table .awesometable th.span4,[riot-tag="rm-table"] .awesometable th.span4 { float: none; width: 284px; margin-left: 0; } rm-table .awesometable td.span5,[riot-tag="rm-table"] .awesometable td.span5,rm-table .awesometable th.span5,[riot-tag="rm-table"] .awesometable th.span5 { float: none; width: 364px; margin-left: 0; } rm-table .awesometable td.span6,[riot-tag="rm-table"] .awesometable td.span6,rm-table .awesometable th.span6,[riot-tag="rm-table"] .awesometable th.span6 { float: none; width: 444px; margin-left: 0; } rm-table .awesometable td.span7,[riot-tag="rm-table"] .awesometable td.span7,rm-table .awesometable th.span7,[riot-tag="rm-table"] .awesometable th.span7 { float: none; width: 524px; margin-left: 0; } rm-table .awesometable td.span8,[riot-tag="rm-table"] .awesometable td.span8,rm-table .awesometable th.span8,[riot-tag="rm-table"] .awesometable th.span8 { float: none; width: 604px; margin-left: 0; } rm-table .awesometable td.span9,[riot-tag="rm-table"] .awesometable td.span9,rm-table .awesometable th.span9,[riot-tag="rm-table"] .awesometable th.span9 { float: none; width: 684px; margin-left: 0; } rm-table .awesometable td.span10,[riot-tag="rm-table"] .awesometable td.span10,rm-table .awesometable th.span10,[riot-tag="rm-table"] .awesometable th.span10 { float: none; width: 764px; margin-left: 0; } rm-table .awesometable td.span11,[riot-tag="rm-table"] .awesometable td.span11,rm-table .awesometable th.span11,[riot-tag="rm-table"] .awesometable th.span11 { float: none; width: 844px; margin-left: 0; } rm-table .awesometable td.span12,[riot-tag="rm-table"] .awesometable td.span12,rm-table .awesometable th.span12,[riot-tag="rm-table"] .awesometable th.span12 { float: none; width: 924px; margin-left: 0; } rm-table .awesometable tbody tr.success td,[riot-tag="rm-table"] .awesometable tbody tr.success td { background-color: #dff0d8; } rm-table .awesometable tbody tr.error td,[riot-tag="rm-table"] .awesometable tbody tr.error td { background-color: #f2dede; } rm-table .awesometable tbody tr.warning td,[riot-tag="rm-table"] .awesometable tbody tr.warning td { background-color: #fcf8e3; } rm-table .awesometable tbody tr.info td,[riot-tag="rm-table"] .awesometable tbody tr.info td { background-color: #d9edf7; } rm-table .awesometable-hover tbody tr.success:hover td,[riot-tag="rm-table"] .awesometable-hover tbody tr.success:hover td { background-color: #d0e9c6; } rm-table .awesometable-hover tbody tr.error:hover td,[riot-tag="rm-table"] .awesometable-hover tbody tr.error:hover td { background-color: #ebcccc; } rm-table .awesometable-hover tbody tr.warning:hover td,[riot-tag="rm-table"] .awesometable-hover tbody tr.warning:hover td { background-color: #faf2cc; } rm-table .awesometable-hover tbody tr.info:hover td,[riot-tag="rm-table"] .awesometable-hover tbody tr.info:hover td { background-color: #c4e3f3; } rm-table .awesometable tr.awesome-section:nth-child(odd),[riot-tag="rm-table"] .awesometable tr.awesome-section:nth-child(odd),rm-table .awesometable tr.awesome-section:nth-child(even),[riot-tag="rm-table"] .awesometable tr.awesome-section:nth-child(even) { background: #eee; font-weight: bold; color: #000; } rm-table .awesometable tr.awesome-section td,[riot-tag="rm-table"] .awesometable tr.awesome-section td { font-weight: bold; font-size: 15px; } rm-table .awesometable tr.awesome-section2,[riot-tag="rm-table"] .awesometable tr.awesome-section2 { background-color: black; color: #EEE; } rm-table .awesometable div.show-on-hover,[riot-tag="rm-table"] .awesometable div.show-on-hover { visibility: hidden; opacity:0; } rm-table .awesometable tr:hover .show-on-hover,[riot-tag="rm-table"] .awesometable tr:hover .show-on-hover { visibility: visible; opacity: 100; } rm-table .awesometable-rowhover tr:hover td,[riot-tag="rm-table"] .awesometable-rowhover tr:hover td { border-top: 1px solid #999; border-bottom: 1px solid #999; } rm-table .awesometable-rowhover tr:hover td:first-child,[riot-tag="rm-table"] .awesometable-rowhover tr:hover td:first-child { border-left: 1px solid #999; } rm-table .awesometable-rowhover tr:hover td:last-child,[riot-tag="rm-table"] .awesometable-rowhover tr:hover td:last-child { border-right: 1px solid #999; } rm-table .awesometable .head-multiple td,[riot-tag="rm-table"] .awesometable .head-multiple td { background-color: #E9E9E9; } rm-table .awesometable .head-single td,[riot-tag="rm-table"] .awesometable .head-single td { background-color: #E9E9E9; } rm-table .awesometable .sub-ticket td,[riot-tag="rm-table"] .awesometable .sub-ticket td { font-size: .8em; color: #333; background-color: white; padding-top: 3px; padding-bottom: 3px; } rm-table .awesometable .sub-ticket td:first-child,[riot-tag="rm-table"] .awesometable .sub-ticket td:first-child { padding-left: 25px; } rm-table .awesometable .boldfoot td,[riot-tag="rm-table"] .awesometable .boldfoot td { font-weight: bold; } rm-table .awesometable .reversed-footer td,[riot-tag="rm-table"] .awesometable .reversed-footer td { font-size: 1.1em; font-weight: bold; } rm-table .awesometable .reversed-footer.small td,[riot-tag="rm-table"] .awesometable .reversed-footer.small td { padding-top: 3px; padding-bottom: 3px; font-size: .83em; background-color: #CCC; } rm-table .awesometable.table td.span12,[riot-tag="rm-table"] .awesometable.table td.span12,rm-table .awesometable.table th.span12,[riot-tag="rm-table"] .awesometable.table th.span12 { float: none; width: 924px; margin-left: 0; } rm-table .awesometable.table tbody tr.success > td,[riot-tag="rm-table"] .awesometable.table tbody tr.success > td { background-color: #dff0d8; } rm-table .awesometable.table tbody tr.error > td,[riot-tag="rm-table"] .awesometable.table tbody tr.error > td { background-color: #f2dede; } rm-table .awesometable.table tbody tr.warning > td,[riot-tag="rm-table"] .awesometable.table tbody tr.warning > td { background-color: #fcf8e3; } rm-table .awesometable.table tbody tr.info > td,[riot-tag="rm-table"] .awesometable.table tbody tr.info > td { background-color: #d9edf7; } rm-table .awesometable.table-hover tbody tr.success:hover > td,[riot-tag="rm-table"] .awesometable.table-hover tbody tr.success:hover > td { background-color: #d0e9c6; } rm-table .awesometable.table-hover tbody tr.error:hover > td,[riot-tag="rm-table"] .awesometable.table-hover tbody tr.error:hover > td { background-color: #ebcccc; } rm-table .awesometable.table-hover tbody tr.warning:hover > td,[riot-tag="rm-table"] .awesometable.table-hover tbody tr.warning:hover > td { background-color: #faf2cc; } rm-table .awesometable.table-hover tbody tr.info:hover > td,[riot-tag="rm-table"] .awesometable.table-hover tbody tr.info:hover > td { background-color: #c4e3f3; } rm-table .awesometable-nc tr.head th,[riot-tag="rm-table"] .awesometable-nc tr.head th{ background-color: #f0f0f0; } rm-table .pointer,[riot-tag="rm-table"] .pointer { cursor: pointer; } rm-table .sort-icon,[riot-tag="rm-table"] .sort-icon { vertical-align: middle; }', '', function(opts) {
+  }.bind(this);
 
 
+});
+
+riot.tag('rm-table', '<table class="awesometable { tableType }"> <thead if="{ validateTableSection(tableHeaders) }"> <tr class="{ pointer: sortTable }"> <th onclick="{ sortTable ? sortByTableColumn : \'\' }" data-header-index="{ i }" each="{ headerContent, i in tableHeaders}">{ headerContent }<i data-header-index="{ i }" if="{ sortTable }" class="material-icons sort-icon">keyboard_arrow_down</i></th> </tr> </thead> <tbody if="{ validateTableSection(tableContent) }"> <tr each="{ bodyContentRows, i in tableContent }"> <td id="body" each="{ bodyContentData, i in bodyContentRows }">{ processBody(bodyContentData) }</td> </tr> </tbody> <tfoot if="{ validateTableSection(tableFooter) }"> <tr class="awesome-section"> <td each="{ footerContent, i in tableFooter }">{ processFooter(footerContent) }</td> </tr> </tfoot> </table>', 'rm-table .awesometable, [riot-tag="rm-table"] .awesometable{ width: 100%; margin-bottom: 20px; max-width: 100%; background-color: transparent; border-collapse: collapse; border-spacing: 0; font-family: helvetica; } rm-table .awesometable-fixed, [riot-tag="rm-table"] .awesometable-fixed{ table-layout: fixed; } rm-table .awesometable th, [riot-tag="rm-table"] .awesometable th,rm-table .awesometable td, [riot-tag="rm-table"] .awesometable td{ padding: 8px; line-height: 20px; text-align: left; vertical-align: top; border-top: 1px solid #dddddd; font-family: helvetica; } rm-table .awesometable.awesometable-small td, [riot-tag="rm-table"] .awesometable.awesometable-small td,rm-table .awesometable.awesometable-small th, [riot-tag="rm-table"] .awesometable.awesometable-small th{ font-size: 10px; } rm-table .awesometable th, [riot-tag="rm-table"] .awesometable th{ font-weight: bold; font-size: 11px; } rm-table .awesometable thead th, [riot-tag="rm-table"] .awesometable thead th{ vertical-align: bottom; } rm-table .awesometable caption + thead tr:first-child th, [riot-tag="rm-table"] .awesometable caption + thead tr:first-child th,rm-table .awesometable caption + thead tr:first-child td, [riot-tag="rm-table"] .awesometable caption + thead tr:first-child td,rm-table .awesometable colgroup + thead tr:first-child th, [riot-tag="rm-table"] .awesometable colgroup + thead tr:first-child th,rm-table .awesometable colgroup + thead tr:first-child td, [riot-tag="rm-table"] .awesometable colgroup + thead tr:first-child td,rm-table .awesometable thead:first-child tr:first-child th, [riot-tag="rm-table"] .awesometable thead:first-child tr:first-child th,rm-table .awesometable thead:first-child tr:first-child td, [riot-tag="rm-table"] .awesometable thead:first-child tr:first-child td{ border-top: 0; } rm-table .awesometable tbody + tbody, [riot-tag="rm-table"] .awesometable tbody + tbody{ border-top: 2px solid #dddddd; } rm-table .awesometable .awesometable, [riot-tag="rm-table"] .awesometable .awesometable{ background-color: #ffffff; } rm-table .awesometable-condensed th, [riot-tag="rm-table"] .awesometable-condensed th,rm-table .awesometable-condensed td, [riot-tag="rm-table"] .awesometable-condensed td{ padding: 4px 5px; font-size: 11px; } rm-table .awesometable-bordered, [riot-tag="rm-table"] .awesometable-bordered{ border: 1px solid #dddddd; border-collapse: separate; *border-collapse: collapse; border-left: 0; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; } rm-table .awesometable-bordered th, [riot-tag="rm-table"] .awesometable-bordered th,rm-table .awesometable-bordered td, [riot-tag="rm-table"] .awesometable-bordered td{ border-left: 1px solid #dddddd; } rm-table .awesometable-bordered caption + thead tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th,rm-table .awesometable-bordered caption + tbody tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child th,rm-table .awesometable-bordered caption + tbody tr:first-child td, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td,rm-table .awesometable-bordered colgroup + thead tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th,rm-table .awesometable-bordered colgroup + tbody tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child th,rm-table .awesometable-bordered colgroup + tbody tr:first-child td, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td,rm-table .awesometable-bordered thead:first-child tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child th,rm-table .awesometable-bordered tbody:first-child tr:first-child th, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child th,rm-table .awesometable-bordered tbody:first-child tr:first-child td, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child td{ border-top: 0; } rm-table .awesometable-bordered thead:first-child tr:first-child > th:first-child, [riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child > th:first-child,rm-table .awesometable-bordered tbody:first-child tr:first-child > td:first-child, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child > td:first-child{ -webkit-border-top-left-radius: 4px; -moz-border-radius-topleft: 4px; border-top-left-radius: 4px; } rm-table .awesometable-bordered thead:first-child tr:first-child > th:last-child, [riot-tag="rm-table"] .awesometable-bordered thead:first-child tr:first-child > th:last-child,rm-table .awesometable-bordered tbody:first-child tr:first-child > td:last-child, [riot-tag="rm-table"] .awesometable-bordered tbody:first-child tr:first-child > td:last-child{ -webkit-border-top-right-radius: 4px; -moz-border-radius-topright: 4px; border-top-right-radius: 4px; } rm-table .awesometable-bordered thead:last-child tr:last-child > th:first-child, [riot-tag="rm-table"] .awesometable-bordered thead:last-child tr:last-child > th:first-child,rm-table .awesometable-bordered tbody:last-child tr:last-child > td:first-child, [riot-tag="rm-table"] .awesometable-bordered tbody:last-child tr:last-child > td:first-child,rm-table .awesometable-bordered tfoot:last-child tr:last-child > td:first-child, [riot-tag="rm-table"] .awesometable-bordered tfoot:last-child tr:last-child > td:first-child{ -webkit-border-bottom-left-radius: 4px; -moz-border-radius-bottomleft: 4px; border-bottom-left-radius: 4px; } rm-table .awesometable-bordered thead:last-child tr:last-child > th:last-child, [riot-tag="rm-table"] .awesometable-bordered thead:last-child tr:last-child > th:last-child,rm-table .awesometable-bordered tbody:last-child tr:last-child > td:last-child, [riot-tag="rm-table"] .awesometable-bordered tbody:last-child tr:last-child > td:last-child,rm-table .awesometable-bordered tfoot:last-child tr:last-child > td:last-child, [riot-tag="rm-table"] .awesometable-bordered tfoot:last-child tr:last-child > td:last-child{ -webkit-border-bottom-right-radius: 4px; -moz-border-radius-bottomright: 4px; border-bottom-right-radius: 4px; } rm-table .awesometable-bordered tfoot + tbody:last-child tr:last-child td:first-child, [riot-tag="rm-table"] .awesometable-bordered tfoot + tbody:last-child tr:last-child td:first-child{ -webkit-border-bottom-left-radius: 0; -moz-border-radius-bottomleft: 0; border-bottom-left-radius: 0; } rm-table .awesometable-bordered tfoot + tbody:last-child tr:last-child td:last-child, [riot-tag="rm-table"] .awesometable-bordered tfoot + tbody:last-child tr:last-child td:last-child{ -webkit-border-bottom-right-radius: 0; -moz-border-radius-bottomright: 0; border-bottom-right-radius: 0; } rm-table .awesometable-bordered caption + thead tr:first-child th:first-child, [riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th:first-child,rm-table .awesometable-bordered caption + tbody tr:first-child td:first-child, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td:first-child,rm-table .awesometable-bordered colgroup + thead tr:first-child th:first-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th:first-child,rm-table .awesometable-bordered colgroup + tbody tr:first-child td:first-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td:first-child{ -webkit-border-top-left-radius: 4px; -moz-border-radius-topleft: 4px; border-top-left-radius: 4px; } rm-table .awesometable-bordered caption + thead tr:first-child th:last-child, [riot-tag="rm-table"] .awesometable-bordered caption + thead tr:first-child th:last-child,rm-table .awesometable-bordered caption + tbody tr:first-child td:last-child, [riot-tag="rm-table"] .awesometable-bordered caption + tbody tr:first-child td:last-child,rm-table .awesometable-bordered colgroup + thead tr:first-child th:last-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + thead tr:first-child th:last-child,rm-table .awesometable-bordered colgroup + tbody tr:first-child td:last-child, [riot-tag="rm-table"] .awesometable-bordered colgroup + tbody tr:first-child td:last-child{ -webkit-border-top-right-radius: 4px; -moz-border-radius-topright: 4px; border-top-right-radius: 4px; } rm-table .awesometable-striped tbody tr:nth-child(odd) td, [riot-tag="rm-table"] .awesometable-striped tbody tr:nth-child(odd) td{ background-color: #F6F6F6; } rm-table .awesometable-hover tbody tr:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr:hover td,rm-table .awesometable-hover tbody tr:hover th, [riot-tag="rm-table"] .awesometable-hover tbody tr:hover th{ background-color: #f3f3f3; } rm-table .awesometable tr.foot td, [riot-tag="rm-table"] .awesometable tr.foot td{ background: #eee; font-weight: bold; } rm-table table td[class*="span"], [riot-tag="rm-table"] table td[class*="span"],rm-table table th[class*="span"], [riot-tag="rm-table"] table th[class*="span"],rm-table .row-fluid table td[class*="span"], [riot-tag="rm-table"] .row-fluid table td[class*="span"],rm-table .row-fluid table th[class*="span"], [riot-tag="rm-table"] .row-fluid table th[class*="span"]{ display: table-cell; float: none; margin-left: 0; } rm-table .awesometable td.span1, [riot-tag="rm-table"] .awesometable td.span1,rm-table .awesometable th.span1, [riot-tag="rm-table"] .awesometable th.span1{ float: none; width: 44px; margin-left: 0; } rm-table .awesometable td.span2, [riot-tag="rm-table"] .awesometable td.span2,rm-table .awesometable th.span2, [riot-tag="rm-table"] .awesometable th.span2{ float: none; width: 124px; margin-left: 0; } rm-table .awesometable td.span3, [riot-tag="rm-table"] .awesometable td.span3,rm-table .awesometable th.span3, [riot-tag="rm-table"] .awesometable th.span3{ float: none; width: 204px; margin-left: 0; } rm-table .awesometable td.span4, [riot-tag="rm-table"] .awesometable td.span4,rm-table .awesometable th.span4, [riot-tag="rm-table"] .awesometable th.span4{ float: none; width: 284px; margin-left: 0; } rm-table .awesometable td.span5, [riot-tag="rm-table"] .awesometable td.span5,rm-table .awesometable th.span5, [riot-tag="rm-table"] .awesometable th.span5{ float: none; width: 364px; margin-left: 0; } rm-table .awesometable td.span6, [riot-tag="rm-table"] .awesometable td.span6,rm-table .awesometable th.span6, [riot-tag="rm-table"] .awesometable th.span6{ float: none; width: 444px; margin-left: 0; } rm-table .awesometable td.span7, [riot-tag="rm-table"] .awesometable td.span7,rm-table .awesometable th.span7, [riot-tag="rm-table"] .awesometable th.span7{ float: none; width: 524px; margin-left: 0; } rm-table .awesometable td.span8, [riot-tag="rm-table"] .awesometable td.span8,rm-table .awesometable th.span8, [riot-tag="rm-table"] .awesometable th.span8{ float: none; width: 604px; margin-left: 0; } rm-table .awesometable td.span9, [riot-tag="rm-table"] .awesometable td.span9,rm-table .awesometable th.span9, [riot-tag="rm-table"] .awesometable th.span9{ float: none; width: 684px; margin-left: 0; } rm-table .awesometable td.span10, [riot-tag="rm-table"] .awesometable td.span10,rm-table .awesometable th.span10, [riot-tag="rm-table"] .awesometable th.span10{ float: none; width: 764px; margin-left: 0; } rm-table .awesometable td.span11, [riot-tag="rm-table"] .awesometable td.span11,rm-table .awesometable th.span11, [riot-tag="rm-table"] .awesometable th.span11{ float: none; width: 844px; margin-left: 0; } rm-table .awesometable td.span12, [riot-tag="rm-table"] .awesometable td.span12,rm-table .awesometable th.span12, [riot-tag="rm-table"] .awesometable th.span12{ float: none; width: 924px; margin-left: 0; } rm-table .awesometable tbody tr.success td, [riot-tag="rm-table"] .awesometable tbody tr.success td{ background-color: #dff0d8; } rm-table .awesometable tbody tr.error td, [riot-tag="rm-table"] .awesometable tbody tr.error td{ background-color: #f2dede; } rm-table .awesometable tbody tr.warning td, [riot-tag="rm-table"] .awesometable tbody tr.warning td{ background-color: #fcf8e3; } rm-table .awesometable tbody tr.info td, [riot-tag="rm-table"] .awesometable tbody tr.info td{ background-color: #d9edf7; } rm-table .awesometable-hover tbody tr.success:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.success:hover td{ background-color: #d0e9c6; } rm-table .awesometable-hover tbody tr.error:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.error:hover td{ background-color: #ebcccc; } rm-table .awesometable-hover tbody tr.warning:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.warning:hover td{ background-color: #faf2cc; } rm-table .awesometable-hover tbody tr.info:hover td, [riot-tag="rm-table"] .awesometable-hover tbody tr.info:hover td{ background-color: #c4e3f3; } rm-table .awesometable tr.awesome-section:nth-child(odd), [riot-tag="rm-table"] .awesometable tr.awesome-section:nth-child(odd),rm-table .awesometable tr.awesome-section:nth-child(even), [riot-tag="rm-table"] .awesometable tr.awesome-section:nth-child(even){ background: #eee; font-weight: bold; color: #000; } rm-table .awesometable tr.awesome-section td, [riot-tag="rm-table"] .awesometable tr.awesome-section td{ font-weight: bold; font-size: 15px; } rm-table .awesometable tr.awesome-section2, [riot-tag="rm-table"] .awesometable tr.awesome-section2{ background-color: black; color: #EEE; } rm-table .awesometable div.show-on-hover, [riot-tag="rm-table"] .awesometable div.show-on-hover{ visibility: hidden; opacity:0; } rm-table .awesometable tr:hover .show-on-hover, [riot-tag="rm-table"] .awesometable tr:hover .show-on-hover{ visibility: visible; opacity: 100; } rm-table .awesometable-rowhover tr:hover td, [riot-tag="rm-table"] .awesometable-rowhover tr:hover td{ border-top: 1px solid #999; border-bottom: 1px solid #999; } rm-table .awesometable-rowhover tr:hover td:first-child, [riot-tag="rm-table"] .awesometable-rowhover tr:hover td:first-child{ border-left: 1px solid #999; } rm-table .awesometable-rowhover tr:hover td:last-child, [riot-tag="rm-table"] .awesometable-rowhover tr:hover td:last-child{ border-right: 1px solid #999; } rm-table .awesometable .head-multiple td, [riot-tag="rm-table"] .awesometable .head-multiple td{ background-color: #E9E9E9; } rm-table .awesometable .head-single td, [riot-tag="rm-table"] .awesometable .head-single td{ background-color: #E9E9E9; } rm-table .awesometable .sub-ticket td, [riot-tag="rm-table"] .awesometable .sub-ticket td{ font-size: .8em; color: #333; background-color: white; padding-top: 3px; padding-bottom: 3px; } rm-table .awesometable .sub-ticket td:first-child, [riot-tag="rm-table"] .awesometable .sub-ticket td:first-child{ padding-left: 25px; } rm-table .awesometable .boldfoot td, [riot-tag="rm-table"] .awesometable .boldfoot td{ font-weight: bold; } rm-table .awesometable .reversed-footer td, [riot-tag="rm-table"] .awesometable .reversed-footer td{ font-size: 1.1em; font-weight: bold; } rm-table .awesometable .reversed-footer.small td, [riot-tag="rm-table"] .awesometable .reversed-footer.small td{ padding-top: 3px; padding-bottom: 3px; font-size: .83em; background-color: #CCC; } rm-table .awesometable.table td.span12, [riot-tag="rm-table"] .awesometable.table td.span12,rm-table .awesometable.table th.span12, [riot-tag="rm-table"] .awesometable.table th.span12{ float: none; width: 924px; margin-left: 0; } rm-table .awesometable.table tbody tr.success > td, [riot-tag="rm-table"] .awesometable.table tbody tr.success > td{ background-color: #dff0d8; } rm-table .awesometable.table tbody tr.error > td, [riot-tag="rm-table"] .awesometable.table tbody tr.error > td{ background-color: #f2dede; } rm-table .awesometable.table tbody tr.warning > td, [riot-tag="rm-table"] .awesometable.table tbody tr.warning > td{ background-color: #fcf8e3; } rm-table .awesometable.table tbody tr.info > td, [riot-tag="rm-table"] .awesometable.table tbody tr.info > td{ background-color: #d9edf7; } rm-table .awesometable.table-hover tbody tr.success:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.success:hover > td{ background-color: #d0e9c6; } rm-table .awesometable.table-hover tbody tr.error:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.error:hover > td{ background-color: #ebcccc; } rm-table .awesometable.table-hover tbody tr.warning:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.warning:hover > td{ background-color: #faf2cc; } rm-table .awesometable.table-hover tbody tr.info:hover > td, [riot-tag="rm-table"] .awesometable.table-hover tbody tr.info:hover > td{ background-color: #c4e3f3; } rm-table .awesometable-nc tr.head th, [riot-tag="rm-table"] .awesometable-nc tr.head th{ background-color: #f0f0f0; } rm-table .pointer, [riot-tag="rm-table"] .pointer{ cursor: pointer; } rm-table .sort-icon, [riot-tag="rm-table"] .sort-icon{ vertical-align: middle; }', function(opts) {
+    
+    
     var me = this;
-
+    
     this.tableType = opts.type;
     this.tableHeaders = opts.tableHeaders;
     this.tableContent = opts.tableContent;
     this.tableFooter = opts.tableFooter;
     this.sortTable = opts.sortTable || false;
     this.toggleSort = false;
-
+    
     this.validateTableSection = function(section) {
         if(section === null || section === undefined)
             return false;
-
+        
         if(Array.isArray(section) === false)
             return false;
-
+            
         return true;
-    }.bind(this)
-
+    }.bind(this);
+    
     this.processBody = function(cells) {
         if(cells.indexOf('$') !== -1) {
             cells = parseFloat(cells.replace('$', ''));
             cells = cells.toFixed(2, 10);
-
+            
             return '$'+cells;
         }
-
+        
         return cells;
-    }.bind(this)
-
+    }.bind(this);
+    
     this.processFooter = function(cells) {
         var currency_found = false;
         var total = 0;
         var averageCount = 0;
         var cellIndex;
-
+        
         if(cells.indexOf('{{') !== -1) {
             cellIndex = cells.replace(/[^0-9.]/g, '');
         } else {
             return cells;
         }
-
+        
         for(var i = 0; i < this.tableContent.length; i++) {
             if(this.tableContent[i][cellIndex].indexOf('$') !== -1) {
                 currency_found = true;
             } else {
                 currency_found = false;
             }
-
+            
             if(isNaN(parseFloat(this.tableContent[i][cellIndex].replace('$', ''))) === false) {
                 averageCount++;
                 total += parseFloat(this.tableContent[i][cellIndex].replace('$', ''));
             }
         }
-
+        
         if(cells.indexOf('{{total') !== -1)
             return currency_found ? '$'+total.toFixed(2, 10) : total;
-
+            
         if(cells.indexOf('{{average') !== -1)
             return currency_found ? '$'+(total/averageCount).toFixed(2, 10) : (total/averageCount).toFixed(2, 10);
-    }.bind(this)
-
+    }.bind(this);
+    
     this.sortByTableColumn = function(e) {
         var rows = this.tableContent;
         var currency_found = false;
         var columnIndex = e.target.dataset.headerIndex;
-
+        
         var mappedRows = rows.map(function(el, i) {
             return {index: i, value: el};
         });
-
+        
         mappedRows.sort(function(a, b) {
             if(!me.toggleSort)
                 return +(a.value[columnIndex] > b.value[columnIndex]) || +(a.value[columnIndex] === b.value[columnIndex]) - 1;
-
+            
             if(me.toggleSort)
                 return +(a.value[columnIndex] < b.value[columnIndex]) || +(a.value[columnIndex] === b.value[columnIndex]) - 1;
         });
-
+        
         var result = mappedRows.map(function(el) {
             return rows[el.index];
         });
-
+        
         if(e.target.nodeName === 'TH') {
             !this.toggleSort ? e.target.querySelector('i').innerText = 'keyboard_arrow_up' : e.target.querySelector('i').innerText = 'keyboard_arrow_down';
         } else if(e.target.nodeName === 'I') {
             !this.toggleSort ? e.target.innerText = 'keyboard_arrow_up' : e.target.innerText = 'keyboard_arrow_down';
         }
-
+        
         this.toggleSort = !this.toggleSort;
         this.tableContent = result;
-    }.bind(this)
-}, '{ }');
-riot.tag2('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textarea if="{opts.type == \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" rows="{rows}" id="text_{id}"></textarea> <input if="{opts.type != \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{_id}">{opts.placeholder || \'Type...\'}</label> <span if="{opts.type == \'numeric\' || opts.type == \'email\' || opts.regex}" class="mdl-textfield__error">{error}</span> <div if="{opts.type == \'expanding\'}" class="mdl-textfield__expandable-holder"> <input name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{id}">Expandable Input</label> </div> </div>', '', '', function(opts) {
+    }.bind(this);
 
+});
+riot.tag('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textarea if="{ opts.type == \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" rows="{rows}" id="text_{id}" ></textarea> <input if="{ opts.type != \'multiple\' && opts.type !=\'expanding\'}" name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{_id}">{ opts.placeholder || \'Type...\' }</label> <span if="{ opts.type == \'numeric\' || opts.type == \'email\' || opts.regex }" class="mdl-textfield__error">{ error }</span> <div if="{ opts.type == \'expanding\' }" class="mdl-textfield__expandable-holder"> <input name="{name}" class="mdl-textfield__input" type="text" id="text_{_id}"> <label class="mdl-textfield__label" for="text_{id}">Expandable Input</label> </div> </div>', function(opts) {
 
+	
 	var me = this;
 
     this.value = '';
@@ -1038,10 +1069,11 @@ riot.tag2('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textar
     this.regex = opts.regex || false;
     this.error = opts.error || "Input error!";
 	this.name = opts.name || false;
+		
 
     this.on('mount',function() {
 		var wrap = this.root.children[0];
-
+		
 		wrap.style.width = me.width;
 
 		if(!me.name) {
@@ -1061,7 +1093,7 @@ riot.tag2('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textar
 		}
 
         me.assignRegex();
-		componentHandler.upgradeElement(wrap);
+		componentHandler.upgradeElement(wrap); //call to load materialdesign on el
     });
 
     this.assignRegex = function() {
@@ -1085,54 +1117,57 @@ riot.tag2('rm-text-field', '<div class="mdl-textfield mdl-js-textfield"> <textar
             input.setAttribute('pattern',opts.regex);
 		    		me.update();
         }
-    }.bind(this)
-
-}, '{ }');
-
-riot.tag2('rm-toast', '<div show="{displayToast}" class="message-container"> <div onclick="{hideToast}" class="toast {toastPosition}">{parseHTML(opts.text)}</div> </div>', 'rm-toast .toast,[riot-tag="rm-toast"] .toast { position: absolute; margin: 20px; max-width: 200px; color: rgba(255, 255, 255, 1); background-color: rgba(0, 0, 0, 0.8); padding: 20px; z-index: 10; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; } rm-toast .top-left,[riot-tag="rm-toast"] .top-left { top: 0; left: 0; } rm-toast .top-right,[riot-tag="rm-toast"] .top-right { top: 0; right: 0; } rm-toast .bottom-left,[riot-tag="rm-toast"] .bottom-left { left: 0; bottom: 0; } rm-toast .bottom-right,[riot-tag="rm-toast"] .bottom-right { right: 0; bottom: 0; }', '', function(opts) {
+    }.bind(this);
 
 
+});
+
+riot.tag('rm-toast', '<div show="{displayToast}" class="message-container"> <div onclick="{hideToast}" class="toast { toastPosition }">{ parseHTML(opts.text) }</div> </div>', 'rm-toast .toast, [riot-tag="rm-toast"] .toast{ position: absolute; margin: 20px; max-width: 200px; color: rgba(255, 255, 255, 1); background-color: rgba(0, 0, 0, 0.8); padding: 20px; z-index: 10; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; } rm-toast .top-left, [riot-tag="rm-toast"] .top-left{ top: 0; left: 0; } rm-toast .top-right, [riot-tag="rm-toast"] .top-right{ top: 0; right: 0; } rm-toast .bottom-left, [riot-tag="rm-toast"] .bottom-left{ left: 0; bottom: 0; } rm-toast .bottom-right, [riot-tag="rm-toast"] .bottom-right{ right: 0; bottom: 0; }', function(opts) {
+	
+	
+	
 	var me = this;
-
+	
 	this.mixin(RMeventMixin);
 	this.displayToast = false;
 	this.toastDuration = opts.duration || 1500;
 	this.toastPosition = opts.position || 'bottom-right';
-
+	
 	this.on('mount', function() {
 		me.update();
 	});
-
+	
 	this.showToast = function(e) {
 		this.displayToast = true;
 		this.update();
 		if(typeof RiotControl != 'undefined')
 			RiotControl.trigger('toastopened');
 		this.fire('open', e);
-
+		
 		setTimeout(function() {
 			me.hideToast();
 		}, me.toastDuration);
-	}.bind(this)
-
+	}.bind(this);
+	
 	this.hideToast = function(e) {
 		this.displayToast = false;
 		this.update();
 		if(typeof RiotControl != 'undefined')
 			RiotControl.trigger('toastclosed');
 		this.fire('close', e);
-	}.bind(this)
-
+	}.bind(this);
+	
 	this.parseHTML = function(text) {
 		this.root.querySelector('.toast').innerHTML = text;
-	}.bind(this)
-}, '{ }');
+	}.bind(this);
 
-riot.tag2('rm-toggle', '<div class="wrap"> <label class="mdl-{toggleType} mdl-js-{toggleType} mdl-js-ripple-effect"> <input type="{toggleType != \'switch\' ? toggleType : \'checkbox\'}" name="{toggleName}" class="mdl-{toggleType}__{toggleType === \'radio\' ? \'button\' : \'input\'}" value="{toggleValue}" onclick="{toggle}" __checked="{ischecked}"> <span if="{toggleLabelText && toggleType !== \'icon-toggle\'}" class="mdl-{toggleType}__label">{toggleLabelText}</span> <i if="{toggleType === \'icon-toggle\'}" class="mdl-icon-toggle__label material-icons">{opts.icon}</i> </label> </div>', '', '', function(opts) {
+});
 
-
+riot.tag('rm-toggle', '<div class="wrap"> <label class="mdl-{ toggleType } mdl-js-{ toggleType } mdl-js-ripple-effect"> <input type="{ toggleType != \'switch\' ? toggleType : \'checkbox\' }" name="{ toggleName }" class="mdl-{ toggleType }__{ toggleType === \'radio\' ? \'button\' : \'input\' }" value="{ toggleValue }" onclick="{ toggle }" __checked="{ ischecked }"> <span if="{ toggleLabelText && toggleType !== \'icon-toggle\' }" class="mdl-{ toggleType }__label">{ toggleLabelText }</span> <i if="{ toggleType === \'icon-toggle\' }" class="mdl-icon-toggle__label material-icons">{ opts.icon }</i> </label> </div>', function(opts) {
+    
+    
     var me = this;
-
+    
     this.mixin(RMeventMixin);
     this.toggleType = opts.type || 'checkbox';
     this.toggleValue = opts.value || '';
@@ -1141,7 +1176,7 @@ riot.tag2('rm-toggle', '<div class="wrap"> <label class="mdl-{toggleType} mdl-js
     this.ischecked = this.opts.ischecked || false;
 
     this.mdl_timer = false;
-
+    
     this.on('updated', function() {
       if(me.ischecked != me.opts.ischecked) {
         setTimeout(function() {
@@ -1172,13 +1207,14 @@ riot.tag2('rm-toggle', '<div class="wrap"> <label class="mdl-{toggleType} mdl-js
         break;
       }
       me.update();
-    }.bind(this)
-
+    }.bind(this);
+    
     this.toggle = function(e) {
 
       me.opts.ischecked = me.ischecked;
       me.fire('toggle', e);
 
-    }.bind(this)
+    }.bind(this);
+    
 
-}, '{ }');
+});

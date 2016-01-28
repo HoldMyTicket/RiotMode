@@ -1,5 +1,5 @@
-riot.tag2('rm-router', '<div style="display:none;" id="options"> <yield></yield> </div> <div id="base"></div>', '', '', function(opts) {
-
+riot.tag('rm-router', '<div style="display:none;" id="options"> <yield></yield> </div> <div id="base"></div>', function(opts) {
+	
 
 	var me = this;
 	this.routes = opts.routes || false;
@@ -42,9 +42,10 @@ riot.tag2('rm-router', '<div style="display:none;" id="options"> <yield></yield>
 		} else {
 			console.log("RiotMode: rm-router has no options!");
 		}
-	}.bind(this)
+	}.bind(this);
 
 	this.parseUrl = function(path, mode) {
+
 
 		mode = 'hash';
 		var url = {
@@ -70,6 +71,7 @@ riot.tag2('rm-router', '<div style="display:none;" id="options"> <yield></yield>
 		}
 
 		if (mode !== 'pushstate') {
+
 
 		    if (url.hash.substring(0, 2) === '#/') {
 
@@ -106,10 +108,10 @@ riot.tag2('rm-router', '<div style="display:none;" id="options"> <yield></yield>
 		}
 
 		return url;
-	}.bind(this)
+	}.bind(this);
 
 	this.load = function(url) {
-
+		
 		var found = false;
 		for (i = 0; i < me.routes.length; ++i) {
 			found = me.compare(url.path, me.routes[i].route);
@@ -117,26 +119,30 @@ riot.tag2('rm-router', '<div style="display:none;" id="options"> <yield></yield>
 			    if(me.mountedTag)
 			    	me.mountedTag.unmount(true);
 
+				
 			    riot.compile(me.routes[i].path, function() {
 			    	me.fire('load');
 					var fileName = me.routes[i].path.split('/').pop().replace(/\.[^/.]+$/, "");
 			    	me.mountedTag = riot.mount(me.base, 'page-'+fileName)[0];
 
+
+
 			    });
 				return;
 			}
 		}
-	}.bind(this)
+	}.bind(this);
 
 	this.compare = function(base, match) {
 		if(base === match) {
 			return true;
 		}
 		return false;
-	}.bind(this)
+	}.bind(this);
 
 	this.error = function() {
 
-	}.bind(this)
+	}.bind(this);
+
 
 });
