@@ -156,20 +156,26 @@
 	}
 
 	pick(e) {
+		
 		var target = e.target || e.srcElement;
+		
 		me.date = moment({
 				year: me.month.year(),
 				month: me.month.month(),
 				day: target.innerHTML
 		});
+		
 		me.value = me.date.format(me.format);
 
-		if(me.opts.onset != 'undefined')
+		// console.log('me.opts', me.opts)
+
+		if(me.opts.onset)
 			me.opts.onset();
 
 		me.build(me.month);
 		me.open = false;
 		me.update();
+		
 	}
 
 	previous(e) {
