@@ -1,0 +1,13 @@
+<html>
+
+<head>
+  <title>boom goes the dynamite</title>
+</head>
+
+<body>
+  
+  <script></script>
+  
+</body>
+
+</html>

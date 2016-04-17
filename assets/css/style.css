@@ -6,36 +6,40 @@ html, body {
 	height:100%;
 	width:100%;
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 100 !important;
 }
 
 a {
 	text-decoration: none;
 	color: #6ab344;
+}d
+
+h1, h2, h3, h4, h5 div {
+	font-weight: 100 !important;
 }
 
-.header {
-	background: #6ab344;
-  	color: #fff;
-  	font-size: 50px;
-  	padding: 50px;
-  	text-align: center;
-  	line-height: .5;
-}
-
-.header .title {
-	margin: 0;
-}
-
-.header .author {
+h5.attribute {
 	font-size: 18px;
-	color:rgba(255,255,255,.5);
+	color: #2ed67f;
+	font-weight: 100;
 }
+
+.required {
+	background: #fafafa;
+	color: #d90068;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	font-size: 9px;
+	font-weight: 900;
+	padding: 1px 3px 1px 3px;
+	text-transform: uppercase;
+}
+
 
 .content {
-	max-width: 990px;
-  	padding: 16px 32px;
-  	margin: 0 auto;
-  	overflow:hidden
+	padding: 0;
+	margin: 0 auto;
+	overflow:hidden;
 }
 
 .nav {
@@ -44,30 +48,83 @@ a {
 	display: block;
 	float: left;
 	height: auto;
-	width: 240px;
+	width: 230px;
+	background: #26272f;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	top: 0px;
+	line-height: 0;
+}
+
+.nav .title {
+	margin: 0;
+	font-weight: 100;
+	color: #37ee8f;
+	padding: 15px 0px 0px 15px;
+	font-size: 24px;
+	text-transform: uppercase;
+}
+.nav .title a {
+	color: #37ee8f;
+	font-weight: 100;
+}
+
+.nav .author {
+	font-size: 11px;
+	font-weight: 100;
+	color: #999;
+	padding: 0px 0 15px 15px;
+}
+.nav h5 {
+	padding: 25px 0 0 15px;
+	color: #37ee8f;
+	font-size: 15px;
+	font-weight: 100;
 }
 
 .nav ul {
 	list-style-type: none;
+	margin: 0;
+	padding: 0 0 0 19px;
 }
 
+.nav ul li {
+	margin: 0;
+	padding: 3px 0 0 0;
+	font-size: 13px;
+}
 .nav ul li a {
 	text-decoration: none;
-	padding:5px;
-	color: #757575;
+	padding: 0;
+	color: #ccc;
+	padding: 0 0 2px 0;
 	border-radius:3px;
+	font-weight: 100;
+}
+.nav ul li a:hover {
+	color: #fff;
+}
+.nav ul li a.active {
+	color: #fff;
+	border-bottom: 1px solid #37ee8f;
 }
 
-.active {
-	background:#e0e0e0;
-}
+
 .main {
+	background: #fff;
 	box-sizing: border-box;
 	color: #757575;
 	display: block;
-	float: right;
-	height: auto;
-	width: 720px;
+	position: fixed;
+	overflow-x: hidden;
+	overflow-y: auto;
+	left: 250px;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	padding-right: 20px;
+	padding-bottom: 100px;
 }
 
 .footer {
@@ -81,3 +138,4 @@ a {
 .footer p {
 	margin-top: 17px;
 }
+

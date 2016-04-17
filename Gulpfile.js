@@ -12,6 +12,15 @@ var gulp = require('gulp')
 
 gutil.env.type = gutil.env.type || 'development'; // if ship.. then bump version and git tag and git push
 
+gulp.task('compileDemo', function() {
+  return gulp.src('./pages/*.tag')
+  .pipe(riot({
+    compact: true
+  }))
+  .pipe(uglify())
+  .pipe(concat('demo.js'))
+  .pipe(gulp.dest('dist/'));
+});
 
 gulp.task('compileTags', function() {
   return gulp.src('./tags/*/src/*.tag')
@@ -54,36 +63,31 @@ gulp.task('deploy', function(){
   });
 });
 
-
-gulp.task('compile', ['compileMixins','compileTags'], function(){
+gulp.task('compile', ['compileMixins','compileTags','compileDemo'], function(){
   return gulp.start('minify');
-})
+});
+
+gulp.task('webserver', function() {
+  return gulp.src('./')
+    .pipe(webserver({
+      livereload: true,
+      directoryListing: false,
+      open: true
+    }));
+});
 
 gulp.task('default', function() {
+
+  gulp.start('webserver');
   
   gulp.start('compile', function(){
     
     if(gutil.env.type == 'ship'){
-      
-      gulp.start(['ship']);
-      
+      return gulp.start(['ship']);
     } else {
-      
-      
-            
-      gulp.watch(['./tags/*/src/*.tag', './mixins/*.js'], function(){
-        gulp.start('compile');
-      });
-      
-      gulp.src('./')
-        .pipe(webserver({
-          livereload: true,
-          directoryListing: false,
-          open: true,
-          fallback: 'index.html'
-        }));      
+      return gulp.watch(['./tags/*/src/*.tag', './mixins/*.js', './pages/*.tag', 'index.html'], ['compile']);
     }
     
   })
   
-})
+});

@@ -1,0 +1,15 @@
+<rm-autocomplete
+  type="select"
+  name="text-input"
+  height="400px"
+  items="{locations}"
+  placeholder="Select a country">
+</rm-autocomplete>
+
+this.locations = [
+    {"text":"Albuequerque, NM","value":"Albuquerque, NM","accent":"2.5 miles"},
+    {"text":"Denver, CO","value":"Denver, CO","accent":"222.5 miles"},
+    {"text":"Honolulu, HI","value":"Honolulu, HI","accent":"1335 miles"},
+    {"text":"Santa Fe, NM","value":"Santa Fe, NM","accent":"45 miles"},
+    {"text":"Taos, NM","value":"Taos, NM","accent":"145 miles"}
+  ];

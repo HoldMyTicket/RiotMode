@@ -1,0 +1,6 @@
+<rm-autocomplete></rm-autocomplete>
+<script src="riot.js"></script>
+<script src="RiotMode.js"></script>
+<script type="text/javascript">
+  riot.mount('rm-autocomplete');
+</script>

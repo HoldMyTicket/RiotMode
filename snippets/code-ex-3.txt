@@ -1,0 +1,3 @@
+rsync -avz ./src ./dest
+
+tar -cvf ./site site.tar

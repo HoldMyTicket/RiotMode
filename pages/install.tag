@@ -1,4 +1,18 @@
 <page-install>
+
+	<h3>Install</h3>
+	<p>You will need to include the RiotMode library and Riot into your project.</p>
+
+	<rm-code type="bash" snippet="./snippets/install-bower.txt"></rm-code>
+
+	<p>Embed the libraries</p>
+
+	<rm-code type="html" snippet="./snippets/install-embed.txt"></rm-code>
+	
+	<p>Now you can mount the component in your views.</p>
+
+	<rm-code type="html" snippet="./snippets/install-mount.txt"></rm-code>
+
 	<style scope>
 		.option {
 			margin:0;
@@ -9,18 +23,5 @@
 			margin: 0;
 		}
 	</style>
-	<h3>How to get RiotMode</h3>
-	<p>You can install every tag the following ways.</p>
-	<h5>Package Managers</h5>
-	<p class="option">BOWER</p>
-	<pre>
-		<code>
-			bower install RiotMode
-		</code>
-	</pre>
-	this.on('mount',function() {
-		$('pre code').each(function(i, block) {
-		  hljs.highlightBlock(block);
-		});
-	});
+
 </page-install>

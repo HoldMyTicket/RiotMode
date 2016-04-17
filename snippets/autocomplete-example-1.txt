@@ -1,0 +1,6 @@
+<rm-autocomplete
+  name="text-input"
+  height="400px"
+  url="/tags/rm-autocomplete/demo/demo.json"
+  placeholder="Enter text here">
+</rm-autocomplete>

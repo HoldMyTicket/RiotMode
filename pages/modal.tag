@@ -1,14 +1,8 @@
 <page-modal>
     
-    <style scoped>
-        h6 {
-          font-family: monaco;
-          font-size: 13px;
-          color: rgb(255, 66, 81);
-        }
-    </style>
 
-	<h3>MODALS</h3>
+	<h3>Modal</h3>
+
     <rm-modal 
     open-btn-text="Open Modal" 
     open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
@@ -128,6 +122,15 @@
     <h6>toggle</h6>
     <p>When your toggle switch was manually toggled this will be fired</p>
 		
+    <style scoped>
+        h6 {
+          font-family: monaco;
+          font-size: 13px;
+          color: rgb(255, 66, 81);
+        }
+    </style>
+
+    
 	  var me = this;
     
 	  this.on('mount',function(){

@@ -1,0 +1,8 @@
+function howmuch(){
+
+  var a = 1;
+  var b = 2;
+
+  alert('boom goes the dynamite = '+(a+b));
+
+}

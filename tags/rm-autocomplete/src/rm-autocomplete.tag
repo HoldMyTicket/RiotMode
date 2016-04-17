@@ -52,7 +52,8 @@
     .list_container {
       position:absolute;
       left:0;
-      right:0;
+      width: 300px;
+      right: 0;
       background:#fff;
       height:auto;
       overflow-x:hidden;
@@ -136,6 +137,13 @@
   this.atIndex = -1;
   
   this.on('mount',function(){
+
+    console.log('mounting autocomplete')
+    
+    if(opts.items){
+      me.list = opts.items
+      me.update()
+    }
     
     if(this.ajax && !this.parameter) {
       this.ajaxGet(this.url, function(res) {
@@ -272,13 +280,12 @@
   
   activate() {
 
-    if(typeof this.filteredList[this.atIndex] === 'undefined') {
+    if(typeof this.filteredList[this.atIndex] === 'undefined')
       return;
-    }
 
     this.deactivate();
     this.filteredList[this.atIndex].active = true;
-    this.update();
+    this.update()
 
     var active = this.root.querySelector('.active');
     var table = this.root.querySelector('.list');

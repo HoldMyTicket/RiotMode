@@ -1,0 +1,14 @@
+//Normal name attribute, required
+name:'input1'
+//Set type to select box versus text input
+type:'select'
+//Set the max-height of the dropdown
+height:'190px'
+//Search list
+list:[]
+//ajax url blah blah
+url="/tags/rm-autocomplete/demo/demo.json"
+//Respective placeholder text
+placeholder="Country Selection"
+// filter
+filter-placeholder="Filter"
