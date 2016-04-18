@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <button hide="{hide_btn}" onclick="{ openModal }" class="{ opts['open-btn-class'] }"><i class="{ opts['open-btn-icon'] }"></i> { opts['open-btn-text'] }</button>
+    <button hide="{hide_btn}" onclick="{ openModal }" class="{ opts['openBtnClass'] }"><i class="{ opts['openBtnIcon'] }"></i> { opts['openBtnText'] }</button>
 
     <style scoped>
         .modalMaster {
@@ -115,7 +115,8 @@
     this.modalHeight = opts.height || false;
 
     this.on('mount',function(){
-      if(!me.opts['open-btn-text'])
+      console.log(me.opts)
+      if(!me.opts['openBtnText'])
         me.hide_btn = true;
       me.update();
     })

@@ -166,16 +166,12 @@ riot.tag2('page-markdown', '<h3>Markdown</h3><p>Here is some markdown rendered w
   });
 
 });
-riot.tag2('page-modal', '<h3>Modal</h3><rm-modal open-btn-text="Open Modal" open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><h4>Are you sure you want to?</h4><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><button onclick="{this.parent.customcallback}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button></rm-modal><br><rm-modal open-btn-text="Open Modal 2" open-btn-class="mdl-button mdl-js-button mdl-js-ripple-effect"><h4>Are you sure you want to?</h4><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><button onclick="{this.parent.customcallback2}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button></rm-modal><br><rm-modal open-btn-text="Open Modal 3" open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><h4>Hells no I dont want to!</h4><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><button onclick="{this.parent.customcallback3}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button></rm-modal><br><rm-modal open-btn-text="Open Modal 4" open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><h4>Hells no I dont want to!</h4><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p></rm-modal><br><rm-modal open-btn-text="HAVE A PROMO CODE?" open-btn-class="btn btn-sm btn-outline btn-noline btn-black btn-round" open-btn-icon="fi fi-price-tag" id="promo_code_modal" class="promo-code-modal"><h1>Promo Code</h1><input id="promo_code_input" class="width-50" type="text" name="promo_code" placeholder="Enter your promo code..."><button id="submit_promo_code_btn" onclick="{submit_promo}" class="btn btn-red btn-outline btn-smaller">SUBMIT</button><div class="error_msg"><div hide="{show_error}"><p class="fine">Enter <strong>Coupon Codes</strong> at the end of checkout (not here)</p></div><div show="{show_error}"><p class="fine">{error_msg}</p></div></div><div class="error" id="promo_code_response_area"></div></rm-modal><br><rm-modal id="noButtonModal"><h4>Hells no I dont want to!</h4><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p></rm-modal><br><a href="javascript:void(0)" onclick="{noButtonModalLoad}">OPEN MODAL WITHOUT BUTTON</a><h5>Basic Usage</h5><pre>\n      <code>\n        &lt;rm-modal open-btn-text=&quot;Open Modal&quot&gt;&lt;/rm-modal&gt;\n      </code>\n    </pre><h5>More Usage</h5><pre>\n      <code>\n\n\n\n      </code>\n    </pre><h5>ATTRIBUTES</h5><h6>open-btn-text</h6><p>The text to be displayed in the modal button</p><h6>open-btn-class</h6><p>The class to used on the modal button</p><h6>open-btn-icon</h6><p>The icon to be used in the modal button</p><hr><h5>EVENTS</h5><h6>toggle</h6><p>When your toggle switch was manually toggled this will be fired</p>', 'page-modal h6,[riot-tag="page-modal"] h6,[data-is="page-modal"] h6{ font-family: monaco; font-size: 13px; color: rgb(255, 66, 81); }', '', function(opts) {
+riot.tag2('page-modal', '<h3>Modal</h3><rm-modal open-btn-text="Open Modal" open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><h4>Are you sure you want to?</h4><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><button onclick="{this.parent.customcallback}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button></rm-modal><br><br><rm-code snippet="./snippets/modal-example-1.txt"></rm-code><hr><rm-modal open-btn-text="Open Modal 2" open-btn-class="mdl-button mdl-js-button mdl-js-ripple-effect"><h4>Are you sure you want to?</h4><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><button onclick="{this.parent.customcallback2}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button></rm-modal><rm-code snippet="./snippets/modal-example-2.txt"></rm-code><br><rm-modal open-btn-text="Open Modal 3" open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><h4>Hells no I dont want to!</h4><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><button onclick="{this.parent.customcallback3}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button></rm-modal><br><br><rm-code snippet="./snippets/modal-example-3.txt"></rm-code><hr><rm-modal open-btn-text="Open Modal 4" open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><h4>Hells no I dont want to!</h4><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p></rm-modal><br><br><rm-code snippet="./snippets/modal-example-4.txt"></rm-code><hr><rm-modal open-btn-text="HAVE A PROMO CODE?" open-btn-class="btn btn-sm btn-outline btn-noline btn-black btn-round" open-btn-icon="fi fi-price-tag" id="promo_code_modal" class="promo-code-modal"><h1>Promo Code</h1><input id="promo_code_input" class="width-50" type="text" name="promo_code" placeholder="Enter your promo code..."><button id="submit_promo_code_btn" onclick="{submit_promo}" class="btn btn-red btn-outline btn-smaller">SUBMIT</button><div class="error_msg"><div hide="{show_error}"><p class="fine">Enter <strong>Coupon Codes</strong> at the end of checkout (not here)</p></div><div show="{show_error}"><p class="fine">{error_msg}</p></div></div><div class="error" id="promo_code_response_area"></div></rm-modal><br><br><rm-code snippet="./snippets/modal-example-5.txt"></rm-code><hr><rm-modal id="noButtonModal"><h4>Hells no I dont want to!</h4><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p><p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p></rm-modal><br><a href="javascript:void(0)" onclick="{noButtonModalLoad}">OPEN MODAL WITHOUT BUTTON</a><br><rm-code snippet="./snippets/modal-example-6.txt"></rm-code><hr><h5>ATTRIBUTES</h5><h5 class="attribute">open-btn-text</h5><p>The text to be displayed in the modal button</p><h5 class="attribute">open-btn-class</h5><p>The class to used on the modal button</p><h5 class="attribute">open-btn-icon</h5><p>The icon to be used in the modal button</p><hr><h5>EVENTS</h5><h5 class="attribute">toggle</h5><p>When your toggle switch was manually toggled this will be fired</p>', 'page-modal h6,[riot-tag="page-modal"] h6,[data-is="page-modal"] h6{ font-family: monaco; font-size: 13px; color: rgb(255, 66, 81); }', '', function(opts) {
 
 
 	  var me = this;
 
 	  this.on('mount',function(){
-
-          $('pre code').each(function(i, block) {
-            hljs.highlightBlock(block);
-          });
 
 	  });
 
@@ -205,51 +201,49 @@ riot.tag2('page-modal', '<h3>Modal</h3><rm-modal open-btn-text="Open Modal" open
       }.bind(this)
 
 });
-riot.tag2('page-table', '<h3>Tables</h3><h4>Default Table</h4><rm-table class="styled-table"></rm-table><h4>Striped Table</h4><rm-table class="styled-table" type="awesometable-striped"></rm-table><h4>Condensed Table</h4><rm-table class="styled-table" type="awesometable-condensed"></rm-table><h4>Bordered Table</h4><rm-table class="styled-table" type="awesometable-bordered"></rm-table><h4>Hover/Condensed Table</h4><rm-table class="styled-table" type="awesometable-hover awesometable-condensed"></rm-table><h4>Calculated Table</h4><rm-table class="calculated-table"></rm-table><h4>Averaged Table</h4><rm-table class="averaged-table"></rm-table><h4>Sorted Table</h4><rm-table class="sorted-table"></rm-table><p>Options</p><pre>\n        <code class="json">\n        // Need to fill in\n        </code>\n    </pre>', '', '', function(opts) {
+riot.tag2('page-table', '<h3>Tables</h3><h4>Default Table</h4><rm-table class="styled-table"></rm-table><rm-code snippet="./snippets/table-example-1.txt" type="html"></rm-code><h4>Striped Table</h4><rm-table class="styled-table" type="awesometable-striped"></rm-table><rm-code snippet="./snippets/table-example-2.txt" type="html"></rm-code><h4>Condensed Table</h4><rm-table class="styled-table" type="awesometable-condensed"></rm-table><rm-code snippet="./snippets/table-example-3.txt" type="html"></rm-code><h4>Bordered Table</h4><rm-table class="styled-table" type="awesometable-bordered"></rm-table><rm-code snippet="./snippets/table-example-4.txt" type="html"></rm-code><h4>Hover/Condensed Table</h4><rm-table class="styled-table" type="awesometable-hover awesometable-condensed"></rm-table><rm-code snippet="./snippets/table-example-5.txt" type="html"></rm-code><h4>Calculated Table</h4><rm-table class="calculated-table"></rm-table><rm-code snippet="./snippets/table-example-6.txt" type="html"></rm-code><h4>Averaged Table</h4><rm-table class="averaged-table"></rm-table><rm-code snippet="./snippets/table-example-7.txt" type="html"></rm-code><h4>Sorted Table</h4><rm-table class="sorted-table"></rm-table><rm-code snippet="./snippets/table-example-8.txt" type="html"></rm-code>', '', '', function(opts) {
 
     this.on('mount', function() {
-        $('pre code').each(function(i, block) {
-          hljs.highlightBlock(block);
-        });
 
-        riot.mount('rm-table.styled-table', {
-            tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
-            tableContent: [
-                ['James Bond', '80', 'M', 'Confidential', 'Blue'],
-                ['Bruce Wayne', '40', 'M', 'Billionare', 'Black'],
-                ['Batman', 'Unknown', 'Unknown', 'Unknown', 'Black'],
-            ]
-        });
+      riot.mount('rm-table.styled-table', {
+          tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
+          tableContent: [
+              ['James Bond', '80', 'M', 'Confidential', 'Blue'],
+              ['Bruce Wayne', '40', 'M', 'Billionare', 'Black'],
+              ['Batman', 'Unknown', 'Unknown', 'Unknown', 'Black'],
+          ]
+      });
 
-        riot.mount('rm-table.calculated-table', {
-            tableHeaders: ['Date', 'Tickets', 'Cash', 'Credit', 'Check'],
-            tableContent: [
-                ['4/14/2015', '12', '$25.12', '$42', '$0'],
-                ['4/13/2015', '10', '$22.15', '$42', '$0'],
-                ['4/12/2015', '8', '$20.50', '$42', '$0']
-            ],
-            tableFooter: ['Total', '{{total1}}', '{{total2}}', '{{total3}}', '{{total4}}']
-        });
+      riot.mount('rm-table.calculated-table', {
+          tableHeaders: ['Date', 'Tickets', 'Cash', 'Credit', 'Check'],
+          tableContent: [
+              ['4/14/2015', '12', '$25.12', '$42', '$0'],
+              ['4/13/2015', '10', '$22.15', '$42', '$0'],
+              ['4/12/2015', '8', '$20.50', '$42', '$0']
+          ],
+          tableFooter: ['Total', '{{total1}}', '{{total2}}', '{{total3}}', '{{total4}}']
+      });
 
-        riot.mount('rm-table.averaged-table', {
-            tableHeaders: ['Date', 'Tickets', 'Cash', 'Credit', 'Check'],
-            tableContent: [
-                ['4/14/2015', '8', '$22.12', '$42', '$0'],
-                ['4/13/2015', '4', '$25.15', '$22', '$0'],
-                ['4/12/2015', '5', '$22.12', '$42', '$0']
-            ],
-            tableFooter: ['Average', '{{average1}}', '{{average2}}', '{{average3}}', '{{average4}}']
-        });
+      riot.mount('rm-table.averaged-table', {
+          tableHeaders: ['Date', 'Tickets', 'Cash', 'Credit', 'Check'],
+          tableContent: [
+              ['4/14/2015', '8', '$22.12', '$42', '$0'],
+              ['4/13/2015', '4', '$25.15', '$22', '$0'],
+              ['4/12/2015', '5', '$22.12', '$42', '$0']
+          ],
+          tableFooter: ['Average', '{{average1}}', '{{average2}}', '{{average3}}', '{{average4}}']
+      });
 
-        riot.mount('rm-table.sorted-table', {
-            sortTable: true,
-            tableHeaders: ['Date', 'Name', 'Tickets', 'Cash', 'Credit', 'Check'],
-            tableContent: [
-                ['4/14/2015', 'James Bond', '8', '$25.12', '$42', '$0'],
-                ['4/13/2015', 'Bruce Wayne', '5', '$22.15', '$22', '$0'],
-                ['4/12/2015', 'Batman', '4', '$20.50', '$42', '$0']
-            ]
-        });
+      riot.mount('rm-table.sorted-table', {
+          sortTable: true,
+          tableHeaders: ['Date', 'Name', 'Tickets', 'Cash', 'Credit', 'Check'],
+          tableContent: [
+              ['4/14/2015', 'James Bond', '8', '$25.12', '$42', '$0'],
+              ['4/13/2015', 'Bruce Wayne', '5', '$22.15', '$22', '$0'],
+              ['4/12/2015', 'Batman', '4', '$20.50', '$42', '$0']
+          ]
+      });
+
     });
 });
 riot.tag2('page-text-field', '<h3>Text Field</h3><div><div class="item"><p>Text</p><rm-text-field name="text" width="150px"></rm-text-field></div><div class="item"><p>Numeric</p><rm-text-field name="number" placeholder="Number..." type="numeric"></rm-text-field></div><div class="item"><p>Floating Label</p><rm-text-field name="floating" floating="true"></rm-text-field></div><div class="item"><p>Regex Email</p><rm-text-field name="email" type="email"></rm-text-field></div><div class="item"><p>Expanding</p><rm-text-field name="expanding" width="200px" placeholder="Number..." type="expanding"></rm-text-field></div><br><div class="item"><p>Text Area</p><rm-text-field name="text-area" type="multiple" width="300px" rows="3"></rm-text-field></div></div><p>Options</p><pre>\n    <code class="json">\n      //Markdown string can be placed here\\n\n      content:\'\'\\n\n      \\n\n    </code>\n  </pre>', '.item { display:inline-block; margin:10px; }', '', function(opts) {

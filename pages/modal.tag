@@ -1,32 +1,33 @@
 <page-modal>
-    
+  
+  <h3>Modal</h3>
 
-	<h3>Modal</h3>
+  <rm-modal 
+  open-btn-text="Open Modal" 
+  open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    <h4>Are you sure you want to?</h4>
+    <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+    <button onclick="{ this.parent.customcallback }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button>
+  </rm-modal>
+  
+  <br /><br />
 
-    <rm-modal 
-    open-btn-text="Open Modal" 
-    open-btn-class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-    
-        <h4>Are you sure you want to?</h4>
-        <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
-        <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
-        
-        <button onclick="{ this.parent.customcallback }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button>
-        
-    </rm-modal>
-    
-    <br />
-        
-    <rm-modal 
+  <rm-code snippet="./snippets/modal-example-1.txt"></rm-code>
+
+  <hr />
+  
+  <rm-modal 
     open-btn-text="Open Modal 2" 
     open-btn-class="mdl-button mdl-js-button mdl-js-ripple-effect">
-        <h4>Are you sure you want to?</h4>
-        <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
-        <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
-        <button onclick="{ this.parent.customcallback2 }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button>
-    </rm-modal>
+      <h4>Are you sure you want to?</h4>
+      <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+      <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+      <button onclick="{ this.parent.customcallback2 }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button>
+  </rm-modal>
+
+  <rm-code snippet="./snippets/modal-example-2.txt"></rm-code>
     
-    <br />
+  <br />
     
     <rm-modal 
     open-btn-text="Open Modal 3" 
@@ -37,7 +38,11 @@
         <button onclick="{ this.parent.customcallback3 }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button>
     </rm-modal>
     
-    <br />
+    <br /><br />
+    
+    <rm-code snippet="./snippets/modal-example-3.txt"></rm-code>
+    
+    <hr />
     
     <rm-modal 
     open-btn-text="Open Modal 4" 
@@ -47,7 +52,11 @@
         <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
     </rm-modal>
     
-    <br />
+    <br /><br />
+    
+    <rm-code snippet="./snippets/modal-example-4.txt"></rm-code>
+    
+    <hr />
     
     <rm-modal 
     open-btn-text="HAVE A PROMO CODE?" 
@@ -72,54 +81,48 @@
         
           <div class="error" id="promo_code_response_area"></div>
           
-      </rm-modal>
+    </rm-modal>
+    
+    <br /><br />
+    
+    <rm-code snippet="./snippets/modal-example-5.txt"></rm-code>
       
-      <br />
+    <hr />
 
-      <rm-modal 
-          id="noButtonModal">
-          
-        <h4>Hells no I dont want to!</h4>
-        <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
-        <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+    <rm-modal 
+      id="noButtonModal">
+        
+      <h4>Hells no I dont want to!</h4>
+      <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+      <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
     </rm-modal>
     
     <br />
         
     <a href="javascript:void(0)" onclick="{noButtonModalLoad}">OPEN MODAL WITHOUT BUTTON</a>
-
-    <h5>Basic Usage</h5>
-    <pre>
-      <code>
-        &lt;rm-modal open-btn-text=&quot;Open Modal&quot&gt;&lt;/rm-modal&gt;
-      </code>
-    </pre>
-
-    <h5>More Usage</h5>
-    <pre>
-      <code>
-        
-        
-        
-      </code>
-    </pre>
-
+    
+    <br />
+    
+    <rm-code snippet="./snippets/modal-example-6.txt"></rm-code>
+    
+    <hr />
+    
     <h5>ATTRIBUTES</h5>
 
-    <h6>open-btn-text</h6>
+    <h5 class="attribute">open-btn-text</h5>
     <p>The text to be displayed in the modal button</p>
 
-    <h6>open-btn-class</h6>
+    <h5 class="attribute">open-btn-class</h5>
     <p>The class to used on the modal button</p>
     
-    <h6>open-btn-icon</h6>
+    <h5 class="attribute">open-btn-icon</h5>
     <p>The icon to be used in the modal button</p>
 
     <hr />
 
     <h5>EVENTS</h5>
 
-    <h6>toggle</h6>
+    <h5 class="attribute">toggle</h5>
     <p>When your toggle switch was manually toggled this will be fired</p>
 		
     <style scoped>
@@ -130,14 +133,10 @@
         }
     </style>
 
-    
 	  var me = this;
     
 	  this.on('mount',function(){
 
-          $('pre code').each(function(i, block) {
-            hljs.highlightBlock(block);
-          });
           
 	  });
       

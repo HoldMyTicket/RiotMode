@@ -1,0 +1,10 @@
+<rm-table class="styled-table" type="awesometable-condensed"></rm-table>
+
+riot.mount('rm-table.styled-table', {
+    tableHeaders: ['Name', 'Age', 'Gender', 'Occupation', 'Favorite Color'],
+    tableContent: [
+        ['James Bond', '80', 'M', 'Confidential', 'Blue'],
+        ['Bruce Wayne', '40', 'M', 'Billionare', 'Black'],
+        ['Batman', 'Unknown', 'Unknown', 'Unknown', 'Black'],
+    ]
+});

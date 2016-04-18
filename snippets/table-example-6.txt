@@ -1,0 +1,11 @@
+<rm-table class="calculated-table"></rm-table>
+
+riot.mount('rm-table.calculated-table', {
+  tableHeaders: ['Date', 'Tickets', 'Cash', 'Credit', 'Check'],
+  tableContent: [
+    ['4/14/2015', '12', '$25.12', '$42', '$0'],
+    ['4/13/2015', '10', '$22.15', '$42', '$0'],
+    ['4/12/2015', '8', '$20.50', '$42', '$0']
+  ],
+  tableFooter: ['Total', '{{total1}}', '{{total2}}', '{{total3}}', '{{total4}}']
+});

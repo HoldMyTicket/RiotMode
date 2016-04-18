@@ -1,0 +1,8 @@
+<rm-modal 
+  open-btn-text="Open Modal 2" 
+  open-btn-class="mdl-button mdl-js-button mdl-js-ripple-effect">
+    <h4>Are you sure you want to?</h4>
+    <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+    <p>Maecenas at interdum sem. Suspendisse potenti. Vestibulum ac nisi sit amet erat molestie tristique. Nullam dignissim condimentum odio vitae congue.</p>
+    <button onclick="{ this.parent.customcallback2 }" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent affirmative-btn">Yes!</button>
+</rm-modal>

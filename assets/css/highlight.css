@@ -10,6 +10,7 @@
   color: #333333;
   overflow-x: auto;
   border: 1px solid #eee;
+  font-size: 13px;
 }
 
 .hljs-comment,
