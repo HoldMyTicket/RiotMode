@@ -20,7 +20,7 @@
 			background-color: white;
 			z-index:10;
 		}
-		.card {padding: 9px 4px 9px 11px;}
+		.card {padding: 0;}
 		.description {
 			width: 200px;
   			display: inline-block;

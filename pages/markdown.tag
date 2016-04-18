@@ -7,28 +7,21 @@
   
   <p>Here is some markdown rendered with our tag.</p>
 
-  <pre id="markdown">
-  </pre>
+  <div id="markdown"></div>
   
-  <p>Options</p>
- 
-  <pre>
-    <code class="json">
-      //Markdown string can be placed here\n
-      content:''\n
-      \n
-    </code>
-  </pre>
-
+  <rm-code snippet="./snippets/markdown-example.txt" type="html"></rm-code>
+  <rm-code snippet="./snippets/markdown-sample.md" type="markdown"></rm-code>
+  
   var me = this;
 
-  this.mixin(RMajaxMixin);
   this.on('mount',function() {
-    $('pre code').each(function(i, block) {
-      hljs.highlightBlock(block);
-    });
-    this.ajaxGet('/tags/rm-markdown/demo/test.md',function(data) {
-        riot.mount('pre#markdown','rm-markdown',{content:data});
-    });
+
+    $.ajax('./snippets/markdown-sample.md', {
+      success: function(markdown){
+        riot.mount('#markdown', 'rm-markdown', {content: markdown})
+      }
+    })
+
   });
+
 </page-markdown>

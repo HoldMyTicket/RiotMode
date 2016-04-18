@@ -17,7 +17,7 @@ gulp.task('compileDemo', function() {
   .pipe(riot({
     compact: true
   }))
-  .pipe(uglify())
+  // .pipe(uglify())
   .pipe(concat('demo.js'))
   .pipe(gulp.dest('dist/'));
 });

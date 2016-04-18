@@ -1,0 +1,13 @@
+<div id="markdown"></div>
+
+var me = this;
+
+this.on('mount',function() {
+
+$.ajax('./snippets/markdown-sample.md', {
+  success: function(markdown){
+    riot.mount('#markdown', 'rm-markdown', {content: markdown})
+  }
+})
+
+});
