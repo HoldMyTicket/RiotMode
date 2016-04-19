@@ -70,6 +70,11 @@ h5.attribute {
 	font-weight: 100;
 }
 
+.nav .title small {
+	font-size: 10px;
+	color: #666;
+}
+
 .nav .author {
 	font-size: 11px;
 	font-weight: 100;
