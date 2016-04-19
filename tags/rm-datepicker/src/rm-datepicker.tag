@@ -167,8 +167,6 @@
 		
 		me.value = me.date.format(me.format);
 
-		// console.log('me.opts', me.opts)
-
 		if(me.opts.onset)
 			me.opts.onset();
 

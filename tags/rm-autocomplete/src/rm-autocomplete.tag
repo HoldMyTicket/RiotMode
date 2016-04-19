@@ -138,8 +138,6 @@
   
   this.on('mount',function(){
 
-    console.log('mounting autocomplete')
-    
     if(opts.items){
       me.list = opts.items
       me.update()

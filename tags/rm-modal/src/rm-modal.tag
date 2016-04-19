@@ -115,7 +115,6 @@
     this.modalHeight = opts.height || false;
 
     this.on('mount',function(){
-      console.log(me.opts)
       if(!me.opts['openBtnText'])
         me.hide_btn = true;
       me.update();
