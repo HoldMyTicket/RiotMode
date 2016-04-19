@@ -1,0 +1,1 @@
+<rm-text-field name="text-area" type="multiple" width="300px" rows="3"></rm-text-field>

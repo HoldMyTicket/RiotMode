@@ -1,0 +1,13 @@
+<rm-toggle id="delayed_on_switch" type="switch" label-text="Delayed On" ontoggle="{ myToggle }" ischecked={delayed_on_switch}></rm-toggle>
+<rm-toggle id="delayed_off_switch" type="switch" label-text="Delayed Off" ontoggle="{ myToggle }" ischecked={delayed_off_switch}></rm-toggle>
+
+this.delayed_on_switch = false;
+this.delayed_off_switch = true;
+
+this.on('mount',function(){
+  setTimeout(function(){
+    me.delayed_on_switch = true;
+    me.delayed_off_switch = false;
+    me.update()
+  },2000);
+})

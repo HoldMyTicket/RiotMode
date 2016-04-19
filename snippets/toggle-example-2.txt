@@ -1,0 +1,1 @@
+<rm-toggle type="checkbox" label-text="Checkbox On" ontoggle="{ myToggle }" ischecked="{on_switch}"></rm-toggle>

@@ -11,27 +11,41 @@
         }
     </style>
 
-		<h3>STANDARD TOGGLES</h3>
+		<h3>Toggle</h3>
+    
+    <h5>Checkbox Toggles</h5>
+    
 		<rm-toggle type="checkbox" label-text="Checkbox Off" ontoggle="{ myToggle }"></rm-toggle>
+    
+    <br />
+    <br />
+    <rm-code snippet="./snippets/toggle-example-1.txt"></rm-code>
+    
+    <hr />
+    
 		<rm-toggle type="checkbox" label-text="Checkbox On" ontoggle="{ myToggle }" ischecked="{on_switch}"></rm-toggle>
+
+    <br />
+    <br />
+    <rm-code snippet="./snippets/toggle-example-2.txt"></rm-code>
+    
+    <hr />
 		
 		<br />
+
+    <h5>Radio Toggles</h5>
 		
 		<rm-toggle type="radio" name="group1" label-text="Radio 1" ontoggle="{ myToggle }"></rm-toggle>
 		<rm-toggle type="radio" name="group1" label-text="Radio 2" ontoggle="{ myToggle }"></rm-toggle>
 		<rm-toggle type="radio" name="group1" label-text="Radio 3" ontoggle="{ myToggle }"></rm-toggle>
 
-		<br />
+    <br />
+    <br />
+    <rm-code snippet="./snippets/toggle-example-3.txt"></rm-code>
+    
+    <hr />
 
-		<rm-toggle type="radio" name="group2" label-text="Radio A" ontoggle="{ myToggle }"></rm-toggle>
-		<rm-toggle type="radio" name="group2" label-text="Radio B" ontoggle="{ myToggle }"></rm-toggle>
-		<rm-toggle type="radio" name="group2" label-text="Radio C" ontoggle="{ myToggle }"></rm-toggle>
-		
-		<br />
-		
-		<rm-toggle type="icon-toggle" icon="feedback" ontoggle="{ myToggle }"></rm-toggle>
-
-		<h3>TOGGLE SWITCHES</h3>
+		<h5>Toggle Switches</h5>
 		<p>
 			Several states with delays
 		</p>
@@ -39,62 +53,47 @@
 		<rm-toggle type="switch" label-text="No State" ontoggle="{ myToggle }"></rm-toggle>
 		<rm-toggle type="switch" label-text="Off State" ontoggle="{ myToggle }" ischecked={off_switch}></rm-toggle>
 		<rm-toggle type="switch" label-text="On State" ontoggle="{ myToggle }" ischecked="true"></rm-toggle>
+
+    <br />
+    <br />
+    <rm-code snippet="./snippets/toggle-example-4.txt"></rm-code>
+    
+    <hr />
+    
+    <h5>Delayed Toggle Switches</h5>
+    
 		<rm-toggle id="delayed_on_switch" type="switch" label-text="Delayed On" ontoggle="{ myToggle }" ischecked={delayed_on_switch}></rm-toggle>
 		<rm-toggle id="delayed_off_switch" type="switch" label-text="Delayed Off" ontoggle="{ myToggle }" ischecked={delayed_off_switch}></rm-toggle>
-	
-		<div class="hidden-message" show="{ show }">This is a hidden message! :D</div>
 
-
-    <h5>Basic Usage</h5>
-    <pre>
-      <code>
-        &lt;rm-toggle type=&quot;checkbox&quot; label-text=&quot;My Label&quot;&gt;&lt;/rm-toggle&gt;
-      </code>
-    </pre>
-
-    <h5>More Usage</h5>
-    <pre>
-      <code>
-        
-        &lt;rm-toggle id=&quot;myswitch&quot; type=&quot;switch&quot; label-text=&quot;My Special Switch&quot; ischecked=&#123;this.ischecked&#125;&gt;&lt;/rm-toggle&gt;
-        <br />
-        <br />
-        somefunction(){<br />
-          this.ischecked = true
-        }
-        
-      </code>
-    </pre>
-
-    <h5>TYPES</h5>
+    <br />
+    <br />
+    <rm-code snippet="./snippets/toggle-example-5.txt"></rm-code>
     
-    <h6>checkbox</h6>
-    <p>A simple checkbox on off</p>
-
-    <h6>radio</h6>
-    <p>Radio groups</p>
-
-    <h6>toggle-icon</h6>
+    <hr />
+	
+    <h5>ATTRIBUTES</h5>
+    
+    <h5 class="attribute">type</h5>
+    <ul>
+      <li>checkbox - Standard checkbox toggle switch</li>
+      <li>radio - Radio group toggles</li>
+      <li>switch - Toggle switch, on or off</li>
+    </ul>
+    
+    <h5 class="attribute">toggle-icon</h5>
     <p>An icon that can be toggled on and off</p>
 
-    <h6>switch</h6>
-    <p>An on and off switch</p>
-
-    <hr />
-
-    <h5>ATTRIBUTES</h5>
-
-    <h6>label-text</h6>
+    <h5 class="attribute">label-text</h5>
     <p>Give your toggle a label description</p>
 
-    <h6>ischecked</h6>
+    <h5 class="attribute">ischecked</h5>
     <p>Setup your state of your toggle on mount</p>
 
     <hr />
 
     <h5>EVENTS</h5>
 
-    <h6>toggle</h6>
+    <h5 class="attribute">toggle</h5>
     <p>When your toggle switch was manually toggled this will be fired</p>
 		
 		var me = this;
@@ -109,12 +108,6 @@
     this.delayed_off_switch = true;
     
 		this.on('mount',function(){
-
-      $('pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
-      });
-
-			this.update();
 			setTimeout(function(){
 				me.delayed_on_switch = true;
 				me.delayed_off_switch = false;
@@ -123,7 +116,6 @@
 		})
 		
 		myToggle(e) {
-			console.log('toggle Switched');
 			me.update();
 		}
       

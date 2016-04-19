@@ -108,7 +108,7 @@ riot.tag2('page-chart', '<h3>Charts</h3><div class="chart-demo" id="first"></div
   });
 });
 
-riot.tag2('page-code', '<h3>Code</h3><p>The code embedding component uses the highlightjs library for code highlighting. Just include it in your libraries and it will work.</p><hr><p> Simple javascript example </p><rm-code type="javascript" snippet="./snippets/code-ex-1.txt"></rm-code><hr><p> HTML layout </p><rm-code type="html" snippet="./snippets/code-ex-2.txt"></rm-code><hr><p> Bash code </p><rm-code type="bash" snippet="./snippets/code-ex-3.txt"></rm-code><hr><h5>ATTRIBUTES</h5><h5 class="attribute">snippet</h5><p>The URL to request the snippet of code to display.</p><h5 class="attribute">type</h5><p>Type of code to highlight with highlightjs</p>', '', '', function(opts) {
+riot.tag2('page-code', '<h3>Code</h3><p>The code embedding component uses the highlightjs library for code highlighting. Just include it in your libraries and it will work.</p><hr><p> Simple javascript example </p><rm-code type="javascript" snippet="./snippets/code-ex-1.txt"></rm-code><rm-code type="html" snippet="./snippets/code-example-1.txt"></rm-code><hr><p> HTML layout </p><rm-code type="html" snippet="./snippets/code-ex-2.txt"></rm-code><rm-code type="html" snippet="./snippets/code-example-2.txt"></rm-code><hr><p> Bash code </p><rm-code type="bash" snippet="./snippets/code-ex-3.txt"></rm-code><rm-code type="html" snippet="./snippets/code-example-3.txt"></rm-code><hr><h5>ATTRIBUTES</h5><h5 class="attribute">snippet</h5><p>The URL to request the snippet of code to display.</p><h5 class="attribute">type</h5><p>Type of code to highlight with highlightjs</p>', '', '', function(opts) {
 });
 riot.tag2('page-contribute', '<h3>Want to contribute?</h3><p>Fork our repository and submit a pull request, you can find it <a href="https://github.com/HoldMyTicket/RiotMode">here</a>', '', '', function(opts) {
 });
@@ -246,42 +246,27 @@ riot.tag2('page-table', '<h3>Tables</h3><h4>Default Table</h4><rm-table class="s
 
     });
 });
-riot.tag2('page-text-field', '<h3>Text Field</h3><div><div class="item"><p>Text</p><rm-text-field name="text" width="150px"></rm-text-field></div><div class="item"><p>Numeric</p><rm-text-field name="number" placeholder="Number..." type="numeric"></rm-text-field></div><div class="item"><p>Floating Label</p><rm-text-field name="floating" floating="true"></rm-text-field></div><div class="item"><p>Regex Email</p><rm-text-field name="email" type="email"></rm-text-field></div><div class="item"><p>Expanding</p><rm-text-field name="expanding" width="200px" placeholder="Number..." type="expanding"></rm-text-field></div><br><div class="item"><p>Text Area</p><rm-text-field name="text-area" type="multiple" width="300px" rows="3"></rm-text-field></div></div><p>Options</p><pre>\n    <code class="json">\n      //Markdown string can be placed here\\n\n      content:\'\'\\n\n      \\n\n    </code>\n  </pre>', '.item { display:inline-block; margin:10px; }', '', function(opts) {
-
-  this.on('mount',function() {
-    $('pre code').each(function(i, block) {
-      hljs.highlightBlock(block);
-    });
-    riot.mount('text-field');
-  });
+riot.tag2('page-text-field', '<h3>Text Field</h3><div><div><p>Text</p><rm-text-field name="text" width="150px"></rm-text-field><rm-code snippet="./snippets/text-field-example-1.txt"></rm-code></div><div><p>Numeric</p><rm-text-field name="number" placeholder="Number..." type="numeric"></rm-text-field><rm-code snippet="./snippets/text-field-example-2.txt"></rm-code></div><div><p>Floating Label</p><rm-text-field name="floating" floating="true"></rm-text-field><rm-code snippet="./snippets/text-field-example-3.txt"></rm-code></div><div><p>Regex Email</p><rm-text-field name="email" type="email"></rm-text-field><rm-code snippet="./snippets/text-field-example-4.txt"></rm-code></div><div><p>Expanding</p><rm-text-field name="expanding" width="200px" placeholder="Number..." type="expanding"></rm-text-field><rm-code snippet="./snippets/text-field-example-5.txt"></rm-code></div><div class="item"><p>Text Area</p><rm-text-field name="text-area" type="multiple" width="300px" rows="3"></rm-text-field><rm-code snippet="./snippets/text-field-example-6.txt"></rm-code></div></div><h5>ATTRIBUTES</h5><h5 class="attribute">name</h5><p>Name of the text field <span class="required">required</span></p><h5 class="attribute">width</h5><p>The width of the text field</p><h5 class="attribute">placeholder</h5><p>Placeholder of the text field</p><h5 class="attribute">type</h5><p>The type of the text field (text|numeric|email|expanding|multiple)</p><h5 class="attribute">rows</h5><p>The height of the textarea if type is multiple</p>', '.item { display:inline-block; margin:10px; }', '', function(opts) {
 });
 
 
-riot.tag2('page-toast', '<h3>TOASTS</h3><rm-toast duration="2000" id="sendEmailToast" position="top-right"></rm-toast><rm-toast id="createDocumentToast" position="bottom-right" duration="3000" text="Successfully created! You can view the document <a target=\'_blank\' href=\'http://google.com\'>here</a>"></rm-toast><button onclick="{sendEmail}">Send Email</button><button onclick="{createDocument}">Create Document</button><h5>Basic Usage</h5><pre>\n      <code>\n        &lt;rm-toast id=&quot;toast&quot;&gt&lt/rm-toast&gt;\n      </code>\n    </pre><h5>More Usage</h5><pre>\n      <code>\n\n        &lt;rm-toast id=&quot;toast&quot; duration=&quot;3000&quot; position=&quot;top-right&quot; text=&quot;TOAST&quot;&gt&lt/rm-toast&gt;\n\n      </code>\n    </pre><h5>ATTRIBUTES</h5><h6>duration</h6><p>Give your toast a duration to be displayed</p><h6>position</h6><p>The position that the toast will be displayed</p><ul><li>top-left</li><li>top-right</li><li>bottom-left</li><li>bottom-right</li></ul><h6>text</h6><p>The text to be displyed in the toast</p><hr>', 'page-toast h6,[riot-tag="page-toast"] h6,[data-is="page-toast"] h6{ font-family: monaco; font-size: 13px; color: rgb(255, 66, 81); }', '', function(opts) {
+riot.tag2('page-toast', '<h3>TOASTS</h3><rm-toast duration="2000" id="sendEmailToast" position="top-right"></rm-toast><button onclick="{sendEmail}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Send Email</button><br><br><rm-code snippet="./snippets/toast-example-1.txt"></rm-code><hr><rm-toast id="createDocumentToast" position="bottom-right" duration="3000" text="Successfully created! You can view the document <a target=\'_blank\' href=\'http://google.com\'>here</a>."></rm-toast><button onclick="{createDocument}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create Document</button><br><br><rm-code snippet="./snippets/toast-example-2.txt"></rm-code><hr><h5>ATTRIBUTES</h5><h5 class="attribute">duration</h5><p>Give your toast a duration to be displayed</p><h5 class="attribute">position</h5><p>The position that the toast will be displayed</p><ul><li>top-left</li><li>top-right</li><li>bottom-left</li><li>bottom-right</li></ul>', '', '', function(opts) {
 
-	var me = this;
+  var me = this;
 
-	this.on('mount',function(){
+  this.createDocument = function(e) {
+    me.createDocumentToast._tag.showToast();
+  }.bind(this)
 
-        $('pre code').each(function(i, block) {
-            hljs.highlightBlock(block);
-        });
-
-	});
-
-    this.createDocument = function(e) {
-        me.createDocumentToast._tag.showToast();
-    }.bind(this)
-
-    this.sendEmail = function(e) {
-        setTimeout(function() {
-            me.sendEmailToast._tag.opts.text = 'Email Successfully Sent!';
-            me.sendEmailToast._tag.showToast();
-        }, 2000);
-    }.bind(this)
+  this.sendEmail = function(e) {
+    setTimeout(function() {
+      me.sendEmailToast._tag.opts.text = 'Email Successfully Sent!';
+      me.sendEmailToast._tag.showToast();
+    }, 500);
+  }.bind(this)
 
 });
-riot.tag2('page-toggle', '<h3>STANDARD TOGGLES</h3><rm-toggle type="checkbox" label-text="Checkbox Off" ontoggle="{myToggle}"></rm-toggle><rm-toggle type="checkbox" label-text="Checkbox On" ontoggle="{myToggle}" ischecked="{on_switch}"></rm-toggle><br><rm-toggle type="radio" name="group1" label-text="Radio 1" ontoggle="{myToggle}"></rm-toggle><rm-toggle type="radio" name="group1" label-text="Radio 2" ontoggle="{myToggle}"></rm-toggle><rm-toggle type="radio" name="group1" label-text="Radio 3" ontoggle="{myToggle}"></rm-toggle><br><rm-toggle type="radio" name="group2" label-text="Radio A" ontoggle="{myToggle}"></rm-toggle><rm-toggle type="radio" name="group2" label-text="Radio B" ontoggle="{myToggle}"></rm-toggle><rm-toggle type="radio" name="group2" label-text="Radio C" ontoggle="{myToggle}"></rm-toggle><br><rm-toggle type="icon-toggle" icon="feedback" ontoggle="{myToggle}"></rm-toggle><h3>TOGGLE SWITCHES</h3><p> Several states with delays </p><rm-toggle type="switch" label-text="No State" ontoggle="{myToggle}"></rm-toggle><rm-toggle type="switch" label-text="Off State" ontoggle="{myToggle}" ischecked="{off_switch}"></rm-toggle><rm-toggle type="switch" label-text="On State" ontoggle="{myToggle}" ischecked="true"></rm-toggle><rm-toggle id="delayed_on_switch" type="switch" label-text="Delayed On" ontoggle="{myToggle}" ischecked="{delayed_on_switch}"></rm-toggle><rm-toggle id="delayed_off_switch" type="switch" label-text="Delayed Off" ontoggle="{myToggle}" ischecked="{delayed_off_switch}"></rm-toggle><div class="hidden-message" show="{show}">This is a hidden message! :D</div><h5>Basic Usage</h5><pre>\n      <code>\n        &lt;rm-toggle type=&quot;checkbox&quot; label-text=&quot;My Label&quot;&gt;&lt;/rm-toggle&gt;\n      </code>\n    </pre><h5>More Usage</h5><pre>\n      <code>\n\n        &lt;rm-toggle id=&quot;myswitch&quot; type=&quot;switch&quot; label-text=&quot;My Special Switch&quot; ischecked=&#123;this.ischecked&#125;&gt;&lt;/rm-toggle&gt;\n        <br>\n        <br>\n        somefunction(){<br />           this.ischecked = true}\n\n      </code>\n    </pre><h5>TYPES</h5><h6>checkbox</h6><p>A simple checkbox on off</p><h6>radio</h6><p>Radio groups</p><h6>toggle-icon</h6><p>An icon that can be toggled on and off</p><h6>switch</h6><p>An on and off switch</p><hr><h5>ATTRIBUTES</h5><h6>label-text</h6><p>Give your toggle a label description</p><h6>ischecked</h6><p>Setup your state of your toggle on mount</p><hr><h5>EVENTS</h5><h6>toggle</h6><p>When your toggle switch was manually toggled this will be fired</p>', 'page-toggle .hidden-message,[riot-tag="page-toggle"] .hidden-message,[data-is="page-toggle"] .hidden-message{ color: red; } page-toggle h6,[riot-tag="page-toggle"] h6,[data-is="page-toggle"] h6{ font-family: monaco; font-size: 13px; color: rgb(255, 66, 81); }', '', function(opts) {
+riot.tag2('page-toggle', '<h3>Toggle</h3><h5>Checkbox Toggles</h5><rm-toggle type="checkbox" label-text="Checkbox Off" ontoggle="{myToggle}"></rm-toggle><br><br><rm-code snippet="./snippets/toggle-example-1.txt"></rm-code><hr><rm-toggle type="checkbox" label-text="Checkbox On" ontoggle="{myToggle}" ischecked="{on_switch}"></rm-toggle><br><br><rm-code snippet="./snippets/toggle-example-2.txt"></rm-code><hr><br><h5>Radio Toggles</h5><rm-toggle type="radio" name="group1" label-text="Radio 1" ontoggle="{myToggle}"></rm-toggle><rm-toggle type="radio" name="group1" label-text="Radio 2" ontoggle="{myToggle}"></rm-toggle><rm-toggle type="radio" name="group1" label-text="Radio 3" ontoggle="{myToggle}"></rm-toggle><br><br><rm-code snippet="./snippets/toggle-example-3.txt"></rm-code><hr><h5>Toggle Switches</h5><p> Several states with delays </p><rm-toggle type="switch" label-text="No State" ontoggle="{myToggle}"></rm-toggle><rm-toggle type="switch" label-text="Off State" ontoggle="{myToggle}" ischecked="{off_switch}"></rm-toggle><rm-toggle type="switch" label-text="On State" ontoggle="{myToggle}" ischecked="true"></rm-toggle><br><br><rm-code snippet="./snippets/toggle-example-4.txt"></rm-code><hr><h5>Delayed Toggle Switches</h5><rm-toggle id="delayed_on_switch" type="switch" label-text="Delayed On" ontoggle="{myToggle}" ischecked="{delayed_on_switch}"></rm-toggle><rm-toggle id="delayed_off_switch" type="switch" label-text="Delayed Off" ontoggle="{myToggle}" ischecked="{delayed_off_switch}"></rm-toggle><br><br><rm-code snippet="./snippets/toggle-example-5.txt"></rm-code><hr><h5>ATTRIBUTES</h5><h5 class="attribute">type</h5><ul><li>checkbox - Standard checkbox toggle switch</li><li>radio - Radio group toggles</li><li>switch - Toggle switch, on or off</li></ul><h5 class="attribute">toggle-icon</h5><p>An icon that can be toggled on and off</p><h5 class="attribute">label-text</h5><p>Give your toggle a label description</p><h5 class="attribute">ischecked</h5><p>Setup your state of your toggle on mount</p><hr><h5>EVENTS</h5><h5 class="attribute">toggle</h5><p>When your toggle switch was manually toggled this will be fired</p>', 'page-toggle .hidden-message,[riot-tag="page-toggle"] .hidden-message,[data-is="page-toggle"] .hidden-message{ color: red; } page-toggle h6,[riot-tag="page-toggle"] h6,[data-is="page-toggle"] h6{ font-family: monaco; font-size: 13px; color: rgb(255, 66, 81); }', '', function(opts) {
 
 		var me = this;
 
@@ -295,12 +280,6 @@ riot.tag2('page-toggle', '<h3>STANDARD TOGGLES</h3><rm-toggle type="checkbox" la
     this.delayed_off_switch = true;
 
 		this.on('mount',function(){
-
-      $('pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
-      });
-
-			this.update();
 			setTimeout(function(){
 				me.delayed_on_switch = true;
 				me.delayed_off_switch = false;
@@ -309,7 +288,6 @@ riot.tag2('page-toggle', '<h3>STANDARD TOGGLES</h3><rm-toggle type="checkbox" la
 		})
 
 		this.myToggle = function(e) {
-			console.log('toggle Switched');
 			me.update();
 		}.bind(this)
 

@@ -10,13 +10,15 @@
     Simple javascript example
   </p>
   <rm-code type="javascript" snippet="./snippets/code-ex-1.txt"></rm-code>
-  
+  <rm-code type="html" snippet="./snippets/code-example-1.txt"></rm-code>
+
   <hr />
   
   <p>
     HTML layout
   </p>
   <rm-code type="html" snippet="./snippets/code-ex-2.txt"></rm-code>
+  <rm-code type="html" snippet="./snippets/code-example-2.txt"></rm-code>
   
   <hr />
   
@@ -24,6 +26,7 @@
     Bash code
   </p>
   <rm-code type="bash" snippet="./snippets/code-ex-3.txt"></rm-code>
+  <rm-code type="html" snippet="./snippets/code-example-3.txt"></rm-code>
   
   <hr />
   

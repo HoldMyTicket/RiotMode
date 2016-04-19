@@ -1,0 +1,1 @@
+<rm-code type="javascript" snippet="./snippets/code-ex-3.txt"></rm-code>

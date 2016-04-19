@@ -1,0 +1,3 @@
+<rm-toggle type="switch" label-text="No State" ontoggle="{ myToggle }"></rm-toggle>
+<rm-toggle type="switch" label-text="Off State" ontoggle="{ myToggle }" ischecked={off_switch}></rm-toggle>
+<rm-toggle type="switch" label-text="On State" ontoggle="{ myToggle }" ischecked="true"></rm-toggle>

@@ -1,0 +1,14 @@
+<rm-toast 
+  duration="2000" 
+  id="sendEmailToast" 
+  position="top-right">
+</rm-toast>
+
+<button onclick="{sendEmail}">Send Email</button>
+
+sendEmail(e) {
+  setTimeout(function() {
+    me.sendEmailToast._tag.opts.text = 'Email Successfully Sent!';
+    me.sendEmailToast._tag.showToast();
+  }, 500);
+}

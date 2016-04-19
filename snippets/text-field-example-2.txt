@@ -1,0 +1,1 @@
+<rm-text-field name="number" placeholder="Number..." type="numeric"></rm-text-field>

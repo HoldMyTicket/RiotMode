@@ -1,0 +1,1 @@
+<rm-text-field name="text" width="150px"></rm-text-field>

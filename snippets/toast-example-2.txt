@@ -1,0 +1,12 @@
+<rm-toast 
+  id="createDocumentToast" 
+  position="bottom-right" 
+  duration="3000" 
+  text="Successfully created! You can view the document <a target='_blank' href='http://google.com'>here</a>">
+</rm-toast>
+
+<button onclick="{createDocument}">Create Document</button>
+
+createDocument(e) {
+  me.createDocumentToast._tag.showToast();
+}

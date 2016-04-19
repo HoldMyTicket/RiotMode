@@ -1,0 +1,3 @@
+<rm-toggle type="radio" name="group1" label-text="Radio 1" ontoggle="{ myToggle }"></rm-toggle>
+<rm-toggle type="radio" name="group1" label-text="Radio 2" ontoggle="{ myToggle }"></rm-toggle>
+<rm-toggle type="radio" name="group1" label-text="Radio 3" ontoggle="{ myToggle }"></rm-toggle>
