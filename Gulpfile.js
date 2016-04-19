@@ -45,22 +45,20 @@ gulp.task('minify', function(){
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('ship', ['bump'], function(){
-  gulp.start('deploy');
+gulp.task('ship', function(){
+  gulp.start('bump', function(){
+    var json = JSON.parse(fs.readFileSync('./bower.json', 'utf8'));
+    git.tag('v'+json.version, 'Updated version', function (err) {
+      if(err) throw(err);
+      git.push('origin', 'master', function (err) {
+        if (err) throw err;
+      });
+    });
+  })
 });
 
 gulp.task('bump', function(){
   return gulp.src('./bower.json').pipe(bump()).pipe(gulp.dest('./'));
-});
-
-gulp.task('deploy', function(){
-  var json = JSON.parse(fs.readFileSync('./bower.json', 'utf8'));
-  return git.tag('v'+json.version, 'Updated version', function (err) {
-    if(err) throw(err);
-    git.push('origin', 'master', function (err) {
-      if (err) throw err;
-    });
-  });
 });
 
 gulp.task('compile', ['compileMixins','compileTags','compileDemo'], function(){
