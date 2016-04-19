@@ -137,10 +137,6 @@
 			    	me.fire('load');
 					var fileName = me.routes[i].path.split('/').pop().replace(/\.[^/.]+$/, "");
 			    	me.mountedTag = riot.mount(me.base, 'page-'+fileName)[0];
-					//console.log(me.mountedTag);
-					//TODO is this needed?
-			    	//me.base.setAtrribute('riot-tag', fileName);
-			    });
 				return;
 			}
 		}

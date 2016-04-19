@@ -19,7 +19,6 @@
       return;
     $.ajax(opts.snippet, {
       success: function(txt){
-        console.log(txt)
         me.code = txt;
         me.update();
         if(!hljs)
