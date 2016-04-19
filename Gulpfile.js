@@ -46,15 +46,25 @@ gulp.task('minify', function(){
 });
 
 gulp.task('ship', function(){
+
   gulp.start('bump', function(){
+
     var json = JSON.parse(fs.readFileSync('./bower.json', 'utf8'));
+
     git.tag('v'+json.version, 'Updated version', function (err) {
+
       if(err) throw(err);
-      git.push('origin', 'master', function (err) {
-        if (err) throw err;
+      
+      return gulp.task('push', function(){
+        git.push('origin', 'master', {args: " --tags"}, function (err) {
+          if (err) throw err;
+        });
       });
+
     });
-  })
+
+  });
+
 });
 
 gulp.task('bump', function(){
