@@ -74,7 +74,7 @@
         }
         .close-btn:hover {
           background-color: white;
-          color: black;
+          color: black; 
         }
 
         .clear {
