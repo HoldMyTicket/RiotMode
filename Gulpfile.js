@@ -48,17 +48,21 @@ gulp.task('minify', function(){
 gulp.task('ship', function(){
 
   gulp.start('bump', function(){
-
-    var json = JSON.parse(fs.readFileSync('./bower.json', 'utf8'));
-
-    git.tag('v'+json.version, 'Updated version', function (err) {
-
-      if(err) throw(err);
+    
+    gulp.start('commit-version', function() {
       
-      git.push('origin', 'master', {args: " --tags"}, function (err) {
-        if (err) throw err;
-      });
+      var json = JSON.parse(fs.readFileSync('./bower.json', 'utf8'));
 
+      git.tag('v'+json.version, 'Updated version', function (err) {
+
+        if(err) throw(err);
+        
+        git.push('origin', 'master', {args: " --tags"}, function (err) {
+          if (err) throw err;
+        });
+
+      });
+      
     });
 
   });
@@ -67,6 +71,12 @@ gulp.task('ship', function(){
 
 gulp.task('bump', function(){
   return gulp.src('./bower.json').pipe(bump()).pipe(gulp.dest('./'));
+});
+
+gulp.task('commit-version', function () {
+  return gulp.src('./bower.json')
+    .pipe(git.add())
+    .pipe(git.commit('[Prerelease] Bumped version number'));
 });
 
 gulp.task('compile', ['compileMixins','compileTags','compileDemo'], function(){
