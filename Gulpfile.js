@@ -55,10 +55,8 @@ gulp.task('ship', function(){
 
       if(err) throw(err);
       
-      return gulp.task('push', function(){
-        git.push('origin', 'master', {args: " --tags"}, function (err) {
-          if (err) throw err;
-        });
+      git.push('origin', 'master', {args: " --tags"}, function (err) {
+        if (err) throw err;
       });
 
     });
