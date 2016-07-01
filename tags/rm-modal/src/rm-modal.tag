@@ -93,6 +93,11 @@
             left: 0;
           }
           
+          .modal .modal-content img {
+            display: block;
+            margin: 0 auto;
+          }
+          
           .close-btn {
             right: 0;
           }
